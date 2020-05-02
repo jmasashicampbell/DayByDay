@@ -11,6 +11,7 @@ import CoreLocation
 
 struct Scripture: Hashable, Codable {
     var id: Int
+    var date: Double
     var reference: String
     var text: String
 }

@@ -14,6 +14,9 @@
 		CF80F90D245B79F8001424C4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF80F90C245B79F8001424C4 /* Preview Assets.xcassets */; };
 		CF80F910245B79F8001424C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF80F90E245B79F8001424C4 /* LaunchScreen.storyboard */; };
 		CF80F918245D3FC6001424C4 /* Scripture.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F917245D3FC6001424C4 /* Scripture.swift */; };
+		CF80F91A245D41E6001424C4 /* ScriptureRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F919245D41E6001424C4 /* ScriptureRow.swift */; };
+		CF80F91C245D4368001424C4 /* ScriptureData.json in Resources */ = {isa = PBXBuildFile; fileRef = CF80F91B245D4368001424C4 /* ScriptureData.json */; };
+		CF80F91E245D4767001424C4 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F91D245D4767001424C4 /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		CF80F90F245B79F8001424C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CF80F911245B79F8001424C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF80F917245D3FC6001424C4 /* Scripture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scripture.swift; sourceTree = "<group>"; };
+		CF80F919245D41E6001424C4 /* ScriptureRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureRow.swift; sourceTree = "<group>"; };
+		CF80F91B245D4368001424C4 /* ScriptureData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ScriptureData.json; sourceTree = "<group>"; };
+		CF80F91D245D4767001424C4 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +67,10 @@
 				CF80F903245B79EF001424C4 /* AppDelegate.swift */,
 				CF80F905245B79EF001424C4 /* SceneDelegate.swift */,
 				CF80F907245B79EF001424C4 /* ScriptureDetailView.swift */,
+				CF80F919245D41E6001424C4 /* ScriptureRow.swift */,
 				CF80F917245D3FC6001424C4 /* Scripture.swift */,
+				CF80F91D245D4767001424C4 /* Data.swift */,
+				CF80F91B245D4368001424C4 /* ScriptureData.json */,
 				CF80F909245B79F8001424C4 /* Assets.xcassets */,
 				CF80F90E245B79F8001424C4 /* LaunchScreen.storyboard */,
 				CF80F911245B79F8001424C4 /* Info.plist */,
@@ -137,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF80F910245B79F8001424C4 /* LaunchScreen.storyboard in Resources */,
+				CF80F91C245D4368001424C4 /* ScriptureData.json in Resources */,
 				CF80F90D245B79F8001424C4 /* Preview Assets.xcassets in Resources */,
 				CF80F90A245B79F8001424C4 /* Assets.xcassets in Resources */,
 			);
@@ -150,8 +160,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF80F904245B79EF001424C4 /* AppDelegate.swift in Sources */,
+				CF80F91E245D4767001424C4 /* Data.swift in Sources */,
 				CF80F906245B79EF001424C4 /* SceneDelegate.swift in Sources */,
 				CF80F908245B79EF001424C4 /* ScriptureDetailView.swift in Sources */,
+				CF80F91A245D41E6001424C4 /* ScriptureRow.swift in Sources */,
 				CF80F918245D3FC6001424C4 /* Scripture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
