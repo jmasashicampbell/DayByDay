@@ -9,7 +9,7 @@
 import SwiftUI
 import CoreLocation
 
-struct Scripture: Hashable, Codable {
+struct Scripture: Hashable, Codable, Identifiable {
     var id: Int
     var date: Double
     var reference: String

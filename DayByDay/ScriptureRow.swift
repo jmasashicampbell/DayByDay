@@ -14,7 +14,7 @@ struct ScriptureRow: View {
         VStack {
             Text(String(format:"%f", scripture.date))
             Text(scripture.text)
-                .padding()
+                .padding(5)
             Text(scripture.reference)
         }
     }
