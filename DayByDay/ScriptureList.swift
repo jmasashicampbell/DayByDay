@@ -17,6 +17,20 @@ struct ScriptureList: View {
                         .frame(height: SCRIPTURE_ROW_HEIGHT)
                 }
             }
+            .navigationBarItems(
+                leading:
+                    Button(action: {
+                        print("Help tapped!")
+                    }) {
+                        Image(systemName: "info.circle")
+                    },
+                trailing:
+                    Button(action: {
+                        print("Help tapped!")
+                    }) {
+                        Image(systemName: "slider.horizontal.3")
+                    }
+            )
         }
     }
 }

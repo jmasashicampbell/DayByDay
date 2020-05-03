@@ -25,12 +25,14 @@ struct ScriptureDetail: View {
                 Spacer()
                 VStack(alignment: .center) {
                     Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                        Image(systemName: "square.and.arrow.up")
                         Text("Share")
-                    }.padding(5)
+                    }.padding(3)
                     
                     Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                        Image(systemName: "book")
                         Text("View in Gospel Library")
-                    }.padding(5)
+                    }.padding(3)
                 }
                 
                 Spacer()
