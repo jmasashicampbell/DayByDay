@@ -11,10 +11,16 @@ import SwiftUI
 struct ScriptureList: View {
     var body: some View {
         NavigationView {
-            List(scriptureData) { scripture in
-                NavigationLink(destination: ScriptureDetail(scripture: scripture)) {
-                    ScriptureRow(scripture: scripture)
-                        .frame(height: SCRIPTURE_ROW_HEIGHT)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .top, spacing: 0) {
+                    ForEach(scriptureData) { scripture in
+                        NavigationLink(destination: ScriptureDetail(scripture: scripture)) {
+                            ScriptureRow(scripture: scripture)
+                                .frame(width: 200.0,
+                                       height: 200.0
+                                )
+                        }
+                    }
                 }
             }
             .navigationBarItems(
