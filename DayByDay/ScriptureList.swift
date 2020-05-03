@@ -12,15 +12,17 @@ struct ScriptureList: View {
     var body: some View {
         NavigationView {
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .top, spacing: 0) {
+                HStack(spacing: 25) {
+                    Spacer().frame(width: 25)
                     ForEach(scriptureData) { scripture in
                         NavigationLink(destination: ScriptureDetail(scripture: scripture)) {
-                            ScriptureRow(scripture: scripture)
-                                .frame(width: 200.0,
-                                       height: 200.0
+                            ScriptureCard(scripture: scripture)
+                                .frame(width: 320.0,
+                                       height: 540.0
                                 )
                         }
                     }
+                    Spacer().frame(width: 20)
                 }
             }
             .navigationBarItems(

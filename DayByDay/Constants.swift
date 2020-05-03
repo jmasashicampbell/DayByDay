@@ -7,6 +7,5 @@
 //
 
 import Foundation
-import CoreGraphics
 
-let SCRIPTURE_ROW_HEIGHT: CGFloat = 200.0
+
