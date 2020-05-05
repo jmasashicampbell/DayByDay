@@ -12,31 +12,25 @@ struct ScriptureDetail: View {
     var scripture: Scripture
     
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text(String(format:"%f", scripture.date))
-                    .font(.headline)
-            }
-            
-            Text(scripture.text)
-            Text(scripture.reference)
-            
-            HStack {
-                Spacer()
-                VStack(alignment: .center) {
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                        Image(systemName: "square.and.arrow.up")
-                        Text("Share")
-                    }.padding(3)
-                    
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                        Image(systemName: "book")
-                        Text("View in Gospel Library")
-                    }.padding(3)
+        VStack {
+            VStack(alignment: .center) {
+                ScriptureView(scripture: scripture)
+                Spacer().frame(height: 20)
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                    Image(systemName: "square.and.arrow.up")
+                    Text("Share")
                 }
-                
-                Spacer()
-            }
+                Spacer().frame(height: 20)
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                    Image(systemName: "book")
+                    Text("View in Gospel Library")
+                }
+                Spacer().frame(height: 20)
+                }.font(SMALL_FONT)
+            .padding()
+            .foregroundColor(TEXT_COLOR)
+            .background(THEME_GRADIENT)
+            .cornerRadius(20)
         }
         .padding()
     }

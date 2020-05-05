@@ -12,30 +12,26 @@ struct ScriptureList: View {
     var body: some View {
         NavigationView {
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 25) {
-                    Spacer().frame(width: 25)
+                HStack(spacing: 24) {
+                    Spacer().frame(width: 10)
                     ForEach(scriptureData) { scripture in
                         NavigationLink(destination: ScriptureDetail(scripture: scripture)) {
                             ScriptureCard(scripture: scripture)
-                                .frame(width: 320.0,
-                                       height: 540.0
+                                .frame(width: 340.0,
+                                       height: 640.0
                                 )
                         }
                     }
-                    Spacer().frame(width: 20)
+                    Spacer().frame(width: 10)
                 }
             }
             .navigationBarItems(
                 leading:
-                    Button(action: {
-                        print("Help tapped!")
-                    }) {
+                    Button(action: {}) {
                         Image(systemName: "info.circle")
                     },
                 trailing:
-                    Button(action: {
-                        print("Help tapped!")
-                    }) {
+                    Button(action: {}) {
                         Image(systemName: "slider.horizontal.3")
                     }
             )

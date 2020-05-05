@@ -19,6 +19,8 @@
 		CF80F91E245D4767001424C4 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F91D245D4767001424C4 /* Data.swift */; };
 		CF80F924245DD343001424C4 /* ScriptureList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F923245DD343001424C4 /* ScriptureList.swift */; };
 		CF80F926245DE26E001424C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F925245DE26E001424C4 /* Constants.swift */; };
+		CF80F9282460D924001424C4 /* ScriptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F9272460D923001424C4 /* ScriptureView.swift */; };
+		CF80F92A2460E332001424C4 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F9292460E332001424C4 /* MultilineTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		CF80F91D245D4767001424C4 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		CF80F923245DD343001424C4 /* ScriptureList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureList.swift; sourceTree = "<group>"; };
 		CF80F925245DE26E001424C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CF80F9272460D923001424C4 /* ScriptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureView.swift; sourceTree = "<group>"; };
+		CF80F9292460E332001424C4 /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,11 +75,13 @@
 				CF80F903245B79EF001424C4 /* AppDelegate.swift */,
 				CF80F905245B79EF001424C4 /* SceneDelegate.swift */,
 				CF80F917245D3FC6001424C4 /* Scripture.swift */,
-				CF80F923245DD343001424C4 /* ScriptureList.swift */,
+				CF80F9272460D923001424C4 /* ScriptureView.swift */,
+				CF80F9292460E332001424C4 /* MultilineTextField.swift */,
 				CF80F919245D41E6001424C4 /* ScriptureCard.swift */,
+				CF80F923245DD343001424C4 /* ScriptureList.swift */,
 				CF80F907245B79EF001424C4 /* ScriptureDetail.swift */,
-				CF80F91D245D4767001424C4 /* Data.swift */,
 				CF80F925245DE26E001424C4 /* Constants.swift */,
+				CF80F91D245D4767001424C4 /* Data.swift */,
 				CF80F91B245D4368001424C4 /* ScriptureData.json */,
 				CF80F909245B79F8001424C4 /* Assets.xcassets */,
 				CF80F90E245B79F8001424C4 /* LaunchScreen.storyboard */,
@@ -169,6 +175,8 @@
 				CF80F904245B79EF001424C4 /* AppDelegate.swift in Sources */,
 				CF80F91E245D4767001424C4 /* Data.swift in Sources */,
 				CF80F906245B79EF001424C4 /* SceneDelegate.swift in Sources */,
+				CF80F9282460D924001424C4 /* ScriptureView.swift in Sources */,
+				CF80F92A2460E332001424C4 /* MultilineTextField.swift in Sources */,
 				CF80F908245B79EF001424C4 /* ScriptureDetail.swift in Sources */,
 				CF80F91A245D41E6001424C4 /* ScriptureCard.swift in Sources */,
 				CF80F918245D3FC6001424C4 /* Scripture.swift in Sources */,

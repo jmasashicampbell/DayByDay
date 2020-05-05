@@ -9,33 +9,21 @@
 import SwiftUI
 import CoreGraphics
 
-let SCRIPTURE_CARD_SPACING: CGFloat = 10.0
-let darkerBlue = Color(red: 0.0, green: 0.45, blue: 0.9)
+func convertDate(date: Date, format: String) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = format
+    return dateFormatter.string(from: date)
+}
 
 struct ScriptureCard: View {
     var scripture: Scripture
     var body: some View {
         HStack(spacing: SCRIPTURE_CARD_SPACING) {
-            Spacer()
-            VStack(spacing: SCRIPTURE_CARD_SPACING) {
-                Spacer().frame(height: SCRIPTURE_CARD_SPACING)
-                Text(String(format:"%f", scripture.date))
-                Text(scripture.text)
-                Text(scripture.reference)
-                Spacer()
-            }
-            .font(.system(size: 24, weight: .light))
-            .foregroundColor(Color.white)
-            Spacer()
+            ScriptureView(scripture: scripture)
         }
-        .background(
-            LinearGradient(
-                gradient: Gradient(colors: [.blue, darkerBlue]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-        )
-        .cornerRadius(20)
+        .padding(20)
+        .background(THEME_GRADIENT)
+        .cornerRadius(25)
     }
 }
 
@@ -45,6 +33,6 @@ struct ScriptureCard_Previews: PreviewProvider {
             ScriptureCard(scripture: scriptureData[0])
             ScriptureCard(scripture: scriptureData[1])
         }
-        .previewLayout(.fixed(width: 300, height: 500))
+        .previewLayout(.fixed(width: 330, height: 640))
     }
 }

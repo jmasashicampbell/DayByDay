@@ -1,26 +1,31 @@
 [
+    
+    {
+        "reference": "John 3:16",
+        "text": "For God so loved the world, that he gave his only begotten Son, that whoso believeth in him should not perish, but have everlasting life.",
+        "notes": "Jesus Christ was the ultimate gift from God to us.",
+        "date": 0.0,
+        "id": 1002,
+    },
     {
         "reference": "Ether 12:27",
         "text": "And if men come unto me I will show unto them their weakness. I give unto men weakness that they may be humble; and my grace is sufficient for all men that humble themselves before me; for if they humble themselves before me, and have faith in me, then will I make weak things become strong unto them.",
+        "notes": "God gives us weakness so we can learn to be humble and trust Him.",
         "date": 0.0,
         "id": 1001,
     },
     {
         "reference": "1 Nephi 3:7",
         "text": "And it came to pass that I, Nephi, said unto my father: I will go and do the things which the Lord hath commanded, for I know that the Lord giveth no commandments unto the children of men, save he shall prepare a way for them that they may accomplish the thing which he commandeth them.",
+        "notes": "God doesn't give us any impossible commandments",
         "date": 0.0,
         "id": 1002,
     },
     {
         "reference": "1 Corinthians 2:9",
         "text": "But as it is written, Eye hath not seen, nor ear heard, neither have entered into the heart of man, the things which God hath prepared for them that love him.",
+        "notes": "The reward of eternal life is greater than anything we have in this life.",
         "date": 0.0,
         "id": 1003,
-    },
-    {
-        "reference": "John 3:16",
-        "text": "For God so loved the world, that he gave his only begotten Son, that whoso believeth in him should not perish, but have everlasting life.",
-        "date": 0.0,
-        "id": 1002,
     }
 ]
