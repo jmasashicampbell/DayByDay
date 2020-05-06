@@ -10,11 +10,16 @@ import Foundation
 import SwiftUI
 
 let TEXT_COLOR = Color.white
-let THEME_COLOR = Color.blue
-let THEME_COLOR_LIGHT = Color(red: 0.02, green: 0.52, blue: 1.0)
-let THEME_COLOR_DARK = Color(red: 0.0, green: 0.43, blue: 0.86)
+let THEME_COLOR = Color(red: 0.0, green: 0.6, blue: 0.95)
+let THEME_COLOR_LIGHT = Color(red: 0.05, green: 0.63, blue: 0.95)
+let THEME_COLOR_DARK = Color(red: 0.0, green: 0.51, blue: 0.81)
 let THEME_GRADIENT = LinearGradient(
                          gradient: Gradient(colors: [THEME_COLOR, THEME_COLOR_DARK]),
                          startPoint: .top,
                          endPoint: .bottom
                      )
+
+
+let MED_FONT : Font = .system(size: 24, weight: .medium)
+let LIGHT_FONT : Font = .system(size: 24, weight: .light)
+let SMALL_FONT : Font = .system(size: 20, weight: .light)

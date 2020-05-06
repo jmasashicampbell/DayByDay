@@ -9,32 +9,40 @@
 import SwiftUI
 
 struct ScriptureList: View {
+    init() {
+        //UINavigationBar.appearance().backgroundColor = .yellow
+    }
     var body: some View {
         NavigationView {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 24) {
-                    Spacer().frame(width: 10)
-                    ForEach(scriptureData) { scripture in
-                        NavigationLink(destination: ScriptureDetail(scripture: scripture)) {
-                            ScriptureCard(scripture: scripture)
-                                .frame(width: 340.0,
-                                       height: 640.0
-                                )
+            GeometryReader { geometry in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 24) {
+                        Spacer().frame(width: 10)
+                        ForEach(scriptureData) { scripture in
+                            NavigationLink(destination: ScriptureDetail(scripture: scripture)
+                            //navigationBarHidden(true)
+                            ) {
+                                ScriptureCard(scripture: scripture)
+                                    .frame(width: geometry.size.width - 74,
+                                           height: 640.0)
+                            }
                         }
+                        Spacer().frame(width: 10)
                     }
-                    Spacer().frame(width: 10)
                 }
+                .navigationBarItems(
+                    leading:
+                        Button(action: {}) {
+                            Image(systemName: "info.circle")
+                        },
+                    trailing:
+                        Button(action: {}) {
+                            Image(systemName: "slider.horizontal.3")
+                        }
+                )
+                .font(MED_FONT)
+                .foregroundColor(THEME_COLOR)
             }
-            .navigationBarItems(
-                leading:
-                    Button(action: {}) {
-                        Image(systemName: "info.circle")
-                    },
-                trailing:
-                    Button(action: {}) {
-                        Image(systemName: "slider.horizontal.3")
-                    }
-            )
         }
     }
 }
