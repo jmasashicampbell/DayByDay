@@ -10,7 +10,7 @@ import UIKit
 import SwiftUI
 import CoreLocation
 
-let scriptureData: [Scripture] = load("ScriptureData.json")
+var scriptureData: [Scripture] = load("ScriptureData.json")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data
@@ -34,3 +34,19 @@ func load<T: Decodable>(_ filename: String) -> T {
     }
 }
 
+/**
+  Updates scriptureData.json to reflect changes in the scriptureData array.
+ */
+func updateScripturesFile() {
+    let jsonData = try! JSONEncoder().encode(scriptureData)
+    let jsonString = String(data: jsonData, encoding: .utf8)!
+
+    let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+    let filename = path!.appendingPathComponent("ScriptureData.json")
+
+    do {
+        try jsonString.write(to: filename, atomically: true, encoding: .utf8)
+    } catch {
+        fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
+    }
+}

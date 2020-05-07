@@ -15,9 +15,9 @@ struct ScriptureView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0.0) {
             HStack {
-                Text(convertDate(date: scripture.date, format: "E"))
+                Text(dateComponentsToString(dateComponents: scripture.date, format: "E"))
                 Spacer()
-                Text(convertDate(date: scripture.date, format: "MMM dd"))
+                Text(dateComponentsToString(dateComponents: scripture.date, format: "MMM dd"))
             }
             Spacer().frame(height: SCRIPTURE_CARD_SPACING)
             Text(scripture.text)
@@ -36,7 +36,7 @@ struct ScriptureView: View {
             }
             .padding(10)
             .frame(height: 210)
-            .background(THEME_COLOR_LIGHT)
+            .background(THEME_COLOR_DARKER)
             .cornerRadius(10)
             //TextField(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/, text: "")
             
