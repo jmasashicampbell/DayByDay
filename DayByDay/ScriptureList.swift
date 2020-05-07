@@ -32,7 +32,7 @@ struct ScriptureList: View {
                 }
                 .navigationBarItems(
                     leading:
-                        Button(action: {}) {
+                        Button(action: {generateScripture()}) {
                             Image(systemName: "info.circle")
                         },
                     trailing:

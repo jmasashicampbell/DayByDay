@@ -10,27 +10,25 @@ import UIKit
 import SwiftUI
 import CoreLocation
 
-var scriptureData: [Scripture] = load("ScriptureData.json")
+var scriptureData: [Scripture] = loadScriptures("ScriptureData.json")
 
-func load<T: Decodable>(_ filename: String) -> T {
+func loadScriptures(_ filename: String) -> [Scripture] {
     let data: Data
     
-    guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
-        else {
-            fatalError("Couldn't find \(filename) in main bundle.")
-    }
+    let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+    let file = path!.appendingPathComponent("ScriptureData.json")
     
     do {
         data = try Data(contentsOf: file)
     } catch {
-        fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
+        return []
     }
     
     do {
         let decoder = JSONDecoder()
-        return try decoder.decode(T.self, from: data)
+        return try decoder.decode([Scripture].self, from: data)
     } catch {
-        fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
+        fatalError("Couldn't parse \(filename) as \([Scripture].self):\n\(error)")
     }
 }
 
@@ -38,6 +36,7 @@ func load<T: Decodable>(_ filename: String) -> T {
   Updates scriptureData.json to reflect changes in the scriptureData array.
  */
 func updateScripturesFile() {
+    print("Updating", scriptureData.count)
     let jsonData = try! JSONEncoder().encode(scriptureData)
     let jsonString = String(data: jsonData, encoding: .utf8)!
 
@@ -47,6 +46,6 @@ func updateScripturesFile() {
     do {
         try jsonString.write(to: filename, atomically: true, encoding: .utf8)
     } catch {
-        fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
+        fatalError("Couldn't load ScriptureData.json from main bundle:\n\(error)")
     }
 }

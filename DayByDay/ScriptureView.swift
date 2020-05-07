@@ -36,7 +36,7 @@ struct ScriptureView: View {
             }
             .padding(10)
             .frame(height: 210)
-            .background(THEME_COLOR_DARKER)
+            .background(THEME_COLOR_LIGHT)
             .cornerRadius(10)
             //TextField(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/, text: "")
             
