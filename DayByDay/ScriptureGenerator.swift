@@ -13,20 +13,20 @@ import Foundation
   Generates a scripture if one hasn't been generated for that day. Adds that scripture to scriptureList and updates scriptureData.json.
  */
 func generateScripture() {
-    print("Generating", scriptureData.count)
-    if (scriptureData.isEmpty) {
+    print("Generating", generatedScriptureData.count)
+    if (generatedScriptureData.isEmpty) {
         let scriptureIndex = 31196
         let newScripture = newScriptureFromIndex(index: scriptureIndex, id: 1001)
-        scriptureData.append(newScripture)
+        generatedScriptureData.append(newScripture)
         updateScripturesFile()
     }
     else {
-        let lastScripture : Scripture = scriptureData.last!
+        let lastScripture : Scripture = generatedScriptureData.last!
         let today = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         
         if (today != lastScripture.date) {
             let newScripture = newScriptureFromIndex(index: lastScripture.index + 1, id: lastScripture.id + 1)
-            scriptureData.append(newScripture)
+            generatedScriptureData.append(newScripture)
             updateScripturesFile()
         }
     }
@@ -34,12 +34,12 @@ func generateScripture() {
 
 
 /**
-  Creates a new Scripture object given and index and an id.
+  Creates a new Scripture struct given and index and an id.
  
   - Parameter index: The index of the scripture in scriptures.json
   - Parameter id: The id to assign to the object
  
-  - Returns: The new Scripture object
+  - Returns: The new Scripture struct
  */
 func newScriptureFromIndex(index: Int, id: Int) -> Scripture {
     struct Verse: Codable {
@@ -48,22 +48,8 @@ func newScriptureFromIndex(index: Int, id: Int) -> Scripture {
         var verse: Int
     }
 
-    let data: Data
-    guard let file = Bundle.main.url(forResource: "scriptures.json", withExtension: nil)
-        else {
-            fatalError("Couldn't find scriptures.json in main bundle.")
-    }
-    
-    do {
-        data = try Data(contentsOf: file)
-    } catch {
-        fatalError("Couldn't load scriptures.json from main bundle:\n\(error)")
-    }
-    
-    guard let scripturesArray: [Verse] = try? JSONDecoder().decode([Verse].self, from: data)
-        else {
-            fatalError("Couldn't parse scriptures.json")
-    }
+    let file = bundleUrlFromFilename("scriptures.json")
+    let scripturesArray: [Verse] = load(file)
     
     let today = Calendar.current.dateComponents([.year, .month, .day], from: Date())
     let newVerse = scripturesArray[index]

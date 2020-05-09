@@ -23,7 +23,7 @@ struct ScriptureCard: View {
             ScriptureView(scripture: scripture)
         }
         .padding(20)
-        .background(THEME_GRADIENT)
+        .background(THEME_COLOR)
         .cornerRadius(25)
     }
 }
@@ -31,8 +31,8 @@ struct ScriptureCard: View {
 struct ScriptureCard_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ScriptureCard(scripture: scriptureData[0])
-            ScriptureCard(scripture: scriptureData[1])
+            ScriptureCard(scripture: generatedScriptureData[0])
+            ScriptureCard(scripture: generatedScriptureData[1])
         }
         .previewLayout(.fixed(width: 330, height: 640))
     }

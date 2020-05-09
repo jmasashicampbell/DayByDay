@@ -18,7 +18,7 @@ struct ScriptureList: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 24) {
                         Spacer().frame(width: 10)
-                        ForEach(scriptureData) { scripture in
+                        ForEach(generatedScriptureData) { scripture in
                             NavigationLink(destination: ScriptureDetail(scripture: scripture)
                             //navigationBarHidden(true)
                             ) {
@@ -40,7 +40,7 @@ struct ScriptureList: View {
                             Image(systemName: "slider.horizontal.3")
                         }
                 )
-                .font(MED_FONT)
+                .imageScale(.large)
                 .foregroundColor(THEME_COLOR)
             }
         }

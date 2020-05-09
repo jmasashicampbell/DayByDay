@@ -11,7 +11,7 @@ import SwiftUI
 
 let TEXT_COLOR = Color.white
 let THEME_COLOR = Color(red: 0.0, green: 0.6, blue: 0.95)
-let THEME_COLOR_LIGHT = Color(red: 0.05, green: 0.63, blue: 0.95)
+let THEME_COLOR_LIGHT = Color(red: 0.09, green: 0.66, blue: 0.98)
 let THEME_COLOR_DARK = Color(red: 0.0, green: 0.51, blue: 0.81)
 let THEME_GRADIENT = LinearGradient(
                          gradient: Gradient(colors: [THEME_COLOR, THEME_COLOR_DARK]),

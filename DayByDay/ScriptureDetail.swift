@@ -36,7 +36,7 @@ struct ScriptureDetail: View {
             .padding()
             .font(SMALL_FONT)
             .foregroundColor(TEXT_COLOR)
-            .background(THEME_GRADIENT)
+            .background(THEME_COLOR)
             .cornerRadius(20)
         }
         // Offset to account for extra size
@@ -47,6 +47,6 @@ struct ScriptureDetail: View {
 
 struct ScriptureDetail_Previews: PreviewProvider {
     static var previews: some View {
-        ScriptureDetail(scripture: scriptureData[0])
+        ScriptureDetail(scripture: generatedScriptureData[0])
     }
 }
