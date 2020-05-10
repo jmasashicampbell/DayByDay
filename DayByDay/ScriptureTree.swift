@@ -8,53 +8,17 @@
 
 import Foundation
 
-/**
-  Converts a filename to a URL
-  - Parameter filename: The filename to convert
-  - Returns: The URL of the file in the main bundle
- */
-
-func bundleUrlFromFilename(_ filename: String) -> URL {
-    print(filename)
-    return NSURL.fileURL(withPath: "Scriptures Source Data/" + filename)
-}
-
-
-/**
-  Loads a JSON object from a file
-  - Parameter file: The file from which to load
-  - Returns: The loaded object
- */
-
-func load<T: Decodable>(_ file: URL) -> T {
-    let data: Data
-    
-    do {
-        data = try Data(contentsOf: file)
-    } catch {
-        fatalError("Couldn't load file:\n\(error)")
-    }
-    
-    do {
-        let decoder = JSONDecoder()
-        return try decoder.decode(T.self, from: data)
-    } catch {
-        fatalError("Couldn't parse file as \(T.self):\n\(error)")
-    }
-}
-
 
 class ScriptureTree {
-    let deepVolumes: [String, Dictionary<String, Dictionary<String, ChapterLimits>]
-    //let deepVolumes: Dictionary<String, Dictionary<String, Dictionary<String, ChapterLimits>>>
+    let deepVolumes: Dictionary<String, Dictionary<String, Dictionary<String, ChapterLimits>>>
     let doctrineAndCovenantsDict: Dictionary<String, ChapterLimits>
     var volumes: [Node]
     
     init() {
-        deepVolumes = [["Old Testament": load(bundleUrlFromFilename("old_testament_map.json"))],
-                       ["New Testament": load(bundleUrlFromFilename("new_testament_map.json"))],
-                       ["Book of Mormon": load(bundleUrlFromFilename("book_of_mormon_map.json"))],
-                       ["Pearl of Great Price": load(bundleUrlFromFilename("pearl_of_great_price_map.json"))]]
+        deepVolumes = ["Old Testament": load(bundleUrlFromFilename("old_testament_map.json")),
+                       "New Testament": load(bundleUrlFromFilename("new_testament_map.json")),
+                       "Book of Mormon": load(bundleUrlFromFilename("book_of_mormon_map.json")),
+                       "Pearl of Great Price": load(bundleUrlFromFilename("pearl_of_great_price_map.json"))]
         doctrineAndCovenantsDict = load(bundleUrlFromFilename("doctrine_and_covenants_map.json"))
         
         volumes = []
@@ -80,7 +44,8 @@ class ScriptureTree {
             sections.append(newSection)
         }
         let newVolume = Node(name: "Doctrine and Covenants", children: sections)
-        volumes.insert(newVolume, at: 3) // Inserts Doctrine and Covenants ahead of Pearl of Great Price
+        volumes.append(newVolume)
+        volumes.sort{ $0.start < $1.start }
     }
     
     func getVolume(_ volumeName: String) -> Node? {
@@ -92,6 +57,7 @@ class ScriptureTree {
         return nil
     }
 }
+
 
 class Node {
     var name: String
@@ -132,21 +98,3 @@ struct ChapterLimits: Codable {
     let start: Int
     let end: Int
 }
-
-func printTree(scriptureTree: ScriptureTree) -> Int {
-    for volume in scriptureTree.volumes {
-        print(volume.name, volume.start, volume.end)
-        for book in volume.children {
-            print("   ", book.name, book.start, book.end)
-            if (!book.children.isEmpty) {
-                for chapter in book.children {
-                    print("       ", chapter.name, chapter.start, chapter.end)
-                }
-            }
-        }
-    }
-    return 0
-}
-
-let scriptureTree = ScriptureTree()
-let printThatTree = printTree(scriptureTree: scriptureTree)
