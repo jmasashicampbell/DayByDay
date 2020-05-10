@@ -9,13 +9,6 @@
 import SwiftUI
 import CoreGraphics
 
-func dateComponentsToString(dateComponents: DateComponents, format: String) -> String {
-    let date = Calendar.current.date(from: dateComponents)
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = format
-    return dateFormatter.string(from: date!)
-}
-
 struct ScriptureCard: View {
     var scripture: Scripture
     var body: some View {

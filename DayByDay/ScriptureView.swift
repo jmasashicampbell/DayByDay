@@ -15,9 +15,9 @@ struct ScriptureView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0.0) {
             HStack {
-                Text(dateComponentsToString(dateComponents: scripture.date, format: "E"))
+                Text(dateComponentsToString(scripture.date, format: "E"))
                 Spacer()
-                Text(dateComponentsToString(dateComponents: scripture.date, format: "MMM dd"))
+                Text(dateComponentsToString(scripture.date, format: "MMM dd"))
             }
             Spacer().frame(height: SCRIPTURE_CARD_SPACING)
             Text(scripture.text)
