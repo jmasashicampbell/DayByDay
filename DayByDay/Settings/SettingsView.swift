@@ -11,6 +11,8 @@ import SwiftUI
 struct SettingsView: View {
     @State private var pickRandom = UserDefaults.standard.bool(forKey: "pickRandom")
     @State private var pickType = UserDefaults.standard.object(forKey: "pickType") as? PickType ?? PickType.chapters
+    @EnvironmentObject var pickReferences: PickReferences
+    
     var body: some View {
         Form {
             List {

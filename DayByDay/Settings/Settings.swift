@@ -15,3 +15,7 @@ enum PickType: String, CaseIterable, Hashable {
     case chapters = "Chapters"
     case topicalGuide = "Topical Guide"
 }
+
+class PickReferences: ObservableObject {
+    @Published var references: [String] = []
+}
