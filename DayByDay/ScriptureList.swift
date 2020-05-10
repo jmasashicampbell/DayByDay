@@ -18,7 +18,7 @@ struct ScriptureList: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 24) {
                         Spacer().frame(width: 10)
-                        ForEach(generatedScriptureData) { scripture in
+                        ForEach(generatedScriptures) { scripture in
                             NavigationLink(destination: ScriptureDetail(scripture: scripture)
                             //navigationBarHidden(true)
                             ) {

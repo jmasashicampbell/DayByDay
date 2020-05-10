@@ -10,21 +10,22 @@ import UIKit
 import SwiftUI
 import CoreLocation
 
-var generatedScriptureData: [Scripture] = loadGeneratedScriptures()
+var generatedScriptures = loadGeneratedScriptures()
 
 func loadGeneratedScriptures() -> [Scripture] {
     let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
     let file = path!.appendingPathComponent("ScriptureData.json")
     
-    return load(file)
+    let scripturesArray: [Scripture]? = try? load(file)
+    return scripturesArray ?? []
 }
 
 /**
   Updates scriptureData.json to reflect changes in the scriptureData array.
  */
 func updateScripturesFile() {
-    print("Updating", generatedScriptureData.count)
-    let jsonData = try! JSONEncoder().encode(generatedScriptureData)
+    print("Updating", generatedScriptures.count)
+    let jsonData = try! JSONEncoder().encode(generatedScriptures)
     let jsonString = String(data: jsonData, encoding: .utf8)!
 
     let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first

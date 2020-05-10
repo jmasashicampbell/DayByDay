@@ -30,18 +30,11 @@ func bundleUrlFromFilename(_ filename: String) -> URL {
   - Returns: The loaded object
  */
 
-func load<T: Decodable>(_ file: URL) -> T {
-    let data: Data
+func load<T: Decodable>(_ file: URL) throws -> T {
+    let data = try Data(contentsOf: file)
     
     do {
-        data = try Data(contentsOf: file)
-    } catch {
-        fatalError("Couldn't load file:\n\(error)")
-    }
-    
-    do {
-        let decoder = JSONDecoder()
-        return try decoder.decode(T.self, from: data)
+        return try JSONDecoder().decode(T.self, from: data)
     } catch {
         fatalError("Couldn't parse file as \(T.self):\n\(error)")
     }

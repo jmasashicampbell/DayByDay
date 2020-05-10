@@ -24,8 +24,8 @@ struct ScriptureCard: View {
 struct ScriptureCard_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ScriptureCard(scripture: generatedScriptureData[0])
-            ScriptureCard(scripture: generatedScriptureData[1])
+            ScriptureCard(scripture: generatedScriptures[0])
+            ScriptureCard(scripture: generatedScriptures[1])
         }
         .previewLayout(.fixed(width: 330, height: 640))
     }

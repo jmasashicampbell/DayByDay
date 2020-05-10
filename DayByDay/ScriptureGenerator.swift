@@ -13,20 +13,20 @@ import Foundation
   Generates a scripture if one hasn't been generated for that day. Adds that scripture to scriptureList and updates scriptureData.json.
  */
 func generateScripture() {
-    print("Generating", generatedScriptureData.count)
-    if (generatedScriptureData.isEmpty) {
+    print("Generating", generatedScriptures.count)
+    if (generatedScriptures.isEmpty) {
         let scriptureIndex = 31196
         let newScripture = newScriptureFromIndex(index: scriptureIndex, id: 1001)
-        generatedScriptureData.append(newScripture)
+        generatedScriptures.append(newScripture)
         updateScripturesFile()
     }
     else {
-        let lastScripture : Scripture = generatedScriptureData.last!
+        let lastScripture : Scripture = generatedScriptures.last!
         let today = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         
         if (today != lastScripture.date) {
             let newScripture = newScriptureFromIndex(index: lastScripture.index + 1, id: lastScripture.id + 1)
-            generatedScriptureData.append(newScripture)
+            generatedScriptures.append(newScripture)
             updateScripturesFile()
         }
     }
@@ -49,7 +49,7 @@ func newScriptureFromIndex(index: Int, id: Int) -> Scripture {
     }
 
     let file = bundleUrlFromFilename("scriptures.json")
-    let scripturesArray: [Verse] = load(file)
+    let scripturesArray: [Verse] = try! load(file)
     
     let today = Calendar.current.dateComponents([.year, .month, .day], from: Date())
     let newVerse = scripturesArray[index]

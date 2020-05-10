@@ -9,19 +9,22 @@
 import Foundation
 
 
+//let scriptureTree = ScriptureTree()
+
+
 class ScriptureTree {
     let deepVolumes: Dictionary<String, Dictionary<String, Dictionary<String, ChapterLimits>>>
     let doctrineAndCovenantsDict: Dictionary<String, ChapterLimits>
-    var volumes: [Node]
+    let root: Node
     
     init() {
-        deepVolumes = ["Old Testament": load(bundleUrlFromFilename("old_testament_map.json")),
-                       "New Testament": load(bundleUrlFromFilename("new_testament_map.json")),
-                       "Book of Mormon": load(bundleUrlFromFilename("book_of_mormon_map.json")),
-                       "Pearl of Great Price": load(bundleUrlFromFilename("pearl_of_great_price_map.json"))]
-        doctrineAndCovenantsDict = load(bundleUrlFromFilename("doctrine_and_covenants_map.json"))
+        deepVolumes = ["Old Testament": try! load(bundleUrlFromFilename("old_testament_map.json")),
+                       "New Testament": try! load(bundleUrlFromFilename("new_testament_map.json")),
+                       "Book of Mormon": try! load(bundleUrlFromFilename("book_of_mormon_map.json")),
+                       "Pearl of Great Price": try! load(bundleUrlFromFilename("pearl_of_great_price_map.json"))]
+        doctrineAndCovenantsDict = try! load(bundleUrlFromFilename("doctrine_and_covenants_map.json"))
         
-        volumes = []
+        var volumes: [Node] = []
         for (volumeName, volumeDict) in deepVolumes {
             var books: [Node] = []
             for (bookName, bookDict) in volumeDict {
@@ -45,16 +48,8 @@ class ScriptureTree {
         }
         let newVolume = Node(name: "Doctrine and Covenants", children: sections)
         volumes.append(newVolume)
-        volumes.sort{ $0.start < $1.start }
-    }
-    
-    func getVolume(_ volumeName: String) -> Node? {
-        for volume in volumes {
-            if (volume.name == volumeName) {
-                return volume
-            }
-        }
-        return nil
+        
+        root = Node(name: "Scriptures", children: volumes)
     }
 }
 

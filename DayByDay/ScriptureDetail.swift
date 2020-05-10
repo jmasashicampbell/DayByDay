@@ -47,6 +47,6 @@ struct ScriptureDetail: View {
 
 struct ScriptureDetail_Previews: PreviewProvider {
     static var previews: some View {
-        ScriptureDetail(scripture: generatedScriptureData[0])
+        ScriptureDetail(scripture: generatedScriptures[0])
     }
 }

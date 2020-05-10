@@ -8,19 +8,23 @@
 
 import SwiftUI
 
-struct SettingsPickerVIew: View {
-    var options: Dictionary<String, Any>
+let scriptureTree = ScriptureTree()
+
+struct SettingsPickerView: View {
+    var node: Node
     var body: some View {
         Form {
             List {
-                ForEach 
+                ForEach(node.children, id: \.start) { child in
+                    Text(child.name)
+                }
             }
-        }
+        }.navigationBarTitle(node.name)
     }
 }
 
 struct SettingsPickerVIew_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsPickerVIew()
+        SettingsPickerView(node: scriptureTree.root)
     }
 }

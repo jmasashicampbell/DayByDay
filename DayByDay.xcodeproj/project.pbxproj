@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		CF3B271C246286AF00D80998 /* ScriptureGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3B271B246286AF00D80998 /* ScriptureGenerator.swift */; };
 		CF3B2720246295B200D80998 /* scriptures.json in Resources */ = {isa = PBXBuildFile; fileRef = CF3B271E246295B200D80998 /* scriptures.json */; };
-		CF3B2721246295B200D80998 /* scriptures_map.json in Resources */ = {isa = PBXBuildFile; fileRef = CF3B271F246295B200D80998 /* scriptures_map.json */; };
 		CF53A2D624650BB20066F7A3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D524650BB20066F7A3 /* SettingsView.swift */; };
 		CF53A2D82465197A0066F7A3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D72465197A0066F7A3 /* Settings.swift */; };
 		CF53A2DA24667E0F0066F7A3 /* SettingsPickerVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D924667E0F0066F7A3 /* SettingsPickerVIew.swift */; };
@@ -23,16 +22,20 @@
 		CF80F910245B79F8001424C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF80F90E245B79F8001424C4 /* LaunchScreen.storyboard */; };
 		CF80F918245D3FC6001424C4 /* Scripture.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F917245D3FC6001424C4 /* Scripture.swift */; };
 		CF80F91A245D41E6001424C4 /* ScriptureCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F919245D41E6001424C4 /* ScriptureCard.swift */; };
-		CF80F91E245D4767001424C4 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F91D245D4767001424C4 /* Data.swift */; };
+		CF80F91E245D4767001424C4 /* GeneratedScriptures.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F91D245D4767001424C4 /* GeneratedScriptures.swift */; };
 		CF80F924245DD343001424C4 /* ScriptureList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F923245DD343001424C4 /* ScriptureList.swift */; };
 		CF80F926245DE26E001424C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F925245DE26E001424C4 /* Constants.swift */; };
 		CF80F9282460D924001424C4 /* ScriptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F9272460D923001424C4 /* ScriptureView.swift */; };
+		CF9FA04724679A8500772D2B /* book_of_mormon_map.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9FA04224679A8500772D2B /* book_of_mormon_map.json */; };
+		CF9FA04824679A8500772D2B /* new_testament_map.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9FA04324679A8500772D2B /* new_testament_map.json */; };
+		CF9FA04924679A8500772D2B /* doctrine_and_covenants_map.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9FA04424679A8500772D2B /* doctrine_and_covenants_map.json */; };
+		CF9FA04A24679A8500772D2B /* pearl_of_great_price_map.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9FA04524679A8500772D2B /* pearl_of_great_price_map.json */; };
+		CF9FA04B24679A8500772D2B /* old_testament_map.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9FA04624679A8500772D2B /* old_testament_map.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CF3B271B246286AF00D80998 /* ScriptureGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureGenerator.swift; sourceTree = "<group>"; };
 		CF3B271E246295B200D80998 /* scriptures.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = scriptures.json; sourceTree = "<group>"; };
-		CF3B271F246295B200D80998 /* scriptures_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = scriptures_map.json; sourceTree = "<group>"; };
 		CF53A2D524650BB20066F7A3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		CF53A2D72465197A0066F7A3 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		CF53A2D924667E0F0066F7A3 /* SettingsPickerVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPickerVIew.swift; sourceTree = "<group>"; };
@@ -48,10 +51,15 @@
 		CF80F911245B79F8001424C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF80F917245D3FC6001424C4 /* Scripture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scripture.swift; sourceTree = "<group>"; };
 		CF80F919245D41E6001424C4 /* ScriptureCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureCard.swift; sourceTree = "<group>"; };
-		CF80F91D245D4767001424C4 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		CF80F91D245D4767001424C4 /* GeneratedScriptures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedScriptures.swift; sourceTree = "<group>"; };
 		CF80F923245DD343001424C4 /* ScriptureList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureList.swift; sourceTree = "<group>"; };
 		CF80F925245DE26E001424C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CF80F9272460D923001424C4 /* ScriptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureView.swift; sourceTree = "<group>"; };
+		CF9FA04224679A8500772D2B /* book_of_mormon_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = book_of_mormon_map.json; sourceTree = "<group>"; };
+		CF9FA04324679A8500772D2B /* new_testament_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = new_testament_map.json; sourceTree = "<group>"; };
+		CF9FA04424679A8500772D2B /* doctrine_and_covenants_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = doctrine_and_covenants_map.json; sourceTree = "<group>"; };
+		CF9FA04524679A8500772D2B /* pearl_of_great_price_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pearl_of_great_price_map.json; sourceTree = "<group>"; };
+		CF9FA04624679A8500772D2B /* old_testament_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = old_testament_map.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +76,11 @@
 		CF3B271D2462872800D80998 /* Scriptures Source Data */ = {
 			isa = PBXGroup;
 			children = (
-				CF3B271F246295B200D80998 /* scriptures_map.json */,
+				CF9FA04224679A8500772D2B /* book_of_mormon_map.json */,
+				CF9FA04424679A8500772D2B /* doctrine_and_covenants_map.json */,
+				CF9FA04324679A8500772D2B /* new_testament_map.json */,
+				CF9FA04624679A8500772D2B /* old_testament_map.json */,
+				CF9FA04524679A8500772D2B /* pearl_of_great_price_map.json */,
 				CF3B271E246295B200D80998 /* scriptures.json */,
 			);
 			path = "Scriptures Source Data";
@@ -106,7 +118,7 @@
 				CF80F903245B79EF001424C4 /* AppDelegate.swift */,
 				CF80F905245B79EF001424C4 /* SceneDelegate.swift */,
 				CF80F917245D3FC6001424C4 /* Scripture.swift */,
-				CF80F91D245D4767001424C4 /* Data.swift */,
+				CF80F91D245D4767001424C4 /* GeneratedScriptures.swift */,
 				CF53A2DD24668E5C0066F7A3 /* General.swift */,
 				CF53A2DB246680AE0066F7A3 /* ScriptureTree.swift */,
 				CF3B271B246286AF00D80998 /* ScriptureGenerator.swift */,
@@ -191,10 +203,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF9FA04724679A8500772D2B /* book_of_mormon_map.json in Resources */,
 				CF80F910245B79F8001424C4 /* LaunchScreen.storyboard in Resources */,
 				CF3B2720246295B200D80998 /* scriptures.json in Resources */,
+				CF9FA04924679A8500772D2B /* doctrine_and_covenants_map.json in Resources */,
+				CF9FA04824679A8500772D2B /* new_testament_map.json in Resources */,
+				CF9FA04B24679A8500772D2B /* old_testament_map.json in Resources */,
 				CF80F90D245B79F8001424C4 /* Preview Assets.xcassets in Resources */,
-				CF3B2721246295B200D80998 /* scriptures_map.json in Resources */,
+				CF9FA04A24679A8500772D2B /* pearl_of_great_price_map.json in Resources */,
 				CF80F90A245B79F8001424C4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,7 +224,7 @@
 			files = (
 				CF80F924245DD343001424C4 /* ScriptureList.swift in Sources */,
 				CF80F904245B79EF001424C4 /* AppDelegate.swift in Sources */,
-				CF80F91E245D4767001424C4 /* Data.swift in Sources */,
+				CF80F91E245D4767001424C4 /* GeneratedScriptures.swift in Sources */,
 				CF3B271C246286AF00D80998 /* ScriptureGenerator.swift in Sources */,
 				CF80F906245B79EF001424C4 /* SceneDelegate.swift in Sources */,
 				CF80F9282460D924001424C4 /* ScriptureView.swift in Sources */,
