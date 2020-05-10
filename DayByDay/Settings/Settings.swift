@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum PickType: String, CaseIterable {
+enum PickType: String, CaseIterable, Hashable {
     case all = "All Scriptures"
     case volumes = "Volumes"
     case books = "Books"

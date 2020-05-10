@@ -27,14 +27,15 @@ struct SettingsView: View {
                                 Text(pickType.rawValue).tag(pickType)
                             }
                         }
-                        //.pickerStyle(SegmentedPickerStyle())
                     }
                     
                     if (pickType != PickType.all) {
-                        Picker(pickType.rawValue, selection: $pickType) {
-                            ForEach(PickType.allCases, id: \.self) { pickType in
-                                Text(pickType.rawValue).tag(pickType)
-                            }
+                        NavigationLink(destination:
+                            SettingsPickerView(node: scriptureTree.root,
+                                               depth: 1,
+                                               maxDepth: maxDepthMap[pickType] ?? 3)
+                        ) {
+                            Text(pickType.rawValue)
                         }
                     }
                 }
@@ -43,16 +44,9 @@ struct SettingsView: View {
     }
 }
 
-extension Binding {
-    func onChange(_ handler: @escaping (Value) -> Void) -> Binding<Value> {
-        return Binding(
-            get: { self.wrappedValue },
-            set: { selection in
-                self.wrappedValue = selection
-                handler(selection)
-        })
-    }
-}
+let maxDepthMap = [PickType.volumes: 1,
+                   PickType.books: 2,
+                   PickType.chapters: 3]
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {

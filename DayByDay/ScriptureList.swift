@@ -18,11 +18,11 @@ struct ScriptureList: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 24) {
                         Spacer().frame(width: 10)
-                        ForEach(generatedScriptures) { scripture in
+                        ForEach(generatedScriptures.reversed()) { scripture in
                             NavigationLink(destination: ScriptureDetail(scripture: scripture)
-                            //navigationBarHidden(true)
                             ) {
                                 ScriptureCard(scripture: scripture)
+                                    .flip()
                                     .frame(width: geometry.size.width - 74,
                                            height: 640.0)
                             }
@@ -30,13 +30,14 @@ struct ScriptureList: View {
                         Spacer().frame(width: 10)
                     }
                 }
+                .flip()
                 .navigationBarItems(
                     leading:
                         Button(action: {generateScripture()}) {
                             Image(systemName: "info.circle")
                         },
                     trailing:
-                        Button(action: {}) {
+                        NavigationLink(destination: SettingsView()) {
                             Image(systemName: "slider.horizontal.3")
                         }
                 )

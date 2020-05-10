@@ -12,19 +12,37 @@ let scriptureTree = ScriptureTree()
 
 struct SettingsPickerView: View {
     var node: Node
+    var depth: Int
+    var maxDepth: Int
     var body: some View {
         Form {
             List {
-                ForEach(node.children, id: \.start) { child in
-                    Text(child.name)
+                if (self.depth < self.maxDepth) {
+                    ForEach(node.children, id: \.start) { child in
+                        NavigationLink(destination:
+                            SettingsPickerView(node: child,
+                                               depth: self.depth + 1,
+                                               maxDepth: self.maxDepth)) {
+                            Text(child.name)
+                        }
+                    }
+                } else {
+                    ForEach(node.children, id: \.start) { child in
+                        Button(action: {}) {
+                            Text(child.name)
+                        }
+                    }
                 }
             }
         }.navigationBarTitle(node.name)
     }
 }
 
+
 struct SettingsPickerVIew_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsPickerView(node: scriptureTree.root)
+        SettingsPickerView(node: scriptureTree.root,
+                           depth: 1,
+                           maxDepth: 3)
     }
 }

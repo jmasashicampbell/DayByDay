@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 /**
@@ -53,5 +54,14 @@ func dateComponentsToString(_ dateComponents: DateComponents, format: String) ->
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = format
     return dateFormatter.string(from: date!)
+}
+
+
+extension View {
+    public func flip() -> some View {
+        return self
+            .rotationEffect(.radians(.pi))
+            .scaleEffect(x: 1, y: -1, anchor: .center)
+    }
 }
 
