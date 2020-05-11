@@ -56,16 +56,22 @@ class ScriptureTree {
 
 class Node {
     var name: String
-    var children: [Node]
+    var parent: Node? = nil
+    var children: [Node] = []
+    var path: [String]
     var start: Int
     var end: Int
     
     init(name: String, children: [Node]) {
         self.name = name
+        self.path = [name]
         if (!children.isEmpty) {
             self.children = children.sorted { $0.start < $1.start }
             self.start = self.children.first!.start
             self.end = self.children.last!.end
+            for child in self.children {
+                child.setParent(parent: self)
+            }
         } else {
             fatalError("Parent node initialized with no children.")
         }
@@ -73,9 +79,21 @@ class Node {
     
     init(name: String, start: Int, end: Int) {
         self.name = name
+        self.path = [name]
         self.start = start
         self.end = end
-        self.children = []
+    }
+    
+    func setParent(parent: Node) {
+        self.parent = parent
+        self.updatePath(name: parent.name)
+    }
+    
+    func updatePath(name: String) {
+        self.path = [name] + self.path
+        for child in children {
+            child.updatePath(name: name)
+        }
     }
     
     func getChild(name: String) -> Node? {
