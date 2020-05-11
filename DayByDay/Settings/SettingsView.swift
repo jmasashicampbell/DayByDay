@@ -18,8 +18,8 @@ struct SettingsView: View {
             List {
                 Section {
                     Picker("pickRandom", selection: $pickRandom) {
-                        Text("In Order").tag(true)
-                        Text("Random").tag(false)
+                        Text("In Order").tag(false)
+                        Text("Random").tag(true)
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     
@@ -37,7 +37,39 @@ struct SettingsView: View {
                                                depth: 1,
                                                maxDepth: maxDepthMap[pickType] ?? 3)
                         ) {
-                            Text(pickType.rawValue)
+                            HStack {
+                                Text(pickType.rawValue)
+                                Spacer()
+                                if (self.settings.referencesContains(path: scriptureTree.root.path)) {
+                                    Text(String(self.settings.referencesCount(path: scriptureTree.root.path)))
+                                }
+                            }
+                        }
+                    }
+                    
+                    if (!pickRandom) {
+                        HStack {
+                            Picker("Pick from", selection: $settings.startingVerse.volume) {
+                                ForEach(scriptureTree.root.children
+                                    .filter({ self.settings.referencesContains(path: $0.path) }),
+                                    id: \.start) { volume in
+                                    Text(volume.name).tag(volume.name)
+                                }
+                            }
+                            .pickerStyle(WheelPickerStyle())
+                            .frame(width: 180)
+                            /*Picker("Pick from", selection: $pickType) {
+                                ForEach(PickType.allCases, id: \.self) { pickType in
+                                    Text(pickType.rawValue).tag(pickType)
+                                }
+                            }.pickerStyle(WheelPickerStyle())
+                            .frame(width: 100)
+                            Picker("Pick from", selection: $pickType) {
+                                ForEach(PickType.allCases, id: \.self) { pickType in
+                                    Text(pickType.rawValue).tag(pickType)
+                                }
+                            }.pickerStyle(WheelPickerStyle())
+                            .frame(width: 100)*/
                         }
                     }
                 }
@@ -52,6 +84,6 @@ let maxDepthMap = [PickType.volumes: 1,
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView().environmentObject(Settings())
     }
 }

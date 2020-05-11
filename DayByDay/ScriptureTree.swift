@@ -51,6 +51,17 @@ class ScriptureTree {
         
         root = Node(name: "Scriptures", children: volumes)
     }
+    
+    func getNode(path: [String]) -> Node? {
+        var node: Node? = self.root
+        for name in path[1...] {
+            node = node!.getChild(name: name)
+            if (node == nil) {
+                break
+            }
+        }
+        return node
+    }
 }
 
 

@@ -25,7 +25,13 @@ struct SettingsPickerView: View {
                             SettingsPickerView(node: child,
                                                depth: self.depth + (child.name == "Doctrine and Covenants" ? 2 : 1),
                                                maxDepth: self.maxDepth)) {
-                            Text(child.name)
+                            HStack {
+                                Text(child.name)
+                                Spacer()
+                                if (self.settings.referencesContains(path: child.path)) {
+                                    Text(String(self.settings.referencesCount(path: child.path)))
+                                }
+                            }
                         }
                     }
                 } else {
@@ -36,7 +42,7 @@ struct SettingsPickerView: View {
                             } else {
                                 self.settings.references.append(child.path)
                             }
-                            print(self.settings.references)
+                            self.settings.updateStartingVerse()
                         }) {
                             HStack {
                                 Text(child.name)
@@ -52,7 +58,8 @@ struct SettingsPickerView: View {
                     }
                 }
             }
-        }.navigationBarTitle(node.name)
+        }
+        .navigationBarTitle(node.name)
     }
 }
 

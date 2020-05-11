@@ -89,8 +89,8 @@
 		CF6C0B1B246509FA0050144E /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				CF53A2D524650BB20066F7A3 /* SettingsView.swift */,
 				CF53A2D72465197A0066F7A3 /* Settings.swift */,
+				CF53A2D524650BB20066F7A3 /* SettingsView.swift */,
 				CF53A2D924667E0F0066F7A3 /* SettingsPickerVIew.swift */,
 			);
 			path = Settings;
