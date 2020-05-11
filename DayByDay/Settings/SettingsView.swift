@@ -47,8 +47,16 @@ struct SettingsView: View {
                         }
                     }
                     
-                    if (!pickRandom) {
-                        
+                    if (!pickRandom && !settings.references.isEmpty) {
+                        NavigationLink(destination:
+                            StartingPickerView(node: scriptureTree.root)
+                        ) {
+                            HStack {
+                                Text("Start from")
+                                Spacer()
+                                Text(self.settings.startingVerse[self.settings.startingVerse.count - 2] + ":" + self.settings.startingVerse[self.settings.startingVerse.count - 1])
+                            }
+                        }
                     }
                 }
             }.padding(5)
