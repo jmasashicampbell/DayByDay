@@ -9,7 +9,7 @@
 import Foundation
 
 
-//let scriptureTree = ScriptureTree()
+let scriptureTree = ScriptureTree()
 
 
 class ScriptureTree {

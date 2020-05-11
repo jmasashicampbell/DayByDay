@@ -11,7 +11,7 @@
 		CF3B2720246295B200D80998 /* scriptures.json in Resources */ = {isa = PBXBuildFile; fileRef = CF3B271E246295B200D80998 /* scriptures.json */; };
 		CF53A2D624650BB20066F7A3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D524650BB20066F7A3 /* SettingsView.swift */; };
 		CF53A2D82465197A0066F7A3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D72465197A0066F7A3 /* Settings.swift */; };
-		CF53A2DA24667E0F0066F7A3 /* SettingsPickerVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D924667E0F0066F7A3 /* SettingsPickerVIew.swift */; };
+		CF53A2DA24667E0F0066F7A3 /* PickPickerVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D924667E0F0066F7A3 /* PickPickerVIew.swift */; };
 		CF53A2DC246680AE0066F7A3 /* ScriptureTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2DB246680AE0066F7A3 /* ScriptureTree.swift */; };
 		CF53A2DE24668E5C0066F7A3 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2DD24668E5C0066F7A3 /* General.swift */; };
 		CF80F904245B79EF001424C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F903245B79EF001424C4 /* AppDelegate.swift */; };
@@ -31,6 +31,7 @@
 		CF9FA04924679A8500772D2B /* doctrine_and_covenants_map.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9FA04424679A8500772D2B /* doctrine_and_covenants_map.json */; };
 		CF9FA04A24679A8500772D2B /* pearl_of_great_price_map.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9FA04524679A8500772D2B /* pearl_of_great_price_map.json */; };
 		CF9FA04B24679A8500772D2B /* old_testament_map.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9FA04624679A8500772D2B /* old_testament_map.json */; };
+		CF9FA04D2469ED4D00772D2B /* StartingPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9FA04C2469ED4D00772D2B /* StartingPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +39,7 @@
 		CF3B271E246295B200D80998 /* scriptures.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = scriptures.json; sourceTree = "<group>"; };
 		CF53A2D524650BB20066F7A3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		CF53A2D72465197A0066F7A3 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		CF53A2D924667E0F0066F7A3 /* SettingsPickerVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPickerVIew.swift; sourceTree = "<group>"; };
+		CF53A2D924667E0F0066F7A3 /* PickPickerVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPickerVIew.swift; sourceTree = "<group>"; };
 		CF53A2DB246680AE0066F7A3 /* ScriptureTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureTree.swift; sourceTree = "<group>"; };
 		CF53A2DD24668E5C0066F7A3 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		CF80F900245B79EF001424C4 /* DayByDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayByDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +61,7 @@
 		CF9FA04424679A8500772D2B /* doctrine_and_covenants_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = doctrine_and_covenants_map.json; sourceTree = "<group>"; };
 		CF9FA04524679A8500772D2B /* pearl_of_great_price_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pearl_of_great_price_map.json; sourceTree = "<group>"; };
 		CF9FA04624679A8500772D2B /* old_testament_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = old_testament_map.json; sourceTree = "<group>"; };
+		CF9FA04C2469ED4D00772D2B /* StartingPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +93,8 @@
 			children = (
 				CF53A2D72465197A0066F7A3 /* Settings.swift */,
 				CF53A2D524650BB20066F7A3 /* SettingsView.swift */,
-				CF53A2D924667E0F0066F7A3 /* SettingsPickerVIew.swift */,
+				CF53A2D924667E0F0066F7A3 /* PickPickerVIew.swift */,
+				CF9FA04C2469ED4D00772D2B /* StartingPickerView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -228,8 +231,9 @@
 				CF3B271C246286AF00D80998 /* ScriptureGenerator.swift in Sources */,
 				CF80F906245B79EF001424C4 /* SceneDelegate.swift in Sources */,
 				CF80F9282460D924001424C4 /* ScriptureView.swift in Sources */,
-				CF53A2DA24667E0F0066F7A3 /* SettingsPickerVIew.swift in Sources */,
+				CF53A2DA24667E0F0066F7A3 /* PickPickerVIew.swift in Sources */,
 				CF53A2D82465197A0066F7A3 /* Settings.swift in Sources */,
+				CF9FA04D2469ED4D00772D2B /* StartingPickerView.swift in Sources */,
 				CF80F908245B79EF001424C4 /* ScriptureDetail.swift in Sources */,
 				CF53A2DE24668E5C0066F7A3 /* General.swift in Sources */,
 				CF80F91A245D41E6001424C4 /* ScriptureCard.swift in Sources */,

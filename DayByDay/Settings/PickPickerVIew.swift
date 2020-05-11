@@ -8,9 +8,8 @@
 
 import SwiftUI
 
-let scriptureTree = ScriptureTree()
 
-struct SettingsPickerView: View {
+struct PickPickerView: View {
     var node: Node
     var depth: Int
     var maxDepth: Int
@@ -22,7 +21,7 @@ struct SettingsPickerView: View {
                 if (self.depth < self.maxDepth) {
                     ForEach(node.children, id: \.start) { child in
                         NavigationLink(destination:
-                            SettingsPickerView(node: child,
+                            PickPickerView(node: child,
                                                depth: self.depth + (child.name == "Doctrine and Covenants" ? 2 : 1),
                                                maxDepth: self.maxDepth)) {
                             HStack {
@@ -64,14 +63,9 @@ struct SettingsPickerView: View {
 }
 
 
-func toggleRow(node: Node) {
-    
-}
-
-
 struct SettingsPickerVIew_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsPickerView(node: scriptureTree.root,
+        PickPickerView(node: scriptureTree.root,
                            depth: 1,
                            maxDepth: 1)
     }

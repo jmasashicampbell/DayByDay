@@ -33,7 +33,7 @@ struct SettingsView: View {
                     
                     if (pickType != PickType.all) {
                         NavigationLink(destination:
-                            SettingsPickerView(node: scriptureTree.root,
+                            PickPickerView(node: scriptureTree.root,
                                                depth: 1,
                                                maxDepth: maxDepthMap[pickType] ?? 3)
                         ) {
@@ -48,29 +48,7 @@ struct SettingsView: View {
                     }
                     
                     if (!pickRandom) {
-                        HStack {
-                            Picker("Pick from", selection: $settings.startingVerse.volume) {
-                                ForEach(scriptureTree.root.children
-                                    .filter({ self.settings.referencesContains(path: $0.path) }),
-                                    id: \.start) { volume in
-                                    Text(volume.name).tag(volume.name)
-                                }
-                            }
-                            .pickerStyle(WheelPickerStyle())
-                            .frame(width: 180)
-                            /*Picker("Pick from", selection: $pickType) {
-                                ForEach(PickType.allCases, id: \.self) { pickType in
-                                    Text(pickType.rawValue).tag(pickType)
-                                }
-                            }.pickerStyle(WheelPickerStyle())
-                            .frame(width: 100)
-                            Picker("Pick from", selection: $pickType) {
-                                ForEach(PickType.allCases, id: \.self) { pickType in
-                                    Text(pickType.rawValue).tag(pickType)
-                                }
-                            }.pickerStyle(WheelPickerStyle())
-                            .frame(width: 100)*/
-                        }
+                        
                     }
                 }
             }.padding(5)
