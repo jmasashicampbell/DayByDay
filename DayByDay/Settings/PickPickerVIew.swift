@@ -67,10 +67,7 @@ struct PickPickerView: View {
                         if (self.settings.references.contains(child.path)) {
                             self.settings.references = self.settings.references.filter {$0 != child.path}
                         } else {
-                            self.settings.references.append(child.path)
-                            print(self.settings.references)
-                            self.settings.references.sort{ scriptureTree.getNode(path: $0)!.start < scriptureTree.getNode(path: $1)!.start}
-                            print(self.settings.references, "\n")
+                            self.settings.addReference(child.path)
                         }
                         self.settings.updateStartingVerse()
                     }) {

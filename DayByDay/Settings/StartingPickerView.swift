@@ -71,7 +71,7 @@ struct StartingPickerView: View {
         }
 
         private func setStartingVerse(path: [String], verseNum: Int) {
-            self.settings.startingVerse = path + [String(verseNum)]
+            self.settings.setStartingVerse(path + [String(verseNum)])
         }
     }
     
