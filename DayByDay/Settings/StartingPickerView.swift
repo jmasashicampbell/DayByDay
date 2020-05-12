@@ -44,7 +44,7 @@ struct StartingPickerView: View {
         var body: some View {
             List {
                 ForEach(1...node.end - node.start, id: \.self) { verseNum in
-                    Button(action: {self.setStartingVerse(path: self.node.path, verseNum: verseNum)}) {
+                    Button(action: {self.settings.setStartingVerse(path: self.node.path + [String(verseNum)])}) {
                         SelectionRow(node: self.node, verseNum: verseNum)
                     }
                 }
@@ -69,14 +69,7 @@ struct StartingPickerView: View {
                 }
             }
         }
-
-        private func setStartingVerse(path: [String], verseNum: Int) {
-            self.settings.setStartingVerse(path + [String(verseNum)])
-        }
     }
-    
-    
-    
 }
 
 struct StartingPickerView_Previews: PreviewProvider {
