@@ -15,8 +15,13 @@ class Settings: ObservableObject {
     @Published var pickSections = UserDefaults.standard.object(forKey: "pickSections") as? [[String]] ?? []
     @Published var startingVerse = UserDefaults.standard.object(forKey: "startingVerse") as? [String] ??
         ["Scriptures", "Book of Mormon", "1 Nephi", "1 Nephi 1", "1"]
-    
+    var startDateComponents: DateComponents
     private var startingVerseIsSet = false
+    
+    init() {
+        let startDate = UserDefaults.standard.object(forKey: "startDate") as? Date ?? Date()
+        self.startDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: startDate)
+    }
     
     func pickSectionsCount(path: [String]) -> Int {
         let filtered = pickSections.filter({ pathsAlign($0, path) })
@@ -66,10 +71,13 @@ class Settings: ObservableObject {
     }
     
     func save() {
+        let startDate = Date()
+        startDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: startDate)
         UserDefaults.standard.set(pickRandom, forKey: "pickRandom")
         UserDefaults.standard.set(pickType.rawValue, forKey: "pickType")
         UserDefaults.standard.set(pickSections, forKey: "pickSections")
         UserDefaults.standard.set(startingVerse, forKey: "startingVerse")
+        UserDefaults.standard.set(startDate, forKey: "startDate")
     }
 }
 

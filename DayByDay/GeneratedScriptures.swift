@@ -16,8 +16,8 @@ func loadGeneratedScriptures() -> [Scripture] {
     let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
     let file = path!.appendingPathComponent("ScriptureData.json")
     
-    let scripturesArray: [Scripture]? = try? load(file)
-    return scripturesArray ?? []
+    let generatedArray: [Scripture]? = try? load(file)
+    return generatedArray ?? []
 }
 
 /**

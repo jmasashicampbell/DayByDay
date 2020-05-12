@@ -122,3 +122,10 @@ struct ChapterLimits: Codable {
     let start: Int
     let end: Int
 }
+
+
+struct Verse: Codable {
+    var reference: String
+    var text: String
+    var verse: Int
+}
