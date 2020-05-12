@@ -44,8 +44,8 @@ struct PickPickerView: View {
                         HStack {
                             Text(child.name)
                             Spacer()
-                            if (self.settings.referencesContains(path: child.path)) {
-                                Text(String(self.settings.referencesCount(path: child.path)))
+                            if (self.settings.pickSectionsContains(path: child.path)) {
+                                Text(String(self.settings.pickSectionsCount(path: child.path)))
                             }
                         }
                     }
@@ -64,17 +64,17 @@ struct PickPickerView: View {
             List {
                 ForEach(node.children, id: \.start) { child in
                     Button(action: {
-                        if (self.settings.references.contains(child.path)) {
-                            self.settings.references = self.settings.references.filter {$0 != child.path}
+                        if (self.settings.pickSections.contains(child.path)) {
+                            self.settings.pickSections = self.settings.pickSections.filter {$0 != child.path}
                         } else {
-                            self.settings.addReference(path: child.path)
+                            self.settings.addPickSection(path: child.path)
                         }
                         self.settings.updateStartingVerse()
                     }) {
                         HStack {
                             Text(child.name)
                             Spacer()
-                            if (self.settings.references
+                            if (self.settings.pickSections
                                 .contains(child.path)) {
                                 Image(systemName: "checkmark")
                                 .font(.system(size: 18, weight: .semibold))

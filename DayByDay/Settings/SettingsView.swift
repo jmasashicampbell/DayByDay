@@ -9,45 +9,43 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var pickRandom = UserDefaults.standard.bool(forKey: "pickRandom")
-    @State private var pickType = UserDefaults.standard.object(forKey: "pickType") as? PickType ?? PickType.chapters
     @EnvironmentObject var settings: Settings
     
     var body: some View {
         Form {
             List {
                 Section {
-                    Picker("pickRandom", selection: $pickRandom) {
+                    Picker("pickRandom", selection: $settings.pickRandom) {
                         Text("In Order").tag(false)
                         Text("Random").tag(true)
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     
                     VStack(alignment: .leading, spacing: 5) {
-                        Picker("Pick from", selection: $pickType) {
+                        Picker("Pick from", selection: $settings.pickType) {
                             ForEach(PickType.allCases, id: \.self) { pickType in
                                 Text(pickType.rawValue).tag(pickType)
                             }
                         }
                     }
                     
-                    if (pickType != PickType.all) {
+                    if (settings.pickType != PickType.all) {
                         NavigationLink(destination:
                             PickPickerView(node: scriptureTree.root,
                                                depth: 1,
-                                               maxDepth: maxDepthMap[pickType] ?? 3)
+                                               maxDepth: maxDepthMap[settings.pickType] ?? 3)
                         ) {
                             HStack {
-                                Text(pickType.rawValue)
+                                Text(settings.pickType.rawValue)
                                 Spacer()
-                                if (self.settings.referencesContains(path: scriptureTree.root.path)) {
-                                    Text(String(self.settings.referencesCount(path: scriptureTree.root.path)))
+                                if (self.settings.pickSectionsContains(path: scriptureTree.root.path)) {
+                                    Text(String(self.settings.pickSectionsCount(path: scriptureTree.root.path)))
                                 }
                             }
                         }
                     }
                     
-                    if (!pickRandom && !settings.references.isEmpty) {
+                    if (!settings.pickRandom && !settings.pickSections.isEmpty) {
                         NavigationLink(destination:
                             StartingPickerView(node: scriptureTree.root)
                         ) {
@@ -61,6 +59,7 @@ struct SettingsView: View {
                 }
             }.padding(5)
         }
+        .onDisappear { self.settings.save() }
     }
 }
 

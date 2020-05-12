@@ -15,7 +15,7 @@ struct StartingPickerView: View {
     var body: some View {
         Form {
             if (!node.children.isEmpty) {
-                NavigationRows(nodes: node.children.filter({ settings.referencesContains(path: $0.path)
+                NavigationRows(nodes: node.children.filter({ settings.pickSectionsContains(path: $0.path)
                 }))
             } else {
                 SelectionRows(node: self.node)

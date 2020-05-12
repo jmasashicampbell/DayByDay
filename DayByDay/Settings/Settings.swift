@@ -10,17 +10,21 @@ import Foundation
 
 
 class Settings: ObservableObject {
-    @Published var references: [[String]] = []
-    @Published var startingVerse = ["Scriptures", "Book of Mormon", "1 Nephi", "1 Nephi 1", "1"]
-    var startingVerseIsSet = false
+    @Published var pickRandom = UserDefaults.standard.bool(forKey: "pickRandom")
+    @Published var pickType = PickType(rawValue: UserDefaults.standard.string(forKey: "pickType") ?? "Chapters") ?? .chapters
+    @Published var pickSections = UserDefaults.standard.object(forKey: "pickSections") as? [[String]] ?? []
+    @Published var startingVerse = UserDefaults.standard.object(forKey: "startingVerse") as? [String] ??
+        ["Scriptures", "Book of Mormon", "1 Nephi", "1 Nephi 1", "1"]
     
-    func referencesCount(path: [String]) -> Int {
-        let filtered = references.filter({ pathsAlign($0, path) })
+    private var startingVerseIsSet = false
+    
+    func pickSectionsCount(path: [String]) -> Int {
+        let filtered = pickSections.filter({ pathsAlign($0, path) })
         return filtered.count
     }
     
-    func referencesContains(path: [String]) -> Bool {
-        return referencesCount(path: path) > 0
+    func pickSectionsContains(path: [String]) -> Bool {
+        return pickSectionsCount(path: path) > 0
     }
     
     /**
@@ -31,9 +35,9 @@ class Settings: ObservableObject {
         return path1[0..<minCount] == path2[0..<minCount]
     }
     
-    func addReference(path: [String]) {
-        references.append(path)
-        references.sort{
+    func addPickSection(path: [String]) {
+        pickSections.append(path)
+        pickSections.sort{
             scriptureTree.getNode(path: $0)!.start < scriptureTree.getNode(path: $1)!.start
         }
     }
@@ -46,12 +50,12 @@ class Settings: ObservableObject {
     
     // TODO: Intelligently get first path
     func updateStartingVerse() {
-        if (!referencesContains(path: startingVerse)) {
+        if (!pickSectionsContains(path: startingVerse)) {
             startingVerseIsSet = false
         }
         
-        if (!references.isEmpty && !startingVerseIsSet) {
-            startingVerse = references.first!
+        if (!pickSections.isEmpty && !startingVerseIsSet) {
+            startingVerse = pickSections.first!
             var node = scriptureTree.getNode(path: startingVerse)!
             while (!node.children.isEmpty) {
                 node = node.children.first!
@@ -59,6 +63,13 @@ class Settings: ObservableObject {
             }
             startingVerse.append("1")
         }
+    }
+    
+    func save() {
+        UserDefaults.standard.set(pickRandom, forKey: "pickRandom")
+        UserDefaults.standard.set(pickType.rawValue, forKey: "pickType")
+        UserDefaults.standard.set(pickSections, forKey: "pickSections")
+        UserDefaults.standard.set(startingVerse, forKey: "startingVerse")
     }
 }
 
