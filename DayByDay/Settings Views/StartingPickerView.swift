@@ -60,7 +60,7 @@ struct StartingPickerView: View {
                 HStack {
                     Text(self.node.name + ":" + String(verseNum))
                     Spacer()
-                    if (self.settings.startingVerse ==
+                    if (self.settings.getStartingVerse() ==
                         self.node.path + [String(verseNum)]) {
                         Image(systemName: "checkmark")
                         .font(.system(size: 18, weight: .semibold))

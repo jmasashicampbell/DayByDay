@@ -56,13 +56,14 @@ class GeneratedScriptures: ObservableObject {
         print("Generating for", date)
         if (!array.map { $0.date }.contains(date)) {
             let settings = Settings()
+            let currentSections = settings.getCurrentSections()
             let newIndex: Int
             var versesPool: [Int] = []
 
-            if (settings.pickType == .all || settings.pickSections.isEmpty) {
+            if (currentSections.isEmpty) {
                 versesPool = Array(0..<scriptureArray.count)
             } else {
-                for path in settings.pickSections {
+                for path in currentSections {
                     let node = scriptureTree.getNode(path: path)!
                     versesPool += Array(node.start..<node.end)
                 }
@@ -71,7 +72,7 @@ class GeneratedScriptures: ObservableObject {
             if (settings.pickRandom) {
                 newIndex = versesPool.randomElement()!
             } else {
-                let startIndex = indexFrom(path: settings.startingVerse)
+                let startIndex = indexFrom(path: settings.getStartingVerse())
                 let dateDifference = differenceInDays(date, settings.startDateComponents)
                 let startIndexInPool = versesPool.firstIndex(of: startIndex)!
                 newIndex = versesPool[(startIndexInPool + dateDifference) % versesPool.count]

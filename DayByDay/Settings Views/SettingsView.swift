@@ -46,14 +46,14 @@ struct SettingsView: View {
                         }
                     }
                     
-                    if (!settings.pickRandom && !settings.pickSections.isEmpty) {
+                    if (!settings.pickRandom && !settings.getCurrentSections().isEmpty) {
                         NavigationLink(destination:
                             StartingPickerView(node: scriptureTree.root)
                         ) {
                             HStack {
                                 Text("Start tomorrow at")
                                 Spacer()
-                                Text(self.settings.startingVerse[self.settings.startingVerse.count - 2] + ":" + self.settings.startingVerse[self.settings.startingVerse.count - 1])
+                                Text(self.makeReference(path: self.settings.getStartingVerse()))
                             }
                         }
                     }
@@ -82,6 +82,14 @@ struct SettingsView: View {
                 }
         )
         //.onDisappear { self.settings.save() }
+    }
+    
+    private func makeReference(path: [String]) -> String {
+        if (!path.isEmpty) {
+            return path[path.count - 2] + ":" + path.last!
+        } else {
+            fatalError("Tried to make reference for empty path")
+        }
     }
 }
 
