@@ -33,7 +33,10 @@ struct ScriptureList: View {
                 .flip()
                 .navigationBarItems(
                     leading:
-                        Button(action: {generateScripture()}) {
+                        Button(action: {
+                            let today = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+                            generateScripture(date: today)
+                        }) {
                             Image(systemName: "info.circle")
                         },
                     trailing:

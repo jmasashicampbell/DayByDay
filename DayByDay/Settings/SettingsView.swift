@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var settings: Settings
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     var body: some View {
         Form {
@@ -50,7 +51,7 @@ struct SettingsView: View {
                             StartingPickerView(node: scriptureTree.root)
                         ) {
                             HStack {
-                                Text("Start from")
+                                Text("Start tomorrow at")
                                 Spacer()
                                 Text(self.settings.startingVerse[self.settings.startingVerse.count - 2] + ":" + self.settings.startingVerse[self.settings.startingVerse.count - 1])
                             }
@@ -59,7 +60,28 @@ struct SettingsView: View {
                 }
             }.padding(5)
         }
-        .onDisappear { self.settings.save() }
+        .navigationBarTitle("Settings")
+        .navigationBarItems(
+            leading:
+                Button(action: {
+                    self.settings.reset()
+                    self.mode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "xmark")
+                    .imageScale(.large)
+                    .foregroundColor(THEME_COLOR)
+                },
+            trailing:
+                Button(action: {
+                    self.settings.save()
+                    self.mode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "checkmark")
+                    .imageScale(.large)
+                    .foregroundColor(THEME_COLOR)
+                }
+        )
+        //.onDisappear { self.settings.save() }
     }
 }
 

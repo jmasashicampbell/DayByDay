@@ -12,7 +12,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        generateScripture()
+        let today = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+        generateScripture(date: today)
         return true
     }
 
@@ -31,7 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        generateScripture()
+        let today = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+        generateScripture(date: today)
     }
 
 

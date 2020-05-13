@@ -17,12 +17,10 @@ class Scripture: Codable, Identifiable {
     var notes: String
     var index: Int
     
-    init(index: Int, id: Int) {
-        let today = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+    init(index: Int, id: Int, date: DateComponents) {
         let newVerse = scriptureArray[index]
-        
         self.id = id
-        self.date = today
+        self.date = date
         self.reference = newVerse.reference
         self.text = newVerse.text
         self.notes = ""
