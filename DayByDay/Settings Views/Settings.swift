@@ -16,11 +16,11 @@ class Settings: ObservableObject {
     @Published var startingVerse = UserDefaults.standard.object(forKey: "startingVerse") as? [String] ??
         ["Scriptures", "Book of Mormon", "1 Nephi", "1 Nephi 1", "1"]
     var startDateComponents: DateComponents
-    private var startingVerseIsSet = false
+    private var startingVerseIsSet = true
     
     init() {
         let startDate = UserDefaults.standard.object(forKey: "startDate") as? Date ?? Date()
-        self.startDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: startDate)
+        self.startDateComponents = makeComponents(date: startDate)
     }
     
     func pickSectionsCount(path: [String]) -> Int {
@@ -71,13 +71,25 @@ class Settings: ObservableObject {
     }
     
     func save() {
-        let startDate = Date()
-        startDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: startDate)
+        let startDate = Date(timeIntervalSinceNow: Double(SECONDS_IN_DAY))
+        startDateComponents = makeComponents(date: startDate)
         UserDefaults.standard.set(pickRandom, forKey: "pickRandom")
         UserDefaults.standard.set(pickType.rawValue, forKey: "pickType")
         UserDefaults.standard.set(pickSections, forKey: "pickSections")
         UserDefaults.standard.set(startingVerse, forKey: "startingVerse")
         UserDefaults.standard.set(startDate, forKey: "startDate")
+    }
+    
+    func reset() {
+        pickRandom = UserDefaults.standard.bool(forKey: "pickRandom")
+        pickType = PickType(rawValue: UserDefaults.standard.string(forKey: "pickType") ?? "Chapters") ?? .chapters
+        pickSections = UserDefaults.standard.object(forKey: "pickSections") as? [[String]] ?? []
+        startingVerse = UserDefaults.standard.object(forKey: "startingVerse") as? [String] ??
+            ["Scriptures", "Book of Mormon", "1 Nephi", "1 Nephi 1", "1"]
+        
+        let startDate = UserDefaults.standard.object(forKey: "startDate") as? Date ?? Date()
+        self.startDateComponents = makeComponents(date: startDate)
+        startingVerseIsSet = false
     }
 }
 

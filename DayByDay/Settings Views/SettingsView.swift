@@ -68,7 +68,7 @@ struct SettingsView: View {
                     self.mode.wrappedValue.dismiss()
                 }) {
                     Image(systemName: "xmark")
-                    .imageScale(.large)
+                    .font(.system(size: 22, weight: .semibold))
                     .foregroundColor(THEME_COLOR)
                 },
             trailing:
@@ -77,7 +77,7 @@ struct SettingsView: View {
                     self.mode.wrappedValue.dismiss()
                 }) {
                     Image(systemName: "checkmark")
-                    .imageScale(.large)
+                    .font(.system(size: 22, weight: .semibold))
                     .foregroundColor(THEME_COLOR)
                 }
         )

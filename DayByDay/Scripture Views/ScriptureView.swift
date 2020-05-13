@@ -48,10 +48,11 @@ struct ScriptureView: View {
 }
 
 struct ScriptureView_Previews: PreviewProvider {
+    let generatedScriptures = GeneratedScriptures()
     static var previews: some View {
         Group {
-            ScriptureView(scripture: generatedScriptures[0])
-            ScriptureView(scripture: generatedScriptures[2])
+            ScriptureView(scripture: previewContent.generatedScriptures.array[0])
+            ScriptureView(scripture: previewContent.generatedScriptures.array[2])
         }
         .background(THEME_GRADIENT)
         .previewLayout(.fixed(width: 300, height: 600))

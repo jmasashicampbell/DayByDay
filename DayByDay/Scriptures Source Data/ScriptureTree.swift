@@ -12,7 +12,7 @@ import Foundation
 let scriptureTree = ScriptureTree()
 
 
-class ScriptureTree {
+struct ScriptureTree {
     let deepVolumes: Dictionary<String, Dictionary<String, Dictionary<String, ChapterLimits>>>
     let doctrineAndCovenantsDict: Dictionary<String, ChapterLimits>
     let root: Node

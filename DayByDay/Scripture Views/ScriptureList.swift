@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ScriptureList: View {
+    @EnvironmentObject var generatedScriptures: GeneratedScriptures
     init() {
         //UINavigationBar.appearance().backgroundColor = .yellow
     }
@@ -18,7 +19,7 @@ struct ScriptureList: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 24) {
                         Spacer().frame(width: 10)
-                        ForEach(generatedScriptures.reversed()) { scripture in
+                        ForEach(self.generatedScriptures.getPast().reversed()) { scripture in
                             NavigationLink(destination: ScriptureDetail(scripture: scripture)
                             ) {
                                 ScriptureCard(scripture: scripture)
@@ -34,18 +35,22 @@ struct ScriptureList: View {
                 .navigationBarItems(
                     leading:
                         Button(action: {
-                            let today = Calendar.current.dateComponents([.year, .month, .day], from: Date())
-                            generateScripture(date: today)
+                            self.generatedScriptures.update()
+                            for scripture in self.generatedScriptures.array {
+                                print(scripture.date)
+                            }
                         }) {
                             Image(systemName: "info.circle")
+                            .font(.system(size: 22, weight: .semibold))
+                            .foregroundColor(THEME_COLOR)
                         },
                     trailing:
                         NavigationLink(destination: SettingsView()) {
                             Image(systemName: "slider.horizontal.3")
+                            .font(.system(size: 22, weight: .semibold))
+                            .foregroundColor(THEME_COLOR)
                         }
                 )
-                .imageScale(.large)
-                .foregroundColor(THEME_COLOR)
             }
         }
     }

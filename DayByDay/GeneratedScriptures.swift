@@ -10,30 +10,131 @@ import UIKit
 import SwiftUI
 import CoreLocation
 
-var generatedScriptures = loadGeneratedScriptures()
 
-func loadGeneratedScriptures() -> [Scripture] {
-    let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-    let file = path!.appendingPathComponent("ScriptureData.json")
+class GeneratedScriptures: ObservableObject {
+    @Published var array: [Scripture]
+    let NUM_FUTURE_SCRIPTURES = 60
     
-    let generatedArray: [Scripture]? = try? load(file)
-    return generatedArray ?? []
-}
+    
+    init() {
+        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        let file = path!.appendingPathComponent("ScriptureData.json")
+        
+        let loadedArray: [Scripture]? = try? load(file)
+        array = loadedArray ?? []
+    }
+    
+    
+    // For previews
+    init(array: [Scripture]) {
+        self.array = array
+    }
+    
+    
+    func getPast() -> [Scripture] {
+        let today = makeComponents(date: Date())
+        return array.filter { $0.date <= today }
+    }
+    
+    
+    func getFuture() -> [Scripture] {
+        let today = makeComponents(date: Date())
+        return array.filter { $0.date > today }
+    }
+    
+    
+    func update() {
+        let today = makeComponents(date: Date())
+        for date in dateRange(startDate: today, size: NUM_FUTURE_SCRIPTURES) {
+            generateScripture(date: date)
+        }
+        save()
+    }
+    
+    
+    func generateScripture(date: DateComponents) {
+        print("Generating for", date)
+        if (!array.map { $0.date }.contains(date)) {
+            let settings = Settings()
+            let newIndex: Int
+            var versesPool: [Int] = []
 
-/**
-  Updates scriptureData.json to reflect changes in the scriptureData array.
- */
-func updateScripturesFile() {
-    print("Updating", generatedScriptures.count)
-    let jsonData = try! JSONEncoder().encode(generatedScriptures)
-    let jsonString = String(data: jsonData, encoding: .utf8)!
+            if (settings.pickType == .all || settings.pickSections.isEmpty) {
+                versesPool = Array(0..<scriptureArray.count)
+            } else {
+                for path in settings.pickSections {
+                    let node = scriptureTree.getNode(path: path)!
+                    versesPool += Array(node.start..<node.end)
+                }
+            }
 
-    let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-    let filename = path!.appendingPathComponent("ScriptureData.json")
+            if (settings.pickRandom) {
+                newIndex = versesPool.randomElement()!
+            } else {
+                let startIndex = indexFrom(path: settings.startingVerse)
+                let dateDifference = differenceInDays(date, settings.startDateComponents)
+                let startIndexInPool = versesPool.firstIndex(of: startIndex)!
+                newIndex = versesPool[(startIndexInPool + dateDifference) % versesPool.count]
+            }
+            
+            let id = array.isEmpty ? 1001 : array.last!.id + 1
 
-    do {
-        try jsonString.write(to: filename, atomically: true, encoding: .utf8)
-    } catch {
-        fatalError("Couldn't load ScriptureData.json from main bundle:\n\(error)")
+            let newScripture = Scripture(index: newIndex, id: id, date: date)
+            array.append(newScripture)
+        }
+    }
+
+    
+    func save() {
+        let jsonData = try! JSONEncoder().encode(array)
+        let jsonString = String(data: jsonData, encoding: .utf8)!
+
+        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        let filename = path!.appendingPathComponent("ScriptureData.json")
+
+        do {
+            try jsonString.write(to: filename, atomically: true, encoding: .utf8)
+        } catch {
+            fatalError("Couldn't write ScriptureData.json to documents directory:\n\(error)")
+        }
+    }
+    
+    
+    /**
+     Gets the index of the scripture represented by a path.
+     - Parameter path: The path representing the scripture
+     - Returns: The index of the scripture in scriptures.json
+     */
+    private func indexFrom(path: [String]) -> Int {
+        var node: Node? = scriptureTree.root
+        for name in path[1 ..< path.count - 1] {
+            node = node!.getChild(name: name)
+            if (node == nil) {
+                fatalError("Invalid path \(path)")
+            }
+        }
+        return node!.start + Int(path.last!)! - 1
+    }
+
+
+    private func differenceInDays(_ dateComp1: DateComponents, _ dateComp2: DateComponents) -> Int {
+        let date1 = Calendar.current.date(from: dateComp1)!
+        let date2 = Calendar.current.date(from: dateComp2)!
+        return Int(date1.timeIntervalSinceReferenceDate - date2.timeIntervalSinceReferenceDate) / SECONDS_IN_DAY
+    }
+    
+    
+    private func dateRange(startDate: DateComponents, size: Int) -> [DateComponents] {
+        
+        func addDays(_ dateComponents: DateComponents, days: Int) -> DateComponents {
+            let date = Calendar.current.date(from: dateComponents)!
+            let newDateInterval = date.timeIntervalSinceReferenceDate + Double(SECONDS_IN_DAY * days)
+            let newDate = Date(timeIntervalSinceReferenceDate: newDateInterval)
+            return makeComponents(date: newDate)
+        }
+        
+        let range = 0 ..< size
+        print(addDays(startDate, days: 5))
+        return range.map { addDays(startDate, days: $0) }
     }
 }

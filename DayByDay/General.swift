@@ -57,6 +57,11 @@ func dateComponentsToString(_ dateComponents: DateComponents, format: String) ->
 }
 
 
+func makeComponents(date: Date) -> DateComponents {
+    return Calendar.current.dateComponents([.year, .month, .day], from: date)
+}
+
+
 extension View {
     public func flip() -> some View {
         return self
@@ -65,3 +70,14 @@ extension View {
     }
 }
 
+extension DateComponents: Comparable {
+    public static func < (lhs: DateComponents, rhs: DateComponents) -> Bool {
+        if lhs.year != rhs.year {
+            return lhs.year! < rhs.year!
+        } else if lhs.month! != rhs.month! {
+            return lhs.month! < rhs.month!
+        } else {
+            return lhs.day! < rhs.day!
+        }
+    }
+}
