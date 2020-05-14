@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var settings: Settings
+    @EnvironmentObject var generatedScriptures: GeneratedScriptures
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     var body: some View {
@@ -74,6 +75,7 @@ struct SettingsView: View {
             trailing:
                 Button(action: {
                     self.settings.save()
+                    self.generatedScriptures.update(force: true)
                     self.mode.wrappedValue.dismiss()
                 }) {
                     Image(systemName: "checkmark")

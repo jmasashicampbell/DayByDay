@@ -25,7 +25,7 @@ struct ScriptureList: View {
                                 ScriptureCard(scripture: scripture)
                                     .flip()
                                     .frame(width: geometry.size.width - 74,
-                                           height: 640.0)
+                                           height: geometry.size.height - 82)
                             }
                         }
                         Spacer().frame(width: 10)
@@ -35,10 +35,7 @@ struct ScriptureList: View {
                 .navigationBarItems(
                     leading:
                         Button(action: {
-                            self.generatedScriptures.update()
-                            for scripture in self.generatedScriptures.array {
-                                print(scripture.date)
-                            }
+                            print(geometry.size.height)
                         }) {
                             Image(systemName: "info.circle")
                             .font(.system(size: 22, weight: .semibold))
@@ -53,6 +50,7 @@ struct ScriptureList: View {
                 )
             }
         }
+        .onAppear { self.generatedScriptures.update() }
     }
 }
 

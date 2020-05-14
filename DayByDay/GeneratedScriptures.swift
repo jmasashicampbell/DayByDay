@@ -13,7 +13,7 @@ import CoreLocation
 
 class GeneratedScriptures: ObservableObject {
     @Published var array: [Scripture]
-    let NUM_FUTURE_SCRIPTURES = 60
+    let NUM_FUTURE_SCRIPTURES = 30
     
     
     init() {
@@ -43,46 +43,54 @@ class GeneratedScriptures: ObservableObject {
     }
     
     
-    func update() {
+    /**
+     Generates new Scriptures based on settings for the next NUM_FUTURE_SCRIPTURES days.
+     - Parameter force: If true, generates for all future dates. If false, only generates for dates not yet generated.
+     */
+    func update(force: Bool = false) {
+        if (force) {
+            array = getPast()
+        }
+        
         let today = makeComponents(date: Date())
+        let generatedDates = array.map { $0.date }
         for date in dateRange(startDate: today, size: NUM_FUTURE_SCRIPTURES) {
-            generateScripture(date: date)
+            if (!generatedDates.contains(date)) {
+                generateScripture(date: date)
+            }
         }
         save()
     }
     
     
     func generateScripture(date: DateComponents) {
-        print("Generating for", date)
-        if (!array.map { $0.date }.contains(date)) {
-            let settings = Settings()
-            let currentSections = settings.getCurrentSections()
-            let newIndex: Int
-            var versesPool: [Int] = []
+        let settings = Settings()
+        let currentSections = settings.getCurrentSections()
+        let newIndex: Int
+        var versesPool: [Int] = []
 
-            if (currentSections.isEmpty) {
-                versesPool = Array(0..<scriptureArray.count)
-            } else {
-                for path in currentSections {
-                    let node = scriptureTree.getNode(path: path)!
-                    versesPool += Array(node.start..<node.end)
-                }
+        if (currentSections.isEmpty) {
+            versesPool = Array(0..<scriptureArray.count)
+        } else {
+            for path in currentSections {
+                let node = scriptureTree.getNode(path: path)!
+                versesPool += Array(node.start..<node.end)
             }
-
-            if (settings.pickRandom) {
-                newIndex = versesPool.randomElement()!
-            } else {
-                let startIndex = indexFrom(path: settings.getStartingVerse())
-                let dateDifference = differenceInDays(date, settings.startDateComponents)
-                let startIndexInPool = versesPool.firstIndex(of: startIndex)!
-                newIndex = versesPool[(startIndexInPool + dateDifference) % versesPool.count]
-            }
-            
-            let id = array.isEmpty ? 1001 : array.last!.id + 1
-
-            let newScripture = Scripture(index: newIndex, id: id, date: date)
-            array.append(newScripture)
         }
+
+        if (settings.pickRandom) {
+            newIndex = versesPool.randomElement()!
+        } else {
+            let startIndex = indexFrom(path: settings.getStartingVerse())
+            let dateDifference = differenceInDays(date, settings.startDateComponents)
+            let startIndexInPool = versesPool.firstIndex(of: startIndex)!
+            newIndex = versesPool[(startIndexInPool + dateDifference) % versesPool.count]
+        }
+        
+        let id = array.isEmpty ? 1001 : array.last!.id + 1
+
+        let newScripture = Scripture(index: newIndex, id: id, date: date)
+        array.append(newScripture)
     }
 
     
@@ -135,7 +143,6 @@ class GeneratedScriptures: ObservableObject {
         }
         
         let range = 0 ..< size
-        print(addDays(startDate, days: 5))
         return range.map { addDays(startDate, days: $0) }
     }
 }
