@@ -20,8 +20,8 @@ let THEME_GRADIENT = LinearGradient(
                      )
 
 
-let MED_FONT : Font = .system(size: 24, weight: .medium)
-let LIGHT_FONT : Font = .system(size: 24, weight: .light)
-let SMALL_FONT : Font = .system(size: 20, weight: .light)
+let MED_FONT : Font = .system(size: 22, weight: .medium)
+let LIGHT_FONT : Font = .system(size: 22, weight: .light)
+let SMALL_FONT : Font = .system(size: 18, weight: .light)
 
 let SECONDS_IN_DAY = 86400
