@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CF0F3754246BACF80096554B /* PreviewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0F3753246BACF80096554B /* PreviewContent.swift */; };
 		CF3B2720246295B200D80998 /* scriptures.json in Resources */ = {isa = PBXBuildFile; fileRef = CF3B271E246295B200D80998 /* scriptures.json */; };
+		CF492CAA246CE97C00B7949C /* GospelLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF492CA9246CE97C00B7949C /* GospelLibrary.swift */; };
 		CF53A2D624650BB20066F7A3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D524650BB20066F7A3 /* SettingsView.swift */; };
 		CF53A2D82465197A0066F7A3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D72465197A0066F7A3 /* Settings.swift */; };
 		CF53A2DA24667E0F0066F7A3 /* PickPickerVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D924667E0F0066F7A3 /* PickPickerVIew.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		CF0F3753246BACF80096554B /* PreviewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContent.swift; sourceTree = "<group>"; };
 		CF3B271E246295B200D80998 /* scriptures.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = scriptures.json; sourceTree = "<group>"; };
+		CF492CA9246CE97C00B7949C /* GospelLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GospelLibrary.swift; sourceTree = "<group>"; };
 		CF53A2D524650BB20066F7A3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		CF53A2D72465197A0066F7A3 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		CF53A2D924667E0F0066F7A3 /* PickPickerVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPickerVIew.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				CF80F91D245D4767001424C4 /* GeneratedScriptures.swift */,
 				CF53A2DD24668E5C0066F7A3 /* General.swift */,
 				CF80F925245DE26E001424C4 /* Constants.swift */,
+				CF492CA9246CE97C00B7949C /* GospelLibrary.swift */,
 				CF0F3753246BACF80096554B /* PreviewContent.swift */,
 				CF80F909245B79F8001424C4 /* Assets.xcassets */,
 				CF80F90E245B79F8001424C4 /* LaunchScreen.storyboard */,
@@ -241,6 +244,7 @@
 				CF0F3754246BACF80096554B /* PreviewContent.swift in Sources */,
 				CF80F91E245D4767001424C4 /* GeneratedScriptures.swift in Sources */,
 				CF80F906245B79EF001424C4 /* SceneDelegate.swift in Sources */,
+				CF492CAA246CE97C00B7949C /* GospelLibrary.swift in Sources */,
 				CF80F9282460D924001424C4 /* ScriptureView.swift in Sources */,
 				CF53A2DA24667E0F0066F7A3 /* PickPickerVIew.swift in Sources */,
 				CF53A2D82465197A0066F7A3 /* Settings.swift in Sources */,

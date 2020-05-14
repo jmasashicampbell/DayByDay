@@ -25,7 +25,7 @@ struct ScriptureDetail: View {
                     Text("Share")
                 }
                 Spacer().frame(height: BUTTON_SPACE_HEIGHT)
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: { UIApplication.shared.open(gospelLibraryLink(self.scripture)) }) {
                     Image(systemName: "book")
                     Text("View in Gospel Library")
                 }

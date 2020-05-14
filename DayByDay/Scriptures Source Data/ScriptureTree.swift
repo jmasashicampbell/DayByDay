@@ -62,6 +62,20 @@ struct ScriptureTree {
         }
         return node
     }
+    
+    func getPath(index: Int) -> [String] {
+        var node = root
+        while (!node.children.isEmpty) {
+            for child in node.children {
+                if (child.end > index) {
+                    node = child
+                    break
+                }
+            }
+        }
+        let verse_num = index - node.start + 1
+        return node.path + [String(verse_num)]
+    }
 }
 
 
