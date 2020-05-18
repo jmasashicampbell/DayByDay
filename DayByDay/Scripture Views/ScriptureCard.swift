@@ -27,7 +27,7 @@ struct ScriptureCard: View {
                     .font(REG_BIG_FONT)
                     
                     Text(dateComponentsToString(self.scripture.date, format: "MMM dd"))
-                    .font(MED_BIG_FONT)
+                    .font(SEMIBOLD_BIG_FONT)
                 }
                 Spacer().frame(height: SCRIPTURE_CARD_SPACING)
                 Text(scripture.text)

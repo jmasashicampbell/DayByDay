@@ -24,7 +24,7 @@ struct ScriptureDetail: View {
                         .font(REG_BIG_FONT)
                         
                         Text(dateComponentsToString(self.scripture.date, format: "MMM dd"))
-                        .font(MED_BIG_FONT)
+                        .font(SEMIBOLD_BIG_FONT)
                         Spacer()
                         
                         Button(action: {
@@ -32,7 +32,7 @@ struct ScriptureDetail: View {
                         }) {
                             Image(systemName: "chevron.down")
                         }
-                        .font(MED_BIG_FONT)
+                        .font(SEMIBOLD_BIG_FONT)
                     }
                     
                     Text(self.scripture.text)
@@ -69,6 +69,7 @@ struct ScriptureDetail: View {
                     }
                 }
             }
+            .padding(20)
             .font(SMALL_FONT)
             .foregroundColor(TEXT_COLOR)
             .background(THEME_COLOR)
