@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 
+// MARK: Functions
 
 /**
   Converts a filename to a URL
@@ -61,6 +62,8 @@ func makeComponents(date: Date) -> DateComponents {
     return Calendar.current.dateComponents([.year, .month, .day], from: date)
 }
 
+
+// MARK: Extensions
 
 extension View {
     public func flip() -> some View {

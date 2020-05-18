@@ -10,46 +10,79 @@ import SwiftUI
 import CoreGraphics
 
 let BUTTON_SPACE_HEIGHT : CGFloat = 20.0
-let EXPANSION_HEIGHT : CGFloat = 40.0
 
 struct ScriptureDetail: View {
     var scripture: Scripture
+    @Binding var scriptureSelected: Bool
     
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
-                ScriptureView(scripture: self.scripture)
-                Spacer().frame(height: BUTTON_SPACE_HEIGHT)
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                    Image(systemName: "square.and.arrow.up")
-                    Text("Share")
+                VStack(alignment: .leading, spacing: 10.0) {
+                    HStack {
+                        Text(dateComponentsToString(self.scripture.date, format: "E"))
+                        .font(REG_BIG_FONT)
+                        
+                        Text(dateComponentsToString(self.scripture.date, format: "MMM dd"))
+                        .font(MED_BIG_FONT)
+                        Spacer()
+                        
+                        Button(action: {
+                            self.scriptureSelected.toggle()
+                        }) {
+                            Image(systemName: "chevron.down")
+                        }
+                        .font(MED_BIG_FONT)
+                    }
+                    
+                    Text(self.scripture.text)
+                        .font(LIGHT_FONT)
+                    
+                    Text(self.scripture.reference)
+                        .font(MED_FONT)
                 }
-                Spacer().frame(height: BUTTON_SPACE_HEIGHT)
-                Button(action: { UIApplication.shared.open(gospelLibraryLink(self.scripture)) }) {
-                    Image(systemName: "book")
-                    Text("View in Gospel Library")
+                
+                Spacer()
+                    
+                VStack(spacing: 20) {
+                    VStack {
+                        HStack {
+                            Text(self.scripture.notes)
+                                .font(SMALL_FONT)
+                            Spacer()
+                        }
+                        Spacer()
+                    }
+                    .padding(10)
+                    .frame(height: 210)
+                    .background(THEME_COLOR_LIGHT)
+                    .cornerRadius(10)
+                    
+                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                        Image(systemName: "square.and.arrow.up")
+                        Text("Share")
+                    }
+                    
+                    Button(action: { UIApplication.shared.open(gospelLibraryLink(self.scripture)) }) {
+                        Image(systemName: "book")
+                        Text("View in Gospel Library")
+                    }
                 }
-                Spacer().frame(height: BUTTON_SPACE_HEIGHT)
             }
-            // Expand view to overlap stupid huge navigation bar
-            .frame(height: geometry.size.height + EXPANSION_HEIGHT)
-            .padding()
             .font(SMALL_FONT)
             .foregroundColor(TEXT_COLOR)
             .background(THEME_COLOR)
             .cornerRadius(20)
         }
-        // Offset to account for extra size
-        .offset(y: -EXPANSION_HEIGHT / 2)
         .padding()
     }
 }
 
-struct ScriptureDetail_Previews: PreviewProvider {
+/*struct ScriptureDetail_Previews: PreviewProvider {
     static var previews: some View {
         ScriptureDetail(scripture: previewContent.generatedScriptures.array[0])
     }
-}
+}*/
 
 
 func gospelLibraryLink(_ scripture: Scripture) -> URL {

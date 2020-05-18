@@ -10,44 +10,54 @@ import SwiftUI
 
 struct ScriptureList: View {
     @EnvironmentObject var generatedScriptures: GeneratedScriptures
-    init() {
-        //UINavigationBar.appearance().backgroundColor = .yellow
-    }
+    @State var scriptureSelected: Bool = false
+    @State var selectedScripture: Scripture? = nil
+    //var navBarHeight: CGFloat = 0
+    
     var body: some View {
-        NavigationView {
-            GeometryReader { geometry in
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 24) {
-                        Spacer().frame(width: 10)
-                        ForEach(self.generatedScriptures.getPast().reversed()) { scripture in
-                            NavigationLink(destination: ScriptureDetail(scripture: scripture)
-                            ) {
-                                ScriptureCard(scripture: scripture)
-                                    .flip()
-                                    .frame(width: geometry.size.width - 74,
-                                           height: geometry.size.height - 82)
+        ZStack {
+            NavigationView {
+                GeometryReader { geometry in
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 24) {
+                            Spacer().frame(width: 10)
+                            ForEach(self.generatedScriptures.getPast().reversed()) { scripture in
+                                ScriptureCard(scripture: scripture,
+                                              scriptureSelected: self.$scriptureSelected,
+                                              selectedScripture: self.$selectedScripture)
+                                .flip()
+                                .frame(width: geometry.size.width - 74,
+                                       height: geometry.size.height - 82)
+                                .animation(nil)
                             }
+                            Spacer().frame(width: 10)
                         }
-                        Spacer().frame(width: 10)
                     }
+                    .flip()
+                    .navigationBarItems(
+                        leading:
+                            Button(action: {
+                            }) {
+                                Image(systemName: "info.circle")
+                                .font(.system(size: 22, weight: .semibold))
+                                .foregroundColor(THEME_COLOR)
+                            },
+                        trailing:
+                            NavigationLink(destination: SettingsView()) {
+                                Image(systemName: "slider.horizontal.3")
+                                .font(.system(size: 22, weight: .semibold))
+                                .foregroundColor(THEME_COLOR)
+                            }
+                    )
                 }
-                .flip()
-                .navigationBarItems(
-                    leading:
-                        Button(action: {
-                            print(geometry.size.height)
-                        }) {
-                            Image(systemName: "info.circle")
-                            .font(.system(size: 22, weight: .semibold))
-                            .foregroundColor(THEME_COLOR)
-                        },
-                    trailing:
-                        NavigationLink(destination: SettingsView()) {
-                            Image(systemName: "slider.horizontal.3")
-                            .font(.system(size: 22, weight: .semibold))
-                            .foregroundColor(THEME_COLOR)
-                        }
-                )
+            }
+            .opacity(self.scriptureSelected ? 0.0 : 1.0)
+            .animation(Animation.easeInOut.speed(0.7))
+            
+            if (self.scriptureSelected) {
+                ScriptureDetail(scripture: self.selectedScripture!, scriptureSelected: self.$scriptureSelected)
+                .transition(.move(edge: .bottom))
+                .animation(.spring(dampingFraction: 0.8))
             }
         }
         .onAppear { self.generatedScriptures.update() }

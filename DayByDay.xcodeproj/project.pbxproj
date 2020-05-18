@@ -25,7 +25,6 @@
 		CF80F91E245D4767001424C4 /* GeneratedScriptures.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F91D245D4767001424C4 /* GeneratedScriptures.swift */; };
 		CF80F924245DD343001424C4 /* ScriptureList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F923245DD343001424C4 /* ScriptureList.swift */; };
 		CF80F926245DE26E001424C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F925245DE26E001424C4 /* Constants.swift */; };
-		CF80F9282460D924001424C4 /* ScriptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F9272460D923001424C4 /* ScriptureView.swift */; };
 		CF9FA04724679A8500772D2B /* book_of_mormon_map.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9FA04224679A8500772D2B /* book_of_mormon_map.json */; };
 		CF9FA04824679A8500772D2B /* new_testament_map.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9FA04324679A8500772D2B /* new_testament_map.json */; };
 		CF9FA04924679A8500772D2B /* doctrine_and_covenants_map.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9FA04424679A8500772D2B /* doctrine_and_covenants_map.json */; };
@@ -56,7 +55,6 @@
 		CF80F91D245D4767001424C4 /* GeneratedScriptures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedScriptures.swift; sourceTree = "<group>"; };
 		CF80F923245DD343001424C4 /* ScriptureList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureList.swift; sourceTree = "<group>"; };
 		CF80F925245DE26E001424C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		CF80F9272460D923001424C4 /* ScriptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureView.swift; sourceTree = "<group>"; };
 		CF9FA04224679A8500772D2B /* book_of_mormon_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = book_of_mormon_map.json; sourceTree = "<group>"; };
 		CF9FA04324679A8500772D2B /* new_testament_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = new_testament_map.json; sourceTree = "<group>"; };
 		CF9FA04424679A8500772D2B /* doctrine_and_covenants_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = doctrine_and_covenants_map.json; sourceTree = "<group>"; };
@@ -80,9 +78,8 @@
 		CF0F3755246BAFFB0096554B /* Scripture Views */ = {
 			isa = PBXGroup;
 			children = (
-				CF80F9272460D923001424C4 /* ScriptureView.swift */,
-				CF80F919245D41E6001424C4 /* ScriptureCard.swift */,
 				CF80F923245DD343001424C4 /* ScriptureList.swift */,
+				CF80F919245D41E6001424C4 /* ScriptureCard.swift */,
 				CF80F907245B79EF001424C4 /* ScriptureDetail.swift */,
 			);
 			path = "Scripture Views";
@@ -241,7 +238,6 @@
 				CF0F3754246BACF80096554B /* PreviewContent.swift in Sources */,
 				CF80F91E245D4767001424C4 /* GeneratedScriptures.swift in Sources */,
 				CF80F906245B79EF001424C4 /* SceneDelegate.swift in Sources */,
-				CF80F9282460D924001424C4 /* ScriptureView.swift in Sources */,
 				CF53A2DA24667E0F0066F7A3 /* PickPickerVIew.swift in Sources */,
 				CF53A2D82465197A0066F7A3 /* Settings.swift in Sources */,
 				CF9FA04D2469ED4D00772D2B /* StartingPickerView.swift in Sources */,
