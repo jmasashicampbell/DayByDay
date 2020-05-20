@@ -18,9 +18,12 @@ class Settings: ObservableObject {
          "Books": ["Scriptures", "Book of Mormon", "1 Nephi", "1 Nephi 1", "1"],
          "Chapters": ["Scriptures", "Book of Mormon", "1 Nephi", "1 Nephi 1", "1"],
          "Topical Guide": ["Scriptures", "Book of Mormon", "1 Nephi", "1 Nephi 1", "1"]]
-    
+         
     var startDateComponents: DateComponents
     private var startingVerseIsSet = true
+    
+    @Published var notificationsOn = UserDefaults.standard.bool(forKey: "notificationsOn")
+    @Published var notificationsTime = UserDefaults.standard.object(forKey: "notificationsTime") as? Date ?? Date()
     
     
     init() {

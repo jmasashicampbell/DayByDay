@@ -8,6 +8,11 @@
 
 import SwiftUI
 
+let THEME_COLOR_SET = ThemeColor().colorSets[.gray]!
+let THEME_COLOR = THEME_COLOR_SET.main
+let THEME_COLOR_LIGHT = THEME_COLOR_SET.light
+let TEXT_COLOR = Color.white
+
 struct ScriptureList: View {
     @EnvironmentObject var generatedScriptures: GeneratedScriptures
     @State var scriptureSelected: Bool = false
@@ -22,13 +27,18 @@ struct ScriptureList: View {
                         HStack(spacing: 24) {
                             Spacer().frame(width: 10)
                             ForEach(self.generatedScriptures.getPast().reversed()) { scripture in
-                                ScriptureCard(scripture: scripture,
-                                              scriptureSelected: self.$scriptureSelected,
-                                              selectedScripture: self.$selectedScripture)
-                                .flip()
-                                .frame(width: geometry.size.width - 74,
-                                       height: geometry.size.height - 82)
-                                .animation(nil)
+                                VStack {
+                                    Spacer()
+                                    ScriptureCard(scripture: scripture,
+                                                  scriptureSelected: self.$scriptureSelected,
+                                                  selectedScripture: self.$selectedScripture)
+                                    .flip()
+                                    .frame(width: geometry.size.width - 74,
+                                           height: geometry.size.height - 82)
+                                    .animation(nil)
+                                    //.shadow(color: Color(red: 0.9, green: 0.9, blue: 0.9), radius: 10)
+                                    Spacer()
+                                }
                             }
                             Spacer().frame(width: 10)
                         }
@@ -56,6 +66,7 @@ struct ScriptureList: View {
             
             if (self.scriptureSelected) {
                 ScriptureDetail(scripture: self.selectedScripture!, scriptureSelected: self.$scriptureSelected)
+                //.shadow(Color(red: 0.9, green: 0.9, blue: 0.9), radius: 10)
                 .transition(.move(edge: .bottom))
                 .animation(.spring(dampingFraction: 0.8))
             }
@@ -66,6 +77,6 @@ struct ScriptureList: View {
 
 struct ScriptureList_Previews: PreviewProvider {
     static var previews: some View {
-        ScriptureList()
+        ScriptureList().environmentObject(GeneratedScriptures())
     }
 }

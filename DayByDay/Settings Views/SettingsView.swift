@@ -12,6 +12,7 @@ struct SettingsView: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var generatedScriptures: GeneratedScriptures
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @State var themeColorSet: Int = 0
     
     var body: some View {
         Form {
@@ -59,6 +60,30 @@ struct SettingsView: View {
                         }
                     }
                 }
+                
+                Section {
+                    HStack {
+                        Toggle(isOn: $settings.notificationsOn) {
+                            Text("Notifications")
+                        }
+                    }
+                    
+                    if (settings.notificationsOn) {
+                        DatePicker(selection: $settings.notificationsTime, displayedComponents: .hourAndMinute) {
+                            Text("Time")
+                        }
+                    }
+                }
+                
+                /*
+                Section {
+                    Picker("pickColor", selection: self.$themeColorSet) {
+                        ForEach(ThemeColorOptions.allCases, id: \.self) { colorSet in
+                            ColorView(color: colorSet.main).tag(colorSet.id)
+                        }
+                    }
+                    //.pickerStyle(SegmentedPickerStyle())
+                }*/
             }.padding(5)
         }
         .navigationBarTitle("Settings")
