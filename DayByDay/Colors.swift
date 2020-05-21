@@ -14,13 +14,6 @@ struct ThemeColor {
     var color : ThemeColorOptions
     var colorSets: [ThemeColorOptions: ThemeColorSet] = [
 
-        .brown: ThemeColorSet(r: 0.38,
-                              g: 0.24,
-                              b: 0.18,
-                              light: 0.08,
-                              dark: 0.0,
-                              textShade: 0.9),
-        
         .yellow: ThemeColorSet(r: 0.93,
                                g: 0.83,
                                b: 0.55,
@@ -63,12 +56,19 @@ struct ThemeColor {
                              dark: 0.0,
                              textShade: 0.85),
         
-        .white: ThemeColorSet(r: 1.0,
+        .brown: ThemeColorSet(r: 0.38,
+                              g: 0.24,
+                              b: 0.18,
+                              light: 0.08,
+                              dark: 0.0,
+                              textShade: 0.9),
+        
+        /*.white: ThemeColorSet(r: 1.0,
                               g: 1.0,
                               b: 1.0,
                               light: 0.4,
                               dark: 0.3,
-                              textShade: 0.7)
+                              textShade: 0.7)*/
     ]
     
     func main() -> Color {
@@ -97,7 +97,7 @@ enum ThemeColorOptions: String, CaseIterable {
     case slate = "slate"
     case gray = "gray"
     case brown = "brown"
-    case white = "white"
+    //case white = "white"
 }
 
 

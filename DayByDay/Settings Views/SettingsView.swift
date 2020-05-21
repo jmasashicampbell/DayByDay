@@ -78,10 +78,11 @@ struct SettingsView: View {
                 Section {
                     Picker("pickColor", selection: $settings.themeColor.color) {
                         ForEach(ThemeColorOptions.allCases, id: \.self) { colorOption in
-                            TabColorView(color: self.settings.themeColor.colorSets[colorOption]!.main).tag(colorOption)
+                            Image(colorOption.rawValue).tag(colorOption)
                         }
                     }
-                    //.pickerStyle(SegmentedPickerStyle())
+                    .pickerStyle(SegmentedPickerStyle())
+                    .frame(height: 42)
                 }
             }.padding(5)
         }

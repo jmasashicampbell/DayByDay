@@ -139,7 +139,6 @@
 				CF53A2DD24668E5C0066F7A3 /* General.swift */,
 				CF80F925245DE26E001424C4 /* Constants.swift */,
 				CF492CAB2474C4DC00B7949C /* Colors.swift */,
-				CF0F3753246BACF80096554B /* PreviewContent.swift */,
 				CF80F909245B79F8001424C4 /* Assets.xcassets */,
 				CF80F90E245B79F8001424C4 /* LaunchScreen.storyboard */,
 				CF80F911245B79F8001424C4 /* Info.plist */,
@@ -154,6 +153,7 @@
 		CF80F90B245B79F8001424C4 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				CF0F3753246BACF80096554B /* PreviewContent.swift */,
 				CF80F90C245B79F8001424C4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";

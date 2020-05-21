@@ -33,7 +33,7 @@ struct ScriptureList: View {
                                     .frame(width: geometry.size.width - 74,
                                            height: geometry.size.height - 82)
                                     .animation(nil)
-                                        .shadow(color: self.settings.themeColor.color == ThemeColorOptions.white ? Color(red: 0.8, green: 0.8, blue: 0.8) : Color.white, radius: 10)
+                                    //.shadow(color: self.settings.themeColor.color == ThemeColorOptions.white ? Color(red: 0.92, green: 0.92, blue: 0.92) : Color.white, radius: 10)
                                     Spacer()
                                 }
                             }
