@@ -8,13 +8,10 @@
 
 import SwiftUI
 
-let THEME_COLOR_SET = ThemeColor().colorSets[.gray]!
-let THEME_COLOR = THEME_COLOR_SET.main
-let THEME_COLOR_LIGHT = THEME_COLOR_SET.light
-let TEXT_COLOR = Color.white
 
 struct ScriptureList: View {
     @EnvironmentObject var generatedScriptures: GeneratedScriptures
+    @EnvironmentObject var settings: Settings
     @State var scriptureSelected: Bool = false
     @State var selectedScripture: Scripture? = nil
     //var navBarHeight: CGFloat = 0
@@ -36,7 +33,7 @@ struct ScriptureList: View {
                                     .frame(width: geometry.size.width - 74,
                                            height: geometry.size.height - 82)
                                     .animation(nil)
-                                    //.shadow(color: Color(red: 0.9, green: 0.9, blue: 0.9), radius: 10)
+                                        .shadow(color: self.settings.themeColor.color == ThemeColorOptions.white ? Color(red: 0.8, green: 0.8, blue: 0.8) : Color.white, radius: 10)
                                     Spacer()
                                 }
                             }
@@ -50,13 +47,13 @@ struct ScriptureList: View {
                             }) {
                                 Image(systemName: "info.circle")
                                 .font(.system(size: 22, weight: .semibold))
-                                .foregroundColor(THEME_COLOR)
+                                .foregroundColor(self.settings.themeColor.dark())
                             },
                         trailing:
                             NavigationLink(destination: SettingsView()) {
                                 Image(systemName: "slider.horizontal.3")
                                 .font(.system(size: 22, weight: .semibold))
-                                .foregroundColor(THEME_COLOR)
+                                .foregroundColor(self.settings.themeColor.dark())
                             }
                     )
                 }

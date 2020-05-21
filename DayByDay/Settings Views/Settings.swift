@@ -25,6 +25,8 @@ class Settings: ObservableObject {
     @Published var notificationsOn = UserDefaults.standard.bool(forKey: "notificationsOn")
     @Published var notificationsTime = UserDefaults.standard.object(forKey: "notificationsTime") as? Date ?? Date()
     
+    @Published var themeColor = ThemeColor(color: ThemeColorOptions(rawValue: UserDefaults.standard.string(forKey: "themeColor") ?? "blue") ?? .blue)
+    
     
     init() {
         let startDate = UserDefaults.standard.object(forKey: "startDate") as? Date ?? Date()
@@ -113,6 +115,7 @@ class Settings: ObservableObject {
         UserDefaults.standard.set(pickSections, forKey: "pickSections")
         UserDefaults.standard.set(startingVerse, forKey: "startingVerse")
         UserDefaults.standard.set(startDate, forKey: "startDate")
+        UserDefaults.standard.set(themeColor.color.rawValue, forKey: "themeColor")
     }
     
     

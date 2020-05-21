@@ -11,38 +11,116 @@ import SwiftUI
 
 
 struct ThemeColor {
+    var color : ThemeColorOptions
     var colorSets: [ThemeColorOptions: ThemeColorSet] = [
-        .brown: ThemeColorSet(r: 0.55, g: 0.35, b: 0.25, light: 0.16),
-        .green: ThemeColorSet(r: 0.2, g: 0.55, b: 0.2, light: 0.2),
-        .slate: ThemeColorSet(r: 0.32, g: 0.46, b: 0.58, light: 0.1),
-        .blue: ThemeColorSet(r: 0.1, g: 0.53, b: 0.75, light: 0.1),
-        .gray: ThemeColorSet(r: 0.35, g: 0.35, b: 0.35, light: 0.2),
-        .white: ThemeColorSet(r: 1.0, g: 1.0, b: 1.0, light: 0.4)
+
+        .brown: ThemeColorSet(r: 0.38,
+                              g: 0.24,
+                              b: 0.18,
+                              light: 0.08,
+                              dark: 0.0,
+                              textShade: 0.9),
+        
+        .yellow: ThemeColorSet(r: 0.93,
+                               g: 0.83,
+                               b: 0.55,
+                               light: 0.2,
+                               dark: 0.2,
+                               textShade: 1.0),
+        
+        .sage: ThemeColorSet(r: 0.69,
+                             g: 0.78,
+                             b: 0.64,
+                             light: 0.2,
+                             dark: 0.25,
+                             textShade: 1.0),
+        
+        .green: ThemeColorSet(r: 0.3,
+                              g: 0.5,
+                              b: 0.3,
+                              light: 0.1,
+                              dark: 0.05,
+                              textShade: 1.0),
+        
+        .blue: ThemeColorSet(r: 0.1,
+                             g: 0.53,
+                             b: 0.75,
+                             light: 0.12,
+                             dark: 0.0,
+                             textShade: 1.0),
+        
+        .slate: ThemeColorSet(r: 0.29,
+                              g: 0.41,
+                              b: 0.51,
+                              light: 0.1,
+                              dark: 0.0,
+                              textShade: 1.0),
+        
+        .gray: ThemeColorSet(r: 0.3,
+                             g: 0.3,
+                             b: 0.3,
+                             light: 0.08,
+                             dark: 0.0,
+                             textShade: 0.85),
+        
+        .white: ThemeColorSet(r: 1.0,
+                              g: 1.0,
+                              b: 1.0,
+                              light: 0.4,
+                              dark: 0.3,
+                              textShade: 0.7)
     ]
+    
+    func main() -> Color {
+        return colorSets[color]!.main
+    }
+    
+    func light() -> Color {
+        return colorSets[color]!.light
+    }
+    
+    func dark() -> Color {
+        return colorSets[color]!.dark
+    }
+
+    func text() -> Color {
+        return colorSets[color]!.text
+    }
 }
 
 
-enum ThemeColorOptions: Int, CaseIterable {
-    case brown = 0
-    case green = 1
-    case slate = 2
-    case blue = 3
-    case gray = 4
-    case white = 5
+enum ThemeColorOptions: String, CaseIterable {
+    case yellow = "yellow"
+    case sage = "sage"
+    case green = "green"
+    case blue = "blue"
+    case slate = "slate"
+    case gray = "gray"
+    case brown = "brown"
+    case white = "white"
 }
 
 
 struct ThemeColorSet {
     let main: Color
     let light: Color
+    let dark: Color
+    let text: Color
     
-    init(r: Double, g: Double, b: Double, light: Double) {
+    init(r: Double, g: Double, b: Double, light: Double, dark: Double, textShade: Double) {
+        
         func lighten(_ value: Double) -> Double {
             return (1.0 - light) * value + light
         }
         
+        func darken(_ value: Double) -> Double {
+            return (1.0 - dark) * value
+        }
+        
         self.main = Color(red: r, green: g, blue: b)
         self.light = Color(red: lighten(r), green: lighten(g), blue: lighten(b))
+        self.dark = Color(red: darken(r), green: darken(g), blue: darken(b))
+        self.text = Color(red: textShade, green: textShade, blue: textShade)
     }
 }
 

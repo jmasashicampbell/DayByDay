@@ -13,6 +13,7 @@ let BUTTON_SPACE_HEIGHT : CGFloat = 20.0
 
 struct ScriptureDetail: View {
     var scripture: Scripture
+    @EnvironmentObject var settings: Settings
     @Binding var scriptureSelected: Bool
     
     var body: some View {
@@ -55,7 +56,7 @@ struct ScriptureDetail: View {
                     }
                     .padding(10)
                     .frame(height: 210)
-                    .background(THEME_COLOR_LIGHT)
+                    .background(self.settings.themeColor.light())
                     .cornerRadius(10)
                     
                     Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
@@ -71,8 +72,8 @@ struct ScriptureDetail: View {
             }
             .padding(20)
             .font(SMALL_FONT)
-            .foregroundColor(TEXT_COLOR)
-            .background(THEME_COLOR)
+            .foregroundColor(self.settings.themeColor.text())
+            .background(self.settings.themeColor.main())
             .cornerRadius(20)
         }
         .padding()

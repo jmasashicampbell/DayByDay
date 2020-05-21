@@ -13,6 +13,7 @@ let SCRIPTURE_CARD_SPACING: CGFloat = 10.0
 
 struct ScriptureCard: View {
     var scripture: Scripture
+    @EnvironmentObject var settings: Settings
     @Binding var scriptureSelected: Bool
     @Binding var selectedScripture: Scripture?
     
@@ -46,15 +47,15 @@ struct ScriptureCard: View {
                 }
                 .padding(10)
                 .frame(height: 210)
-                .background(THEME_COLOR_LIGHT)
+                .background(settings.themeColor.light())
                 .cornerRadius(10)
             }
             .padding(0)
             .font(MED_FONT)
-            .foregroundColor(TEXT_COLOR)
+            .foregroundColor(settings.themeColor.text())
         }
         .padding(20)
-        .background(THEME_COLOR)
+        .background(settings.themeColor.main())
         .cornerRadius(25)
     }
 }

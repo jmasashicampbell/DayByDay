@@ -12,7 +12,6 @@ struct SettingsView: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var generatedScriptures: GeneratedScriptures
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @State var themeColorSet: Int = 0
     
     var body: some View {
         Form {
@@ -75,15 +74,15 @@ struct SettingsView: View {
                     }
                 }
                 
-                /*
+                
                 Section {
-                    Picker("pickColor", selection: self.$themeColorSet) {
-                        ForEach(ThemeColorOptions.allCases, id: \.self) { colorSet in
-                            ColorView(color: colorSet.main).tag(colorSet.id)
+                    Picker("pickColor", selection: $settings.themeColor.color) {
+                        ForEach(ThemeColorOptions.allCases, id: \.self) { colorOption in
+                            TabColorView(color: self.settings.themeColor.colorSets[colorOption]!.main).tag(colorOption)
                         }
                     }
                     //.pickerStyle(SegmentedPickerStyle())
-                }*/
+                }
             }.padding(5)
         }
         .navigationBarTitle("Settings")
@@ -95,7 +94,7 @@ struct SettingsView: View {
                 }) {
                     Image(systemName: "xmark")
                     .font(.system(size: 22, weight: .semibold))
-                    .foregroundColor(THEME_COLOR)
+                    .foregroundColor(settings.themeColor.dark())
                 },
             trailing:
                 Button(action: {
@@ -105,7 +104,7 @@ struct SettingsView: View {
                 }) {
                     Image(systemName: "checkmark")
                     .font(.system(size: 22, weight: .semibold))
-                    .foregroundColor(THEME_COLOR)
+                    .foregroundColor(settings.themeColor.dark())
                 }
         )
         //.onDisappear { self.settings.save() }
