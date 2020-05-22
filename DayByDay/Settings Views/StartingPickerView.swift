@@ -21,7 +21,7 @@ struct StartingPickerView: View {
                 SelectionRows(node: self.node)
             }
         }
-        .navigationBarTitle(node.name)
+            .navigationBarTitle(node.name)
     }
     
     struct NavigationRows: View {
@@ -63,8 +63,9 @@ struct StartingPickerView: View {
                     if (self.settings.getStartingVerse() ==
                         self.node.path + [String(verseNum)]) {
                         Image(systemName: "checkmark")
-                        .font(.system(size: 18, weight: .semibold))
-                        .imageScale(.medium)
+                            .font(.system(size: 18, weight: .semibold))
+                            .imageScale(.medium)
+                            .foregroundColor(self.settings.themeColor.dark())
                     }
                 }
             }

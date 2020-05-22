@@ -17,12 +17,10 @@ struct PickPickerView: View {
     
     var body: some View {
         Form {
-            List {
-                if (self.depth < self.maxDepth) {
-                    NavigationRows(node: node, depth: depth, maxDepth: maxDepth)
-                } else {
-                    SelectionRows(node: node, depth: depth, maxDepth: maxDepth)
-                }
+            if (self.depth < self.maxDepth) {
+                NavigationRows(node: node, depth: depth, maxDepth: maxDepth)
+            } else {
+                SelectionRows(node: node, depth: depth, maxDepth: maxDepth)
             }
         }
         .navigationBarTitle(node.name)
@@ -75,8 +73,9 @@ struct PickPickerView: View {
                             Spacer()
                             if (self.settings.pickSectionsContains(path: child.path)) {
                                 Image(systemName: "checkmark")
-                                .font(.system(size: 18, weight: .semibold))
-                                .imageScale(.medium)
+                                    .font(.system(size: 18, weight: .semibold))
+                                    .imageScale(.medium)
+                                    .foregroundColor(self.settings.themeColor.dark())    
                             }
                         }
                     }

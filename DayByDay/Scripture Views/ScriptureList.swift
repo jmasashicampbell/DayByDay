@@ -58,14 +58,15 @@ struct ScriptureList: View {
                     )
                 }
             }
+            .accentColor(settings.themeColor.dark())
             .opacity(self.scriptureSelected ? 0.0 : 1.0)
             .animation(Animation.easeInOut.speed(0.7))
             
             if (self.scriptureSelected) {
                 ScriptureDetail(scripture: self.selectedScripture!, scriptureSelected: self.$scriptureSelected)
-                //.shadow(Color(red: 0.9, green: 0.9, blue: 0.9), radius: 10)
-                .transition(.move(edge: .bottom))
-                .animation(.spring(dampingFraction: 0.8))
+                    //.shadow(Color(red: 0.9, green: 0.9, blue: 0.9), radius: 10)
+                    .transition(.move(edge: .bottom))
+                    .animation(.spring(dampingFraction: 0.8))
             }
         }
         .onAppear { self.generatedScriptures.update() }

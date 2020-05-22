@@ -23,11 +23,13 @@ struct SettingsView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     
-                    VStack(alignment: .leading, spacing: 5) {
-                        Picker("Pick from", selection: $settings.pickType) {
-                            ForEach(PickType.allCases, id: \.self) { pickType in
-                                Text(pickType.rawValue).tag(pickType)
-                            }
+                    NavigationLink(destination:
+                        TypePickerView()
+                    ) {
+                        HStack {
+                            Text("Pick from")
+                            Spacer()
+                            Text(self.settings.pickType.rawValue)
                         }
                     }
                     
@@ -61,11 +63,10 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    HStack {
-                        Toggle(isOn: $settings.notificationsOn) {
-                            Text("Notifications")
-                        }
-                    }
+                    Toggle("", isOn: $settings.notificationsOn)
+                        .toggleStyle(
+                    ColoredToggleStyle(label: "Notifications",
+                                       onColor: settings.themeColor.main()))
                     
                     if (settings.notificationsOn) {
                         DatePicker(selection: $settings.notificationsTime, displayedComponents: .hourAndMinute) {
@@ -108,7 +109,8 @@ struct SettingsView: View {
                     .foregroundColor(settings.themeColor.dark())
                 }
         )
-        //.onDisappear { self.settings.save() }
+        .foregroundColor(Color.black)
+        .accentColor(settings.themeColor.main())
     }
     
     private func makeReference(path: [String]) -> String {

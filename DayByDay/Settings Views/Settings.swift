@@ -130,6 +130,8 @@ class Settings: ObservableObject {
         let startDate = UserDefaults.standard.object(forKey: "startDate") as? Date ?? Date()
         self.startDateComponents = makeComponents(date: startDate)
         startingVerseIsSet = false
+        
+        themeColor = ThemeColor(color: ThemeColorOptions(rawValue: UserDefaults.standard.string(forKey: "themeColor") ?? "blue") ?? .blue)
     }
     
     
