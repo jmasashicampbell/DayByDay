@@ -16,7 +16,7 @@ struct SettingsView: View {
     var body: some View {
         Form {
             List {
-                Section {
+                Section(header: Text("VERSE SELECTION")) {
                     Picker("pickRandom", selection: $settings.pickRandom) {
                         Text("In Order").tag(false)
                         Text("Random").tag(true)
@@ -27,7 +27,7 @@ struct SettingsView: View {
                         TypePickerView()
                     ) {
                         HStack {
-                            Text("Pick from")
+                            Text("Select from")
                             Spacer()
                             Text(self.settings.pickType.rawValue)
                         }
@@ -76,7 +76,7 @@ struct SettingsView: View {
                 }
                 
                 
-                Section {
+                Section(header: Text("THEME")) {
                     Picker("pickColor", selection: $settings.themeColor.color) {
                         ForEach(ThemeColorOptions.allCases, id: \.self) { colorOption in
                             Image(colorOption.rawValue).tag(colorOption)
@@ -87,6 +87,7 @@ struct SettingsView: View {
                 }
             }.padding(5)
         }
+        .padding(.top, 10)
         .navigationBarTitle("Settings")
         .navigationBarItems(
             leading:
