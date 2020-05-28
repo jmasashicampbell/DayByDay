@@ -44,7 +44,7 @@ struct StartingPickerView: View {
         var body: some View {
             List {
                 ForEach(1...node.end - node.start, id: \.self) { verseNum in
-                    Button(action: {self.settings.setStartingVerse(path: self.node.path + [String(verseNum)])}) {
+                    Button(action: {self.settings.setTomorrowVerse(path: self.node.path + [String(verseNum)])}) {
                         SelectionRow(node: self.node, verseNum: verseNum)
                     }
                 }
@@ -60,7 +60,7 @@ struct StartingPickerView: View {
                 HStack {
                     Text(self.node.name + ":" + String(verseNum))
                     Spacer()
-                    if (self.settings.getStartingVerse() ==
+                    if (self.settings.getTomorrowVerse() ==
                         self.node.path + [String(verseNum)]) {
                         Image(systemName: "checkmark")
                             .font(.system(size: 18, weight: .semibold))

@@ -56,7 +56,7 @@ struct SettingsView: View {
                             HStack {
                                 Text("Start tomorrow at")
                                 Spacer()
-                                Text(self.makeReference(path: self.settings.getStartingVerse()))
+                                Text(self.makeReference(path: self.settings.getTomorrowVerse()))
                             }
                         }
                     }
@@ -65,8 +65,8 @@ struct SettingsView: View {
                 Section {
                     Toggle("", isOn: $settings.notificationsOn)
                         .toggleStyle(
-                    ColoredToggleStyle(label: "Notifications",
-                                       onColor: settings.themeColor.main()))
+                        ColoredToggleStyle(label: "Notifications",
+                                           onColor: settings.themeColor.main()))
                     
                     if (settings.notificationsOn) {
                         DatePicker(selection: $settings.notificationsTime, displayedComponents: .hourAndMinute) {
@@ -112,6 +112,7 @@ struct SettingsView: View {
         )
         .foregroundColor(Color.black)
         .accentColor(settings.themeColor.main())
+        .onAppear { self.settings.updateTomorrowVerse() }
     }
     
     private func makeReference(path: [String]) -> String {

@@ -18,3 +18,4 @@ let LIGHT_FONT : Font = .system(size: 20, weight: .light)
 let SMALL_FONT : Font = .system(size: 18, weight: .medium)
 
 let SECONDS_IN_DAY = 86400
+let BOM_FIRST_VERSE = ["Scriptures", "Book of Mormon", "1 Nephi", "1 Nephi 1", "1"]

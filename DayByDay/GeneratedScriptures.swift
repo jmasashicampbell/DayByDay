@@ -48,6 +48,8 @@ class GeneratedScriptures: ObservableObject {
      - Parameter force: If true, generates for all future dates. If false, only generates for dates not yet generated.
      */
     func update(force: Bool = false) {
+        let settings = Settings()
+        
         if (force) {
             array = getPast()
         }
@@ -56,15 +58,14 @@ class GeneratedScriptures: ObservableObject {
         let generatedDates = array.map { $0.date }
         for date in dateRange(startDate: today, size: NUM_FUTURE_SCRIPTURES) {
             if (!generatedDates.contains(date)) {
-                generateScripture(date: date)
+                generateScripture(date: date, settings: settings)
             }
         }
         save()
     }
     
     
-    func generateScripture(date: DateComponents) {
-        let settings = Settings()
+    func generateScripture(date: DateComponents, settings: Settings) {
         let currentSections = settings.getCurrentSections()
         let newIndex: Int
         var versesPool: [Int] = []
@@ -81,7 +82,7 @@ class GeneratedScriptures: ObservableObject {
         if (settings.pickRandom) {
             newIndex = versesPool.randomElement()!
         } else {
-            let startIndex = indexFrom(path: settings.getStartingVerse())
+            let startIndex = indexFrom(path: settings.startingVerse)
             let dateDifference = differenceInDays(date, settings.startDateComponents)
             let startIndexInPool = versesPool.firstIndex(of: startIndex)!
             newIndex = versesPool[(startIndexInPool + dateDifference) % versesPool.count]
