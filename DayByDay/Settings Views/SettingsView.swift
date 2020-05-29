@@ -90,6 +90,7 @@ struct SettingsView: View {
         .padding(.top, 10)
         .navigationBarTitle("Settings")
         .navigationBarItems(
+            
             leading:
                 Button(action: {
                     self.settings.reset()
@@ -99,6 +100,7 @@ struct SettingsView: View {
                     .font(.system(size: 22, weight: .semibold))
                     .foregroundColor(settings.themeColor.dark())
                 },
+            
             trailing:
                 Button(action: {
                     self.settings.save()

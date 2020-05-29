@@ -9,6 +9,7 @@
 import UIKit
 import SwiftUI
 import CoreLocation
+import UserNotifications
 
 
 class GeneratedScriptures: ObservableObject {
@@ -51,7 +52,15 @@ class GeneratedScriptures: ObservableObject {
         let settings = Settings()
         
         if (force) {
+            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             array = getPast()
+        }
+        
+        // Schedule notification for today
+        if (settings.notificationsOn) {
+            if let todayScripture = getPast().last {
+                scheduleNotification(scripture: todayScripture, time: settings.notificationsTime)
+            }
         }
         
         let today = makeComponents(date: Date())
@@ -92,8 +101,11 @@ class GeneratedScriptures: ObservableObject {
 
         let newScripture = Scripture(index: newIndex, id: id, date: date)
         array.append(newScripture)
+        if (settings.notificationsOn) {
+            scheduleNotification(scripture: newScripture, time: settings.notificationsTime)
+        }
     }
-
+    
     
     func save() {
         let jsonData = try! JSONEncoder().encode(array)
@@ -145,5 +157,27 @@ class GeneratedScriptures: ObservableObject {
         
         let range = 0 ..< size
         return range.map { addDays(startDate, days: $0) }
+    }
+    
+    
+    private func scheduleNotification(scripture: Scripture, time: Date) {
+        let content = UNMutableNotificationContent()
+        content.title = "Today's scripture: " + scripture.reference
+        content.body = scripture.text
+        content.sound = UNNotificationSound.default
+        content.userInfo = ["index": scripture.index, "id": scripture.id, "year": scripture.date.year!, "month": scripture.date.month!, "day": scripture.date.day!]
+        
+        let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: time)
+        let dateComponents = scripture.date
+        let dateTimeComponents = DateComponents(calendar: Calendar.current,
+                                                year: dateComponents.year,
+                                                month: dateComponents.month,
+                                                day: dateComponents.day,
+                                                hour: timeComponents.hour,
+                                                minute: timeComponents.minute)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateTimeComponents, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: String(scripture.id), content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request)
     }
 }

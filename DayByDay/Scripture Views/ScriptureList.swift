@@ -12,8 +12,7 @@ import SwiftUI
 struct ScriptureList: View {
     @EnvironmentObject var generatedScriptures: GeneratedScriptures
     @EnvironmentObject var settings: Settings
-    @State var scriptureSelected: Bool = false
-    @State var selectedScripture: Scripture? = nil
+    @EnvironmentObject var screenCoordinator: ScreenCoordinator
     //var navBarHeight: CGFloat = 0
     
     var body: some View {
@@ -27,8 +26,8 @@ struct ScriptureList: View {
                                 VStack {
                                     Spacer()
                                     ScriptureCard(scripture: scripture,
-                                                  scriptureSelected: self.$scriptureSelected,
-                                                  selectedScripture: self.$selectedScripture)
+                                                  scriptureSelected: self.$screenCoordinator.scriptureSelected,
+                                                  selectedScripture: self.$screenCoordinator.selectedScripture)
                                     .flip()
                                     .frame(width: geometry.size.width - 74,
                                            height: geometry.size.height - 82)
@@ -44,6 +43,13 @@ struct ScriptureList: View {
                     .navigationBarItems(
                         leading:
                             Button(action: {
+                                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                                    if success {
+                                        print("All set!")
+                                    } else if let error = error {
+                                        print(error.localizedDescription)
+                                    }
+                                }
                             }) {
                                 Image(systemName: "info.circle")
                                 .font(.system(size: 22, weight: .semibold))
@@ -59,11 +65,12 @@ struct ScriptureList: View {
                 }
             }
             .accentColor(settings.themeColor.dark())
-            .opacity(self.scriptureSelected ? 0.0 : 1.0)
+            .opacity(self.screenCoordinator.scriptureSelected ? 0.0 : 1.0)
             .animation(Animation.easeInOut.speed(0.7))
             
-            if (self.scriptureSelected) {
-                ScriptureDetail(scripture: self.selectedScripture!, scriptureSelected: self.$scriptureSelected)
+            if (self.screenCoordinator.scriptureSelected) {
+                ScriptureDetail(scripture: self.screenCoordinator.selectedScripture!,
+                                scriptureSelected: self.$screenCoordinator.scriptureSelected)
                     //.shadow(Color(red: 0.9, green: 0.9, blue: 0.9), radius: 10)
                     .transition(.move(edge: .bottom))
                     .animation(.spring(dampingFraction: 0.8))

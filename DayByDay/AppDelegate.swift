@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import UserNotifications
+import SwiftUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    var window: UIWindow?
+    var screenCoordinator = ScreenCoordinator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        UNUserNotificationCenter.current().delegate = self
         return true
     }
 
@@ -35,3 +40,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        if let userInfo = response.notification.request.content.userInfo as? [String: Int] {
+            let date = DateComponents(year: userInfo["year"], month: userInfo["month"], day: userInfo["day"])
+            screenCoordinator.selectedScripture = Scripture(index: userInfo["index"]!, id: userInfo["id"]!, date: date)
+            screenCoordinator.scriptureSelected = true
+        }
+        completionHandler()
+    }
+}
+
+
+class ScreenCoordinator: ObservableObject {
+    @Published var scriptureSelected: Bool = false
+    @Published var selectedScripture: Scripture? = nil
+}

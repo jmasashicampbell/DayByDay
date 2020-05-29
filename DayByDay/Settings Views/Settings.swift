@@ -118,12 +118,14 @@ class Settings: ObservableObject {
         UserDefaults.standard.set(pickSections, forKey: "pickSections")
         UserDefaults.standard.set(tomorrowVerses, forKey: "tomorrowVerses")
         
-        
         UserDefaults.standard.set(tomorrowVerses[pickType.rawValue], forKey: "startingVerse")
         let startDate = Date(timeIntervalSinceNow: Double(SECONDS_IN_DAY))
         startDateComponents = makeComponents(date: startDate)
         UserDefaults.standard.set(startDate, forKey: "startDate")
         
+        
+        UserDefaults.standard.set(notificationsOn, forKey: "notificationsOn")
+        UserDefaults.standard.set(notificationsTime, forKey: "notificationsTime")
         UserDefaults.standard.set(themeColor.color.rawValue, forKey: "themeColor")
     }
     
@@ -141,6 +143,8 @@ class Settings: ObservableObject {
         let startDate = UserDefaults.standard.object(forKey: "startDate") as? Date ?? Date()
         startDateComponents = makeComponents(date: startDate)
         
+        notificationsOn = UserDefaults.standard.bool(forKey: "notificationsOn")
+        notificationsTime = UserDefaults.standard.object(forKey: "notificationsTime") as? Date ?? Date()
         themeColor = ThemeColor(color: ThemeColorOptions(rawValue: UserDefaults.standard.string(forKey: "themeColor") ?? "blue") ?? .blue)
     }
     

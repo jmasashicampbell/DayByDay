@@ -12,8 +12,8 @@ import CoreGraphics
 let BUTTON_SPACE_HEIGHT : CGFloat = 20.0
 
 struct ScriptureDetail: View {
-    var scripture: Scripture
     @EnvironmentObject var settings: Settings
+    var scripture: Scripture
     @Binding var scriptureSelected: Bool
     
     var body: some View {
