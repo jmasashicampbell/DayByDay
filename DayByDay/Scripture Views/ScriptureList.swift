@@ -12,7 +12,7 @@ import SwiftUI
 struct ScriptureList: View {
     @EnvironmentObject var generatedScriptures: GeneratedScriptures
     @EnvironmentObject var settings: Settings
-    @EnvironmentObject var screenCoordinator: ScreenCoordinator
+    @EnvironmentObject var selectionCoordinator: SelectionCoordinator
     //var navBarHeight: CGFloat = 0
     
     var body: some View {
@@ -26,8 +26,8 @@ struct ScriptureList: View {
                                 VStack {
                                     Spacer()
                                     ScriptureCard(scripture: scripture,
-                                                  scriptureSelected: self.$screenCoordinator.scriptureSelected,
-                                                  selectedScripture: self.$screenCoordinator.selectedScripture)
+                                                  scriptureSelected: self.$selectionCoordinator.selected,
+                                                  selectedScripture: self.$selectionCoordinator.scripture)
                                     .flip()
                                     .frame(width: geometry.size.width - 74,
                                            height: geometry.size.height - 82)
@@ -65,12 +65,12 @@ struct ScriptureList: View {
                 }
             }
             .accentColor(settings.themeColor.dark())
-            .opacity(self.screenCoordinator.scriptureSelected ? 0.0 : 1.0)
+            .opacity(self.selectionCoordinator.selected ? 0.0 : 1.0)
             .animation(Animation.easeInOut.speed(0.7))
             
-            if (self.screenCoordinator.scriptureSelected) {
-                ScriptureDetail(scripture: self.screenCoordinator.selectedScripture!,
-                                scriptureSelected: self.$screenCoordinator.scriptureSelected)
+            if (self.selectionCoordinator.selected) {
+                ScriptureDetail(scripture: self.selectionCoordinator.scripture!,
+                                scriptureSelected: self.$selectionCoordinator.selected)
                     //.shadow(Color(red: 0.9, green: 0.9, blue: 0.9), radius: 10)
                     .transition(.move(edge: .bottom))
                     .animation(.spring(dampingFraction: 0.8))

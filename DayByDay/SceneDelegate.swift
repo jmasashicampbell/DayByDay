@@ -20,16 +20,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
-        var screenCoordinator: ScreenCoordinator?
+        var selectionCoordinator: SelectionCoordinator?
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            screenCoordinator = appDelegate.screenCoordinator
+            selectionCoordinator = appDelegate.selectionCoordinator
         }
         
         // Create the SwiftUI view that provides the window contents.
         let contentView = ScriptureList()
                           .environmentObject(settings)
                           .environmentObject(generatedScriptures)
-                          .environmentObject(screenCoordinator ?? ScreenCoordinator())
+                          .environmentObject(selectionCoordinator ?? SelectionCoordinator())
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

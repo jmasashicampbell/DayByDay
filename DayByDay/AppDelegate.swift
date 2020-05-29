@@ -13,7 +13,7 @@ import SwiftUI
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    var screenCoordinator = ScreenCoordinator()
+    var selectionCoordinator = SelectionCoordinator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UNUserNotificationCenter.current().delegate = self
@@ -51,15 +51,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         if let userInfo = response.notification.request.content.userInfo as? [String: Int] {
             let date = DateComponents(year: userInfo["year"], month: userInfo["month"], day: userInfo["day"])
-            screenCoordinator.selectedScripture = Scripture(index: userInfo["index"]!, id: userInfo["id"]!, date: date)
-            screenCoordinator.scriptureSelected = true
+            selectionCoordinator.scripture = Scripture(index: userInfo["index"]!, id: userInfo["id"]!, date: date)
+            selectionCoordinator.selected = true
         }
         completionHandler()
     }
 }
 
 
-class ScreenCoordinator: ObservableObject {
-    @Published var scriptureSelected: Bool = false
-    @Published var selectedScripture: Scripture? = nil
+class SelectionCoordinator: ObservableObject {
+    @Published var selected: Bool = false
+    @Published var scripture: Scripture? = nil
 }
