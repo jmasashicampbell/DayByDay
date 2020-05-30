@@ -65,7 +65,7 @@ struct SettingsView: View {
                 Section {
                     Toggle("", isOn: $settings.notificationsOn)
                         .toggleStyle(
-                        ColoredToggleStyle(label: "Notifications",
+                        NotificationsToggleStyle(label: "Notifications",
                                            onColor: settings.themeColor.main()))
                     
                     if (settings.notificationsOn) {

@@ -88,7 +88,7 @@ extension DateComponents: Comparable {
 
 // MARK: Styles
 
-struct ColoredToggleStyle: ToggleStyle {
+struct NotificationsToggleStyle: ToggleStyle {
     var label = ""
     var onColor = Color.green
     var offColor = Color(UIColor.systemGray5)
@@ -99,9 +99,18 @@ struct ColoredToggleStyle: ToggleStyle {
             Text(label)
             Spacer()
             Button(action: { withAnimation {
-                configuration.isOn.toggle()
+                if (!configuration.isOn) {
+                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                        if success {
+                            DispatchQueue.main.async {
+                                configuration.isOn.toggle()
+                            }
+                        }
+                    }
+                } else {
+                    configuration.isOn.toggle()
                 }
-            } ) {
+            } } ) {
                 RoundedRectangle(cornerRadius: 16, style: .circular)
                     .fill(configuration.isOn ? onColor : offColor)
                     .frame(width: 50, height: 29)

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UserNotifications
 
 
 class Settings: ObservableObject {
@@ -146,6 +147,19 @@ class Settings: ObservableObject {
         notificationsOn = UserDefaults.standard.bool(forKey: "notificationsOn")
         notificationsTime = UserDefaults.standard.object(forKey: "notificationsTime") as? Date ?? Date()
         themeColor = ThemeColor(color: ThemeColorOptions(rawValue: UserDefaults.standard.string(forKey: "themeColor") ?? "blue") ?? .blue)
+    }
+    
+    
+    private func askNotifications() {
+        if (notificationsOn) {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                if success {
+                    print("Notifications enabled")
+                } else {
+                    self.notificationsOn = false
+                }
+            }
+        }
     }
     
     
