@@ -112,8 +112,6 @@ struct SettingsView: View {
                     .foregroundColor(settings.themeColor.dark())
                 }
         )
-        .foregroundColor(Color.black)
-        .accentColor(settings.themeColor.main())
         .onAppear { self.settings.updateTomorrowVerse() }
     }
     

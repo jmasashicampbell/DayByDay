@@ -18,6 +18,7 @@ class Settings: ObservableObject {
     @Published var tomorrowVerses = UserDefaults.standard.object(forKey: "tomorrowVerses") as? Dictionary<String, [String]> ??
         ["Volumes": BOM_FIRST_VERSE, "Books": BOM_FIRST_VERSE, "Chapters": BOM_FIRST_VERSE, "Topical Guide": BOM_FIRST_VERSE]
     private var tomorrowVerseIsSet = true
+    var shouldUpdateTomorrowVerse = true
          
     var startingVerse = UserDefaults.standard.object(forKey: "startingVerse") as? [String] ?? BOM_FIRST_VERSE
     var startDateComponents: DateComponents
@@ -107,8 +108,11 @@ class Settings: ObservableObject {
     
     
     func updateTomorrowVerse() {
-        if let tomorrowScripture = GeneratedScriptures().getFuture().first {
-            tomorrowVerses[pickType.rawValue] = pathFrom(index: tomorrowScripture.index)
+        if (shouldUpdateTomorrowVerse) {
+            if let tomorrowScripture = GeneratedScriptures().getFuture().first {
+                tomorrowVerses[pickType.rawValue] = pathFrom(index: tomorrowScripture.index)
+                shouldUpdateTomorrowVerse = false
+            }
         }
     }
     
@@ -128,6 +132,8 @@ class Settings: ObservableObject {
         UserDefaults.standard.set(notificationsOn, forKey: "notificationsOn")
         UserDefaults.standard.set(notificationsTime, forKey: "notificationsTime")
         UserDefaults.standard.set(themeColor.color.rawValue, forKey: "themeColor")
+        
+        shouldUpdateTomorrowVerse = true
     }
     
     
@@ -147,6 +153,8 @@ class Settings: ObservableObject {
         notificationsOn = UserDefaults.standard.bool(forKey: "notificationsOn")
         notificationsTime = UserDefaults.standard.object(forKey: "notificationsTime") as? Date ?? Date()
         themeColor = ThemeColor(color: ThemeColorOptions(rawValue: UserDefaults.standard.string(forKey: "themeColor") ?? "blue") ?? .blue)
+        
+        shouldUpdateTomorrowVerse = true
     }
     
     
