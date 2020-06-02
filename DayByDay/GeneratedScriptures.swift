@@ -44,6 +44,16 @@ class GeneratedScriptures: ObservableObject {
     }
     
     
+    func setScriptureNotes(id: Int, notes: String) {
+        for (i, scripture) in array.enumerated() {
+            if (scripture.id == id) {
+                array[i].notes = notes
+            }
+        }
+        save()
+    }
+    
+    
     /**
      Generates new Scriptures based on settings for the next NUM_FUTURE_SCRIPTURES days.
      - Parameter force: If true, generates for all future dates. If false, only generates for dates not yet generated.

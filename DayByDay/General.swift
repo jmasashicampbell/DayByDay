@@ -8,6 +8,8 @@
 
 import Foundation
 import SwiftUI
+import Combine
+
 
 // MARK: Functions
 
@@ -58,6 +60,9 @@ func dateComponentsToString(_ dateComponents: DateComponents, format: String) ->
 }
 
 
+/**
+  Converts a Date to a DateComponents object with year, month, and day components.
+ */
 func makeComponents(date: Date) -> DateComponents {
     return Calendar.current.dateComponents([.year, .month, .day], from: date)
 }
@@ -65,6 +70,11 @@ func makeComponents(date: Date) -> DateComponents {
 
 // MARK: Extensions
 
+
+/**
+  Rotates a view by 180 degrees and reflects it across the horizontal axis.
+  Used to make a ScrollView start from the opposite side.
+ */
 extension View {
     public func flip() -> some View {
         return self
@@ -73,6 +83,9 @@ extension View {
     }
 }
 
+/**
+  Enables comparison of DateComponents
+ */
 extension DateComponents: Comparable {
     public static func < (lhs: DateComponents, rhs: DateComponents) -> Bool {
         if lhs.year != rhs.year {
@@ -86,7 +99,56 @@ extension DateComponents: Comparable {
 }
 
 
-// MARK: Styles
+/**
+  Publishes keyboard height when the keyboard is shown or hidden.
+  Used to intelligently move TextField so it is not obscured by keyboard.
+ */
+extension Publishers {
+    static var keyboardHeight: AnyPublisher<CGFloat, Never> {
+        let willShow = NotificationCenter.default.publisher(for: UIApplication.keyboardWillShowNotification)
+            .map { $0.keyboardHeight }
+        let willHide = NotificationCenter.default.publisher(for: UIApplication.keyboardWillHideNotification)
+            .map { _ in CGFloat(0) }
+        return MergeMany(willShow, willHide)
+            .eraseToAnyPublisher()
+    }
+}
+
+/**
+ Publishes keyboard height when the keyboard is shown or hidden.
+ Used to intelligently move TextField so it is not obscured by keyboard.
+*/
+extension Notification {
+    var keyboardHeight: CGFloat {
+        return (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.height ?? 0
+    }
+}
+
+
+/**
+ Used to find first responder text field
+ */
+extension UIResponder {
+    static var currentFirstResponder: UIResponder? {
+        _currentFirstResponder = nil
+        UIApplication.shared.sendAction(#selector(UIResponder.findFirstResponder(_:)), to: nil, from: nil, for: nil)
+        return _currentFirstResponder
+    }
+
+    private static weak var _currentFirstResponder: UIResponder?
+
+    @objc private func findFirstResponder(_ sender: Any) {
+        UIResponder._currentFirstResponder = self
+    }
+
+    var globalFrame: CGRect? {
+        guard let view = self as? UIView else { return nil }
+        return view.superview?.convert(view.frame, to: nil)
+    }
+}
+
+
+// MARK: Structs
 
 struct NotificationsToggleStyle: ToggleStyle {
     var label = ""
@@ -122,6 +184,22 @@ struct NotificationsToggleStyle: ToggleStyle {
                             .offset(x: configuration.isOn ? 10 : -10))
                     .animation(Animation.easeInOut(duration: 0.1))
             }
+        }
+    }
+}
+
+
+/**
+  Makes a view
+ */
+struct KeyboardAdaptive: ViewModifier {
+    func body(content: Content) -> some View {
+        GeometryReader { geometry in
+            content
+                .onReceive(Publishers.keyboardHeight) { keyboardHeight in
+            }
+            // 6.
+            .animation(.easeOut(duration: 0.16))
         }
     }
 }

@@ -8,13 +8,16 @@
 
 import SwiftUI
 import CoreGraphics
+import Combine
 
 let BUTTON_SPACE_HEIGHT : CGFloat = 20.0
 
 struct ScriptureDetail: View {
     @EnvironmentObject var settings: Settings
-    var scripture: Scripture
+    @EnvironmentObject var generatedScriptures: GeneratedScriptures
+    @State var scripture: Scripture
     @Binding var scriptureSelected: Bool
+    @State private var keyboardMoveDist: CGFloat = 0
     
     var body: some View {
         GeometryReader { geometry in
@@ -29,6 +32,7 @@ struct ScriptureDetail: View {
                         Spacer()
                         
                         Button(action: {
+                            self.generatedScriptures.setScriptureNotes(id: self.scripture.id, notes: self.scripture.notes)
                             self.scriptureSelected.toggle()
                         }) {
                             Image(systemName: "chevron.down")
@@ -36,28 +40,30 @@ struct ScriptureDetail: View {
                         .font(SEMIBOLD_BIG_FONT)
                     }
                     
-                    Text(self.scripture.text)
-                        .font(LIGHT_FONT)
-                    
-                    Text(self.scripture.reference)
-                        .font(MED_FONT)
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 10.0) {
+                            Text(self.scripture.text)
+                                .font(LIGHT_FONT)
+                            
+                            Text(self.scripture.reference)
+                                .font(MED_FONT)
+                        }
+                    }
+                    .animation(nil)
                 }
                 
                 Spacer()
                     
                 VStack(spacing: 20) {
-                    VStack {
-                        HStack {
-                            Text(self.scripture.notes)
-                                .font(SMALL_FONT)
-                            Spacer()
-                        }
-                        Spacer()
-                    }
-                    .padding(10)
+                    MultilineTextField("Add a note", text: self.$scripture.notes, onCommit: {
+                        self.generatedScriptures.setScriptureNotes(id: self.scripture.id, notes: self.scripture.notes)
+                    })
+                    .padding(5)
                     .frame(height: 210)
                     .background(self.settings.themeColor.light())
                     .cornerRadius(10)
+                    
+                    Spacer().frame(height: self.keyboardMoveDist)
                     
                     Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
                         Image(systemName: "square.and.arrow.up")
@@ -75,6 +81,11 @@ struct ScriptureDetail: View {
             .foregroundColor(self.settings.themeColor.text())
             .background(self.settings.themeColor.main())
             .cornerRadius(20)
+            .onReceive(Publishers.keyboardHeight) { keyboardHeight in
+                let keyboardTop = geometry.frame(in: .global).height - keyboardHeight
+                let focusedTextInputTop = UIResponder.currentFirstResponder?.globalFrame?.minY ?? 0
+                self.keyboardMoveDist = max(0, focusedTextInputTop - keyboardTop - geometry.safeAreaInsets.bottom + 100)
+            }
         }
         .padding()
     }
