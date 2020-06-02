@@ -15,6 +15,22 @@
 		CF53A2DA24667E0F0066F7A3 /* PickPickerVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D924667E0F0066F7A3 /* PickPickerVIew.swift */; };
 		CF53A2DC246680AE0066F7A3 /* ScriptureTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2DB246680AE0066F7A3 /* ScriptureTree.swift */; };
 		CF53A2DE24668E5C0066F7A3 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2DD24668E5C0066F7A3 /* General.swift */; };
+		CF6767D62486D8530098DECF /* icon_sage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767D22486D8530098DECF /* icon_sage@2x.png */; };
+		CF6767D72486D8530098DECF /* icon_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767D32486D8530098DECF /* icon_blue@2x.png */; };
+		CF6767D82486D8530098DECF /* icon_sage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767D42486D8530098DECF /* icon_sage@3x.png */; };
+		CF6767D92486D8530098DECF /* icon_blue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767D52486D8530098DECF /* icon_blue@3x.png */; };
+		CF6767E62486DAC40098DECF /* icon_yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767DA2486DAC40098DECF /* icon_yellow@2x.png */; };
+		CF6767E72486DAC40098DECF /* icon_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767DB2486DAC40098DECF /* icon_gray@2x.png */; };
+		CF6767E82486DAC40098DECF /* icon_brown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767DC2486DAC40098DECF /* icon_brown@2x.png */; };
+		CF6767E92486DAC40098DECF /* icon_white@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767DD2486DAC40098DECF /* icon_white@3x.png */; };
+		CF6767EA2486DAC40098DECF /* icon_green@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767DE2486DAC40098DECF /* icon_green@3x.png */; };
+		CF6767EB2486DAC40098DECF /* icon_gray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767DF2486DAC40098DECF /* icon_gray@3x.png */; };
+		CF6767EC2486DAC40098DECF /* icon_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767E02486DAC40098DECF /* icon_green@2x.png */; };
+		CF6767ED2486DAC40098DECF /* icon_slate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767E12486DAC40098DECF /* icon_slate@2x.png */; };
+		CF6767EE2486DAC40098DECF /* icon_slate@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767E22486DAC40098DECF /* icon_slate@3x.png */; };
+		CF6767EF2486DAC40098DECF /* icon_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767E32486DAC40098DECF /* icon_white@2x.png */; };
+		CF6767F02486DAC40098DECF /* icon_yellow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767E42486DAC40098DECF /* icon_yellow@3x.png */; };
+		CF6767F12486DAC40098DECF /* icon_brown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767E52486DAC40098DECF /* icon_brown@3x.png */; };
 		CF80F904245B79EF001424C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F903245B79EF001424C4 /* AppDelegate.swift */; };
 		CF80F906245B79EF001424C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F905245B79EF001424C4 /* SceneDelegate.swift */; };
 		CF80F908245B79EF001424C4 /* ScriptureDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F907245B79EF001424C4 /* ScriptureDetail.swift */; };
@@ -46,6 +62,22 @@
 		CF53A2D924667E0F0066F7A3 /* PickPickerVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPickerVIew.swift; sourceTree = "<group>"; };
 		CF53A2DB246680AE0066F7A3 /* ScriptureTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureTree.swift; sourceTree = "<group>"; };
 		CF53A2DD24668E5C0066F7A3 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
+		CF6767D22486D8530098DECF /* icon_sage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_sage@2x.png"; path = "DayByDay/icon_sage@2x.png"; sourceTree = SOURCE_ROOT; };
+		CF6767D32486D8530098DECF /* icon_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_blue@2x.png"; path = "DayByDay/icon_blue@2x.png"; sourceTree = SOURCE_ROOT; };
+		CF6767D42486D8530098DECF /* icon_sage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_sage@3x.png"; path = "DayByDay/icon_sage@3x.png"; sourceTree = SOURCE_ROOT; };
+		CF6767D52486D8530098DECF /* icon_blue@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_blue@3x.png"; path = "DayByDay/icon_blue@3x.png"; sourceTree = SOURCE_ROOT; };
+		CF6767DA2486DAC40098DECF /* icon_yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_yellow@2x.png"; path = "DayByDay/icon_yellow@2x.png"; sourceTree = SOURCE_ROOT; };
+		CF6767DB2486DAC40098DECF /* icon_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_gray@2x.png"; path = "DayByDay/icon_gray@2x.png"; sourceTree = SOURCE_ROOT; };
+		CF6767DC2486DAC40098DECF /* icon_brown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_brown@2x.png"; path = "DayByDay/icon_brown@2x.png"; sourceTree = SOURCE_ROOT; };
+		CF6767DD2486DAC40098DECF /* icon_white@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_white@3x.png"; path = "DayByDay/icon_white@3x.png"; sourceTree = SOURCE_ROOT; };
+		CF6767DE2486DAC40098DECF /* icon_green@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_green@3x.png"; path = "DayByDay/icon_green@3x.png"; sourceTree = SOURCE_ROOT; };
+		CF6767DF2486DAC40098DECF /* icon_gray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_gray@3x.png"; path = "DayByDay/icon_gray@3x.png"; sourceTree = SOURCE_ROOT; };
+		CF6767E02486DAC40098DECF /* icon_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_green@2x.png"; path = "DayByDay/icon_green@2x.png"; sourceTree = SOURCE_ROOT; };
+		CF6767E12486DAC40098DECF /* icon_slate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_slate@2x.png"; path = "DayByDay/icon_slate@2x.png"; sourceTree = SOURCE_ROOT; };
+		CF6767E22486DAC40098DECF /* icon_slate@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_slate@3x.png"; path = "DayByDay/icon_slate@3x.png"; sourceTree = SOURCE_ROOT; };
+		CF6767E32486DAC40098DECF /* icon_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_white@2x.png"; path = "DayByDay/icon_white@2x.png"; sourceTree = SOURCE_ROOT; };
+		CF6767E42486DAC40098DECF /* icon_yellow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_yellow@3x.png"; path = "DayByDay/icon_yellow@3x.png"; sourceTree = SOURCE_ROOT; };
+		CF6767E52486DAC40098DECF /* icon_brown@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_brown@3x.png"; path = "DayByDay/icon_brown@3x.png"; sourceTree = SOURCE_ROOT; };
 		CF80F900245B79EF001424C4 /* DayByDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayByDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF80F903245B79EF001424C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF80F905245B79EF001424C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +139,30 @@
 			path = "Scriptures Source Data";
 			sourceTree = "<group>";
 		};
+		CF6767C92486D78D0098DECF /* App Icons */ = {
+			isa = PBXGroup;
+			children = (
+				CF6767DC2486DAC40098DECF /* icon_brown@2x.png */,
+				CF6767E52486DAC40098DECF /* icon_brown@3x.png */,
+				CF6767DB2486DAC40098DECF /* icon_gray@2x.png */,
+				CF6767DF2486DAC40098DECF /* icon_gray@3x.png */,
+				CF6767E02486DAC40098DECF /* icon_green@2x.png */,
+				CF6767DE2486DAC40098DECF /* icon_green@3x.png */,
+				CF6767E12486DAC40098DECF /* icon_slate@2x.png */,
+				CF6767E22486DAC40098DECF /* icon_slate@3x.png */,
+				CF6767E32486DAC40098DECF /* icon_white@2x.png */,
+				CF6767DD2486DAC40098DECF /* icon_white@3x.png */,
+				CF6767DA2486DAC40098DECF /* icon_yellow@2x.png */,
+				CF6767E42486DAC40098DECF /* icon_yellow@3x.png */,
+				CF6767D32486D8530098DECF /* icon_blue@2x.png */,
+				CF6767D52486D8530098DECF /* icon_blue@3x.png */,
+				CF6767D22486D8530098DECF /* icon_sage@2x.png */,
+				CF6767D42486D8530098DECF /* icon_sage@3x.png */,
+			);
+			name = "App Icons";
+			path = "Settings Views";
+			sourceTree = "<group>";
+		};
 		CF6C0B1B246509FA0050144E /* Settings Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +207,7 @@
 				CF0F3755246BAFFB0096554B /* Scripture Views */,
 				CF6C0B1B246509FA0050144E /* Settings Views */,
 				CF3B271D2462872800D80998 /* Scriptures Source Data */,
+				CF6767C92486D78D0098DECF /* App Icons */,
 				CF80F90B245B79F8001424C4 /* Preview Content */,
 			);
 			path = DayByDay;
@@ -223,15 +280,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF6767E92486DAC40098DECF /* icon_white@3x.png in Resources */,
 				CF9FA04724679A8500772D2B /* book_of_mormon_map.json in Resources */,
+				CF6767E62486DAC40098DECF /* icon_yellow@2x.png in Resources */,
 				CF80F910245B79F8001424C4 /* LaunchScreen.storyboard in Resources */,
+				CF6767EA2486DAC40098DECF /* icon_green@3x.png in Resources */,
+				CF6767D82486D8530098DECF /* icon_sage@3x.png in Resources */,
 				CF3B2720246295B200D80998 /* scriptures.json in Resources */,
+				CF6767E72486DAC40098DECF /* icon_gray@2x.png in Resources */,
+				CF6767EB2486DAC40098DECF /* icon_gray@3x.png in Resources */,
 				CF9FA04924679A8500772D2B /* doctrine_and_covenants_map.json in Resources */,
 				CF9FA04824679A8500772D2B /* new_testament_map.json in Resources */,
 				CF9FA04B24679A8500772D2B /* old_testament_map.json in Resources */,
+				CF6767EE2486DAC40098DECF /* icon_slate@3x.png in Resources */,
 				CF80F90D245B79F8001424C4 /* Preview Assets.xcassets in Resources */,
+				CF6767D72486D8530098DECF /* icon_blue@2x.png in Resources */,
 				CF9FA04A24679A8500772D2B /* pearl_of_great_price_map.json in Resources */,
+				CF6767EC2486DAC40098DECF /* icon_green@2x.png in Resources */,
 				CF80F90A245B79F8001424C4 /* Assets.xcassets in Resources */,
+				CF6767EF2486DAC40098DECF /* icon_white@2x.png in Resources */,
+				CF6767ED2486DAC40098DECF /* icon_slate@2x.png in Resources */,
+				CF6767F12486DAC40098DECF /* icon_brown@3x.png in Resources */,
+				CF6767F02486DAC40098DECF /* icon_yellow@3x.png in Resources */,
+				CF6767D92486D8530098DECF /* icon_blue@3x.png in Resources */,
+				CF6767E82486DAC40098DECF /* icon_brown@2x.png in Resources */,
+				CF6767D62486D8530098DECF /* icon_sage@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,7 +468,6 @@
 		CF80F915245B79F8001424C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"DayByDay/Preview Content\"";
 				DEVELOPMENT_TEAM = DF352DP5G8;
@@ -415,7 +487,6 @@
 		CF80F916245B79F8001424C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"DayByDay/Preview Content\"";
 				DEVELOPMENT_TEAM = DF352DP5G8;

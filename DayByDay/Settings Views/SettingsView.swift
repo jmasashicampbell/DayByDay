@@ -14,7 +14,15 @@ struct SettingsView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     var body: some View {
-        Form {
+        let themeColorBinding = Binding (
+            get: { self.settings.themeColor.color },
+            set: { themeColor in
+                self.settings.themeColor.color = themeColor
+                UIApplication.shared.setAlternateIconName(themeColor == .blue ? nil : themeColor.rawValue)
+            }
+        )
+        
+        return Form {
             List {
                 Section(header: Text("VERSE SELECTION")) {
                     Picker("pickRandom", selection: $settings.pickRandom) {
@@ -77,7 +85,7 @@ struct SettingsView: View {
                 
                 
                 Section(header: Text("THEME")) {
-                    Picker("pickColor", selection: $settings.themeColor.color) {
+                    Picker("pickColor", selection: themeColorBinding) {
                         ForEach(ThemeColorOptions.allCases, id: \.self) { colorOption in
                             Image(colorOption.rawValue).tag(colorOption)
                         }
