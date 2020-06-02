@@ -18,6 +18,7 @@ struct ScriptureDetail: View {
     @State var scripture: Scripture
     @Binding var scriptureSelected: Bool
     @State private var keyboardMoveDist: CGFloat = 0
+    @State private var showShareSheet = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -65,7 +66,7 @@ struct ScriptureDetail: View {
                     
                     Spacer().frame(height: self.keyboardMoveDist)
                     
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                    Button(action: { self.showShareSheet = true } ) {
                         Image(systemName: "square.and.arrow.up")
                         Text("Share")
                     }
@@ -85,6 +86,9 @@ struct ScriptureDetail: View {
                 let keyboardTop = geometry.frame(in: .global).height - keyboardHeight
                 let focusedTextInputTop = UIResponder.currentFirstResponder?.globalFrame?.minY ?? 0
                 self.keyboardMoveDist = max(0, focusedTextInputTop - keyboardTop - geometry.safeAreaInsets.bottom + 100)
+            }
+            .sheet(isPresented: self.$showShareSheet) {
+                ShareSheet(activityItems: [self.scripture.text, self.scripture.reference])
             }
         }
         .padding()
