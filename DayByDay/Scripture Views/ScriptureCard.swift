@@ -50,13 +50,14 @@ struct ScriptureCard: View {
                 .background(settings.themeColor.light())
                 .cornerRadius(10)
             }
-            .padding(0)
+            .padding(20)
             .font(MED_FONT)
             .foregroundColor(settings.themeColor.text())
+            .background(settings.themeColor.main())
+            .cornerRadius(25)
         }
-        .padding(20)
-        .background(settings.themeColor.main())
-        .cornerRadius(25)
+        .padding(0)
+        .buttonStyle(ScaleButtonStyle())
     }
 }
 
