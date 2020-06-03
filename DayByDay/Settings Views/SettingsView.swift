@@ -12,8 +12,27 @@ struct SettingsView: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var generatedScriptures: GeneratedScriptures
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @State var presentSheet = true
     
     var body: some View {
+        let notificationsOnBinding = Binding (
+            get: { self.settings.notificationsOn },
+            set: { notificationsOn in
+                if (notificationsOn) {
+                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                        if success {
+                            DispatchQueue.main.async {
+                                self.settings.notificationsOn = notificationsOn
+                            }
+                        } else {
+                            self.presentSheet = true
+                        }
+                    }
+                } else {
+                    self.settings.notificationsOn = notificationsOn
+                }
+        } )
+    
         let themeColorBinding = Binding (
             get: { self.settings.themeColor.color },
             set: { themeColor in
@@ -71,7 +90,7 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    Toggle("", isOn: $settings.notificationsOn)
+                    Toggle("", isOn: notificationsOnBinding)
                         .toggleStyle(
                         NotificationsToggleStyle(label: "Notifications",
                                            onColor: settings.themeColor.main()))
@@ -96,9 +115,33 @@ struct SettingsView: View {
             }.padding(5)
         }
         .padding(.top, 10)
+        .sheet(isPresented: self.$presentSheet) {
+            VStack(spacing: 20) {
+                HStack {
+                    Spacer()
+                    Button(action: { self.presentSheet = false } ) {
+                        Image(systemName: "chevron.down")
+                    }
+                    .font(SEMIBOLD_BIG_FONT)
+                }
+                Text("To enable notifications, turn on notifications for Day By Day in your phone's settings.")
+                    .font(SEMIBOLD_BIG_FONT)
+                Spacer()
+                Button(action: {}) {
+                    Text("Go to Settings")
+                    Image(systemName: "chevron.right")
+                }
+                .font(SEMIBOLD_BIG_FONT)
+                Spacer().frame(height: 5)
+                
+            }
+            .padding(20)
+            .foregroundColor(self.settings.themeColor.text())
+            .background(self.settings.themeColor.main())
+            .edgesIgnoringSafeArea(.all)
+        }
         .navigationBarTitle("Settings")
         .navigationBarItems(
-            
             leading:
                 Button(action: {
                     self.settings.reset()

@@ -160,19 +160,7 @@ struct NotificationsToggleStyle: ToggleStyle {
         HStack {
             Text(label)
             Spacer()
-            Button(action: { withAnimation {
-                if (!configuration.isOn) {
-                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                        if success {
-                            DispatchQueue.main.async {
-                                configuration.isOn.toggle()
-                            }
-                        }
-                    }
-                } else {
-                    configuration.isOn.toggle()
-                }
-            } } ) {
+            Button(action: { withAnimation { configuration.isOn.toggle() } } ) {
                 RoundedRectangle(cornerRadius: 16, style: .circular)
                     .fill(configuration.isOn ? onColor : offColor)
                     .frame(width: 50, height: 29)
@@ -227,10 +215,12 @@ struct ShareSheet: UIViewControllerRepresentable {
     }
 }
 
+
 struct ScaleButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .scaleEffect(configuration.isPressed ? 0.97 : 1)
+            .scaleEffect(configuration.isPressed ? 0.95 : 1)
             .animation(.easeIn(duration: 0.08))
     }
 }
+
