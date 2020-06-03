@@ -57,7 +57,7 @@ struct ScriptureDetail: View {
                 Spacer()
                     
                 VStack(spacing: 20) {
-                    MultilineTextField(text: self.$scripture.notes, isFirstResponder: self.$openInEdit, onCommit: {
+                    MultilineTextField(text: self.$scripture.notes, isFirstResponder: self.openInEdit, onCommit: {
                         self.generatedScriptures.setScriptureNotes(id: self.scripture.id, notes: self.scripture.notes)
                     })
                     .padding(5)
@@ -85,9 +85,11 @@ struct ScriptureDetail: View {
             .cornerRadius(20)
             .onReceive(Publishers.keyboardHeight) { keyboardHeight in
                 let keyboardTop = geometry.frame(in: .global).height - keyboardHeight
-                let focusedTextInputTop = UIResponder.currentFirstResponder?.globalFrame?.minY ?? 0
-                print(focusedTextInputTop, keyboardTop, geometry.safeAreaInsets.bottom)
+                let focusedTextInputTop = (UIResponder.currentFirstResponder?.globalFrame?.minY ?? 0)
+                    - (self.openInEdit ? geometry.frame(in: .global).height : 0)
+                print("Open keyboard", self.openInEdit)
                 self.keyboardMoveDist = max(0, focusedTextInputTop - keyboardTop - geometry.safeAreaInsets.bottom + 100)
+                self.openInEdit = false
             }
             .sheet(isPresented: self.$showShareSheet) {
                 ShareSheet(activityItems: [self.scripture.text, self.scripture.reference])

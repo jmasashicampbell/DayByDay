@@ -38,39 +38,36 @@ struct ScriptureCard: View {
                 Spacer().frame(height: SCRIPTURE_CARD_SPACING)
                 Text(scripture.reference)
                 Spacer()
-                
-                VStack {
+
+                Button(action: {
+                    self.openInEdit = true
+                    self.selectedScripture = self.scripture
+                    self.scriptureSelected.toggle()
+                }) {
                     HStack {
-                        Button(action: {
-                            self.openInEdit = true
-                            self.selectedScripture = self.scripture
-                            self.scriptureSelected.toggle()
-                        }) {
-                            if scripture.notes.isEmpty {
-                                VStack {
-                                    Spacer()
-                                    HStack {
-                                        Spacer()
-                                        Image(systemName: "plus")
-                                            .font(.system(size: 50, weight: .thin))
-                                        Spacer()
-                                    }
-                                    Spacer()
-                                }
-                            } else {
+                        if scripture.notes.isEmpty {
+                            Spacer()
+                            VStack {
+                                Spacer()
+                                Image(systemName: "plus")
+                                    .font(.system(size: 50, weight: .thin))
+                                Spacer()
+                            }
+                        } else {
+                            VStack {
                                 Text(scripture.notes)
                                     .font(SMALL_FONT)
                                 Spacer()
                             }
                         }
-                        .buttonStyle(ScaleButtonStyle(scaleFactor: 0.8))
+                        Spacer()
                     }
-                    Spacer()
+                    .padding(10)
+                    .frame(height: 210)
+                    .background(settings.themeColor.light())
+                    .cornerRadius(10)
                 }
-                .padding(10)
-                .frame(height: 210)
-                .background(settings.themeColor.light())
-                .cornerRadius(10)
+                .buttonStyle(ScaleButtonStyle(scaleFactor: 0.9))
             }
             .padding(20)
             .font(MED_FONT)
@@ -79,7 +76,7 @@ struct ScriptureCard: View {
             .cornerRadius(25)
         }
         .padding(0)
-        .buttonStyle(ScaleButtonStyle(scaleFactor: 0.95))
+        .buttonStyle(ScaleButtonStyle(scaleFactor: 0.96))
     }
 }
 
