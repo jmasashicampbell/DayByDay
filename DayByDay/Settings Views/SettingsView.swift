@@ -12,7 +12,8 @@ struct SettingsView: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var generatedScriptures: GeneratedScriptures
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @State var presentSheet = true
+    @Environment(\.colorScheme) var colorScheme
+    @State var presentSheet = false
     
     var body: some View {
         let notificationsOnBinding = Binding (
@@ -40,6 +41,8 @@ struct SettingsView: View {
                 UIApplication.shared.setAlternateIconName(themeColor == .blue ? nil : themeColor.rawValue)
             }
         )
+        
+        let mode = self.colorScheme == .light ? "light" : "dark"
         
         return Form {
             List {
@@ -124,16 +127,40 @@ struct SettingsView: View {
                     }
                     .font(SEMIBOLD_BIG_FONT)
                 }
+                
                 Text("To enable notifications, turn on notifications for Day By Day in your phone's settings.")
                     .font(SEMIBOLD_BIG_FONT)
+                
+                
+                GeometryReader { geometry in
+                    Image("settings1_" + mode)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        //.frame(width: geometry.size.width)
+                        .cornerRadius(10)
+                }
+                
+                GeometryReader { geometry in
+                    Image("settings2_" + mode)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        //.frame(width: geometry.size.width)
+                        .cornerRadius(10)
+                }
+                
                 Spacer()
-                Button(action: {}) {
+                Spacer()
+                Spacer()
+                Spacer()
+                
+                Button(action: {
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                }) {
                     Text("Go to Settings")
                     Image(systemName: "chevron.right")
                 }
                 .font(SEMIBOLD_BIG_FONT)
                 Spacer().frame(height: 5)
-                
             }
             .padding(20)
             .foregroundColor(self.settings.themeColor.text())
