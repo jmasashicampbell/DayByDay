@@ -125,18 +125,14 @@ struct SettingsView: View {
                     Button(action: { self.presentSheet = false } ) {
                         Image(systemName: "chevron.down")
                     }
-                    .font(SEMIBOLD_BIG_FONT)
                 }
                 
                 Text("To enable notifications, turn on notifications for Day By Day in your phone's settings.")
-                    .font(SEMIBOLD_BIG_FONT)
-                
                 
                 GeometryReader { geometry in
                     Image("settings1_" + mode)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        //.frame(width: geometry.size.width)
                         .cornerRadius(10)
                 }
                 
@@ -144,7 +140,6 @@ struct SettingsView: View {
                     Image("settings2_" + mode)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        //.frame(width: geometry.size.width)
                         .cornerRadius(10)
                 }
                 
@@ -159,12 +154,12 @@ struct SettingsView: View {
                     Text("Go to Settings")
                     Image(systemName: "chevron.right")
                 }
-                .font(SEMIBOLD_BIG_FONT)
                 Spacer().frame(height: 5)
             }
             .padding(20)
             .foregroundColor(self.settings.themeColor.text())
             .background(self.settings.themeColor.main())
+            .font(SEMIBOLD_BIG_FONT)
             .edgesIgnoringSafeArea(.all)
         }
         .navigationBarTitle("Settings")

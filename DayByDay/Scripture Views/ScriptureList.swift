@@ -13,6 +13,7 @@ struct ScriptureList: View {
     @EnvironmentObject var generatedScriptures: GeneratedScriptures
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var selectionCoordinator: SelectionCoordinator
+    @State var openInEdit = false
     //var navBarHeight: CGFloat = 0
     
     var body: some View {
@@ -27,7 +28,8 @@ struct ScriptureList: View {
                                     Spacer()
                                     ScriptureCard(scripture: scripture,
                                                   scriptureSelected: self.$selectionCoordinator.selected,
-                                                  selectedScripture: self.$selectionCoordinator.scripture)
+                                                  selectedScripture: self.$selectionCoordinator.scripture,
+                                                  openInEdit: self.$openInEdit)
                                     .flip()
                                     .frame(width: geometry.size.width - 74,
                                            height: geometry.size.height - 82)
@@ -64,7 +66,8 @@ struct ScriptureList: View {
             
             if (self.selectionCoordinator.selected) {
                 ScriptureDetail(scripture: self.selectionCoordinator.scripture!,
-                                scriptureSelected: self.$selectionCoordinator.selected)
+                                scriptureSelected: self.$selectionCoordinator.selected,
+                                openInEdit: self.$openInEdit)
                     //.shadow(Color(red: 0.9, green: 0.9, blue: 0.9), radius: 10)
                     .transition(.move(edge: .bottom))
                     .animation(.spring(dampingFraction: 0.8))

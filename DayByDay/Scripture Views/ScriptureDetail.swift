@@ -17,6 +17,7 @@ struct ScriptureDetail: View {
     @EnvironmentObject var generatedScriptures: GeneratedScriptures
     @State var scripture: Scripture
     @Binding var scriptureSelected: Bool
+    @Binding var openInEdit: Bool
     @State private var keyboardMoveDist: CGFloat = 0
     @State private var showShareSheet = false
     
@@ -56,7 +57,7 @@ struct ScriptureDetail: View {
                 Spacer()
                     
                 VStack(spacing: 20) {
-                    MultilineTextField("Add a note", text: self.$scripture.notes, onCommit: {
+                    MultilineTextField(text: self.$scripture.notes, isFirstResponder: self.$openInEdit, onCommit: {
                         self.generatedScriptures.setScriptureNotes(id: self.scripture.id, notes: self.scripture.notes)
                     })
                     .padding(5)
@@ -85,6 +86,7 @@ struct ScriptureDetail: View {
             .onReceive(Publishers.keyboardHeight) { keyboardHeight in
                 let keyboardTop = geometry.frame(in: .global).height - keyboardHeight
                 let focusedTextInputTop = UIResponder.currentFirstResponder?.globalFrame?.minY ?? 0
+                print(focusedTextInputTop, keyboardTop, geometry.safeAreaInsets.bottom)
                 self.keyboardMoveDist = max(0, focusedTextInputTop - keyboardTop - geometry.safeAreaInsets.bottom + 100)
             }
             .sheet(isPresented: self.$showShareSheet) {

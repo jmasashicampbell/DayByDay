@@ -16,9 +16,11 @@ struct ScriptureCard: View {
     @EnvironmentObject var settings: Settings
     @Binding var scriptureSelected: Bool
     @Binding var selectedScripture: Scripture?
+    @Binding var openInEdit: Bool
     
     var body: some View {
         Button(action: {
+            self.openInEdit = false
             self.selectedScripture = self.scripture
             self.scriptureSelected.toggle()
         } ) {
@@ -39,9 +41,29 @@ struct ScriptureCard: View {
                 
                 VStack {
                     HStack {
-                        Text(scripture.notes)
-                            .font(SMALL_FONT)
-                        Spacer()
+                        Button(action: {
+                            self.openInEdit = true
+                            self.selectedScripture = self.scripture
+                            self.scriptureSelected.toggle()
+                        }) {
+                            if scripture.notes.isEmpty {
+                                VStack {
+                                    Spacer()
+                                    HStack {
+                                        Spacer()
+                                        Image(systemName: "plus")
+                                            .font(.system(size: 50, weight: .thin))
+                                        Spacer()
+                                    }
+                                    Spacer()
+                                }
+                            } else {
+                                Text(scripture.notes)
+                                    .font(SMALL_FONT)
+                                Spacer()
+                            }
+                        }
+                        .buttonStyle(ScaleButtonStyle(scaleFactor: 0.8))
                     }
                     Spacer()
                 }
@@ -57,7 +79,7 @@ struct ScriptureCard: View {
             .cornerRadius(25)
         }
         .padding(0)
-        .buttonStyle(ScaleButtonStyle())
+        .buttonStyle(ScaleButtonStyle(scaleFactor: 0.95))
     }
 }
 

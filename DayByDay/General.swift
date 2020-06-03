@@ -217,9 +217,11 @@ struct ShareSheet: UIViewControllerRepresentable {
 
 
 struct ScaleButtonStyle: ButtonStyle {
+    var scaleFactor: CGFloat
+    
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .scaleEffect(configuration.isPressed ? 0.95 : 1)
+            .scaleEffect(configuration.isPressed ? scaleFactor : 1)
             .animation(.easeIn(duration: 0.08))
     }
 }

@@ -11,12 +11,11 @@ import SwiftUI
 import UIKit
 
 struct MultilineTextField: View {
-
-    private var placeholder: String
     private var onCommit: (() -> Void)?
-    @State private var viewHeight: CGFloat = 40 //start with one line
-    @State private var shouldShowPlaceholder = false
     @Binding private var text: String
+    @Binding private var isFirstResponder: Bool
+    @State private var viewHeight: CGFloat = 40
+    @State private var shouldShowPlaceholder = false
     
     private var internalText: Binding<String> {
         Binding<String>(get: { self.text } ) {
@@ -26,28 +25,43 @@ struct MultilineTextField: View {
     }
 
     var body: some View {
-        ScrollView {
-            UITextViewWrapper(text: self.internalText, calculatedHeight: $viewHeight, onDone: onCommit)
-            .frame(minHeight: viewHeight, maxHeight: viewHeight)
-            .background(placeholderView, alignment: .topLeading)
-        }
-    }
-
-    var placeholderView: some View {
         Group {
             if shouldShowPlaceholder {
-                Text(placeholder).foregroundColor(.gray)
-                    .padding(.leading, 4)
-                    .padding(.top, 8)
+                Button(action: {
+                    self.isFirstResponder = true
+                    self.shouldShowPlaceholder = false
+                }) {
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            Image(systemName: "plus")
+                                .font(.system(size: 50, weight: .thin))
+                            Spacer()
+                        }
+                        Spacer()
+                    }
+                }
+                .buttonStyle(ScaleButtonStyle(scaleFactor: 0.8))
+            } else {
+                ScrollView {
+                    UITextViewWrapper(text: self.internalText,
+                                      calculatedHeight: $viewHeight,
+                                      isFirstResponder: self.$isFirstResponder,
+                                      onDone: onCommit)
+                    .frame(minHeight: viewHeight, maxHeight: viewHeight)
+                    //.background(placeholderView)
+                }
             }
         }
     }
+
     
-    init (_ placeholder: String = "", text: Binding<String>, onCommit: (() -> Void)? = nil) {
-        self.placeholder = placeholder
+    init (text: Binding<String>, isFirstResponder: Binding<Bool>, onCommit: (() -> Void)? = nil) {
         self.onCommit = onCommit
         self._text = text
-        self._shouldShowPlaceholder = State<Bool>(initialValue: self.text.isEmpty)
+        self._isFirstResponder = isFirstResponder
+        self._shouldShowPlaceholder = State<Bool>(initialValue: self.text.isEmpty && !self.isFirstResponder)
     }
 
 }
@@ -58,6 +72,7 @@ private struct UITextViewWrapper: UIViewRepresentable {
 
     @Binding var text: String
     @Binding var calculatedHeight: CGFloat
+    @Binding var isFirstResponder: Bool
     var onDone: (() -> Void)?
 
     func makeUIView(context: UIViewRepresentableContext<UITextViewWrapper>) -> UITextView {
@@ -75,7 +90,9 @@ private struct UITextViewWrapper: UIViewRepresentable {
         }
 
         textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        //textField.resignFirstResponder()
+        if isFirstResponder {
+            textField.becomeFirstResponder()
+        }
         return textField
     }
 
