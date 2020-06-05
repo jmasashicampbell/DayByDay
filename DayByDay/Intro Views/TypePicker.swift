@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct TypePicker: View {
-    @Binding var settings: Settings
+    @Binding var selectedType: PickType
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -22,18 +22,18 @@ struct TypePicker: View {
 
             
             HStack(spacing: 20) {
-                TypeButton(type: .all, imageName: "type_all", text: "All Scriptures", selectedType: self.$settings.pickType)
-                TypeButton(type: .volumes, imageName: "type_volumes", text: "Choose Volumes", selectedType: self.$settings.pickType)
+                TypeButton(type: .all, imageName: "type_all", text: "All Scriptures", selectedType: self.$selectedType)
+                TypeButton(type: .volumes, imageName: "type_volumes", text: "Choose Volumes", selectedType: self.$selectedType)
             }
             Spacer().frame(height: 20)
             
             HStack(spacing: 20) {
-                TypeButton(type: .books, imageName: "type_books", text: "Choose Books", selectedType: self.$settings.pickType)
-                TypeButton(type: .chapters, imageName: "type_chapters", text: "Choose Chapters", selectedType: self.$settings.pickType)
+                TypeButton(type: .books, imageName: "type_books", text: "Choose Books", selectedType: self.$selectedType)
+                TypeButton(type: .chapters, imageName: "type_chapters", text: "Choose Chapters", selectedType: self.$selectedType)
             }
             Spacer()//.frame(height: 20)
             
-            Text(captionText(settings.pickType))
+            Text(captionText(selectedType))
                 .font(FONT_LIGHT)
             Spacer()
             Spacer()

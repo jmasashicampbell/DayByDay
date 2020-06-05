@@ -10,19 +10,25 @@ import SwiftUI
 
 struct IntroNavigator: View {
     @State var settings = Settings()
+    @State var pickRandom = false
+    @State var selectedType = PickType.all
+    @State var sectionsList: [[String]] = []
+    @State var notificationsOn: Bool? = nil
+    @State var notificationsTime = Date()
+    
     @State var page = 0
     @State var nextDisabled: Bool = false
     
     var body: some View {
         VStack {
             if (page == 0) {
-                RandomPicker(settings: self.$settings)
+                RandomPicker(pickRandom: self.$pickRandom)
             } else if (page == 1) {
-                TypePicker(settings: self.$settings)
+                TypePicker(selectedType: self.$selectedType)
             } else if (page == 2) {
-                SectionPicker(settings: self.$settings)
+                SectionPicker(pickType: self.selectedType, sectionsList: self.$sectionsList)
             } else if (page == 3) {
-                NotificationsPicker(settings: self.$settings)
+                NotificationsPicker(notificationsOn: self.$notificationsOn, notificationsTime: self.$notificationsTime)
             }
             
             HStack {

@@ -9,46 +9,42 @@
 import SwiftUI
 
 struct SectionPicker: View {
-    @Binding var settings: Settings
+    var pickType = PickType.books
+    @Binding var sectionsList: [[String]]
     @State var showPickerSheet = false
     
     var body: some View {
-        let pickType = settings.pickType
-        let pickTypeStr = pickType.rawValue
-        let start = pickTypeStr.startIndex
-        let end = pickTypeStr.index(pickTypeStr.startIndex, offsetBy: pickTypeStr.count - 1)
-        let pickTypeSingular = String(pickTypeStr[start..<end])
-        
-        let volumeNames = ["Old Testament", "New Testament", "Book of Mormon", "Doctrine and Covenants", "Pearl of Great Price"]
+        let start = pickType.rawValue.startIndex
+        let end = pickType.rawValue.index(pickType.rawValue.startIndex, offsetBy: pickType.rawValue.count - 1)
+        let pickTypeSingular = String(pickType.rawValue[start..<end])
         
         let maxDepthMap = [PickType.volumes: 1,
                            PickType.books: 2,
                            PickType.chapters: 3]
         
-        let pickSectionsBinding = Binding(get: { self.settings.pickSections[pickTypeStr]! },
-                                          set: { self.settings.pickSections[pickTypeStr] = $0 })
-        
         return GeometryReader { geometry in
             VStack(spacing: 10) {
                 HStack {
-                    Text("Choose \(pickTypeStr.lowercased()) from which to receive verses.")
+                    Text("Choose \(self.pickType.rawValue.lowercased()) from which to receive verses.")
                         .font(FONT_TITLE)
                     Spacer()
                 }
                 Spacer()
                 
-                if (pickType == .volumes) {
+                if (self.pickType == .volumes) {
                     VStack(spacing: 10) {
-                        ForEach(volumeNames, id: \.self) { name in
-                            VolumeListEntry(text: name, sectionsList: pickSectionsBinding)
-                        }
+                        VolumeListEntry(text: "Old Testament", sectionsList: self.$sectionsList)
+                        VolumeListEntry(text: "New Testament", sectionsList: self.$sectionsList)
+                        VolumeListEntry(text: "Book of Mormon", sectionsList: self.$sectionsList)
+                        VolumeListEntry(text: "Doctrine and Covenants", sectionsList: self.$sectionsList)
+                        VolumeListEntry(text: "Pearl of Great Price", sectionsList: self.$sectionsList)
                     }
                 } else {
-                    if (self.settings.pickSections[pickTypeStr]!.count > 7) {
+                    if (self.sectionsList.count > 7) {
                         ScrollView {
                             VStack(spacing: 10) {
-                                ForEach(self.settings.pickSections[pickTypeStr]!, id: \.self.last!) { path in
-                                    AddedListEntry(path: path, sectionsList: pickSectionsBinding, width: geometry.size.width)
+                                ForEach(self.sectionsList, id: \.self.last!) { path in
+                                    AddedListEntry(path: path, sectionsList: self.$sectionsList, width: geometry.size.width)
                                 }
                                 Spacer().frame(height: 0)
                                 
@@ -63,8 +59,8 @@ struct SectionPicker: View {
                         }
                     } else {
                         VStack(spacing: 10) {
-                            ForEach(self.settings.pickSections[pickTypeStr]!, id: \.self.last!) { path in
-                                AddedListEntry(path: path, sectionsList: pickSectionsBinding, width: geometry.size.width)
+                            ForEach(self.sectionsList, id: \.self.last!) { path in
+                                AddedListEntry(path: path, sectionsList: self.$sectionsList, width: geometry.size.width)
                             }
                             Spacer().frame(height: 0)
                             
@@ -83,8 +79,8 @@ struct SectionPicker: View {
             .sheet(isPresented: self.$showPickerSheet) {
                 SectionPickerSheet(node: scriptureTree.root,
                                    depth: 1,
-                                   maxDepth: maxDepthMap[self.settings.pickType] ?? 3,
-                                   pickSections: pickSectionsBinding,
+                                   maxDepth: maxDepthMap[self.pickType] ?? 3,
+                                   pickSections: self.$sectionsList,
                                    showSheet: self.$showPickerSheet)
             }
         }
@@ -254,15 +250,14 @@ struct SectionPicker: View {
 
 
 /*struct SectionPicker_Previews: PreviewProvider {
-    @State var settings = Settings()
     static var previews: some View {
-        return Group {
-            SectionPicker(settings: $settings)
+        Group {
+            SectionPicker()
                 .padding(20)
                 .foregroundColor(STARTING_THEME_COLOR)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
                 .previewDisplayName("iPhone 11")
-            SectionPicker(settings: $settings)
+            SectionPicker()
                 .padding(20)
                 .foregroundColor(STARTING_THEME_COLOR)
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))

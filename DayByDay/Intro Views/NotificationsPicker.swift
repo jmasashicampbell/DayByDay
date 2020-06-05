@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct NotificationsPicker: View {
-    @Binding var settings: Settings
+    @Binding var notificationsOn: Bool?
+    @Binding var notificationsTime: Date
     
     var body: some View {
         VStack(spacing: 10) {
@@ -26,8 +27,8 @@ struct NotificationsPicker: View {
                 Spacer().frame(height: 30)
                 HStack {
                     Spacer()
-                    if (settings.notificationsOn == true) {
-                        DatePicker("Time", selection: $settings.notificationsTime, displayedComponents: .hourAndMinute)
+                    if (notificationsOn == true) {
+                        DatePicker("Time", selection: self.$notificationsTime, displayedComponents: .hourAndMinute)
                             .colorInvert()
                             .colorMultiply(Color.white)
                             .labelsHidden()
@@ -36,23 +37,23 @@ struct NotificationsPicker: View {
                     Spacer()
                 }
             }
-            .frame(height: settings.notificationsOn == true ? 250 : 74)
+            .frame(height: notificationsOn == true ? 250 : 74)
             .background(STARTING_THEME_COLOR)
             .cornerRadius(20)
-            .overlay(YesNoButton(value: true, settings: self.$settings), alignment: .top)
+            .overlay(YesNoButton(value: true, notificationsOn: self.$notificationsOn), alignment: .top)
             .animation(.linear(duration: 0.12))
             
-            YesNoButton(value: false, settings: self.$settings)
+            YesNoButton(value: false, notificationsOn: self.$notificationsOn)
             Spacer()
         }
     }
     
     struct YesNoButton: View {
         var value: Bool
-        @Binding var settings: Settings
+        @Binding var notificationsOn: Bool?
         
         var body: some View {
-            Button(action: { withAnimation { self.settings.notificationsOn = self.value } }) {
+            Button(action: { withAnimation { self.notificationsOn = self.value } }) {
                 VStack {
                     HStack {
                         Spacer()
@@ -63,7 +64,7 @@ struct NotificationsPicker: View {
                 }
                 .padding(20)
                 .foregroundColor(Color.white)
-                .background(value == settings.notificationsOn ? STARTING_THEME_COLOR : Color(red: 0.42, green: 0.7, blue: 0.84))
+                .background(value == notificationsOn ? STARTING_THEME_COLOR : Color(red: 0.42, green: 0.7, blue: 0.84))
                 .cornerRadius(20)
                 .animation(.linear(duration: 0.2))
             }

@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 struct RandomPicker: View {
-    @Binding var settings: Settings
+    @Binding var pickRandom: Bool
     
     var body: some View {
         let themeColor = Color(red: 0.1, green: 0.53, blue: 0.75)
@@ -23,9 +23,9 @@ struct RandomPicker: View {
             }
             Spacer().frame(height: 0)
             
-            TypeButton(setRandom: false, imageName: "text.justify", text: "In Order", themeColor: themeColor, selectedRandom: self.$settings.pickRandom)
+            TypeButton(setRandom: false, imageName: "text.justify", text: "In Order", themeColor: themeColor, selectedRandom: self.$pickRandom)
             
-            TypeButton(setRandom: true, imageName: "shuffle", text: "Random", themeColor: themeColor, selectedRandom: self.$settings.pickRandom)
+            TypeButton(setRandom: true, imageName: "shuffle", text: "Random", themeColor: themeColor, selectedRandom: self.$pickRandom)
             
             Spacer().frame(height: 0)
         }
@@ -70,7 +70,7 @@ struct RandomPicker: View {
 
 /*struct RandomPicker_Previews: PreviewProvider {
     static var previews: some View {
-        RandomPicker(settings: Settings())
+        RandomPicker()
             .padding(20)
             .foregroundColor(STARTING_THEME_COLOR)
     }
