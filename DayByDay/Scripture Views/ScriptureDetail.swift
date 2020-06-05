@@ -27,10 +27,10 @@ struct ScriptureDetail: View {
                 VStack(alignment: .leading, spacing: 10.0) {
                     HStack {
                         Text(dateComponentsToString(self.scripture.date, format: "E"))
-                        .font(REG_BIG_FONT)
+                        .font(FONT_REG_BIG)
                         
                         Text(dateComponentsToString(self.scripture.date, format: "MMM dd"))
-                        .font(SEMIBOLD_BIG_FONT)
+                        .font(FONT_SEMIBOLD_BIG)
                         Spacer()
                         
                         Button(action: {
@@ -39,16 +39,16 @@ struct ScriptureDetail: View {
                         }) {
                             Image(systemName: "chevron.down")
                         }
-                        .font(SEMIBOLD_BIG_FONT)
+                        .font(FONT_SEMIBOLD_BIG)
                     }
                     
                     ScrollView {
                         VStack(alignment: .leading, spacing: 10.0) {
                             Text(self.scripture.text)
-                                .font(LIGHT_FONT)
+                                .font(FONT_LIGHT)
                             
                             Text(self.scripture.reference)
-                                .font(MED_FONT)
+                                .font(FONT_MED)
                         }
                     }
                     .animation(nil)
@@ -79,7 +79,7 @@ struct ScriptureDetail: View {
                 }
             }
             .padding(20)
-            .font(SMALL_FONT)
+            .font(FONT_SMALL)
             .foregroundColor(self.settings.themeColor.text())
             .background(self.settings.themeColor.main())
             .cornerRadius(20)

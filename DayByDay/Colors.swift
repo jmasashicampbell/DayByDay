@@ -10,6 +10,8 @@ import Foundation
 import SwiftUI
 
 
+let STARTING_THEME_COLOR = Color(red: 0.1, green: 0.53, blue: 0.75)
+
 struct ThemeColor {
     var color : ThemeColorOptions
     var colorSets: [ThemeColorOptions: ThemeColorSet] = [

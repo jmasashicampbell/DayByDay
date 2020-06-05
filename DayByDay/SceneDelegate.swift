@@ -26,10 +26,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ScriptureList()
+        /*let contentView = ScriptureList()
                           .environmentObject(settings)
                           .environmentObject(generatedScriptures)
-                          .environmentObject(selectionCoordinator ?? SelectionCoordinator())
+                          .environmentObject(selectionCoordinator ?? SelectionCoordinator())*/
+        let contentView = SectionPicker()
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

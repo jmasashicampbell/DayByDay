@@ -27,14 +27,14 @@ struct ScriptureCard: View {
             VStack(alignment: .leading, spacing: 0.0) {
                 HStack {
                     Text(dateComponentsToString(self.scripture.date, format: "E"))
-                    .font(REG_BIG_FONT)
+                    .font(FONT_REG_BIG)
                     
                     Text(dateComponentsToString(self.scripture.date, format: "MMM dd"))
-                    .font(SEMIBOLD_BIG_FONT)
+                    .font(FONT_SEMIBOLD_BIG)
                 }
                 Spacer().frame(height: SCRIPTURE_CARD_SPACING)
                 Text(scripture.text)
-                    .font(LIGHT_FONT)
+                    .font(FONT_LIGHT)
                 Spacer().frame(height: SCRIPTURE_CARD_SPACING)
                 Text(scripture.reference)
                 Spacer()
@@ -56,7 +56,7 @@ struct ScriptureCard: View {
                         } else {
                             VStack {
                                 Text(scripture.notes)
-                                    .font(SMALL_FONT)
+                                    .font(FONT_SMALL)
                                 Spacer()
                             }
                         }
@@ -70,7 +70,7 @@ struct ScriptureCard: View {
                 .buttonStyle(ScaleButtonStyle(scaleFactor: 0.9))
             }
             .padding(20)
-            .font(MED_FONT)
+            .font(FONT_MED)
             .foregroundColor(settings.themeColor.text())
             .background(settings.themeColor.main())
             .cornerRadius(25)

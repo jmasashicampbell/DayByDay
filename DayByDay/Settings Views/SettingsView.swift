@@ -159,7 +159,7 @@ struct SettingsView: View {
             .padding(20)
             .foregroundColor(self.settings.themeColor.text())
             .background(self.settings.themeColor.main())
-            .font(SEMIBOLD_BIG_FONT)
+            .font(FONT_SEMIBOLD_BIG)
             .edgesIgnoringSafeArea(.all)
         }
         .navigationBarTitle("Settings")
