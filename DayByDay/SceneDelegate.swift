@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                           .environmentObject(settings)
                           .environmentObject(generatedScriptures)
                           .environmentObject(selectionCoordinator ?? SelectionCoordinator())*/
-        let contentView = SectionPicker()
+        let contentView = IntroNavigator()
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

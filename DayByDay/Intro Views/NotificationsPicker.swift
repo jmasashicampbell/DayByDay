@@ -9,13 +9,15 @@
 import SwiftUI
 
 struct NotificationsPicker: View {
-    @State var notificationsOn: Bool? = nil
-    @State var notificationsTime = Date()
+    @Binding var settings: Settings
     
     var body: some View {
         VStack(spacing: 10) {
-            Text("Do you want a daily scripture notification?")
-                .font(FONT_TITLE)
+            HStack {
+                Text("Do you want a daily scripture notification?")
+                    .font(FONT_TITLE)
+                Spacer()
+            }
             Spacer()
 
             
@@ -24,8 +26,8 @@ struct NotificationsPicker: View {
                 Spacer().frame(height: 30)
                 HStack {
                     Spacer()
-                    if (notificationsOn == true) {
-                        DatePicker("Time", selection: $notificationsTime, displayedComponents: .hourAndMinute)
+                    if (settings.notificationsOn == true) {
+                        DatePicker("Time", selection: $settings.notificationsTime, displayedComponents: .hourAndMinute)
                             .colorInvert()
                             .colorMultiply(Color.white)
                             .labelsHidden()
@@ -34,27 +36,23 @@ struct NotificationsPicker: View {
                     Spacer()
                 }
             }
-            .frame(height: notificationsOn == true ? 250 : 74)
+            .frame(height: settings.notificationsOn == true ? 250 : 74)
             .background(STARTING_THEME_COLOR)
             .cornerRadius(20)
-            .overlay(YesNoButton(value: true, notificationsOn: self.$notificationsOn), alignment: .top)
+            .overlay(YesNoButton(value: true, settings: self.$settings), alignment: .top)
             .animation(.linear(duration: 0.12))
             
-            YesNoButton(value: false, notificationsOn: self.$notificationsOn)
+            YesNoButton(value: false, settings: self.$settings)
             Spacer()
-            
-            IntroNavigator(disabled: notificationsOn == nil)
         }
-        .foregroundColor(STARTING_THEME_COLOR)
-        .padding(20)
     }
     
     struct YesNoButton: View {
         var value: Bool
-        @Binding var notificationsOn: Bool?
+        @Binding var settings: Settings
         
         var body: some View {
-            Button(action: { withAnimation { self.notificationsOn = self.value } }) {
+            Button(action: { withAnimation { self.settings.notificationsOn = self.value } }) {
                 VStack {
                     HStack {
                         Spacer()
@@ -65,7 +63,7 @@ struct NotificationsPicker: View {
                 }
                 .padding(20)
                 .foregroundColor(Color.white)
-                .background(value == notificationsOn ? STARTING_THEME_COLOR : Color(red: 0.42, green: 0.7, blue: 0.84))
+                .background(value == settings.notificationsOn ? STARTING_THEME_COLOR : Color(red: 0.42, green: 0.7, blue: 0.84))
                 .cornerRadius(20)
                 .animation(.linear(duration: 0.2))
             }
@@ -74,15 +72,19 @@ struct NotificationsPicker: View {
     }
 }
 
-struct NotificationsPicker_Previews: PreviewProvider {
+/*struct NotificationsPicker_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NotificationsPicker()
+                .padding(20)
+                .foregroundColor(STARTING_THEME_COLOR)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
                 .previewDisplayName("iPhone 11")
             NotificationsPicker()
+                .padding(20)
+                .foregroundColor(STARTING_THEME_COLOR)
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
                 .previewDisplayName("iPhone SE ")
         }
     }
-}
+}*/

@@ -9,35 +9,42 @@
 import SwiftUI
 
 struct IntroNavigator: View {
+    @State var settings = Settings()
     @State var page = 0
     @State var nextDisabled: Bool = false
     
     var body: some View {
         VStack {
             if (page == 0) {
-                RandomPicker()
+                RandomPicker(settings: self.$settings)
             } else if (page == 1) {
-                TypePicker()
+                TypePicker(settings: self.$settings)
             } else if (page == 2) {
-                SectionPicker()
+                SectionPicker(settings: self.$settings)
             } else if (page == 3) {
-                NotificationsPicker()
+                NotificationsPicker(settings: self.$settings)
             }
             
             HStack {
-                Button(action: {}) {
-                    Image(systemName: "chevron.left")
+                if (self.page != 0) {
+                    Button(action: { self.page -= 1 }) {
+                        Image(systemName: "chevron.left")
+                    }
                 }
                 Spacer()
-                Button(action: {}) {
-                    Text("Next")
-                    Image(systemName: "chevron.right")
+                if (self.page != 3) {
+                    Button(action: { self.page += 1 }) {
+                        Text("Next")
+                        Image(systemName: "chevron.right")
+                    }
+                    .disabled(self.nextDisabled)
+                    .foregroundColor(self.nextDisabled ? Color(red: 0.42, green: 0.7, blue: 0.84) : STARTING_THEME_COLOR)
                 }
-                .disabled(self.nextDisabled)
-                .foregroundColor(self.nextDisabled ? Color(red: 0.42, green: 0.7, blue: 0.84) : STARTING_THEME_COLOR)
             }
             .font(FONT_SEMIBOLD_BIG)
         }
+        .padding(20)
+        .foregroundColor(STARTING_THEME_COLOR)
     }
 }
 

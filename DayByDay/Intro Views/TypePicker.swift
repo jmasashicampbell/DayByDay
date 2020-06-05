@@ -9,38 +9,35 @@
 import SwiftUI
 
 struct TypePicker: View {
-    @State var selectedType = PickType.all
+    @Binding var settings: Settings
     
     var body: some View {
-        let themeColor = Color(red: 0.1, green: 0.53, blue: 0.75)
-        
-        return VStack(alignment: .leading, spacing: 0) {
-            Text("From where would you like to receive verses?")
-                .font(FONT_TITLE)
-            Spacer()//.frame(height: 20)
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                Text("From where would you like to receive verses?")
+                    .font(FONT_TITLE)
+                Spacer()
+            }
+            Spacer()
 
             
             HStack(spacing: 20) {
-                TypeButton(type: .all, imageName: "type_all", text: "All Scriptures", themeColor: themeColor, selectedType: self.$selectedType)
-                TypeButton(type: .volumes, imageName: "type_volumes", text: "Choose Volumes", themeColor: themeColor, selectedType: self.$selectedType)
+                TypeButton(type: .all, imageName: "type_all", text: "All Scriptures", selectedType: self.$settings.pickType)
+                TypeButton(type: .volumes, imageName: "type_volumes", text: "Choose Volumes", selectedType: self.$settings.pickType)
             }
             Spacer().frame(height: 20)
             
             HStack(spacing: 20) {
-                TypeButton(type: .books, imageName: "type_books", text: "Choose Books", themeColor: themeColor, selectedType: self.$selectedType)
-                TypeButton(type: .chapters, imageName: "type_chapters", text: "Choose Chapters", themeColor: themeColor, selectedType: self.$selectedType)
+                TypeButton(type: .books, imageName: "type_books", text: "Choose Books", selectedType: self.$settings.pickType)
+                TypeButton(type: .chapters, imageName: "type_chapters", text: "Choose Chapters", selectedType: self.$settings.pickType)
             }
             Spacer()//.frame(height: 20)
             
-            Text(captionText(selectedType))
+            Text(captionText(settings.pickType))
                 .font(FONT_LIGHT)
             Spacer()
             Spacer()
-            
-            IntroNavigator()
         }
-        .padding(20)
-        .foregroundColor(themeColor)
     }
     
     private func captionText(_ type: PickType) -> String {
@@ -62,7 +59,6 @@ struct TypePicker: View {
         var type: PickType
         var imageName: String
         var text: String
-        var themeColor: Color
         @Binding var selectedType: PickType
         
         var body: some View {
@@ -78,7 +74,7 @@ struct TypePicker: View {
                 }
                 .padding(10)
                 .foregroundColor(Color.white)
-                .background(type == selectedType ? self.themeColor : Color(red: 0.42, green: 0.7, blue: 0.84) /*self.themeColor.light*/)
+                .background(type == selectedType ? STARTING_THEME_COLOR : Color(red: 0.42, green: 0.7, blue: 0.84) /*self.themeColor.light*/)
                 .cornerRadius(20)
                 .animation(.linear(duration: 0.2))
             }
@@ -87,8 +83,10 @@ struct TypePicker: View {
     }
 }
 
-struct TypePicker_Previews: PreviewProvider {
+/*struct TypePicker_Previews: PreviewProvider {
     static var previews: some View {
         TypePicker()
+            .padding(20)
+            .foregroundColor(STARTING_THEME_COLOR)
     }
-}
+}*/

@@ -10,26 +10,25 @@ import Foundation
 import SwiftUI
 
 struct RandomPicker: View {
-    @State var pickRandom = false
+    @Binding var settings: Settings
     
     var body: some View {
         let themeColor = Color(red: 0.1, green: 0.53, blue: 0.75)
         
-        return VStack(alignment: .leading, spacing: 20) {
-            Text("Do you want to receive verses in order or randomly?")
-                .font(FONT_TITLE)
+        return VStack(spacing: 20) {
+            HStack {
+                Text("Do you want to receive verses in order or randomly?")
+                    .font(FONT_TITLE)
+                Spacer()
+            }
             Spacer().frame(height: 0)
             
-            TypeButton(setRandom: false, imageName: "text.justify", text: "In Order", themeColor: themeColor, selectedRandom: self.$pickRandom)
+            TypeButton(setRandom: false, imageName: "text.justify", text: "In Order", themeColor: themeColor, selectedRandom: self.$settings.pickRandom)
             
-            TypeButton(setRandom: true, imageName: "shuffle", text: "Random", themeColor: themeColor, selectedRandom: self.$pickRandom)
+            TypeButton(setRandom: true, imageName: "shuffle", text: "Random", themeColor: themeColor, selectedRandom: self.$settings.pickRandom)
             
             Spacer().frame(height: 0)
-            
-            IntroNavigator()
         }
-        .padding(20)
-        .foregroundColor(themeColor)
     }
     
     
@@ -69,8 +68,10 @@ struct RandomPicker: View {
     }
 }
 
-struct RandomPicker_Previews: PreviewProvider {
+/*struct RandomPicker_Previews: PreviewProvider {
     static var previews: some View {
-        RandomPicker()
+        RandomPicker(settings: Settings())
+            .padding(20)
+            .foregroundColor(STARTING_THEME_COLOR)
     }
-}
+}*/
