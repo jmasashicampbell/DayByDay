@@ -6,6 +6,84 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundleAlternateIcons</key>
+		<dict>
+			<key>brown</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_brown</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>gray</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_gray</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>green</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_green</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>sage</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_sage</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>slate</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_slate</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>white</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_white</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>yellow</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_yellow</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+		</dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>icon_blue</string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<false/>
+		</dict>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -46,8 +124,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -56,83 +132,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>CFBundleIcons</key>
-    <dict>
-        <key>CFBundlePrimaryIcon</key>
-        <dict>
-            <key>CFBundleIconFiles</key>
-            <array>
-                <string>icon_blue</string>
-            </array>
-            <key>UIPrerenderedIcon</key>
-            <false/>
-        </dict>
-        <key>CFBundleAlternateIcons</key>
-        <dict>
-            <key>brown</key>
-            <dict>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <string>icon_brown</string>
-                </array>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-            </dict>
-            <key>gray</key>
-            <dict>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <string>icon_gray</string>
-                </array>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-            </dict>
-            <key>green</key>
-            <dict>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <string>icon_green</string>
-                </array>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-            </dict>
-            <key>slate</key>
-            <dict>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <string>icon_slate</string>
-                </array>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-            </dict>
-            <key>white</key>
-            <dict>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <string>icon_white</string>
-                </array>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-            </dict>
-            <key>yellow</key>
-            <dict>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <string>icon_yellow</string>
-                </array>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-            </dict>
-            <key>sage</key>
-            <dict>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <string>icon_sage</string>
-                </array>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-            </dict>
-        </dict>
-    </dict>
 </dict>
 </plist>

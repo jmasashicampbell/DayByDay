@@ -199,5 +199,5 @@ enum PickType: String, CaseIterable, Hashable {
     case volumes = "Volumes"
     case books = "Books"
     case chapters = "Chapters"
-    case topicalGuide = "Topical Guide"
+    //case topicalGuide = "Topical Guide"
 }

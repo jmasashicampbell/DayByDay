@@ -43,19 +43,12 @@ struct ScriptureList: View {
                     }
                     .flip()
                     .navigationBarItems(
-                        leading:
-                            Button(action: {
-                                
-                            }) {
-                                Image(systemName: "info.circle")
-                                .font(.system(size: 22, weight: .semibold))
-                                .foregroundColor(self.settings.themeColor.dark())
-                            },
                         trailing:
                             NavigationLink(destination: SettingsView()) {
-                                Image(systemName: "slider.horizontal.3")
-                                .font(.system(size: 22, weight: .semibold))
-                                .foregroundColor(self.settings.themeColor.dark())
+                                Image("gear")
+                                    .resizable()
+                                    .frame(width: 32, height: 32)
+                                    .foregroundColor(self.settings.themeColor.dark())
                             }
                     )
                 }
