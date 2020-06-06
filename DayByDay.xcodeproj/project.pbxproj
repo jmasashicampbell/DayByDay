@@ -93,7 +93,7 @@
 		CF6767E32486DAC40098DECF /* icon_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_white@2x.png"; path = "DayByDay/icon_white@2x.png"; sourceTree = SOURCE_ROOT; };
 		CF6767E42486DAC40098DECF /* icon_yellow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_yellow@3x.png"; path = "DayByDay/icon_yellow@3x.png"; sourceTree = SOURCE_ROOT; };
 		CF6767E52486DAC40098DECF /* icon_brown@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_brown@3x.png"; path = "DayByDay/icon_brown@3x.png"; sourceTree = SOURCE_ROOT; };
-		CF80F900245B79EF001424C4 /* Day By Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Day By Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF80F900245B79EF001424C4 /* Day by Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Day by Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF80F903245B79EF001424C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF80F905245B79EF001424C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CF80F907245B79EF001424C4 /* ScriptureDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureDetail.swift; sourceTree = "<group>"; };
@@ -224,7 +224,7 @@
 		CF80F901245B79EF001424C4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CF80F900245B79EF001424C4 /* Day By Day.app */,
+				CF80F900245B79EF001424C4 /* Day by Day.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -292,7 +292,7 @@
 			);
 			name = DayByDay;
 			productName = DayByDay;
-			productReference = CF80F900245B79EF001424C4 /* Day By Day.app */;
+			productReference = CF80F900245B79EF001424C4 /* Day by Day.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -546,7 +546,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jeromecampbell.DayByDay;
-				PRODUCT_NAME = "Day By Day";
+				PRODUCT_NAME = "Day by Day";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -565,7 +565,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jeromecampbell.DayByDay;
-				PRODUCT_NAME = "Day By Day";
+				PRODUCT_NAME = "Day by Day";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
