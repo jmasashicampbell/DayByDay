@@ -11,6 +11,7 @@ import SwiftUI
 struct NotificationsPicker: View {
     @Binding var notificationsOn: Bool?
     @Binding var notificationsTime: Date
+    @Binding var nextDisabled: Bool
     
     var body: some View {
         VStack(spacing: 10) {
@@ -40,20 +41,25 @@ struct NotificationsPicker: View {
             .frame(height: notificationsOn == true ? 250 : 74)
             .background(STARTING_THEME_COLOR)
             .cornerRadius(20)
-            .overlay(YesNoButton(value: true, notificationsOn: self.$notificationsOn), alignment: .top)
+            .overlay(YesNoButton(value: true, notificationsOn: self.$notificationsOn, nextDisabled: self.$nextDisabled), alignment: .top)
             .animation(.linear(duration: 0.12))
             
-            YesNoButton(value: false, notificationsOn: self.$notificationsOn)
+            YesNoButton(value: false, notificationsOn: self.$notificationsOn, nextDisabled: self.$nextDisabled)
             Spacer()
         }
+        .padding(20)
     }
     
     struct YesNoButton: View {
         var value: Bool
         @Binding var notificationsOn: Bool?
+        @Binding var nextDisabled: Bool
         
         var body: some View {
-            Button(action: { withAnimation { self.notificationsOn = self.value } }) {
+            Button(action: {
+                withAnimation { self.notificationsOn = self.value }
+                self.nextDisabled = false
+            }) {
                 VStack {
                     HStack {
                         Spacer()
@@ -64,7 +70,7 @@ struct NotificationsPicker: View {
                 }
                 .padding(20)
                 .foregroundColor(Color.white)
-                .background(value == notificationsOn ? STARTING_THEME_COLOR : Color(red: 0.42, green: 0.7, blue: 0.84))
+                .background(value == notificationsOn ? STARTING_THEME_COLOR : STARTING_THEME_LIGHT)
                 .cornerRadius(20)
                 .animation(.linear(duration: 0.2))
             }

@@ -13,9 +13,7 @@ struct RandomPicker: View {
     @Binding var pickRandom: Bool
     
     var body: some View {
-        let themeColor = Color(red: 0.1, green: 0.53, blue: 0.75)
-        
-        return VStack(spacing: 20) {
+        VStack(spacing: 20) {
             HStack {
                 Text("Do you want to receive verses in order or randomly?")
                     .font(FONT_TITLE)
@@ -23,12 +21,13 @@ struct RandomPicker: View {
             }
             Spacer().frame(height: 0)
             
-            TypeButton(setRandom: false, imageName: "text.justify", text: "In Order", themeColor: themeColor, selectedRandom: self.$pickRandom)
+            TypeButton(setRandom: false, imageName: "text.justify", text: "In Order", selectedRandom: self.$pickRandom)
             
-            TypeButton(setRandom: true, imageName: "shuffle", text: "Random", themeColor: themeColor, selectedRandom: self.$pickRandom)
+            TypeButton(setRandom: true, imageName: "shuffle", text: "Random", selectedRandom: self.$pickRandom)
             
             Spacer().frame(height: 0)
         }
+        .padding(20)
     }
     
     
@@ -36,7 +35,6 @@ struct RandomPicker: View {
         var setRandom: Bool
         var imageName: String
         var text: String
-        var themeColor: Color
         @Binding var selectedRandom: Bool
         
         var body: some View {
@@ -59,7 +57,7 @@ struct RandomPicker: View {
                 }
                 .padding(20)
                 .foregroundColor(Color.white)
-                .background(setRandom == selectedRandom ? self.themeColor : Color(red: 0.42, green: 0.7, blue: 0.84) /*self.themeColor.light*/)
+                .background(setRandom == selectedRandom ? STARTING_THEME_COLOR : STARTING_THEME_LIGHT)
                 .cornerRadius(20)
                 .animation(.linear(duration: 0.2))
             }

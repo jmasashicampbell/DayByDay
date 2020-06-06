@@ -14,8 +14,9 @@ let FONT_TITLE: Font = .system(size: 28, weight: .semibold)
 let FONT_REG_BIG : Font = .system(size: 24, weight: .regular)
 let FONT_SEMIBOLD_BIG : Font = .system(size: 24, weight: .semibold)
 let FONT_LABEL: Font = .system(size: 22, weight: .semibold)
+let FONT_LIGHT_PLUS: Font = .system(size: 21, weight: .light)
 let FONT_MED : Font = .system(size: 20, weight: .medium)
-let FONT_LIGHT : Font = .system(size: 20, weight: .light)
+let FONT_LIGHT : Font = .system(size: 18, weight: .light)
 let FONT_SMALL : Font = .system(size: 18, weight: .regular)
 
 let SECONDS_IN_DAY = 86400

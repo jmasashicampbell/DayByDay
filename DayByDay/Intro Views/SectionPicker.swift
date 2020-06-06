@@ -11,6 +11,7 @@ import SwiftUI
 struct SectionPicker: View {
     var pickType = PickType.books
     @Binding var sectionsList: [[String]]
+    @Binding var nextDisabled: Bool
     @State var showPickerSheet = false
     
     var body: some View {
@@ -21,6 +22,8 @@ struct SectionPicker: View {
         let maxDepthMap = [PickType.volumes: 1,
                            PickType.books: 2,
                            PickType.chapters: 3]
+        
+        let volumeNames = ["Old Testament", "New Testament", "Book of Mormon", "Doctrine and Covenants", "Pearl of Great Price"]
         
         return GeometryReader { geometry in
             VStack(spacing: 10) {
@@ -33,18 +36,16 @@ struct SectionPicker: View {
                 
                 if (self.pickType == .volumes) {
                     VStack(spacing: 10) {
-                        VolumeListEntry(text: "Old Testament", sectionsList: self.$sectionsList)
-                        VolumeListEntry(text: "New Testament", sectionsList: self.$sectionsList)
-                        VolumeListEntry(text: "Book of Mormon", sectionsList: self.$sectionsList)
-                        VolumeListEntry(text: "Doctrine and Covenants", sectionsList: self.$sectionsList)
-                        VolumeListEntry(text: "Pearl of Great Price", sectionsList: self.$sectionsList)
+                        ForEach(volumeNames, id: \.self) { volumeName in
+                            VolumeListEntry(text: volumeName, sectionsList: self.$sectionsList, nextDisabled: self.$nextDisabled)
+                        }
                     }
                 } else {
                     if (self.sectionsList.count > 7) {
                         ScrollView {
                             VStack(spacing: 10) {
                                 ForEach(self.sectionsList, id: \.self.last!) { path in
-                                    AddedListEntry(path: path, sectionsList: self.$sectionsList, width: geometry.size.width)
+                                    AddedListEntry(path: path, sectionsList: self.$sectionsList, width: geometry.size.width, nextDisabled: self.$nextDisabled)
                                 }
                                 Spacer().frame(height: 0)
                                 
@@ -60,7 +61,7 @@ struct SectionPicker: View {
                     } else {
                         VStack(spacing: 10) {
                             ForEach(self.sectionsList, id: \.self.last!) { path in
-                                AddedListEntry(path: path, sectionsList: self.$sectionsList, width: geometry.size.width)
+                                AddedListEntry(path: path, sectionsList: self.$sectionsList, width: geometry.size.width, nextDisabled: self.$nextDisabled)
                             }
                             Spacer().frame(height: 0)
                             
@@ -81,14 +82,17 @@ struct SectionPicker: View {
                                    depth: 1,
                                    maxDepth: maxDepthMap[self.pickType] ?? 3,
                                    pickSections: self.$sectionsList,
-                                   showSheet: self.$showPickerSheet)
+                                   showSheet: self.$showPickerSheet,
+                                   nextDisabled: self.$nextDisabled)
             }
         }
+        .padding(20)
     }
     
     struct VolumeListEntry: View {
         var text: String
         @Binding var sectionsList: [[String]]
+        @Binding var nextDisabled: Bool
         
         var body: some View {
             Button(action: {
@@ -97,6 +101,7 @@ struct SectionPicker: View {
                 } else {
                     self.sectionsList.append(["Scriptures", self.text])
                 }
+                self.nextDisabled = self.sectionsList.isEmpty
             }) {
                 HStack {
                     Text(self.text)
@@ -108,7 +113,7 @@ struct SectionPicker: View {
                 .font(FONT_LABEL)
                 .padding(20)
                 .foregroundColor(Color.white)
-                .background(STARTING_THEME_COLOR)
+                .background(self.sectionsList.contains(["Scriptures", text]) ? STARTING_THEME_COLOR : STARTING_THEME_LIGHT)
                 .cornerRadius(20)
             }
             .buttonStyle(ScaleButtonStyle(scaleFactor: 0.95))
@@ -118,8 +123,9 @@ struct SectionPicker: View {
     struct AddedListEntry: View {
         var path: [String]
         @Binding var sectionsList: [[String]]
-        @State var showDelete = false
         var width: CGFloat
+        @Binding var nextDisabled: Bool
+        @State var showDelete = false
         
         var body: some View {
             ZStack {
@@ -127,7 +133,8 @@ struct SectionPicker: View {
                     Text(self.path.last!)
                     Spacer()
                     Button(action: {
-                        withAnimation { self.showDelete.toggle() } }) {
+                        withAnimation { self.showDelete.toggle() }
+                    }) {
                         Image(systemName: self.showDelete ? "chevron.right" : "minus.circle.fill")
                     }
                 }
@@ -141,14 +148,17 @@ struct SectionPicker: View {
                 if self.showDelete {
                     HStack {
                         Button(action: {
-                            withAnimation { self.sectionsList.removeAll { $0 == self.path } }
+                            withAnimation {
+                                self.sectionsList.removeAll { $0 == self.path }
+                                self.nextDisabled = self.sectionsList.isEmpty
+                            }
                         } ) {
                             Image(systemName: "trash.fill")
                                 .foregroundColor(Color.red)
                         }
                     }
                     .font(FONT_LABEL)
-                    .offset(x: self.width / 2 - 50)
+                    .offset(x: self.width / 2 - 30)
                 }
             }
         }
@@ -160,6 +170,7 @@ struct SectionPicker: View {
         @State var maxDepth: Int
         @Binding var pickSections: [[String]]
         @Binding var showSheet: Bool
+        @Binding var nextDisabled: Bool
         
         var body: some View {
             VStack {
@@ -187,7 +198,7 @@ struct SectionPicker: View {
                     if (self.depth < self.maxDepth) {
                         NavigationRows(node: $node, depth: $depth)
                     } else {
-                        SelectionRows(node: node, pickSections: $pickSections, showSheet: $showSheet)
+                        SelectionRows(node: node, pickSections: $pickSections, showSheet: $showSheet, nextDisabled: self.$nextDisabled)
                     }
                 }
             }
@@ -217,6 +228,7 @@ struct SectionPicker: View {
             var node: Node
             @Binding var pickSections: [[String]]
             @Binding var showSheet: Bool
+            @Binding var nextDisabled: Bool
             
             var body: some View {
                 List {
@@ -225,6 +237,7 @@ struct SectionPicker: View {
                             if (!self.pickSections.contains(child.path)) {
                                 Button(action: {
                                     self.pickSections.append(child.path)
+                                    self.nextDisabled = self.pickSections.isEmpty
                                     self.showSheet.toggle()
                                 }) {
                                     HStack {

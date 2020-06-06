@@ -25,14 +25,14 @@ struct ScriptureList: View {
                             Spacer().frame(width: 10)
                             ForEach(self.generatedScriptures.getPast().reversed()) { scripture in
                                 VStack {
-                                    Spacer()
                                     ScriptureCard(scripture: scripture,
                                                   scriptureSelected: self.$selectionCoordinator.selected,
                                                   selectedScripture: self.$selectionCoordinator.scripture,
-                                                  openInEdit: self.$openInEdit)
+                                                  openInEdit: self.$openInEdit,
+                                                  height: geometry.size.height)
                                     .flip()
                                     .frame(width: geometry.size.width - 74,
-                                           height: geometry.size.height - 82)
+                                           height: geometry.size.height * 0.93)
                                     .animation(nil)
                                     //.shadow(color: self.settings.themeColor.color == ThemeColorOptions.white ? Color(red: 0.92, green: 0.92, blue: 0.92) : Color.white, radius: 10)
                                     Spacer()
@@ -79,6 +79,17 @@ struct ScriptureList: View {
 
 struct ScriptureList_Previews: PreviewProvider {
     static var previews: some View {
-        ScriptureList().environmentObject(GeneratedScriptures())
+        Group {
+            ScriptureList()
+                .environmentObject(GeneratedScriptures())
+                .environmentObject(Settings())
+                .environmentObject(SelectionCoordinator())
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd Generation)"))
+            ScriptureList()
+                .environmentObject(GeneratedScriptures())
+                .environmentObject(Settings())
+                .environmentObject(SelectionCoordinator())
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
+        }
     }
 }

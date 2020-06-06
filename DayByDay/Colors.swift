@@ -11,6 +11,7 @@ import SwiftUI
 
 
 let STARTING_THEME_COLOR = Color(red: 0.1, green: 0.53, blue: 0.75)
+let STARTING_THEME_LIGHT = Color(red: 0.42, green: 0.7, blue: 0.84)
 
 struct ThemeColor {
     var color : ThemeColorOptions

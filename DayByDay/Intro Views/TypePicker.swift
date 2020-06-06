@@ -21,23 +21,24 @@ struct TypePicker: View {
             Spacer()
 
             
-            HStack(spacing: 20) {
-                TypeButton(type: .all, imageName: "type_all", text: "All Scriptures", selectedType: self.$selectedType)
-                TypeButton(type: .volumes, imageName: "type_volumes", text: "Choose Volumes", selectedType: self.$selectedType)
+            HStack(spacing: 15) {
+                TypeButton(type: .all, imageName: "type_all", text: "All", selectedType: self.$selectedType)
+                TypeButton(type: .volumes, imageName: "type_volumes", text: "Volumes", selectedType: self.$selectedType)
             }
-            Spacer().frame(height: 20)
+            Spacer().frame(height: 15)
             
-            HStack(spacing: 20) {
-                TypeButton(type: .books, imageName: "type_books", text: "Choose Books", selectedType: self.$selectedType)
-                TypeButton(type: .chapters, imageName: "type_chapters", text: "Choose Chapters", selectedType: self.$selectedType)
+            HStack(spacing: 15) {
+                TypeButton(type: .books, imageName: "type_books", text: "Books", selectedType: self.$selectedType)
+                TypeButton(type: .chapters, imageName: "type_chapters", text: "Chapters", selectedType: self.$selectedType)
             }
             Spacer()//.frame(height: 20)
             
             Text(captionText(selectedType))
-                .font(FONT_LIGHT)
+                .font(FONT_MED)
             Spacer()
             Spacer()
         }
+        .padding(20)
     }
     
     private func captionText(_ type: PickType) -> String {
@@ -63,18 +64,19 @@ struct TypePicker: View {
         
         var body: some View {
             Button(action: {self.selectedType = self.type}) {
-                VStack() {
+                VStack(spacing: 0) {
                     Image(imageName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .cornerRadius(10)
+                        .padding(.top, 10)
+                        .padding(.horizontal, 10)
                     Text(text)
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.system(size: 20, weight: .semibold))
                         .multilineTextAlignment(.center)
                 }
                 .padding(10)
                 .foregroundColor(Color.white)
-                .background(type == selectedType ? STARTING_THEME_COLOR : Color(red: 0.42, green: 0.7, blue: 0.84) /*self.themeColor.light*/)
+                .background(type == selectedType ? STARTING_THEME_COLOR : STARTING_THEME_LIGHT)
                 .cornerRadius(20)
                 .animation(.linear(duration: 0.2))
             }

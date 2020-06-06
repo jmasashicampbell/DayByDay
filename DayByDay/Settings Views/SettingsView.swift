@@ -66,8 +66,8 @@ struct SettingsView: View {
                     if (settings.pickType != PickType.all) {
                         NavigationLink(destination:
                             PickPickerView(node: scriptureTree.root,
-                                               depth: 1,
-                                               maxDepth: maxDepthMap[settings.pickType] ?? 3)
+                                           depth: 1,
+                                           maxDepth: maxDepthMap[settings.pickType] ?? 3)
                         ) {
                             HStack {
                                 Text(settings.pickType.rawValue)

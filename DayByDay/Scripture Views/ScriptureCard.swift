@@ -17,6 +17,7 @@ struct ScriptureCard: View {
     @Binding var scriptureSelected: Bool
     @Binding var selectedScripture: Scripture?
     @Binding var openInEdit: Bool
+    var height: CGFloat
     
     var body: some View {
         Button(action: {
@@ -34,7 +35,7 @@ struct ScriptureCard: View {
                 }
                 Spacer().frame(height: SCRIPTURE_CARD_SPACING)
                 Text(scripture.text)
-                    .font(FONT_LIGHT)
+                    .font(height > 600 ? FONT_LIGHT_PLUS : FONT_LIGHT)
                 Spacer().frame(height: SCRIPTURE_CARD_SPACING)
                 Text(scripture.reference)
                 Spacer()
