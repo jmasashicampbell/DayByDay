@@ -10,10 +10,10 @@ import SwiftUI
 
 
 struct PickPickerView: View {
+    @EnvironmentObject var settings: Settings
     var node: Node
     var depth: Int
     var maxDepth: Int
-    @EnvironmentObject var settings: Settings
     
     var body: some View {
         Form {
@@ -57,9 +57,13 @@ struct PickPickerView: View {
         var depth: Int
         var maxDepth: Int
         @EnvironmentObject var settings: Settings
+        @Environment(\.colorScheme) var colorScheme
         
         var body: some View {
-            List {
+            let textColor = colorScheme == .dark ? Color.white : Color.black
+            let accentColor = self.settings.themeColor.dark()
+            
+            return List {
                 ForEach(node.children, id: \.start) { child in
                     Button(action: {
                         if (self.settings.pickSectionsContains(path: child.path)) {
@@ -70,12 +74,13 @@ struct PickPickerView: View {
                     }) {
                         HStack {
                             Text(child.name)
+                                .foregroundColor(self.settings.pickSectionsContains(path: child.path) ? accentColor : textColor)
                             Spacer()
                             if (self.settings.pickSectionsContains(path: child.path)) {
                                 Image(systemName: "checkmark")
                                     .font(.system(size: 18, weight: .semibold))
                                     .imageScale(.medium)
-                                    .foregroundColor(self.settings.themeColor.dark())    
+                                    .foregroundColor(accentColor)    
                             }
                         }
                     }

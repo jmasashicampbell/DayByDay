@@ -10,9 +10,13 @@ import SwiftUI
 
 struct TypePickerView: View {
     @EnvironmentObject var settings: Settings
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        Form {
+        let textColor = colorScheme == .dark ? Color.white : Color.black
+        let accentColor = self.settings.themeColor.dark()
+        
+        return Form {
             List {
                 ForEach(PickType.allCases, id: \.self) { pickType in
                     Button(action: {
@@ -20,19 +24,19 @@ struct TypePickerView: View {
                     }) {
                         HStack {
                             Text(pickType.rawValue)
+                                .foregroundColor(pickType == self.settings.pickType ? accentColor : textColor)
                             Spacer()
                             if (pickType == self.settings.pickType) {
                                 Image(systemName: "checkmark")
                                     .font(.system(size: 18, weight: .semibold))
                                     .imageScale(.medium)
-                                    .foregroundColor(self.settings.themeColor.dark())
+                                    .foregroundColor(accentColor)
                             }
                         }
                     }
                 }
             }
         }
-        //.navigationBarTitle("")
     }
 }
 

@@ -55,17 +55,22 @@ struct StartingPickerView: View {
             var node: Node
             var verseNum: Int
             @EnvironmentObject var settings: Settings
+            @Environment(\.colorScheme) var colorScheme
             
             var body: some View {
-                HStack {
+                let textColor = colorScheme == .dark ? Color.white : Color.black
+                let accentColor = self.settings.themeColor.dark()
+                let selected = self.settings.getTomorrowVerse() == self.node.path + [String(verseNum)]
+                
+                return HStack {
                     Text(self.node.name + ":" + String(verseNum))
+                        .foregroundColor(selected ? accentColor : textColor)
                     Spacer()
-                    if (self.settings.getTomorrowVerse() ==
-                        self.node.path + [String(verseNum)]) {
+                    if selected {
                         Image(systemName: "checkmark")
                             .font(.system(size: 18, weight: .semibold))
                             .imageScale(.medium)
-                            .foregroundColor(self.settings.themeColor.dark())
+                            .foregroundColor(accentColor)
                     }
                 }
             }
