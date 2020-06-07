@@ -8,6 +8,15 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIcons</key>
 	<dict>
+        <key>CFBundlePrimaryIcon</key>
+        <dict>
+            <key>CFBundleIconFiles</key>
+            <array>
+                <string>icon_blue</string>
+            </array>
+            <key>UIPrerenderedIcon</key>
+            <false/>
+        </dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
 			<key>brown</key>
@@ -73,15 +82,6 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-		</dict>
-		<key>CFBundlePrimaryIcon</key>
-		<dict>
-			<key>CFBundleIconFiles</key>
-			<array>
-				<string>icon_blue</string>
-			</array>
-			<key>UIPrerenderedIcon</key>
-			<false/>
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
