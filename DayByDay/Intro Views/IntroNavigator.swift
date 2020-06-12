@@ -78,7 +78,7 @@ struct IntroNavigator: View {
                         self.settings.pickSections[self.pickType.rawValue] = self.sectionsList
                         self.settings.notificationsOn = self.notificationsOn!
                         self.settings.notificationsTime = self.notificationsTime
-                        self.settings.save()
+                        self.settings.save(firstTime: true)
                         UserDefaults.standard.set(true, forKey: "didLaunchBefore")
                         self.viewRouter.showIntro = false
                     } ) {

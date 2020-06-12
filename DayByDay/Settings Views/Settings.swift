@@ -117,14 +117,14 @@ class Settings: ObservableObject {
     }
     
     
-    func save() {
+    func save(firstTime: Bool = false) {
         UserDefaults.standard.set(pickRandom, forKey: "pickRandom")
         UserDefaults.standard.set(pickType.rawValue, forKey: "pickType")
         UserDefaults.standard.set(pickSections, forKey: "pickSections")
         UserDefaults.standard.set(tomorrowVerses, forKey: "tomorrowVerses")
         
         UserDefaults.standard.set(tomorrowVerses[pickType.rawValue], forKey: "startingVerse")
-        let startDate = Date(timeIntervalSinceNow: Double(SECONDS_IN_DAY))
+        let startDate = firstTime ? Date() : Date(timeIntervalSinceNow: Double(SECONDS_IN_DAY))
         startDateComponents = makeComponents(date: startDate)
         UserDefaults.standard.set(startDate, forKey: "startDate")
         
