@@ -536,6 +536,7 @@
 		CF80F915245B79F8001424C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"DayByDay/Preview Content\"";
 				DEVELOPMENT_TEAM = DF352DP5G8;
@@ -555,6 +556,7 @@
 		CF80F916245B79F8001424C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"DayByDay/Preview Content\"";
 				DEVELOPMENT_TEAM = DF352DP5G8;
