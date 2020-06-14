@@ -56,14 +56,19 @@ struct NotificationsPicker: View {
         @Binding var nextDisabled: Bool
         
         var body: some View {
-            Button(action: {
+            var text = value ? "Yes" : "No"
+            if (value && notificationsOn ?? false) {
+                text += ", at"
+            }
+            
+            return Button(action: {
                 withAnimation { self.notificationsOn = self.value }
                 self.nextDisabled = false
             }) {
                 VStack {
                     HStack {
                         Spacer()
-                        Text(value ? "Yes" : "No")
+                        Text(text)
                             .font(FONT_TITLE)
                         Spacer()
                     }

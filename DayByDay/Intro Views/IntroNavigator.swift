@@ -73,12 +73,27 @@ struct IntroNavigator: View {
                     .foregroundColor(self.nextDisabled ? STARTING_THEME_LIGHT : STARTING_THEME_COLOR)
                 } else {
                     Button(action: {
+                        var startingVerse: [String]
+                        if (self.sectionsList.first == nil) {
+                            startingVerse = BOM_FIRST_VERSE
+                        } else {
+                            startingVerse = self.sectionsList.first!
+                            var node = scriptureTree.getNode(path: startingVerse)!
+                            while (!node.children.isEmpty) {
+                                node = node.children.first!
+                                startingVerse.append(node.name)
+                            }
+                            startingVerse.append("1")
+                        }
+                        
                         self.settings.pickRandom = self.pickRandom
                         self.settings.pickType = self.pickType
                         self.settings.pickSections[self.pickType.rawValue] = self.sectionsList
                         self.settings.notificationsOn = self.notificationsOn!
                         self.settings.notificationsTime = self.notificationsTime
+                        self.settings.tomorrowVerses[self.pickType.rawValue] = startingVerse
                         self.settings.save(firstTime: true)
+                        
                         UserDefaults.standard.set(true, forKey: "didLaunchBefore")
                         self.viewRouter.showIntro = false
                     } ) {
@@ -100,8 +115,8 @@ struct IntroNavigator: View {
     }
 }
 
-/*struct IntroNavigator_Previews: PreviewProvider {
+struct IntroNavigator_Previews: PreviewProvider {
     static var previews: some View {
         IntroNavigator()
     }
-}*/
+}
