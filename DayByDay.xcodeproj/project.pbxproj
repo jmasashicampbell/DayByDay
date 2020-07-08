@@ -37,7 +37,6 @@
 		CF80F90A245B79F8001424C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF80F909245B79F8001424C4 /* Assets.xcassets */; };
 		CF80F90D245B79F8001424C4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF80F90C245B79F8001424C4 /* Preview Assets.xcassets */; };
 		CF80F910245B79F8001424C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF80F90E245B79F8001424C4 /* LaunchScreen.storyboard */; };
-		CF80F918245D3FC6001424C4 /* Scripture.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F917245D3FC6001424C4 /* Scripture.swift */; };
 		CF80F91A245D41E6001424C4 /* ScriptureCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F919245D41E6001424C4 /* ScriptureCard.swift */; };
 		CF80F91E245D4767001424C4 /* GeneratedScriptures.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F91D245D4767001424C4 /* GeneratedScriptures.swift */; };
 		CF80F924245DD343001424C4 /* ScriptureList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F923245DD343001424C4 /* ScriptureList.swift */; };
@@ -65,6 +64,7 @@
 		CFCADD92248B63B40094FF1C /* IntroCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCADD91248B63B40094FF1C /* IntroCover.swift */; };
 		CFD69CCD24B52F3900EC6B9A /* CircleScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD69CCC24B52F3900EC6B9A /* CircleScale.swift */; };
 		CFD69CCF24B556FF00EC6B9A /* ScriptureCompletionArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD69CCE24B556FF00EC6B9A /* ScriptureCompletionArray.swift */; };
+		CFD69CD324B57D1700EC6B9A /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD69CD224B57D1700EC6B9A /* DashboardView.swift */; };
 		CFE0329724931E10003521D6 /* icon_launch.png in Resources */ = {isa = PBXBuildFile; fileRef = CFE0329624931E0F003521D6 /* icon_launch.png */; };
 		CFE16A662488D0AA005636C9 /* TypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE16A652488D0AA005636C9 /* TypePicker.swift */; };
 		CFEC797724899AA40011C236 /* IntroNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEC797624899AA40011C236 /* IntroNavigator.swift */; };
@@ -104,7 +104,6 @@
 		CF80F90C245B79F8001424C4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CF80F90F245B79F8001424C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CF80F911245B79F8001424C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CF80F917245D3FC6001424C4 /* Scripture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scripture.swift; sourceTree = "<group>"; };
 		CF80F919245D41E6001424C4 /* ScriptureCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureCard.swift; sourceTree = "<group>"; };
 		CF80F91D245D4767001424C4 /* GeneratedScriptures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedScriptures.swift; sourceTree = "<group>"; };
 		CF80F923245DD343001424C4 /* ScriptureList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureList.swift; sourceTree = "<group>"; };
@@ -132,6 +131,7 @@
 		CFCADD91248B63B40094FF1C /* IntroCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroCover.swift; sourceTree = "<group>"; };
 		CFD69CCC24B52F3900EC6B9A /* CircleScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleScale.swift; sourceTree = "<group>"; };
 		CFD69CCE24B556FF00EC6B9A /* ScriptureCompletionArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureCompletionArray.swift; sourceTree = "<group>"; };
+		CFD69CD224B57D1700EC6B9A /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		CFE0329624931E0F003521D6 /* icon_launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_launch.png; path = ../../../../Downloads/icon_launch.png; sourceTree = "<group>"; };
 		CFE16A652488D0AA005636C9 /* TypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypePicker.swift; sourceTree = "<group>"; };
 		CFEC797624899AA40011C236 /* IntroNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroNavigator.swift; sourceTree = "<group>"; };
@@ -165,7 +165,6 @@
 			children = (
 				CF53A2DB246680AE0066F7A3 /* ScriptureTree.swift */,
 				CF9FA04F246A7B9800772D2B /* ScriptureArray.swift */,
-				CF80F917245D3FC6001424C4 /* Scripture.swift */,
 				CF80F91D245D4767001424C4 /* GeneratedScriptures.swift */,
 				CFD69CCE24B556FF00EC6B9A /* ScriptureCompletionArray.swift */,
 				CF9FA04224679A8500772D2B /* book_of_mormon_map.json */,
@@ -220,6 +219,7 @@
 				CF53A2D924667E0F0066F7A3 /* PickPickerVIew.swift */,
 				CF9FA04C2469ED4D00772D2B /* StartingPickerView.swift */,
 				CFD69CCC24B52F3900EC6B9A /* CircleScale.swift */,
+				CFD69CD224B57D1700EC6B9A /* DashboardView.swift */,
 			);
 			path = "Settings Views";
 			sourceTree = "<group>";
@@ -403,13 +403,13 @@
 				CF53A2D82465197A0066F7A3 /* Settings.swift in Sources */,
 				CFEC79792489E4A10011C236 /* NotificationsPicker.swift in Sources */,
 				CF9FA04D2469ED4D00772D2B /* StartingPickerView.swift in Sources */,
+				CFD69CD324B57D1700EC6B9A /* DashboardView.swift in Sources */,
 				CFA5139C248974BF00F770C6 /* RandomPicker.swift in Sources */,
 				CF80F908245B79EF001424C4 /* ScriptureDetail.swift in Sources */,
 				CFD69CCD24B52F3900EC6B9A /* CircleScale.swift in Sources */,
 				CF53A2DE24668E5C0066F7A3 /* General.swift in Sources */,
 				CF9FA050246A7B9800772D2B /* ScriptureArray.swift in Sources */,
 				CF80F91A245D41E6001424C4 /* ScriptureCard.swift in Sources */,
-				CF80F918245D3FC6001424C4 /* Scripture.swift in Sources */,
 				CFEC797724899AA40011C236 /* IntroNavigator.swift in Sources */,
 				CF80F926245DE26E001424C4 /* Constants.swift in Sources */,
 				CF53A2DC246680AE0066F7A3 /* ScriptureTree.swift in Sources */,

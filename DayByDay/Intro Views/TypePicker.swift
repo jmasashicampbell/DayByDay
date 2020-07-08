@@ -51,8 +51,6 @@ struct TypePicker: View {
             return "Choose books (such as 1 Nephi, Isaiah) from which to receive verses."
         case .chapters:
             return "Choose chapters (such as Luke 2, Jacob 5) from which to receive verses."
-        default:
-            return ""
         }
     }
     

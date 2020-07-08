@@ -13,35 +13,51 @@ let END_DEGREES: Double = 50
 let DIFFERENCE_DEGREES: Double = (END_DEGREES - START_DEGREES + 360.0).truncatingRemainder(dividingBy: 360)
 
 struct CircleScale: View {
+    @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var settings: Settings
+    var title: String
     var verses: Int
     var maxVerses: Int
-    var lineWidth: CGFloat
-    var accentColor: Color
     
     var body: some View {
         let fraction = Double(verses) / Double(maxVerses)
         let percentage = round(fraction * 10000) / 100.0
+        let darkMode = colorScheme == .dark
+        let backgroundGray = darkMode ? 0.2 : 0.9
+        let textGray = darkMode ? 0.8 : 0.4
         
         return GeometryReader { g in
-            ZStack {
-                RoundedArc(geometry: g,
-                           lineWidth: min(g.size.height, g.size.width) * 0.08,
-                           fraction: 1.0,
-                           color: Color(red: 0.9, green: 0.9, blue: 0.9))
+            VStack {
+                ZStack {
+                    RoundedArc(geometry: g,
+                               lineWidth: min(g.size.height, g.size.width) * 0.08,
+                               fraction: 1.0,
+                               color: Color(white: backgroundGray))
+                    
+                    if fraction > 0 {
+                        RoundedArc(geometry: g,
+                                   lineWidth: min(g.size.height, g.size.width) * 0.08,
+                                   fraction: fraction,
+                                   color: self.settings.themeColor.main())
+                    }
+                    
+                    Text(String(percentage) + "%")
+                        .font(.system(size: min(g.size.height, g.size.width) * 0.22 - 1, weight: .medium))
+                        .offset(y: min(g.size.height, g.size.width) * -0.03)
+                    
+                    Text(String(self.verses) + " / " + String(self.maxVerses))
+                        .font(.system(size: min(g.size.height, g.size.width) * 0.05 + 8, weight: .semibold))
+                        .foregroundColor(Color(white: textGray))
+                        .offset(y: min(g.size.height, g.size.width) * 0.15)
+                }
+                .frame(height: g.size.width)
                 
-                RoundedArc(geometry: g,
-                           lineWidth: min(g.size.height, g.size.width) * 0.08,
-                           fraction: fraction,
-                           color: self.accentColor)
+                if !self.title.isEmpty {
+                    Text(self.title)
+                        .font(.system(size: min(g.size.height, g.size.width) * 0.08 + 6, weight: .medium))
+                }
                 
-                Text(String(percentage) + "%")
-                    .font(.system(size: min(g.size.height, g.size.width) * 0.22 - 1, weight: .medium))
-                    .offset(y: min(g.size.height, g.size.width) * -0.03)
-                
-                Text(String(self.verses) + " / " + String(self.maxVerses))
-                    .font(.system(size: min(g.size.height, g.size.width) * 0.05 + 8, weight: .semibold))
-                    .foregroundColor(Color(red: 0.3, green: 0.3, blue: 0.3))
-                    .offset(y: min(g.size.height, g.size.width) * 0.15)
+                //Spacer()
             }
         }
     }
@@ -101,19 +117,16 @@ struct Arc: Shape {
 struct CircleScale_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            CircleScale(verses: 11216,
-                             maxVerses: 27318,
-                             lineWidth: 30,
-                             accentColor: .green)
+            CircleScale(title: "Pearl of Great Price",
+                        verses: 11216,
+                        maxVerses: 27318)
             HStack(spacing: 20) {
-                CircleScale(verses: 11216,
-                                 maxVerses: 27318,
-                                 lineWidth: 30,
-                                 accentColor: .green)
-                CircleScale(verses: 11216,
-                                 maxVerses: 27318,
-                                 lineWidth: 30,
-                                 accentColor: .green)
+                CircleScale(title: "Pearl of Great Price",
+                            verses: 11216,
+                            maxVerses: 27318)
+                CircleScale(title: "Pearl of Great Price",
+                            verses: 11216,
+                            maxVerses: 27318)
             }
         }
         .padding(20)

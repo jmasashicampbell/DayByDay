@@ -43,6 +43,13 @@ struct ScriptureList: View {
                     }
                     .flip()
                     .navigationBarItems(
+                        leading:
+                            NavigationLink(destination: DashboardView()) {
+                                Image(systemName: "gauge")
+                                    .resizable()
+                                    .frame(width: 28, height: 28)
+                                    .foregroundColor(self.settings.themeColor.dark())
+                            },
                         trailing:
                             NavigationLink(destination: SettingsView()) {
                                 Image("gear")
