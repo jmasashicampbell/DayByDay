@@ -18,7 +18,6 @@ import Combine
   - Parameter filename: The filename to convert
   - Returns: The URL of the file in the main bundle
  */
-
 func bundleUrlFromFilename(_ filename: String) -> URL {
     guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
         else {
@@ -33,7 +32,6 @@ func bundleUrlFromFilename(_ filename: String) -> URL {
   - Parameter file: The file from which to load
   - Returns: The loaded object
  */
-
 func load<T: Decodable>(_ file: URL) throws -> T {
     let data = try Data(contentsOf: file)
     
@@ -51,7 +49,6 @@ func load<T: Decodable>(_ file: URL) throws -> T {
   - Parameter format: The format with which to convert
   - Returns: The converted date string
  */
-
 func dateComponentsToString(_ dateComponents: DateComponents, format: String) -> String {
     let date = Calendar.current.date(from: dateComponents)
     let dateFormatter = DateFormatter()

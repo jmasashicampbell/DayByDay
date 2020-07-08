@@ -63,6 +63,8 @@
 		CFA5139E24898D5E00F770C6 /* SectionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA5139D24898D5E00F770C6 /* SectionPicker.swift */; };
 		CFCADD90248B4E500094FF1C /* MotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCADD8F248B4E500094FF1C /* MotherView.swift */; };
 		CFCADD92248B63B40094FF1C /* IntroCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCADD91248B63B40094FF1C /* IntroCover.swift */; };
+		CFD69CCD24B52F3900EC6B9A /* CircleScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD69CCC24B52F3900EC6B9A /* CircleScale.swift */; };
+		CFD69CCF24B556FF00EC6B9A /* ScriptureCompletionArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD69CCE24B556FF00EC6B9A /* ScriptureCompletionArray.swift */; };
 		CFE0329724931E10003521D6 /* icon_launch.png in Resources */ = {isa = PBXBuildFile; fileRef = CFE0329624931E0F003521D6 /* icon_launch.png */; };
 		CFE16A662488D0AA005636C9 /* TypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE16A652488D0AA005636C9 /* TypePicker.swift */; };
 		CFEC797724899AA40011C236 /* IntroNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEC797624899AA40011C236 /* IntroNavigator.swift */; };
@@ -128,6 +130,8 @@
 		CFA5139D24898D5E00F770C6 /* SectionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPicker.swift; sourceTree = "<group>"; };
 		CFCADD8F248B4E500094FF1C /* MotherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherView.swift; sourceTree = "<group>"; };
 		CFCADD91248B63B40094FF1C /* IntroCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroCover.swift; sourceTree = "<group>"; };
+		CFD69CCC24B52F3900EC6B9A /* CircleScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleScale.swift; sourceTree = "<group>"; };
+		CFD69CCE24B556FF00EC6B9A /* ScriptureCompletionArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureCompletionArray.swift; sourceTree = "<group>"; };
 		CFE0329624931E0F003521D6 /* icon_launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_launch.png; path = ../../../../Downloads/icon_launch.png; sourceTree = "<group>"; };
 		CFE16A652488D0AA005636C9 /* TypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypePicker.swift; sourceTree = "<group>"; };
 		CFEC797624899AA40011C236 /* IntroNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroNavigator.swift; sourceTree = "<group>"; };
@@ -156,11 +160,14 @@
 			path = "Scripture Views";
 			sourceTree = "<group>";
 		};
-		CF3B271D2462872800D80998 /* Scriptures Source Data */ = {
+		CF3B271D2462872800D80998 /* Scriptures Data */ = {
 			isa = PBXGroup;
 			children = (
 				CF53A2DB246680AE0066F7A3 /* ScriptureTree.swift */,
 				CF9FA04F246A7B9800772D2B /* ScriptureArray.swift */,
+				CF80F917245D3FC6001424C4 /* Scripture.swift */,
+				CF80F91D245D4767001424C4 /* GeneratedScriptures.swift */,
+				CFD69CCE24B556FF00EC6B9A /* ScriptureCompletionArray.swift */,
 				CF9FA04224679A8500772D2B /* book_of_mormon_map.json */,
 				CF9FA04424679A8500772D2B /* doctrine_and_covenants_map.json */,
 				CF9FA04324679A8500772D2B /* new_testament_map.json */,
@@ -168,7 +175,7 @@
 				CF9FA04524679A8500772D2B /* pearl_of_great_price_map.json */,
 				CF3B271E246295B200D80998 /* scriptures.json */,
 			);
-			path = "Scriptures Source Data";
+			path = "Scriptures Data";
 			sourceTree = "<group>";
 		};
 		CF6767C92486D78D0098DECF /* App Icons */ = {
@@ -212,6 +219,7 @@
 				CF811ECD247792B40012116C /* TypePickerView.swift */,
 				CF53A2D924667E0F0066F7A3 /* PickPickerVIew.swift */,
 				CF9FA04C2469ED4D00772D2B /* StartingPickerView.swift */,
+				CFD69CCC24B52F3900EC6B9A /* CircleScale.swift */,
 			);
 			path = "Settings Views";
 			sourceTree = "<group>";
@@ -238,8 +246,6 @@
 				CF80F903245B79EF001424C4 /* AppDelegate.swift */,
 				CF80F905245B79EF001424C4 /* SceneDelegate.swift */,
 				CFCADD8F248B4E500094FF1C /* MotherView.swift */,
-				CF80F917245D3FC6001424C4 /* Scripture.swift */,
-				CF80F91D245D4767001424C4 /* GeneratedScriptures.swift */,
 				CF53A2DD24668E5C0066F7A3 /* General.swift */,
 				CF80F925245DE26E001424C4 /* Constants.swift */,
 				CF492CAB2474C4DC00B7949C /* Colors.swift */,
@@ -249,7 +255,7 @@
 				CF0F3755246BAFFB0096554B /* Scripture Views */,
 				CF6C0B1B246509FA0050144E /* Settings Views */,
 				CFE16A642488D065005636C9 /* Intro Views */,
-				CF3B271D2462872800D80998 /* Scriptures Source Data */,
+				CF3B271D2462872800D80998 /* Scriptures Data */,
 				CF6767C92486D78D0098DECF /* App Icons */,
 				CF80F90B245B79F8001424C4 /* Preview Content */,
 			);
@@ -387,6 +393,7 @@
 				CF492CAC2474C4DC00B7949C /* Colors.swift in Sources */,
 				CF811ECE247792B40012116C /* TypePickerView.swift in Sources */,
 				CF80F91E245D4767001424C4 /* GeneratedScriptures.swift in Sources */,
+				CFD69CCF24B556FF00EC6B9A /* ScriptureCompletionArray.swift in Sources */,
 				CF80F906245B79EF001424C4 /* SceneDelegate.swift in Sources */,
 				CFE16A662488D0AA005636C9 /* TypePicker.swift in Sources */,
 				CFCADD90248B4E500094FF1C /* MotherView.swift in Sources */,
@@ -398,6 +405,7 @@
 				CF9FA04D2469ED4D00772D2B /* StartingPickerView.swift in Sources */,
 				CFA5139C248974BF00F770C6 /* RandomPicker.swift in Sources */,
 				CF80F908245B79EF001424C4 /* ScriptureDetail.swift in Sources */,
+				CFD69CCD24B52F3900EC6B9A /* CircleScale.swift in Sources */,
 				CF53A2DE24668E5C0066F7A3 /* General.swift in Sources */,
 				CF9FA050246A7B9800772D2B /* ScriptureArray.swift in Sources */,
 				CF80F91A245D41E6001424C4 /* ScriptureCard.swift in Sources */,
