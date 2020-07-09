@@ -554,11 +554,12 @@
 				DEVELOPMENT_TEAM = DF352DP5G8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = DayByDay/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.3;
+				MARKETING_VERSION = 2020.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jeromecampbell.DayByDay;
 				PRODUCT_NAME = "Day by Day";
 				SWIFT_VERSION = 5.0;
@@ -575,11 +576,12 @@
 				DEVELOPMENT_TEAM = DF352DP5G8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = DayByDay/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.3;
+				MARKETING_VERSION = 2020.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jeromecampbell.DayByDay;
 				PRODUCT_NAME = "Day by Day";
 				SWIFT_VERSION = 5.0;

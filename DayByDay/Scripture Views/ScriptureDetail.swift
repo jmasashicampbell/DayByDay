@@ -205,8 +205,8 @@ let ABBR = ["Old Testament": "ot",
             "Mormon": "morm",
             "Ether": "eth",
             "Moroni": "moro",
-            "Moses": "",
-            "Abraham": "",
-            "Joseph Smith\u{2014}Matthew": "",
-            "Joseph Smith\u{2014}History": "",
-            "Articles of Faith": ""]
+            "Moses": "moses",
+            "Abraham": "abr",
+            "Joseph Smith\u{2014}Matthew": "js-m",
+            "Joseph Smith\u{2014}History": "js-h",
+            "Articles of Faith": "a-of-f"]
