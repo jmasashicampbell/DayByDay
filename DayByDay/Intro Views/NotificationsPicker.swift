@@ -12,6 +12,7 @@ struct NotificationsPicker: View {
     @Binding var notificationsOn: Bool?
     @Binding var notificationsTime: Date
     @Binding var nextDisabled: Bool
+    @State var presentSheet = false
     
     var body: some View {
         VStack(spacing: 10) {
@@ -41,19 +42,23 @@ struct NotificationsPicker: View {
             .frame(height: notificationsOn == true ? 250 : 74)
             .background(STARTING_THEME_COLOR)
             .cornerRadius(20)
-            .overlay(YesNoButton(value: true, notificationsOn: self.$notificationsOn, nextDisabled: self.$nextDisabled), alignment: .top)
+            .overlay(YesNoButton(value: true, notificationsOn: self.$notificationsOn, nextDisabled: self.$nextDisabled, presentSheet: self.$presentSheet), alignment: .top)
             .animation(.linear(duration: 0.12))
             
-            YesNoButton(value: false, notificationsOn: self.$notificationsOn, nextDisabled: self.$nextDisabled)
+            YesNoButton(value: false, notificationsOn: self.$notificationsOn, nextDisabled: self.$nextDisabled, presentSheet: self.$presentSheet)
             Spacer()
         }
         .padding(20)
+        .sheet(isPresented: self.$presentSheet) {
+            GoToSettingsSheet(presentSheet: self.$presentSheet)
+        }
     }
     
     struct YesNoButton: View {
         var value: Bool
         @Binding var notificationsOn: Bool?
         @Binding var nextDisabled: Bool
+        @Binding var presentSheet: Bool
         
         var body: some View {
             var text = value ? "Yes" : "No"
@@ -62,7 +67,19 @@ struct NotificationsPicker: View {
             }
             
             return Button(action: {
-                withAnimation { self.notificationsOn = self.value }
+                if self.value {
+                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                        if success {
+                            DispatchQueue.main.async {
+                                withAnimation { self.notificationsOn = true }
+                            }
+                        } else {
+                            self.presentSheet = true
+                        }
+                    }
+                } else {
+                    withAnimation { self.notificationsOn = false }
+                }
                 self.nextDisabled = false
             }) {
                 VStack {

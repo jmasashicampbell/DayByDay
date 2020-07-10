@@ -12,7 +12,6 @@ struct SettingsView: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var generatedScriptures: GeneratedScriptures
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @Environment(\.colorScheme) var colorScheme
     @State var presentSheet = false
     
     var body: some View {
@@ -41,8 +40,6 @@ struct SettingsView: View {
                 UIApplication.shared.setAlternateIconName(themeColor == .blue ? nil : themeColor.rawValue)
             }
         )
-        
-        let mode = self.colorScheme == .light ? "light" : "dark"
         
         return Form {
             List {
@@ -119,48 +116,7 @@ struct SettingsView: View {
         }
         .padding(.top, 10)
         .sheet(isPresented: self.$presentSheet) {
-            VStack(spacing: 20) {
-                HStack {
-                    Spacer()
-                    Button(action: { self.presentSheet = false } ) {
-                        Image(systemName: "chevron.down")
-                    }
-                }
-                
-                Text("To enable notifications, turn on notifications for Day By Day in your phone's settings.")
-                
-                GeometryReader { geometry in
-                    Image("settings1_" + mode)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(10)
-                }
-                
-                GeometryReader { geometry in
-                    Image("settings2_" + mode)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(10)
-                }
-                
-                Spacer()
-                Spacer()
-                Spacer()
-                Spacer()
-                
-                Button(action: {
-                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
-                }) {
-                    Text("Go to Settings")
-                    Image(systemName: "chevron.right")
-                }
-                Spacer().frame(height: 5)
-            }
-            .padding(20)
-            .foregroundColor(self.settings.themeColor.text())
-            .background(self.settings.themeColor.main())
-            .font(FONT_SEMIBOLD_BIG)
-            .edgesIgnoringSafeArea(.all)
+            GoToSettingsSheet(presentSheet: self.$presentSheet)
         }
         .navigationBarTitle("Settings")
         .navigationBarItems(

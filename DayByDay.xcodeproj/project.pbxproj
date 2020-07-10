@@ -10,6 +10,7 @@
 		CF0F3754246BACF80096554B /* PreviewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0F3753246BACF80096554B /* PreviewContent.swift */; };
 		CF3B2720246295B200D80998 /* scriptures.json in Resources */ = {isa = PBXBuildFile; fileRef = CF3B271E246295B200D80998 /* scriptures.json */; };
 		CF492CAC2474C4DC00B7949C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF492CAB2474C4DC00B7949C /* Colors.swift */; };
+		CF52509924B8E59B0009979F /* GoToSettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52509824B8E59B0009979F /* GoToSettingsSheet.swift */; };
 		CF53A2D624650BB20066F7A3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D524650BB20066F7A3 /* SettingsView.swift */; };
 		CF53A2D82465197A0066F7A3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D72465197A0066F7A3 /* Settings.swift */; };
 		CF53A2DA24667E0F0066F7A3 /* PickPickerVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D924667E0F0066F7A3 /* PickPickerVIew.swift */; };
@@ -31,6 +32,7 @@
 		CF6767EF2486DAC40098DECF /* icon_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767E32486DAC40098DECF /* icon_white@2x.png */; };
 		CF6767F02486DAC40098DECF /* icon_yellow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767E42486DAC40098DECF /* icon_yellow@3x.png */; };
 		CF6767F12486DAC40098DECF /* icon_brown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767E52486DAC40098DECF /* icon_brown@3x.png */; };
+		CF686DE824B8E374005F7287 /* sorted_indices.json in Resources */ = {isa = PBXBuildFile; fileRef = CF686DE724B8E374005F7287 /* sorted_indices.json */; };
 		CF80F904245B79EF001424C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F903245B79EF001424C4 /* AppDelegate.swift */; };
 		CF80F906245B79EF001424C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F905245B79EF001424C4 /* SceneDelegate.swift */; };
 		CF80F908245B79EF001424C4 /* ScriptureDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F907245B79EF001424C4 /* ScriptureDetail.swift */; };
@@ -75,6 +77,7 @@
 		CF0F3753246BACF80096554B /* PreviewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContent.swift; sourceTree = "<group>"; };
 		CF3B271E246295B200D80998 /* scriptures.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = scriptures.json; sourceTree = "<group>"; };
 		CF492CAB2474C4DC00B7949C /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		CF52509824B8E59B0009979F /* GoToSettingsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoToSettingsSheet.swift; sourceTree = "<group>"; };
 		CF53A2D524650BB20066F7A3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		CF53A2D72465197A0066F7A3 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		CF53A2D924667E0F0066F7A3 /* PickPickerVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPickerVIew.swift; sourceTree = "<group>"; };
@@ -96,6 +99,7 @@
 		CF6767E32486DAC40098DECF /* icon_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_white@2x.png"; path = "DayByDay/icon_white@2x.png"; sourceTree = SOURCE_ROOT; };
 		CF6767E42486DAC40098DECF /* icon_yellow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_yellow@3x.png"; path = "DayByDay/icon_yellow@3x.png"; sourceTree = SOURCE_ROOT; };
 		CF6767E52486DAC40098DECF /* icon_brown@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_brown@3x.png"; path = "DayByDay/icon_brown@3x.png"; sourceTree = SOURCE_ROOT; };
+		CF686DE724B8E374005F7287 /* sorted_indices.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sorted_indices.json; sourceTree = "<group>"; };
 		CF80F900245B79EF001424C4 /* Day by Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Day by Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF80F903245B79EF001424C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF80F905245B79EF001424C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 				CF9FA04324679A8500772D2B /* new_testament_map.json */,
 				CF9FA04624679A8500772D2B /* old_testament_map.json */,
 				CF9FA04524679A8500772D2B /* pearl_of_great_price_map.json */,
+				CF686DE724B8E374005F7287 /* sorted_indices.json */,
 				CF3B271E246295B200D80998 /* scriptures.json */,
 			);
 			path = "Scriptures Data";
@@ -215,11 +220,12 @@
 			children = (
 				CF53A2D72465197A0066F7A3 /* Settings.swift */,
 				CF53A2D524650BB20066F7A3 /* SettingsView.swift */,
+				CF52509824B8E59B0009979F /* GoToSettingsSheet.swift */,
 				CF811ECD247792B40012116C /* TypePickerView.swift */,
 				CF53A2D924667E0F0066F7A3 /* PickPickerVIew.swift */,
 				CF9FA04C2469ED4D00772D2B /* StartingPickerView.swift */,
-				CFD69CCC24B52F3900EC6B9A /* CircleScale.swift */,
 				CFD69CD224B57D1700EC6B9A /* DashboardView.swift */,
+				CFD69CCC24B52F3900EC6B9A /* CircleScale.swift */,
 			);
 			path = "Settings Views";
 			sourceTree = "<group>";
@@ -352,6 +358,7 @@
 				CF6767EA2486DAC40098DECF /* icon_green@3x.png in Resources */,
 				CF6767D82486D8530098DECF /* icon_sage@3x.png in Resources */,
 				CF3B2720246295B200D80998 /* scriptures.json in Resources */,
+				CF686DE824B8E374005F7287 /* sorted_indices.json in Resources */,
 				CFA4C0A5248C47D1007BB1A1 /* icon_yellow@1x.png in Resources */,
 				CF6767E72486DAC40098DECF /* icon_gray@2x.png in Resources */,
 				CFA4C0A3248C479A007BB1A1 /* icon_sage@1x.png in Resources */,
@@ -394,6 +401,7 @@
 				CF811ECE247792B40012116C /* TypePickerView.swift in Sources */,
 				CF80F91E245D4767001424C4 /* GeneratedScriptures.swift in Sources */,
 				CFD69CCF24B556FF00EC6B9A /* ScriptureCompletionArray.swift in Sources */,
+				CF52509924B8E59B0009979F /* GoToSettingsSheet.swift in Sources */,
 				CF80F906245B79EF001424C4 /* SceneDelegate.swift in Sources */,
 				CFE16A662488D0AA005636C9 /* TypePicker.swift in Sources */,
 				CFCADD90248B4E500094FF1C /* MotherView.swift in Sources */,
