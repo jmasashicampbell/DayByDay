@@ -9,8 +9,9 @@
 import Foundation
 
 
+let scriptureArray: [Verse] = try! load(bundleUrlFromFilename("scriptures.json"))
+let topicalGuide: [String: [Int]] = try! load(bundleUrlFromFilename("sorted_indices.json"))
 let scriptureTree = ScriptureTree()
-
 
 struct ScriptureTree {
     let deepVolumes: Dictionary<String, Dictionary<String, Dictionary<String, ChapterLimits>>>

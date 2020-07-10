@@ -12,7 +12,7 @@ import UserNotifications
 
 class Settings: ObservableObject {
     @Published var pickRandom = UserDefaults.standard.bool(forKey: "pickRandom")
-    @Published var pickType = PickType(rawValue: UserDefaults.standard.string(forKey: "pickType") ?? "All Scriptures") ?? .all
+    @Published var pickType = PickType(rawValue: UserDefaults.standard.string(forKey: "pickType") ?? "All Scriptures") ?? .volumes
     @Published var pickSections = UserDefaults.standard.object(forKey: "pickSections") as? Dictionary<String, [[String]]> ??
         ["Volumes": [], "Books": [], "Chapters": [], "Topical Guide": []]
     @Published var tomorrowVerses = UserDefaults.standard.object(forKey: "tomorrowVerses") as? Dictionary<String, [String]> ??
@@ -40,14 +40,17 @@ class Settings: ObservableObject {
     }
     
     
-    func pickSectionsCount(path: [String]) -> Int {
+    func pickSectionsCount(path: [String] = scriptureTree.root.path) -> Int {
         let currentSections = pickSections[pickType.rawValue] ?? []
-        let filtered = currentSections.filter({ pathsAlign($0, path) })
-        return filtered.count
+        if pickType == .topicalGuide {
+            return currentSections.filter({ $0 == path }).count
+        } else {
+            return currentSections.filter({ pathsAlign($0, path) }).count
+        }
     }
     
     
-    func pickSectionsContains(path: [String]) -> Bool {
+    func pickSectionsContains(path: [String] = scriptureTree.root.path) -> Bool {
         return pickSectionsCount(path: path) > 0
     }
     
@@ -195,9 +198,9 @@ class Settings: ObservableObject {
 
 
 enum PickType: String, CaseIterable, Hashable {
-    case all = "All Scriptures"
+    //case all = "All Scriptures"
     case volumes = "Volumes"
     case books = "Books"
     case chapters = "Chapters"
-    //case topicalGuide = "Topical Guide"
+    case topicalGuide = "Topical Guide"
 }

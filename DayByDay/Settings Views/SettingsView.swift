@@ -60,7 +60,7 @@ struct SettingsView: View {
                         }
                     }
                     
-                    if (settings.pickType != PickType.all) {
+                    if (settings.pickType != PickType.topicalGuide) {
                         NavigationLink(destination:
                             PickPickerView(node: scriptureTree.root,
                                            depth: 1,
@@ -69,8 +69,22 @@ struct SettingsView: View {
                             HStack {
                                 Text(settings.pickType.rawValue)
                                 Spacer()
-                                if (self.settings.pickSectionsContains(path: scriptureTree.root.path)) {
-                                    Text(String(self.settings.pickSectionsCount(path: scriptureTree.root.path)))
+                                if (self.settings.pickSectionsContains()) {
+                                    Text(String(self.settings.pickSectionsCount()))
+                                }
+                            }
+                        }
+                    } else {
+                        NavigationLink(destination:
+                            PickPickerView(node: scriptureTree.root,
+                                           depth: 1,
+                                           maxDepth: maxDepthMap[settings.pickType] ?? 3)
+                        ) {
+                            HStack {
+                                Text("Topical Guide entries")
+                                Spacer()
+                                if (self.settings.pickSectionsContains()) {
+                                    Text(String(self.settings.pickSectionsCount()))
                                 }
                             }
                         }
