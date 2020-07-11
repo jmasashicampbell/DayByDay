@@ -13,7 +13,7 @@ struct IntroNavigator: View {
     @EnvironmentObject var viewRouter: ViewRouter
     
     @State var pickRandom = false
-    @State var pickType = PickType.all
+    @State var pickType = PickType.volumes
     @State var sectionsList: [[String]] = []
     @State var notificationsOn: Bool? = nil
     @State var notificationsTime = Date()
@@ -43,7 +43,7 @@ struct IntroNavigator: View {
                 if (self.page != 0) {
                     Button(action: {
                         withAnimation {
-                            if (self.page == 3 && self.pickType == .all) {
+                            if (self.page == 3 && self.pickType == .topicalGuide) {
                                 self.page -= 2
                             } else {
                                 self.page -= 1
@@ -58,7 +58,7 @@ struct IntroNavigator: View {
                 if (self.page != 4) {
                     Button(action: {
                         withAnimation {
-                            if (self.page == 1 && self.pickType == .all) {
+                            if (self.page == 1 && self.pickType == .topicalGuide) {
                                 self.page += 2
                             } else {
                                 self.page += 1

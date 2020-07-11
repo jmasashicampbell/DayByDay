@@ -22,7 +22,7 @@ struct TypePicker: View {
 
             
             HStack(spacing: 15) {
-                TypeButton(type: .all, imageName: "type_all", text: "All", selectedType: self.$selectedType)
+                TypeButton(type: .topicalGuide, imageName: "type_all", text: "All", selectedType: self.$selectedType)
                 TypeButton(type: .volumes, imageName: "type_volumes", text: "Volumes", selectedType: self.$selectedType)
             }
             Spacer().frame(height: 15)
@@ -43,7 +43,7 @@ struct TypePicker: View {
     
     private func captionText(_ type: PickType) -> String {
         switch type {
-        case .all:
+        case .topicalGuide:
             return "Receive verses from anywhere in the scriptures."
         case .volumes:
             return "Choose volumes (such as the Book of Mormon) from which to receive verses."

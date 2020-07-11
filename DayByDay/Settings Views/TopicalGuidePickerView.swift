@@ -15,32 +15,33 @@ struct TopicalGuidePickerView: View {
         var body: some View {
             let textColor = colorScheme == .dark ? Color.white : Color.black
             let accentColor = self.settings.themeColor.dark()
+            let titles = Array(topicalGuideDict.keys).sorted()
             
             return Form {
                 List {
-                    ForEach(PickType.allCases, id: \.self) { pickType in
+                    ForEach(titles, id: \.self) { title in
                         Button(action: {
-                            if (self.settings.pickSectionsContains(path: child.path)) {
-                                self.settings.removePickSection(path: child.path)
+                            if (self.settings.pickSectionsContains(path: [title])) {
+                                self.settings.removePickSection(path: [title])
                             } else {
-                                self.settings.addPickSection(path: child.path)
+                                self.settings.addPickSection(path: [title])
                             }
                         }) {
                             HStack {
-                                Text(pickType.rawValue)
-                                    .foregroundColor(pickType == self.settings.pickType ? accentColor : textColor)
+                                Text(title)
                                 Spacer()
-                                if (pickType == self.settings.pickType) {
+                                if (self.settings.pickSectionsContains(path: [title])) {
                                     Image(systemName: "checkmark")
                                         .font(.system(size: 18, weight: .semibold))
                                         .imageScale(.medium)
-                                        .foregroundColor(accentColor)
                                 }
                             }
+                            .foregroundColor(self.settings.pickSectionsContains(path: [title]) ? accentColor : textColor)
                         }
                     }
                 }
             }
+            .navigationBarTitle("Topical Guide")
         }
     }
 

@@ -39,7 +39,7 @@ class Settings: ObservableObject {
         return pickSections[pickType.rawValue] ?? []
     }
     
-    
+    // Accepts titles for topical guide and full paths otherwise
     func pickSectionsCount(path: [String] = scriptureTree.root.path) -> Int {
         let currentSections = pickSections[pickType.rawValue] ?? []
         if pickType == .topicalGuide {
@@ -55,11 +55,35 @@ class Settings: ObservableObject {
     }
     
     
+    func pickSectionsContains(verseIndex: Int) -> Bool {
+        if pickType == .topicalGuide {
+            for title in pickSections[pickType.rawValue]! {
+                if topicalGuideDict[title[0]]!.contains(verseIndex) {
+                    return true
+                }
+            }
+            return false
+        } else {
+            for path in pickSections[pickType.rawValue]! {
+                let node = scriptureTree.getNode(path: path)!
+                if verseIndex >= node.start && verseIndex < node.end {
+                    return true
+                }
+            }
+            return false
+        }
+    }
+    
+    
     func addPickSection(path: [String]) {
         if (pickSections[pickType.rawValue] != nil) {
             pickSections[pickType.rawValue]!.append(path)
-            pickSections[pickType.rawValue]!.sort{
-                scriptureTree.getNode(path: $0)!.start < scriptureTree.getNode(path: $1)!.start
+            if pickType == .topicalGuide {
+                pickSections[pickType.rawValue]!.sort { $0[0] < $1[0] }
+            } else {
+                pickSections[pickType.rawValue]!.sort{
+                    scriptureTree.getNode(path: $0)!.start < scriptureTree.getNode(path: $1)!.start
+                }
             }
             checkTomorrowVerseValid()
         } else {
@@ -91,18 +115,31 @@ class Settings: ObservableObject {
     
     func checkTomorrowVerseValid() {
         if let currentSections = pickSections[pickType.rawValue] {
-            if (!pickSectionsContains(path: tomorrowVerses[pickType.rawValue]!)) {
-                tomorrowVerseIsSet = false
+            if pickType == .topicalGuide {
+                let verseIndex = scriptureTree.getIndex(path: tomorrowVerses[pickType.rawValue]!)!
+                if (!pickSectionsContains(verseIndex: verseIndex)) {
+                    tomorrowVerseIsSet = false
+                }
+            } else {
+                if (!pickSectionsContains(path: tomorrowVerses[pickType.rawValue]!)) {
+                    tomorrowVerseIsSet = false
+                }
             }
             
             if (!currentSections.isEmpty && !tomorrowVerseIsSet) {
-                tomorrowVerses[pickType.rawValue] = currentSections.first!
-                var node = scriptureTree.getNode(path: tomorrowVerses[pickType.rawValue]!)!
-                while (!node.children.isEmpty) {
-                    node = node.children.first!
-                    tomorrowVerses[pickType.rawValue]!.append(node.name)
+                if pickType == .topicalGuide {
+                    let title = currentSections.first![0]
+                    let firstIndex = topicalGuideDict[title]!.first!
+                    tomorrowVerses[pickType.rawValue] = scriptureTree.getPath(index: firstIndex)
+                } else {
+                    tomorrowVerses[pickType.rawValue] = currentSections.first!
+                    var node = scriptureTree.getNode(path: tomorrowVerses[pickType.rawValue]!)!
+                    while (!node.children.isEmpty) {
+                        node = node.children.first!
+                        tomorrowVerses[pickType.rawValue]!.append(node.name)
+                    }
+                    tomorrowVerses[pickType.rawValue]!.append("1")
                 }
-                tomorrowVerses[pickType.rawValue]!.append("1")
             }
         } else {
             fatalError("Tried to add to pickSections with pickType \(pickType.rawValue)")

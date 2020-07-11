@@ -76,12 +76,10 @@ struct SettingsView: View {
                         }
                     } else {
                         NavigationLink(destination:
-                            PickPickerView(node: scriptureTree.root,
-                                           depth: 1,
-                                           maxDepth: maxDepthMap[settings.pickType] ?? 3)
+                            TopicalGuidePickerView()
                         ) {
                             HStack {
-                                Text("Topical Guide entries")
+                                Text("Topical Guide Entries")
                                 Spacer()
                                 if (self.settings.pickSectionsContains()) {
                                     Text(String(self.settings.pickSectionsCount()))
@@ -90,14 +88,26 @@ struct SettingsView: View {
                         }
                     }
                     
-                    if (!settings.pickRandom && !settings.getCurrentSections().isEmpty) {
-                        NavigationLink(destination:
-                            StartingPickerView(node: scriptureTree.root)
-                        ) {
-                            HStack {
-                                Text("Start tomorrow at")
-                                Spacer()
-                                Text(self.makeReference(path: self.settings.getTomorrowVerse()))
+                    if !settings.pickRandom && !settings.getCurrentSections().isEmpty {
+                        if settings.pickType == .topicalGuide {
+                            NavigationLink(destination:
+                                TGStartingPickerView(entries: settings.getCurrentSections())
+                            ) {
+                                HStack {
+                                    Text("Start tomorrow at")
+                                    Spacer()
+                                    Text(self.makeReference(path: self.settings.getTomorrowVerse()))
+                                }
+                            }
+                        } else {
+                            NavigationLink(destination:
+                                StartingPickerView(node: scriptureTree.root)
+                            ) {
+                                HStack {
+                                    Text("Start tomorrow at")
+                                    Spacer()
+                                    Text(self.makeReference(path: self.settings.getTomorrowVerse()))
+                                }
                             }
                         }
                     }

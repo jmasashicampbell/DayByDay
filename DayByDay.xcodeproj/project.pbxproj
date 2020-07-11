@@ -44,6 +44,7 @@
 		CF80F924245DD343001424C4 /* ScriptureList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F923245DD343001424C4 /* ScriptureList.swift */; };
 		CF80F926245DE26E001424C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F925245DE26E001424C4 /* Constants.swift */; };
 		CF811ECE247792B40012116C /* TypePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF811ECD247792B40012116C /* TypePickerView.swift */; };
+		CF9297EF24B920590032AF78 /* TGStartingPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9297EE24B920590032AF78 /* TGStartingPickerView.swift */; };
 		CF96202C24859E5D00594440 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF96202B24859E5D00594440 /* MultilineTextField.swift */; };
 		CF9FA04724679A8500772D2B /* book_of_mormon_map.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9FA04224679A8500772D2B /* book_of_mormon_map.json */; };
 		CF9FA04824679A8500772D2B /* new_testament_map.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9FA04324679A8500772D2B /* new_testament_map.json */; };
@@ -112,6 +113,7 @@
 		CF80F923245DD343001424C4 /* ScriptureList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureList.swift; sourceTree = "<group>"; };
 		CF80F925245DE26E001424C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CF811ECD247792B40012116C /* TypePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypePickerView.swift; sourceTree = "<group>"; };
+		CF9297EE24B920590032AF78 /* TGStartingPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGStartingPickerView.swift; sourceTree = "<group>"; };
 		CF96202B24859E5D00594440 /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		CF9FA04224679A8500772D2B /* book_of_mormon_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = book_of_mormon_map.json; sourceTree = "<group>"; };
 		CF9FA04324679A8500772D2B /* new_testament_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = new_testament_map.json; sourceTree = "<group>"; };
@@ -221,8 +223,7 @@
 				CF53A2D924667E0F0066F7A3 /* PickPickerVIew.swift */,
 				CFF462D724B909BF0032B738 /* TopicalGuidePickerView.swift */,
 				CF9FA04C2469ED4D00772D2B /* StartingPickerView.swift */,
-				CFD69CD224B57D1700EC6B9A /* DashboardView.swift */,
-				CFD69CCC24B52F3900EC6B9A /* CircleScale.swift */,
+				CF9297EE24B920590032AF78 /* TGStartingPickerView.swift */,
 			);
 			path = "Settings Views";
 			sourceTree = "<group>";
@@ -257,6 +258,7 @@
 				CF80F911245B79F8001424C4 /* Info.plist */,
 				CF0F3755246BAFFB0096554B /* Scripture Views */,
 				CF6C0B1B246509FA0050144E /* Settings Views */,
+				CF9297F024B97F3E0032AF78 /* Dashboard Views */,
 				CFE16A642488D065005636C9 /* Intro Views */,
 				CF3B271D2462872800D80998 /* Scriptures Data */,
 				CF6767C92486D78D0098DECF /* App Icons */,
@@ -272,6 +274,15 @@
 				CF80F90C245B79F8001424C4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CF9297F024B97F3E0032AF78 /* Dashboard Views */ = {
+			isa = PBXGroup;
+			children = (
+				CFD69CD224B57D1700EC6B9A /* DashboardView.swift */,
+				CFD69CCC24B52F3900EC6B9A /* CircleScale.swift */,
+			);
+			name = "Dashboard Views";
 			sourceTree = "<group>";
 		};
 		CFE16A642488D065005636C9 /* Intro Views */ = {
@@ -411,6 +422,7 @@
 				CFD69CD324B57D1700EC6B9A /* DashboardView.swift in Sources */,
 				CFA5139C248974BF00F770C6 /* RandomPicker.swift in Sources */,
 				CF80F908245B79EF001424C4 /* ScriptureDetail.swift in Sources */,
+				CF9297EF24B920590032AF78 /* TGStartingPickerView.swift in Sources */,
 				CFD69CCD24B52F3900EC6B9A /* CircleScale.swift in Sources */,
 				CF53A2DE24668E5C0066F7A3 /* General.swift in Sources */,
 				CF80F91A245D41E6001424C4 /* ScriptureCard.swift in Sources */,
