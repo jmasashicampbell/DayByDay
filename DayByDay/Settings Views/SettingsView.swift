@@ -12,7 +12,6 @@ struct SettingsView: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var generatedScriptures: GeneratedScriptures
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @Environment(\.colorScheme) var colorScheme
     @State var presentSheet = false
     
     var body: some View {
@@ -42,8 +41,6 @@ struct SettingsView: View {
             }
         )
         
-        let mode = self.colorScheme == .light ? "light" : "dark"
-        
         return Form {
             List {
                 Section(header: Text("VERSE SELECTION")) {
@@ -63,7 +60,7 @@ struct SettingsView: View {
                         }
                     }
                     
-                    if (settings.pickType != PickType.all) {
+                    if (settings.pickType != PickType.topicalGuide) {
                         NavigationLink(destination:
                             PickPickerView(node: scriptureTree.root,
                                            depth: 1,
@@ -72,21 +69,45 @@ struct SettingsView: View {
                             HStack {
                                 Text(settings.pickType.rawValue)
                                 Spacer()
-                                if (self.settings.pickSectionsContains(path: scriptureTree.root.path)) {
-                                    Text(String(self.settings.pickSectionsCount(path: scriptureTree.root.path)))
+                                if (self.settings.pickSectionsContains()) {
+                                    Text(String(self.settings.pickSectionsCount()))
+                                }
+                            }
+                        }
+                    } else {
+                        NavigationLink(destination:
+                            TopicalGuidePickerView()
+                        ) {
+                            HStack {
+                                Text("Topical Guide Entries")
+                                Spacer()
+                                if (self.settings.pickSectionsContains()) {
+                                    Text(String(self.settings.pickSectionsCount()))
                                 }
                             }
                         }
                     }
                     
-                    if (!settings.pickRandom && !settings.getCurrentSections().isEmpty) {
-                        NavigationLink(destination:
-                            StartingPickerView(node: scriptureTree.root)
-                        ) {
-                            HStack {
-                                Text("Start tomorrow at")
-                                Spacer()
-                                Text(self.makeReference(path: self.settings.getTomorrowVerse()))
+                    if !settings.pickRandom && !settings.getCurrentSections().isEmpty {
+                        if settings.pickType == .topicalGuide {
+                            NavigationLink(destination:
+                                TGStartingPickerView(entries: settings.getCurrentSections())
+                            ) {
+                                HStack {
+                                    Text("Start tomorrow at")
+                                    Spacer()
+                                    Text(self.makeReference(path: self.settings.getTomorrowVerse()))
+                                }
+                            }
+                        } else {
+                            NavigationLink(destination:
+                                StartingPickerView(node: scriptureTree.root)
+                            ) {
+                                HStack {
+                                    Text("Start tomorrow at")
+                                    Spacer()
+                                    Text(self.makeReference(path: self.settings.getTomorrowVerse()))
+                                }
                             }
                         }
                     }
@@ -119,48 +140,7 @@ struct SettingsView: View {
         }
         .padding(.top, 10)
         .sheet(isPresented: self.$presentSheet) {
-            VStack(spacing: 20) {
-                HStack {
-                    Spacer()
-                    Button(action: { self.presentSheet = false } ) {
-                        Image(systemName: "chevron.down")
-                    }
-                }
-                
-                Text("To enable notifications, turn on notifications for Day By Day in your phone's settings.")
-                
-                GeometryReader { geometry in
-                    Image("settings1_" + mode)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(10)
-                }
-                
-                GeometryReader { geometry in
-                    Image("settings2_" + mode)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(10)
-                }
-                
-                Spacer()
-                Spacer()
-                Spacer()
-                Spacer()
-                
-                Button(action: {
-                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
-                }) {
-                    Text("Go to Settings")
-                    Image(systemName: "chevron.right")
-                }
-                Spacer().frame(height: 5)
-            }
-            .padding(20)
-            .foregroundColor(self.settings.themeColor.text())
-            .background(self.settings.themeColor.main())
-            .font(FONT_SEMIBOLD_BIG)
-            .edgesIgnoringSafeArea(.all)
+            GoToSettingsSheet(presentSheet: self.$presentSheet)
         }
         .navigationBarTitle("Settings")
         .navigationBarItems(

@@ -12,7 +12,7 @@ import UserNotifications
 
 class Settings: ObservableObject {
     @Published var pickRandom = UserDefaults.standard.bool(forKey: "pickRandom")
-    @Published var pickType = PickType(rawValue: UserDefaults.standard.string(forKey: "pickType") ?? "All Scriptures") ?? .all
+    @Published var pickType = PickType(rawValue: UserDefaults.standard.string(forKey: "pickType") ?? "All Scriptures") ?? .volumes
     @Published var pickSections = UserDefaults.standard.object(forKey: "pickSections") as? Dictionary<String, [[String]]> ??
         ["Volumes": [], "Books": [], "Chapters": [], "Topical Guide": []]
     @Published var tomorrowVerses = UserDefaults.standard.object(forKey: "tomorrowVerses") as? Dictionary<String, [String]> ??
@@ -39,24 +39,55 @@ class Settings: ObservableObject {
         return pickSections[pickType.rawValue] ?? []
     }
     
-    
-    func pickSectionsCount(path: [String]) -> Int {
+    // Accepts titles for topical guide and full paths otherwise
+    func pickSectionsCount(path: [String] = scriptureTree.root.path) -> Int {
         let currentSections = pickSections[pickType.rawValue] ?? []
-        let filtered = currentSections.filter({ pathsAlign($0, path) })
-        return filtered.count
+        if pickType == .topicalGuide {
+            if path == scriptureTree.root.path {
+                return currentSections.count
+            } else {
+                return currentSections.filter({ $0 == path }).count
+            }
+        } else {
+            return currentSections.filter({ pathsAlign($0, path) }).count
+        }
     }
     
     
-    func pickSectionsContains(path: [String]) -> Bool {
+    func pickSectionsContains(path: [String] = scriptureTree.root.path) -> Bool {
         return pickSectionsCount(path: path) > 0
+    }
+    
+    
+    func pickSectionsContains(verseIndex: Int) -> Bool {
+        if pickType == .topicalGuide {
+            for title in pickSections[pickType.rawValue]! {
+                if topicalGuideDict[title[0]]!.contains(verseIndex) {
+                    return true
+                }
+            }
+            return false
+        } else {
+            for path in pickSections[pickType.rawValue]! {
+                let node = scriptureTree.getNode(path: path)!
+                if verseIndex >= node.start && verseIndex < node.end {
+                    return true
+                }
+            }
+            return false
+        }
     }
     
     
     func addPickSection(path: [String]) {
         if (pickSections[pickType.rawValue] != nil) {
             pickSections[pickType.rawValue]!.append(path)
-            pickSections[pickType.rawValue]!.sort{
-                scriptureTree.getNode(path: $0)!.start < scriptureTree.getNode(path: $1)!.start
+            if pickType == .topicalGuide {
+                pickSections[pickType.rawValue]!.sort { $0[0] < $1[0] }
+            } else {
+                pickSections[pickType.rawValue]!.sort{
+                    scriptureTree.getNode(path: $0)!.start < scriptureTree.getNode(path: $1)!.start
+                }
             }
             checkTomorrowVerseValid()
         } else {
@@ -88,18 +119,31 @@ class Settings: ObservableObject {
     
     func checkTomorrowVerseValid() {
         if let currentSections = pickSections[pickType.rawValue] {
-            if (!pickSectionsContains(path: tomorrowVerses[pickType.rawValue]!)) {
-                tomorrowVerseIsSet = false
+            if pickType == .topicalGuide {
+                let verseIndex = scriptureTree.getIndex(path: tomorrowVerses[pickType.rawValue]!)!
+                if (!pickSectionsContains(verseIndex: verseIndex)) {
+                    tomorrowVerseIsSet = false
+                }
+            } else {
+                if (!pickSectionsContains(path: tomorrowVerses[pickType.rawValue]!)) {
+                    tomorrowVerseIsSet = false
+                }
             }
             
             if (!currentSections.isEmpty && !tomorrowVerseIsSet) {
-                tomorrowVerses[pickType.rawValue] = currentSections.first!
-                var node = scriptureTree.getNode(path: tomorrowVerses[pickType.rawValue]!)!
-                while (!node.children.isEmpty) {
-                    node = node.children.first!
-                    tomorrowVerses[pickType.rawValue]!.append(node.name)
+                if pickType == .topicalGuide {
+                    let title = currentSections.first![0]
+                    let firstIndex = topicalGuideDict[title]!.first!
+                    tomorrowVerses[pickType.rawValue] = scriptureTree.getPath(index: firstIndex)
+                } else {
+                    tomorrowVerses[pickType.rawValue] = currentSections.first!
+                    var node = scriptureTree.getNode(path: tomorrowVerses[pickType.rawValue]!)!
+                    while (!node.children.isEmpty) {
+                        node = node.children.first!
+                        tomorrowVerses[pickType.rawValue]!.append(node.name)
+                    }
+                    tomorrowVerses[pickType.rawValue]!.append("1")
                 }
-                tomorrowVerses[pickType.rawValue]!.append("1")
             }
         } else {
             fatalError("Tried to add to pickSections with pickType \(pickType.rawValue)")
@@ -195,9 +239,9 @@ class Settings: ObservableObject {
 
 
 enum PickType: String, CaseIterable, Hashable {
-    case all = "All Scriptures"
+    //case all = "All Scriptures"
     case volumes = "Volumes"
     case books = "Books"
     case chapters = "Chapters"
-    //case topicalGuide = "Topical Guide"
+    case topicalGuide = "Topical Guide"
 }

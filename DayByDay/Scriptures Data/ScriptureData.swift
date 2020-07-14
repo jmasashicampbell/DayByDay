@@ -9,8 +9,9 @@
 import Foundation
 
 
+let scriptureArray: [Verse] = try! load(bundleUrlFromFilename("scriptures.json"))
+let topicalGuideDict: [String: [Int]] = try! load(bundleUrlFromFilename("sorted_indices.json"))
 let scriptureTree = ScriptureTree()
-
 
 struct ScriptureTree {
     let deepVolumes: Dictionary<String, Dictionary<String, Dictionary<String, ChapterLimits>>>
@@ -61,6 +62,14 @@ struct ScriptureTree {
             }
         }
         return node
+    }
+    
+    func getIndex(path: [String]) -> Int? {
+        if let node = getNode(path: Array(path[0 ..< path.count - 1])) {
+            return node.start + Int(path.last!)! - 1
+        } else {
+            return nil
+        }
     }
     
     func getPath(index: Int) -> [String] {

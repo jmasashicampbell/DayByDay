@@ -22,14 +22,14 @@ struct TypePicker: View {
 
             
             HStack(spacing: 15) {
-                TypeButton(type: .all, imageName: "type_all", text: "All", selectedType: self.$selectedType)
                 TypeButton(type: .volumes, imageName: "type_volumes", text: "Volumes", selectedType: self.$selectedType)
+                TypeButton(type: .books, imageName: "type_books", text: "Books", selectedType: self.$selectedType)
             }
             Spacer().frame(height: 15)
             
             HStack(spacing: 15) {
-                TypeButton(type: .books, imageName: "type_books", text: "Books", selectedType: self.$selectedType)
                 TypeButton(type: .chapters, imageName: "type_chapters", text: "Chapters", selectedType: self.$selectedType)
+                TypeButton(type: .topicalGuide, imageName: "type_topical_guide", text: "Topical Guide", selectedType: self.$selectedType)
             }
             Spacer()//.frame(height: 20)
             
@@ -43,14 +43,14 @@ struct TypePicker: View {
     
     private func captionText(_ type: PickType) -> String {
         switch type {
-        case .all:
-            return "Receive verses from anywhere in the scriptures."
         case .volumes:
             return "Choose volumes (such as the Book of Mormon) from which to receive verses."
         case .books:
             return "Choose books (such as 1 Nephi, Isaiah) from which to receive verses."
         case .chapters:
             return "Choose chapters (such as Luke 2, Jacob 5) from which to receive verses."
+        case .topicalGuide:
+            return "Choose entries from the Topical Guide from which to receive verses."
         }
     }
     
@@ -83,10 +83,10 @@ struct TypePicker: View {
     }
 }
 
-/*struct TypePicker_Previews: PreviewProvider {
+struct TypePicker_Previews: PreviewProvider {
     static var previews: some View {
-        TypePicker()
+        TypePicker(selectedType: .constant(.volumes))
             .padding(20)
             .foregroundColor(STARTING_THEME_COLOR)
     }
-}*/
+}

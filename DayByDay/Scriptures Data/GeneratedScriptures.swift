@@ -92,9 +92,15 @@ class GeneratedScriptures: ObservableObject {
         if (currentSections.isEmpty) {
             versesPool = Array(0..<scriptureArray.count)
         } else {
-            for path in currentSections {
-                let node = scriptureTree.getNode(path: path)!
-                versesPool += Array(node.start..<node.end)
+            if settings.pickType == .topicalGuide {
+                for title in currentSections {
+                    versesPool += topicalGuideDict[title[0]]!
+                }
+            } else {
+                for path in currentSections {
+                    let node = scriptureTree.getNode(path: path)!
+                    versesPool += Array(node.start..<node.end)
+                }
             }
         }
 

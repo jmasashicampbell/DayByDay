@@ -21,3 +21,5 @@ let FONT_SMALL : Font = .system(size: 18, weight: .regular)
 
 let SECONDS_IN_DAY = 86400
 let BOM_FIRST_VERSE = ["Scriptures", "Book of Mormon", "1 Nephi", "1 Nephi 1", "1"]
+let ALPHABET = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+                "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]

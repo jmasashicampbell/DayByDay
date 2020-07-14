@@ -13,7 +13,7 @@ struct IntroNavigator: View {
     @EnvironmentObject var viewRouter: ViewRouter
     
     @State var pickRandom = false
-    @State var pickType = PickType.all
+    @State var pickType = PickType.volumes
     @State var sectionsList: [[String]] = []
     @State var notificationsOn: Bool? = nil
     @State var notificationsTime = Date()
@@ -43,11 +43,7 @@ struct IntroNavigator: View {
                 if (self.page != 0) {
                     Button(action: {
                         withAnimation {
-                            if (self.page == 3 && self.pickType == .all) {
-                                self.page -= 2
-                            } else {
-                                self.page -= 1
-                            }
+                            self.page -= 1
                             self.updateNextDisabled()
                         }
                     }) {
@@ -58,11 +54,7 @@ struct IntroNavigator: View {
                 if (self.page != 4) {
                     Button(action: {
                         withAnimation {
-                            if (self.page == 1 && self.pickType == .all) {
-                                self.page += 2
-                            } else {
-                                self.page += 1
-                            }
+                            self.page += 1
                             self.updateNextDisabled()
                         }
                     }) {
@@ -77,13 +69,19 @@ struct IntroNavigator: View {
                         if (self.sectionsList.first == nil) {
                             startingVerse = BOM_FIRST_VERSE
                         } else {
-                            startingVerse = self.sectionsList.first!
-                            var node = scriptureTree.getNode(path: startingVerse)!
-                            while (!node.children.isEmpty) {
-                                node = node.children.first!
-                                startingVerse.append(node.name)
+                            if self.pickType == .topicalGuide {
+                                let firstTitle = self.sectionsList.first!.first!
+                                let startingVerseIndex = topicalGuideDict[firstTitle]!.first!
+                                startingVerse = scriptureTree.getPath(index: startingVerseIndex)
+                            } else {
+                                startingVerse = self.sectionsList.first!
+                                var node = scriptureTree.getNode(path: startingVerse)!
+                                while (!node.children.isEmpty) {
+                                    node = node.children.first!
+                                    startingVerse.append(node.name)
+                                }
+                                startingVerse.append("1")
                             }
-                            startingVerse.append("1")
                         }
                         
                         self.settings.pickRandom = self.pickRandom
