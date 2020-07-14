@@ -303,11 +303,63 @@ struct EntryPickerSheet: View {
     @Binding var nextDisabled: Bool
     
     var body: some View {
-        let titles = Array(topicalGuideDict.keys).sorted()
+        NavigationView {
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        self.showSheet = false
+                    }) {
+                        Image(systemName: "chevron.down")
+                    }
+                    .font(FONT_SEMIBOLD_BIG)
+                    .padding(20)
+                    .padding(.bottom, -10)
+                }
+                
+                Form {
+                    List {
+                        ForEach(ALPHABET, id: \.self) { letter in
+                            NavigationLink(destination:
+                                EntryLetterSheet(letter: letter,
+                                                 pickSections: self.$pickSections,
+                                                 showSheet: self.$showSheet,
+                                                 nextDisabled: self.$nextDisabled
+                            )) {
+                                Text(letter)
+                            }
+                        }
+                    }
+                }
+            }
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+        }
+    }
+}
+
+
+struct EntryLetterSheet: View {
+    var letter: String
+    @Binding var pickSections: [[String]]
+    @Binding var showSheet: Bool
+    @Binding var nextDisabled: Bool
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    
+    var body: some View {
+        let allTitles = Array(topicalGuideDict.keys).sorted()
+        let titles = allTitles.filter { $0.first!.uppercased() == letter }
         
         return VStack {
             HStack {
+                Button(action: {
+                    self.mode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "chevron.left")
+                }
+                
                 Spacer()
+                
                 Button(action: {
                     self.showSheet = false
                 }) {
@@ -315,7 +367,6 @@ struct EntryPickerSheet: View {
                 }
             }
             .font(FONT_SEMIBOLD_BIG)
-            //.padding(.top, 20)
             .padding(20)
             .padding(.bottom, -10)
             
@@ -330,6 +381,8 @@ struct EntryPickerSheet: View {
                 }
             }
         }
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
     }
 
     struct EntryRow: View {
