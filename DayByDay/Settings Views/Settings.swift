@@ -43,7 +43,11 @@ class Settings: ObservableObject {
     func pickSectionsCount(path: [String] = scriptureTree.root.path) -> Int {
         let currentSections = pickSections[pickType.rawValue] ?? []
         if pickType == .topicalGuide {
-            return currentSections.filter({ $0 == path }).count
+            if path == scriptureTree.root.path {
+                return currentSections.count
+            } else {
+                return currentSections.filter({ $0 == path }).count
+            }
         } else {
             return currentSections.filter({ pathsAlign($0, path) }).count
         }

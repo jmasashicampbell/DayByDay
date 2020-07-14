@@ -43,11 +43,7 @@ struct IntroNavigator: View {
                 if (self.page != 0) {
                     Button(action: {
                         withAnimation {
-                            if (self.page == 3 && self.pickType == .topicalGuide) {
-                                self.page -= 2
-                            } else {
-                                self.page -= 1
-                            }
+                            self.page -= 1
                             self.updateNextDisabled()
                         }
                     }) {
@@ -58,11 +54,7 @@ struct IntroNavigator: View {
                 if (self.page != 4) {
                     Button(action: {
                         withAnimation {
-                            if (self.page == 1 && self.pickType == .topicalGuide) {
-                                self.page += 2
-                            } else {
-                                self.page += 1
-                            }
+                            self.page += 1
                             self.updateNextDisabled()
                         }
                     }) {
@@ -77,13 +69,19 @@ struct IntroNavigator: View {
                         if (self.sectionsList.first == nil) {
                             startingVerse = BOM_FIRST_VERSE
                         } else {
-                            startingVerse = self.sectionsList.first!
-                            var node = scriptureTree.getNode(path: startingVerse)!
-                            while (!node.children.isEmpty) {
-                                node = node.children.first!
-                                startingVerse.append(node.name)
+                            if self.pickType == .topicalGuide {
+                                let firstTitle = self.sectionsList.first!.first!
+                                let startingVerseIndex = topicalGuideDict[firstTitle]!.first!
+                                startingVerse = scriptureTree.getPath(index: startingVerseIndex)
+                            } else {
+                                startingVerse = self.sectionsList.first!
+                                var node = scriptureTree.getNode(path: startingVerse)!
+                                while (!node.children.isEmpty) {
+                                    node = node.children.first!
+                                    startingVerse.append(node.name)
+                                }
+                                startingVerse.append("1")
                             }
-                            startingVerse.append("1")
                         }
                         
                         self.settings.pickRandom = self.pickRandom
