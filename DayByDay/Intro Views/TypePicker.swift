@@ -10,6 +10,7 @@ import SwiftUI
 
 struct TypePicker: View {
     @Binding var selectedType: PickType
+    var transitionType: AnyTransition
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -22,14 +23,14 @@ struct TypePicker: View {
 
             
             HStack(spacing: 15) {
-                TypeButton(type: .volumes, imageName: "type_volumes", text: "Volumes", selectedType: self.$selectedType)
-                TypeButton(type: .books, imageName: "type_books", text: "Books", selectedType: self.$selectedType)
+                TypeButton(type: .volumes, imageName: "type_volumes", text: "Volumes", selectedType: self.$selectedType, transitionType: self.transitionType)
+                TypeButton(type: .books, imageName: "type_books", text: "Books", selectedType: self.$selectedType, transitionType: self.transitionType)
             }
             Spacer().frame(height: 15)
             
             HStack(spacing: 15) {
-                TypeButton(type: .chapters, imageName: "type_chapters", text: "Chapters", selectedType: self.$selectedType)
-                TypeButton(type: .topicalGuide, imageName: "type_topical_guide", text: "Topical Guide", selectedType: self.$selectedType)
+                TypeButton(type: .chapters, imageName: "type_chapters", text: "Chapters", selectedType: self.$selectedType, transitionType: self.transitionType)
+                TypeButton(type: .topicalGuide, imageName: "type_topical_guide", text: "Topical Guide", selectedType: self.$selectedType, transitionType: self.transitionType)
             }
             Spacer()//.frame(height: 20)
             
@@ -59,6 +60,7 @@ struct TypePicker: View {
         var imageName: String
         var text: String
         @Binding var selectedType: PickType
+        var transitionType: AnyTransition
         
         var body: some View {
             Button(action: {self.selectedType = self.type}) {
@@ -78,15 +80,15 @@ struct TypePicker: View {
                 .cornerRadius(20)
                 .animation(.linear(duration: 0.2))
             }
-            .buttonStyle(ScaleButtonStyle(scaleFactor: 0.93))
+            .buttonStyle(ScaleButtonStyle(scaleFactor: 0.93, animated: false))
         }
     }
 }
 
-struct TypePicker_Previews: PreviewProvider {
+/*struct TypePicker_Previews: PreviewProvider {
     static var previews: some View {
         TypePicker(selectedType: .constant(.volumes))
             .padding(20)
             .foregroundColor(STARTING_THEME_COLOR)
     }
-}
+}*/

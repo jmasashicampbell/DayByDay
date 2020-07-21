@@ -95,7 +95,7 @@ struct VolumeList: View {
                     .background(self.sectionsList.contains(["Scriptures", volumeName]) ? STARTING_THEME_COLOR : STARTING_THEME_LIGHT)
                     .cornerRadius(20)
                 }
-                .buttonStyle(ScaleButtonStyle(scaleFactor: 0.95))
+                .buttonStyle(ScaleButtonStyle(scaleFactor: 0.95, animated: false))
             }
         }
         

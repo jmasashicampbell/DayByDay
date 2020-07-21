@@ -20,29 +20,45 @@ struct IntroNavigator: View {
     
     @State var page = 0
     @State var nextDisabled: Bool = false
+    @State var forward = false
     
     var body: some View {
-        VStack {
+        let forwardTransition = AnyTransition.asymmetric(
+            insertion: .move(edge: .trailing),
+            removal: .move(edge: .leading)
+        )
+        let backwardTransition = AnyTransition.asymmetric(
+            insertion: .move(edge: .leading),
+            removal: .move(edge: .trailing)
+        )
+        
+        return VStack {
             Group {
                 if (page == 0) {
                     IntroCover()
                 } else if (page == 1) {
-                    TypePicker(selectedType: self.$pickType)
+                    TypePicker(selectedType: self.$pickType,
+                               transitionType: self.forward ? forwardTransition : backwardTransition)
                 } else if (page == 2) {
-                    SectionPicker(pickType: self.pickType, sectionsList: self.$sectionsList, nextDisabled: self.$nextDisabled)
+                    SectionPicker(pickType: self.pickType,
+                                  sectionsList: self.$sectionsList,
+                                  nextDisabled: self.$nextDisabled)
                 } else if (page == 3) {
                     RandomPicker(pickRandom: self.$pickRandom)
                 } else if (page == 4) {
-                    NotificationsPicker(notificationsOn: self.$notificationsOn, notificationsTime: self.$notificationsTime, nextDisabled: self.$nextDisabled)
+                    NotificationsPicker(notificationsOn: self.$notificationsOn,
+                                        notificationsTime: self.$notificationsTime,
+                                        nextDisabled: self.$nextDisabled)
                 }
             }
-            .transition(.move(edge: .leading))
-            .animation(.default)
+            .transition(self.forward ? forwardTransition : backwardTransition)
+            .animation(.spring())
             
             HStack {
                 if (self.page != 0) {
                     Button(action: {
                         withAnimation {
+                            self.forward = false
                             self.page -= 1
                             self.updateNextDisabled()
                         }
@@ -54,6 +70,7 @@ struct IntroNavigator: View {
                 if (self.page != 4) {
                     Button(action: {
                         withAnimation {
+                            self.forward = true
                             self.page += 1
                             self.updateNextDisabled()
                         }

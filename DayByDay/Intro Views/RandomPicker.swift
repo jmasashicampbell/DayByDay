@@ -61,7 +61,7 @@ struct RandomPicker: View {
                 .cornerRadius(20)
                 .animation(.linear(duration: 0.2))
             }
-            .buttonStyle(ScaleButtonStyle(scaleFactor: 0.93))
+            .buttonStyle(ScaleButtonStyle(scaleFactor: 0.93, animated: false))
         }
     }
 }

@@ -14,7 +14,7 @@ struct IntroCover: View {
             Text("Welcome to Day By Day")
                 .font(.system(size: 50, weight: .semibold))
             Spacer()
-            Image("icon_intro")
+            Image("icon_launch")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             Spacer()
@@ -22,14 +22,18 @@ struct IntroCover: View {
                 .font(FONT_TITLE)
         }
         .padding(40)
-        .foregroundColor(STARTING_THEME_COLOR)
-        .background(Color.white)
-        .cornerRadius(20)
+        .foregroundColor(Color.white)
+        .background(STARTING_THEME_COLOR)
+        //.cornerRadius(20)
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
 struct IntroCover_Previews: PreviewProvider {
     static var previews: some View {
-        IntroCover()
+        Text("")
+        .sheet(isPresented: .constant(true)) {
+            IntroCover()
+        }
     }
 }

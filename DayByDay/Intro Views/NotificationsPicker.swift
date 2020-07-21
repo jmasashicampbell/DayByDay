@@ -101,19 +101,15 @@ struct NotificationsPicker: View {
     }
 }
 
-/*struct NotificationsPicker_Previews: PreviewProvider {
+struct NotificationsPicker_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            NotificationsPicker()
+            NotificationsPicker(notificationsOn: .constant(nil), notificationsTime: .constant(Date()), nextDisabled: .constant(true))
                 .padding(20)
                 .foregroundColor(STARTING_THEME_COLOR)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
                 .previewDisplayName("iPhone 11")
-            NotificationsPicker()
-                .padding(20)
-                .foregroundColor(STARTING_THEME_COLOR)
-                .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
-                .previewDisplayName("iPhone SE ")
         }
     }
-}*/
+}
+
