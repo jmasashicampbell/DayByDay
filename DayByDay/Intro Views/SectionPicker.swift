@@ -307,6 +307,9 @@ struct EntryPickerSheet: View {
         NavigationView {
             VStack {
                 HStack {
+                    Text("Topical Guide")
+                        .font(FONT_TITLE)
+                        //.padding()
                     Spacer()
                     Button(action: {
                         self.showSheet = false
@@ -314,9 +317,9 @@ struct EntryPickerSheet: View {
                         Image(systemName: "chevron.down")
                     }
                     .font(FONT_SEMIBOLD_BIG)
-                    .padding(20)
-                    .padding(.bottom, -10)
                 }
+                .padding(20)
+                .padding(.bottom, -20)
                 
                 Form {
                     List {
@@ -404,13 +407,10 @@ struct EntryLetterSheet: View {
                             Text(title)
                             Spacer()
                         }
-                        .foregroundColor(STARTING_THEME_COLOR)
-                        .font(FONT_MED)
                     }
                 } else {
                     Text(title)
                     .foregroundColor(Color.gray)
-                    .font(FONT_MED)
                 }
             }
         }
@@ -426,11 +426,6 @@ struct SectionPicker_Previews: PreviewProvider {
                 .foregroundColor(STARTING_THEME_COLOR)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
                 .previewDisplayName("iPhone 11")
-            SectionPicker(sectionsList: .constant([[]]), nextDisabled: .constant(true))
-                .padding(20)
-                .foregroundColor(STARTING_THEME_COLOR)
-                .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
-                .previewDisplayName("iPhone SE")
         }
     }
 }

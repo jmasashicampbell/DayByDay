@@ -24,22 +24,21 @@ struct TypePicker: View {
             Spacer()
 
             VStack {
-                HStack(spacing: 30) {
+                HStack(spacing: 10) {
                     TypeButton(type: .volumes, imageName: "type_volumes", text: "Volumes", selectedType: self.$selectedType, sectionsList: self.$sectionsList, transitionType: self.transitionType)
                     TypeButton(type: .books, imageName: "type_books", text: "Books", selectedType: self.$selectedType, sectionsList: self.$sectionsList, transitionType: self.transitionType)
                 }
-                Spacer().frame(height: 35)
+                Spacer().frame(height: 10)
                 
-                HStack(spacing: 30) {
+                HStack(spacing: 10) {
                     TypeButton(type: .chapters, imageName: "type_chapters", text: "Chapters", selectedType: self.$selectedType, sectionsList: self.$sectionsList, transitionType: self.transitionType)
                     TypeButton(type: .topicalGuide, imageName: "type_topical_guide", text: "Topical Guide", selectedType: self.$selectedType, sectionsList: self.$sectionsList, transitionType: self.transitionType)
                 }
             }
-            .padding(20)
             Spacer()//.frame(height: 20)
             
             Text(captionText(selectedType))
-                .font(FONT_MED)
+                .font(FONT_MED_PLUS)
             Spacer()
             Spacer()
         }
@@ -55,7 +54,7 @@ struct TypePicker: View {
         case .chapters:
             return "Choose chapters (such as Luke 2, Jacob 5) from which to receive verses."
         case .topicalGuide:
-            return "Choose entries from the Topical Guide from which to receive verses."
+            return "Choose specific entries from the Topical Guide from which to receive verses."
         }
     }
     
@@ -83,7 +82,7 @@ struct TypePicker: View {
                 .foregroundColor(Color.white)
                 .background(type == selectedType ? STARTING_THEME_SELECTED : STARTING_THEME_UNSELECTED)
                 .cornerRadius(20)
-                .scaleEffect(type == selectedType ? 1.2 : 1.0)
+                .scaleEffect(type == selectedType ? 1.0 : 0.9)
                 .animation(.linear(duration: 0.2))
             }
             .buttonStyle(ScaleButtonStyle(scaleFactor: 0.93, animated: false))
@@ -102,6 +101,7 @@ struct TypePicker_Previews: PreviewProvider {
             .sheet(isPresented: .constant(true)) {
                 TypePicker(selectedType: .constant(.volumes), sectionsList: .constant([]), transitionType: .slide)
                 .background(STARTING_THEME_COLOR)
+                .foregroundColor(Color.white)
         }
     }
 }

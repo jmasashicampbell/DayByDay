@@ -21,9 +21,7 @@ struct NotificationsPicker: View {
                     .font(FONT_TITLE)
                 Spacer()
             }
-            Spacer()
-
-            
+            Spacer()            
             
             VStack {
                 Spacer().frame(height: 30)
@@ -42,6 +40,7 @@ struct NotificationsPicker: View {
             .frame(height: notificationsOn == true ? 250 : 74)
             .background(notificationsOn == true ? STARTING_THEME_SELECTED : STARTING_THEME_UNSELECTED)
             .cornerRadius(20)
+            .scaleEffect(notificationsOn == true ? 1.0 : 0.95)
             .overlay(YesNoButton(value: true, notificationsOn: self.$notificationsOn, nextDisabled: self.$nextDisabled, presentSheet: self.$presentSheet), alignment: .top)
             .animation(.spring())
             
@@ -69,7 +68,6 @@ struct NotificationsPicker: View {
             return Button(action: {
                 if self.value {
                     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                        print(success)
                         if success {
                             DispatchQueue.main.async {
                                 withAnimation { self.notificationsOn = true }
@@ -96,6 +94,7 @@ struct NotificationsPicker: View {
                 .foregroundColor(Color.white)
                 .background(value == notificationsOn ? STARTING_THEME_SELECTED : STARTING_THEME_UNSELECTED)
                 .cornerRadius(20)
+                .scaleEffect(value == notificationsOn ? 1.0 : 0.95)
                 .animation(.linear(duration: 0.2))
             }
             .buttonStyle(ScaleButtonStyle(scaleFactor: 0.95, animated: false))
@@ -106,11 +105,16 @@ struct NotificationsPicker: View {
 struct NotificationsPicker_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            NotificationsPicker(notificationsOn: .constant(nil), notificationsTime: .constant(Date()), nextDisabled: .constant(true))
-                .padding(20)
-                .foregroundColor(STARTING_THEME_COLOR)
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
-                .previewDisplayName("iPhone 11")
+            Text("")
+            .sheet(isPresented: .constant(true)) {
+                NotificationsPicker(notificationsOn: .constant(true),
+                                    notificationsTime: .constant(Date()),
+                                    nextDisabled: .constant(true))
+                    .foregroundColor(Color.white)
+                    .background(STARTING_THEME_COLOR)
+                    .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
+                    .previewDisplayName("iPhone 11")
+            }
         }
     }
 }
