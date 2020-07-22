@@ -13,6 +13,7 @@ struct ScriptureList: View {
     @EnvironmentObject var generatedScriptures: GeneratedScriptures
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var selectionCoordinator: SelectionCoordinator
+    @EnvironmentObject var viewRouter: ViewRouter
     @State var openInEdit = false
     //var navBarHeight: CGFloat = 0
     
@@ -73,9 +74,25 @@ struct ScriptureList: View {
                     .animation(.spring(dampingFraction: 0.8))
             }
         }
+        .sheet(isPresented: $viewRouter.showIntro) {
+            IntroNavigator()
+                .environmentObject(self.settings)
+                .environmentObject(self.viewRouter)
+                .environmentObject(self.generatedScriptures)
+        }
         .onAppear { self.generatedScriptures.update() }
     }
 }
+
+
+class ViewRouter: ObservableObject {
+    @Published var showIntro: Bool
+    
+    init() {
+        showIntro = !UserDefaults.standard.bool(forKey: "didLaunchBefore")
+    }
+}
+
 
 struct ScriptureList_Previews: PreviewProvider {
     static var previews: some View {

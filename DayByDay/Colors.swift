@@ -10,8 +10,9 @@ import Foundation
 import SwiftUI
 
 
-let STARTING_THEME_COLOR = Color(red: 0.1, green: 0.53, blue: 0.75)
-let STARTING_THEME_LIGHT = Color(red: 0.42, green: 0.7, blue: 0.84)
+let STARTING_THEME_COLOR = Color(hue: 0.55, saturation: 1.0, brightness: 0.8)
+let STARTING_THEME_SELECTED = Color(hue: 0.55, saturation: 1.0, brightness: 0.97)
+let STARTING_THEME_UNSELECTED = Color(hue: 0.55, saturation: 1.0, brightness: 0.89)
 
 struct ThemeColor {
     var color : ThemeColorOptions
@@ -159,5 +160,25 @@ struct TabColorView: View {
         Circle()
         .fill(color)
         .frame(width: 20, height: 20)
+    }
+}
+
+
+struct Color_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            /*Text("")
+            .sheet(isPresented: .constant(true)) {
+                IntroCover()
+                .background(STARTING_THEME_COLOR)
+            }*/
+            
+            Text("")
+                .sheet(isPresented: .constant(true)) {
+                    TypePicker(selectedType: .constant(.volumes), sectionsList: .constant([]), transitionType: .slide)
+                    .background(STARTING_THEME_COLOR)
+                        .foregroundColor(Color.white)
+            }
+        }
     }
 }

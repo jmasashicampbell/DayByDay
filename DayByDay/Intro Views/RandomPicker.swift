@@ -13,7 +13,7 @@ struct RandomPicker: View {
     @Binding var pickRandom: Bool
     
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 10) {
             HStack {
                 Text("Do you want to receive verses in order or randomly?")
                     .font(FONT_TITLE)
@@ -57,11 +57,12 @@ struct RandomPicker: View {
                 }
                 .padding(20)
                 .foregroundColor(Color.white)
-                .background(setRandom == selectedRandom ? STARTING_THEME_COLOR : STARTING_THEME_LIGHT)
+                .background(setRandom == selectedRandom ? STARTING_THEME_SELECTED : STARTING_THEME_UNSELECTED)
                 .cornerRadius(20)
+                .scaleEffect(setRandom == selectedRandom ? 1.0 : 0.95)
                 .animation(.linear(duration: 0.2))
             }
-            .buttonStyle(ScaleButtonStyle(scaleFactor: 0.93))
+            .buttonStyle(ScaleButtonStyle(scaleFactor: 0.93, animated: false))
         }
     }
 }

@@ -10,6 +10,9 @@ import SwiftUI
 
 struct TypePicker: View {
     @Binding var selectedType: PickType
+    @Binding var sectionsList: [[String]]
+    var transitionType: AnyTransition
+    var temp: Bool = true
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -20,21 +23,22 @@ struct TypePicker: View {
             }
             Spacer()
 
-            
-            HStack(spacing: 15) {
-                TypeButton(type: .volumes, imageName: "type_volumes", text: "Volumes", selectedType: self.$selectedType)
-                TypeButton(type: .books, imageName: "type_books", text: "Books", selectedType: self.$selectedType)
-            }
-            Spacer().frame(height: 15)
-            
-            HStack(spacing: 15) {
-                TypeButton(type: .chapters, imageName: "type_chapters", text: "Chapters", selectedType: self.$selectedType)
-                TypeButton(type: .topicalGuide, imageName: "type_topical_guide", text: "Topical Guide", selectedType: self.$selectedType)
+            VStack {
+                HStack(spacing: 10) {
+                    TypeButton(type: .volumes, imageName: "type_volumes", text: "Volumes", selectedType: self.$selectedType, sectionsList: self.$sectionsList, transitionType: self.transitionType)
+                    TypeButton(type: .books, imageName: "type_books", text: "Books", selectedType: self.$selectedType, sectionsList: self.$sectionsList, transitionType: self.transitionType)
+                }
+                Spacer().frame(height: 10)
+                
+                HStack(spacing: 10) {
+                    TypeButton(type: .chapters, imageName: "type_chapters", text: "Chapters", selectedType: self.$selectedType, sectionsList: self.$sectionsList, transitionType: self.transitionType)
+                    TypeButton(type: .topicalGuide, imageName: "type_topical_guide", text: "Topical Guide", selectedType: self.$selectedType, sectionsList: self.$sectionsList, transitionType: self.transitionType)
+                }
             }
             Spacer()//.frame(height: 20)
             
             Text(captionText(selectedType))
-                .font(FONT_MED)
+                .font(FONT_MED_PLUS)
             Spacer()
             Spacer()
         }
@@ -50,7 +54,7 @@ struct TypePicker: View {
         case .chapters:
             return "Choose chapters (such as Luke 2, Jacob 5) from which to receive verses."
         case .topicalGuide:
-            return "Choose entries from the Topical Guide from which to receive verses."
+            return "Choose specific entries from the Topical Guide from which to receive verses."
         }
     }
     
@@ -59,9 +63,11 @@ struct TypePicker: View {
         var imageName: String
         var text: String
         @Binding var selectedType: PickType
+        @Binding var sectionsList: [[String]]
+        var transitionType: AnyTransition
         
         var body: some View {
-            Button(action: {self.selectedType = self.type}) {
+            Button(action: self.setType) {
                 VStack(spacing: 0) {
                     Image(imageName)
                         .resizable()
@@ -74,19 +80,28 @@ struct TypePicker: View {
                 }
                 .padding(10)
                 .foregroundColor(Color.white)
-                .background(type == selectedType ? STARTING_THEME_COLOR : STARTING_THEME_LIGHT)
+                .background(type == selectedType ? STARTING_THEME_SELECTED : STARTING_THEME_UNSELECTED)
                 .cornerRadius(20)
+                .scaleEffect(type == selectedType ? 1.0 : 0.9)
                 .animation(.linear(duration: 0.2))
             }
-            .buttonStyle(ScaleButtonStyle(scaleFactor: 0.93))
+            .buttonStyle(ScaleButtonStyle(scaleFactor: 0.93, animated: false))
+        }
+        
+        func setType() {
+            self.selectedType = self.type
+            self.sectionsList = []
         }
     }
 }
 
 struct TypePicker_Previews: PreviewProvider {
     static var previews: some View {
-        TypePicker(selectedType: .constant(.volumes))
-            .padding(20)
-            .foregroundColor(STARTING_THEME_COLOR)
+        Text("")
+            .sheet(isPresented: .constant(true)) {
+                TypePicker(selectedType: .constant(.volumes), sectionsList: .constant([]), transitionType: .slide)
+                .background(STARTING_THEME_COLOR)
+                .foregroundColor(Color.white)
+        }
     }
 }

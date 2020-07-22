@@ -11,6 +11,7 @@ import SwiftUI
 struct IntroNavigator: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var generatedScriptures: GeneratedScriptures
     
     @State var pickRandom = false
     @State var pickType = PickType.volumes
@@ -20,29 +21,46 @@ struct IntroNavigator: View {
     
     @State var page = 0
     @State var nextDisabled: Bool = false
+    @State var forward = true
     
     var body: some View {
-        VStack {
+        let forwardTransition = AnyTransition.asymmetric(
+            insertion: .move(edge: .trailing),
+            removal: .move(edge: .leading)
+        )
+        let backwardTransition = AnyTransition.asymmetric(
+            insertion: .move(edge: .leading),
+            removal: .move(edge: .trailing)
+        )
+        
+        return VStack {
             Group {
                 if (page == 0) {
                     IntroCover()
                 } else if (page == 1) {
-                    TypePicker(selectedType: self.$pickType)
+                    TypePicker(selectedType: self.$pickType,
+                               sectionsList: self.$sectionsList, 
+                               transitionType: self.forward ? forwardTransition : backwardTransition)
                 } else if (page == 2) {
-                    SectionPicker(pickType: self.pickType, sectionsList: self.$sectionsList, nextDisabled: self.$nextDisabled)
+                    SectionPicker(pickType: self.pickType,
+                                  sectionsList: self.$sectionsList,
+                                  nextDisabled: self.$nextDisabled)
                 } else if (page == 3) {
                     RandomPicker(pickRandom: self.$pickRandom)
                 } else if (page == 4) {
-                    NotificationsPicker(notificationsOn: self.$notificationsOn, notificationsTime: self.$notificationsTime, nextDisabled: self.$nextDisabled)
+                    NotificationsPicker(notificationsOn: self.$notificationsOn,
+                                        notificationsTime: self.$notificationsTime,
+                                        nextDisabled: self.$nextDisabled)
                 }
             }
-            .transition(.move(edge: .leading))
-            .animation(.default)
+            .transition(self.forward ? forwardTransition : backwardTransition)
+            .animation(.spring())
             
             HStack {
                 if (self.page != 0) {
                     Button(action: {
                         withAnimation {
+                            self.forward = false
                             self.page -= 1
                             self.updateNextDisabled()
                         }
@@ -51,9 +69,11 @@ struct IntroNavigator: View {
                     }
                 }
                 Spacer()
+                
                 if (self.page != 4) {
                     Button(action: {
                         withAnimation {
+                            self.forward = true
                             self.page += 1
                             self.updateNextDisabled()
                         }
@@ -62,59 +82,69 @@ struct IntroNavigator: View {
                         Image(systemName: "chevron.right")
                     }
                     .disabled(self.nextDisabled)
-                    .foregroundColor(self.nextDisabled ? STARTING_THEME_LIGHT : STARTING_THEME_COLOR)
+                    .foregroundColor(self.nextDisabled ? STARTING_THEME_SELECTED : Color.white)
                 } else {
-                    Button(action: {
-                        var startingVerse: [String]
-                        if (self.sectionsList.first == nil) {
-                            startingVerse = BOM_FIRST_VERSE
-                        } else {
-                            if self.pickType == .topicalGuide {
-                                let firstTitle = self.sectionsList.first!.first!
-                                let startingVerseIndex = topicalGuideDict[firstTitle]!.first!
-                                startingVerse = scriptureTree.getPath(index: startingVerseIndex)
-                            } else {
-                                startingVerse = self.sectionsList.first!
-                                var node = scriptureTree.getNode(path: startingVerse)!
-                                while (!node.children.isEmpty) {
-                                    node = node.children.first!
-                                    startingVerse.append(node.name)
-                                }
-                                startingVerse.append("1")
-                            }
-                        }
-                        
-                        self.settings.pickRandom = self.pickRandom
-                        self.settings.pickType = self.pickType
-                        self.settings.pickSections[self.pickType.rawValue] = self.sectionsList
-                        self.settings.notificationsOn = self.notificationsOn!
-                        self.settings.notificationsTime = self.notificationsTime
-                        self.settings.tomorrowVerses[self.pickType.rawValue] = startingVerse
-                        self.settings.save(firstTime: true)
-                        
-                        UserDefaults.standard.set(true, forKey: "didLaunchBefore")
-                        self.viewRouter.showIntro = false
-                    } ) {
+                    Button(action: self.finishOnboarding) {
+                        Text(" ")
                         Image(systemName: "checkmark")
                     }
                     .disabled(self.nextDisabled)
-                    .foregroundColor(self.nextDisabled ? STARTING_THEME_LIGHT : STARTING_THEME_COLOR)
+                    .foregroundColor(self.nextDisabled ? STARTING_THEME_SELECTED : Color.white)
                 }
             }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 20)
+            .padding(.horizontal, 30)
+            .padding(.bottom, 25)
             .font(FONT_SEMIBOLD_BIG)
         }
-        .foregroundColor(STARTING_THEME_COLOR)
+        .foregroundColor(Color.white)
+        .background(STARTING_THEME_COLOR)
+        .edgesIgnoringSafeArea(.all)
     }
     
     func updateNextDisabled() {
         nextDisabled = (page == 2 && sectionsList.isEmpty) || (page == 4 && notificationsOn == nil)
     }
+    
+    func finishOnboarding() {
+        var startingVerse: [String]
+        if (self.sectionsList.first == nil) {
+            startingVerse = BOM_FIRST_VERSE
+        } else {
+            if self.pickType == .topicalGuide {
+                let firstTitle = self.sectionsList.first!.first!
+                let startingVerseIndex = topicalGuideDict[firstTitle]!.first!
+                startingVerse = scriptureTree.getPath(index: startingVerseIndex)
+            } else {
+                startingVerse = self.sectionsList.first!
+                var node = scriptureTree.getNode(path: startingVerse)!
+                while (!node.children.isEmpty) {
+                    node = node.children.first!
+                    startingVerse.append(node.name)
+                }
+                startingVerse.append("1")
+            }
+        }
+        
+        self.settings.pickRandom = self.pickRandom
+        self.settings.pickType = self.pickType
+        self.settings.pickSections[self.pickType.rawValue] = self.sectionsList
+        self.settings.notificationsOn = self.notificationsOn!
+        self.settings.notificationsTime = self.notificationsTime
+        self.settings.tomorrowVerses[self.pickType.rawValue] = startingVerse
+        self.settings.save(firstTime: true)
+        
+        self.generatedScriptures.array = []
+        self.generatedScriptures.update(force: true)
+        UserDefaults.standard.set(true, forKey: "didLaunchBefore")
+        self.viewRouter.showIntro = false
+    }
 }
 
 struct IntroNavigator_Previews: PreviewProvider {
     static var previews: some View {
-        IntroNavigator()
+        Text("")
+            .sheet(isPresented: .constant(true)) {
+                IntroNavigator()
+        }
     }
 }
