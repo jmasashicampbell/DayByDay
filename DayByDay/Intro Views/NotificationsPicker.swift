@@ -40,10 +40,10 @@ struct NotificationsPicker: View {
                 }
             }
             .frame(height: notificationsOn == true ? 250 : 74)
-            .background(STARTING_THEME_COLOR)
+            .background(notificationsOn == true ? STARTING_THEME_COLOR : STARTING_THEME_LIGHT)
             .cornerRadius(20)
             .overlay(YesNoButton(value: true, notificationsOn: self.$notificationsOn, nextDisabled: self.$nextDisabled, presentSheet: self.$presentSheet), alignment: .top)
-            .animation(.linear(duration: 0.12))
+            .animation(.spring())
             
             YesNoButton(value: false, notificationsOn: self.$notificationsOn, nextDisabled: self.$nextDisabled, presentSheet: self.$presentSheet)
             Spacer()
@@ -69,9 +69,11 @@ struct NotificationsPicker: View {
             return Button(action: {
                 if self.value {
                     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                        print(success)
                         if success {
                             DispatchQueue.main.async {
                                 withAnimation { self.notificationsOn = true }
+                                self.nextDisabled = false
                             }
                         } else {
                             self.presentSheet = true
@@ -79,8 +81,8 @@ struct NotificationsPicker: View {
                     }
                 } else {
                     withAnimation { self.notificationsOn = false }
+                    self.nextDisabled = false
                 }
-                self.nextDisabled = false
             }) {
                 VStack {
                     HStack {
@@ -96,7 +98,7 @@ struct NotificationsPicker: View {
                 .cornerRadius(20)
                 .animation(.linear(duration: 0.2))
             }
-            .buttonStyle(ScaleButtonStyle(scaleFactor: 0.95))
+            .buttonStyle(ScaleButtonStyle(scaleFactor: 0.95, animated: false))
         }
     }
 }
