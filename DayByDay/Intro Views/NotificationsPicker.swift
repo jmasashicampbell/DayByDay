@@ -40,7 +40,7 @@ struct NotificationsPicker: View {
                 }
             }
             .frame(height: notificationsOn == true ? 250 : 74)
-            .background(notificationsOn == true ? STARTING_THEME_COLOR : STARTING_THEME_LIGHT)
+            .background(notificationsOn == true ? STARTING_THEME_SELECTED : STARTING_THEME_UNSELECTED)
             .cornerRadius(20)
             .overlay(YesNoButton(value: true, notificationsOn: self.$notificationsOn, nextDisabled: self.$nextDisabled, presentSheet: self.$presentSheet), alignment: .top)
             .animation(.spring())
@@ -94,7 +94,7 @@ struct NotificationsPicker: View {
                 }
                 .padding(20)
                 .foregroundColor(Color.white)
-                .background(value == notificationsOn ? STARTING_THEME_COLOR : STARTING_THEME_LIGHT)
+                .background(value == notificationsOn ? STARTING_THEME_SELECTED : STARTING_THEME_UNSELECTED)
                 .cornerRadius(20)
                 .animation(.linear(duration: 0.2))
             }

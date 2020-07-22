@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         // Create the SwiftUI view that provides the window contents.
-        let contentView = MotherView()
+        let contentView = ScriptureList()
                           .environmentObject(settings)
                           .environmentObject(generatedScriptures)
                           .environmentObject(viewRouter)

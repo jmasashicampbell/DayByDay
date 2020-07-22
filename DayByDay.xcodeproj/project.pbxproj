@@ -62,7 +62,6 @@
 		CFA4C0AF248C4897007BB1A1 /* icon_white@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFA4C0AE248C4897007BB1A1 /* icon_white@1x.png */; };
 		CFA5139C248974BF00F770C6 /* RandomPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA5139B248974BF00F770C6 /* RandomPicker.swift */; };
 		CFA5139E24898D5E00F770C6 /* SectionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA5139D24898D5E00F770C6 /* SectionPicker.swift */; };
-		CFCADD90248B4E500094FF1C /* MotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCADD8F248B4E500094FF1C /* MotherView.swift */; };
 		CFCADD92248B63B40094FF1C /* IntroCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCADD91248B63B40094FF1C /* IntroCover.swift */; };
 		CFD69CCD24B52F3900EC6B9A /* CircleScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD69CCC24B52F3900EC6B9A /* CircleScale.swift */; };
 		CFD69CD324B57D1700EC6B9A /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD69CD224B57D1700EC6B9A /* DashboardView.swift */; };
@@ -131,7 +130,6 @@
 		CFA4C0AE248C4897007BB1A1 /* icon_white@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_white@1x.png"; path = "../../../../Downloads/AppIcons-7/Assets.xcassets/AppIcon.appiconset/icon_white@1x.png"; sourceTree = "<group>"; };
 		CFA5139B248974BF00F770C6 /* RandomPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPicker.swift; sourceTree = "<group>"; };
 		CFA5139D24898D5E00F770C6 /* SectionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPicker.swift; sourceTree = "<group>"; };
-		CFCADD8F248B4E500094FF1C /* MotherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherView.swift; sourceTree = "<group>"; };
 		CFCADD91248B63B40094FF1C /* IntroCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroCover.swift; sourceTree = "<group>"; };
 		CFD69CCC24B52F3900EC6B9A /* CircleScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleScale.swift; sourceTree = "<group>"; };
 		CFD69CD224B57D1700EC6B9A /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
@@ -249,7 +247,6 @@
 			children = (
 				CF80F903245B79EF001424C4 /* AppDelegate.swift */,
 				CF80F905245B79EF001424C4 /* SceneDelegate.swift */,
-				CFCADD8F248B4E500094FF1C /* MotherView.swift */,
 				CF53A2DD24668E5C0066F7A3 /* General.swift */,
 				CF80F925245DE26E001424C4 /* Constants.swift */,
 				CF492CAB2474C4DC00B7949C /* Colors.swift */,
@@ -288,12 +285,12 @@
 		CFE16A642488D065005636C9 /* Intro Views */ = {
 			isa = PBXGroup;
 			children = (
+				CFEC797624899AA40011C236 /* IntroNavigator.swift */,
 				CFCADD91248B63B40094FF1C /* IntroCover.swift */,
 				CFE16A652488D0AA005636C9 /* TypePicker.swift */,
 				CFA5139D24898D5E00F770C6 /* SectionPicker.swift */,
 				CFA5139B248974BF00F770C6 /* RandomPicker.swift */,
 				CFEC79782489E4A10011C236 /* NotificationsPicker.swift */,
-				CFEC797624899AA40011C236 /* IntroNavigator.swift */,
 			);
 			path = "Intro Views";
 			sourceTree = "<group>";
@@ -412,7 +409,6 @@
 				CF52509924B8E59B0009979F /* GoToSettingsSheet.swift in Sources */,
 				CF80F906245B79EF001424C4 /* SceneDelegate.swift in Sources */,
 				CFE16A662488D0AA005636C9 /* TypePicker.swift in Sources */,
-				CFCADD90248B4E500094FF1C /* MotherView.swift in Sources */,
 				CF53A2DA24667E0F0066F7A3 /* PickPickerVIew.swift in Sources */,
 				CF96202C24859E5D00594440 /* MultilineTextField.swift in Sources */,
 				CFCADD92248B63B40094FF1C /* IntroCover.swift in Sources */,

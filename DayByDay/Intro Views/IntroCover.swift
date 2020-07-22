@@ -23,9 +23,6 @@ struct IntroCover: View {
         }
         .padding(40)
         .foregroundColor(Color.white)
-        .background(STARTING_THEME_COLOR)
-        //.cornerRadius(20)
-        .edgesIgnoringSafeArea(.all)
     }
 }
 

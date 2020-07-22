@@ -92,8 +92,9 @@ struct VolumeList: View {
                     .font(FONT_LABEL)
                     .padding(20)
                     .foregroundColor(Color.white)
-                    .background(self.sectionsList.contains(["Scriptures", volumeName]) ? STARTING_THEME_COLOR : STARTING_THEME_LIGHT)
+                    .background(self.sectionsList.contains(["Scriptures", volumeName]) ? STARTING_THEME_SELECTED : STARTING_THEME_UNSELECTED)
                     .cornerRadius(20)
+                    .scaleEffect(self.sectionsList.contains(["Scriptures", volumeName]) ? 1.0 : 0.95)
                 }
                 .buttonStyle(ScaleButtonStyle(scaleFactor: 0.95, animated: false))
             }
@@ -177,7 +178,7 @@ struct AddedListEntry: View {
             .font(FONT_LABEL)
             .padding(15)
             .foregroundColor(Color.white)
-            .background(STARTING_THEME_COLOR)
+            .background(STARTING_THEME_SELECTED)
             .cornerRadius(20)
             .offset(x: self.showDelete ? -60 : 0)
             
