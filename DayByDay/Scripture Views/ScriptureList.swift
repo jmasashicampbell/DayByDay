@@ -101,11 +101,13 @@ struct ScriptureList_Previews: PreviewProvider {
                 .environmentObject(GeneratedScriptures())
                 .environmentObject(Settings())
                 .environmentObject(SelectionCoordinator())
+                .environmentObject(ViewRouter())
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd Generation)"))
             ScriptureList()
                 .environmentObject(GeneratedScriptures())
                 .environmentObject(Settings())
                 .environmentObject(SelectionCoordinator())
+                .environmentObject(ViewRouter())
                 .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
         }
     }
