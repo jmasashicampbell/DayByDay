@@ -26,6 +26,7 @@ struct ScriptureDetail: View {
             VStack(alignment: .center) {
                 VStack(alignment: .leading, spacing: 10.0) {
                     HStack {
+                        // Header
                         Text(dateComponentsToString(self.scripture.date, format: "E"))
                         .font(FONT_REG_BIG)
                         
@@ -33,6 +34,7 @@ struct ScriptureDetail: View {
                         .font(FONT_SEMIBOLD_BIG)
                         Spacer()
                         
+                        // Dismiss button
                         Button(action: {
                             self.generatedScriptures.setScriptureNotes(id: self.scripture.id, notes: self.scripture.notes)
                             self.scriptureSelected.toggle()
@@ -42,6 +44,7 @@ struct ScriptureDetail: View {
                         .font(FONT_SEMIBOLD_BIG)
                     }
                     
+                    // Text
                     ScrollView {
                         VStack(alignment: .leading, spacing: 10.0) {
                             Text(self.scripture.text)
@@ -53,10 +56,10 @@ struct ScriptureDetail: View {
                     }
                     .animation(nil)
                 }
-                
                 Spacer()
                     
                 VStack(spacing: 20) {
+                    // Notes
                     MultilineTextField(text: self.$scripture.notes, isFirstResponder: self.openInEdit, onCommit: {
                         self.generatedScriptures.setScriptureNotes(id: self.scripture.id, notes: self.scripture.notes)
                     })
@@ -67,6 +70,7 @@ struct ScriptureDetail: View {
                     
                     Spacer().frame(height: self.keyboardMoveDist)
                     
+                    // Share/Gospel Library buttons
                     Button(action: { self.showShareSheet = true } ) {
                         Image(systemName: "square.and.arrow.up")
                         Text("Share")

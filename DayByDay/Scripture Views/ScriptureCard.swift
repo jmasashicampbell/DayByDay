@@ -26,6 +26,7 @@ struct ScriptureCard: View {
             self.scriptureSelected.toggle()
         } ) {
             VStack(alignment: .leading, spacing: 0.0) {
+                // Header
                 HStack {
                     Text(dateComponentsToString(self.scripture.date, format: "E"))
                     .font(FONT_REG_BIG)
@@ -34,12 +35,15 @@ struct ScriptureCard: View {
                     .font(FONT_SEMIBOLD_BIG)
                 }
                 Spacer().frame(height: SCRIPTURE_CARD_SPACING)
+                
+                // Text
                 Text(scripture.text)
                     .font(height > 600 ? FONT_LIGHT_PLUS : FONT_LIGHT)
                 Spacer().frame(height: SCRIPTURE_CARD_SPACING)
                 Text(scripture.reference)
                 Spacer()
-
+                
+                // Notes box
                 Button(action: {
                     self.openInEdit = true
                     self.selectedScripture = self.scripture
