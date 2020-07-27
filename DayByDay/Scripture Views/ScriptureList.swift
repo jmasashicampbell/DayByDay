@@ -26,6 +26,7 @@ struct ScriptureList: View {
                             Spacer().frame(width: 10)
                             ForEach(self.generatedScriptures.getPast().reversed()) { scripture in
                                 VStack {
+                                    Spacer()
                                     ScriptureCard(scripture: scripture,
                                                   scriptureSelected: self.$selectionCoordinator.selected,
                                                   selectedScripture: self.$selectionCoordinator.scripture,
@@ -43,6 +44,7 @@ struct ScriptureList: View {
                         }
                     }
                     .flip()
+                    .navigationBarTitle("", displayMode: .inline)
                     .navigationBarItems(
                         leading:
                             NavigationLink(destination: DashboardView()) {
@@ -103,12 +105,12 @@ struct ScriptureList_Previews: PreviewProvider {
                 .environmentObject(SelectionCoordinator())
                 .environmentObject(ViewRouter())
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd Generation)"))
-            ScriptureList()
+            /*ScriptureList()
                 .environmentObject(GeneratedScriptures())
                 .environmentObject(Settings())
                 .environmentObject(SelectionCoordinator())
                 .environmentObject(ViewRouter())
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))*/
         }
     }
 }

@@ -43,6 +43,7 @@ struct SettingsView: View {
         
         return Form {
             List {
+                // Verse Selection
                 Section(header: Text("VERSE SELECTION")) {
                     Picker("pickRandom", selection: $settings.pickRandom) {
                         Text("In Order").tag(false)
@@ -113,6 +114,7 @@ struct SettingsView: View {
                     }
                 }
                 
+                // Notifications
                 Section {
                     Toggle("", isOn: notificationsOnBinding)
                         .toggleStyle(
@@ -132,7 +134,7 @@ struct SettingsView: View {
                     }
                 }
                 
-                
+                // Theme
                 Section(header: Text("THEME")) {
                     Picker("pickColor", selection: themeColorBinding) {
                         ForEach(ThemeColorOptions.allCases, id: \.self) { colorOption in
