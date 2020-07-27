@@ -120,8 +120,14 @@ struct SettingsView: View {
                                            onColor: settings.themeColor.main()))
                     
                     if (settings.notificationsOn) {
-                        DatePicker(selection: $settings.notificationsTime, displayedComponents: .hourAndMinute) {
+                        HStack {
                             Text("Time")
+                            Spacer()
+                            DatePicker(selection: $settings.notificationsTime, displayedComponents: .hourAndMinute) {
+                                Text("Time")
+                            }
+                            .labelsHidden()
+                            .frame(width: 100)
                         }
                     }
                 }
@@ -143,6 +149,7 @@ struct SettingsView: View {
             GoToSettingsSheet(presentSheet: self.$presentSheet)
         }
         .navigationBarTitle("Settings")
+        .navigationBarBackButtonHidden(true)
         .navigationBarItems(
             leading:
                 Button(action: {
