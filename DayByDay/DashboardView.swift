@@ -37,9 +37,10 @@ struct DashboardView: View {
             CircleScale(title: "",
                         verses: scriptureCompletion.getCompletedNum(allNode),
                         maxVerses: allNode.end - allNode.start)
+                .offset(y: -80)
             Text("All Scriptures")
                 .font(.system(size: 24, weight: .medium))
-                .offset(y: -20)
+                .offset(y: -10)
             
             HStack(spacing: 20) {
                 CircleScale(title: "Old Testament",
