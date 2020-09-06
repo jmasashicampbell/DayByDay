@@ -44,7 +44,7 @@ struct TopicalGuideLetterView: View {
     
     var body: some View {
         let textColor = colorScheme == .dark ? Color.white : Color.black
-        let accentColor = self.settings.themeColor.dark()
+        let accentColor = self.settings.themeColor.dark
         let allTitles = Array(topicalGuideDict.keys).sorted()
         let titles = allTitles.filter { $0.first!.uppercased() == letter }
         

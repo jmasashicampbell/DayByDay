@@ -122,7 +122,7 @@ struct SettingsView: View {
                 // Notifications toggle
                 Toggle("", isOn: notificationsOnBinding)
                     .toggleStyle(ThemeToggleStyle(label: "Notifications",
-                                                  themeColor: settings.themeColor.main()))
+                                                  themeColor: settings.themeColor.main))
                 
                 if (settings.notificationsOn) {
                     // Notification time picker
@@ -133,7 +133,7 @@ struct SettingsView: View {
                     // Badge toggle
                     Toggle("", isOn: $settings.badgeNumOn)
                         .toggleStyle(ThemeToggleStyle(label: "Badge Number",
-                                                      themeColor: settings.themeColor.main()))
+                                                      themeColor: settings.themeColor.main))
                 }
             }
             
@@ -161,7 +161,7 @@ struct SettingsView: View {
                 }) {
                     Image(systemName: "xmark")
                     .font(.system(size: 22, weight: .semibold))
-                    .foregroundColor(settings.themeColor.dark())
+                    .foregroundColor(settings.themeColor.dark)
                 },
             
             trailing:
@@ -172,7 +172,7 @@ struct SettingsView: View {
                 }) {
                     Image(systemName: "checkmark")
                     .font(.system(size: 22, weight: .semibold))
-                    .foregroundColor(settings.themeColor.dark())
+                    .foregroundColor(settings.themeColor.dark)
                 }
         )
         .onAppear { self.settings.updateTomorrowVerse() }

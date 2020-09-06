@@ -54,8 +54,8 @@ struct GoToSettingsSheet: View {
             Spacer().frame(height: 5)
         }
         .padding(20)
-        .foregroundColor(self.settings.themeColor.text())
-        .background(self.settings.themeColor.main())
+        .foregroundColor(self.settings.themeColor.text)
+        .background(self.settings.themeColor.main)
         .font(FONT_SEMIBOLD_BIG)
         .edgesIgnoringSafeArea(.all)
     }

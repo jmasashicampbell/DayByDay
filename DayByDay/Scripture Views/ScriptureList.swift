@@ -49,19 +49,19 @@ struct ScriptureList: View {
                                 Image(systemName: "gauge")
                                     .resizable()
                                     .frame(width: 28, height: 28)
-                                    .foregroundColor(self.settings.themeColor.dark())
+                                    .foregroundColor(self.settings.themeColor.dark)
                             },
                         trailing:
                             NavigationLink(destination: SettingsView()) {
                                 Image("gear")
                                     .resizable()
                                     .frame(width: 32, height: 32)
-                                    .foregroundColor(self.settings.themeColor.dark())
+                                    .foregroundColor(self.settings.themeColor.dark)
                             }
                     )
                 }
             }
-            .accentColor(settings.themeColor.dark())
+            .accentColor(settings.themeColor.dark)
             .opacity(self.selectionCoordinator.selected ? 0.0 : 1.0)
             .animation(Animation.easeInOut.speed(0.7))
             

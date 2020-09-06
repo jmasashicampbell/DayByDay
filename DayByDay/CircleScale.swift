@@ -38,7 +38,7 @@ struct CircleScale: View {
                         RoundedArc(geometry: g,
                                    lineWidth: min(g.size.height, g.size.width) * 0.08,
                                    fraction: fraction,
-                                   color: self.settings.themeColor.main())
+                                   color: self.settings.themeColor.main)
                     }
                     
                     Text(String(percentage) + "%")

@@ -75,21 +75,10 @@ struct ThemeColor {
                               textShade: 0.7)*/
     ]
     
-    func main() -> Color {
-        return colorSets[color]!.main
-    }
-    
-    func light() -> Color {
-        return colorSets[color]!.light
-    }
-    
-    func dark() -> Color {
-        return colorSets[color]!.dark
-    }
-
-    func text() -> Color {
-        return colorSets[color]!.text
-    }
+    var main: Color { colorSets[color]!.main }
+    var light: Color { colorSets[color]!.light }
+    var dark: Color { colorSets[color]!.dark }
+    var text: Color { colorSets[color]!.text }
 }
 
 

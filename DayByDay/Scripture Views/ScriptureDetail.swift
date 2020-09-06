@@ -65,7 +65,7 @@ struct ScriptureDetail: View {
                     })
                     .padding(5)
                     .frame(height: 210)
-                    .background(self.settings.themeColor.light())
+                    .background(self.settings.themeColor.light)
                     .cornerRadius(10)
                     
                     Spacer().frame(height: self.keyboardMoveDist)
@@ -84,8 +84,8 @@ struct ScriptureDetail: View {
             }
             .padding(20)
             .font(FONT_SMALL)
-            .foregroundColor(self.settings.themeColor.text())
-            .background(self.settings.themeColor.main())
+            .foregroundColor(self.settings.themeColor.text)
+            .background(self.settings.themeColor.main)
             .cornerRadius(20)
             .onReceive(Publishers.keyboardHeight) { keyboardHeight in
                 let keyboardTop = geometry.frame(in: .global).height - keyboardHeight
