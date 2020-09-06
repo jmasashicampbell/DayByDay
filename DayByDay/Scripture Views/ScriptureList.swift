@@ -26,6 +26,7 @@ struct ScriptureList: View {
                             Spacer().frame(width: 10)
                             ForEach(self.generatedScriptures.getPast().reversed()) { scripture in
                                 VStack {
+                                    Spacer()
                                     ScriptureCard(scripture: scripture,
                                                   scriptureSelected: self.$selectionCoordinator.selected,
                                                   selectedScripture: self.$selectionCoordinator.scripture,
@@ -33,7 +34,7 @@ struct ScriptureList: View {
                                                   height: geometry.size.height)
                                     .flip()
                                     .frame(width: geometry.size.width - 74,
-                                           height: geometry.size.height * 0.93)
+                                           height: geometry.size.height * 0.9)
                                     .animation(nil)
                                     //.shadow(color: self.settings.themeColor.color == ThemeColorOptions.white ? Color(red: 0.92, green: 0.92, blue: 0.92) : Color.white, radius: 10)
                                     Spacer()
@@ -43,6 +44,7 @@ struct ScriptureList: View {
                         }
                     }
                     .flip()
+                    .navigationBarTitle("", displayMode: .inline)
                     .navigationBarItems(
                         leading:
                             NavigationLink(destination: DashboardView()) {
@@ -53,15 +55,15 @@ struct ScriptureList: View {
                             },
                         trailing:
                             NavigationLink(destination: SettingsView()) {
-                                Image("gear")
+                                Image(systemName: "gear")
                                     .resizable()
-                                    .frame(width: 32, height: 32)
+                                    .frame(width: 28, height: 28)
                                     .foregroundColor(self.settings.themeColor.dark)
                             }
                     )
                 }
             }
-            .accentColor(settings.themeColor.dark)
+            //.accentColor(settings.themeColor.dark)
             .opacity(self.selectionCoordinator.selected ? 0.0 : 1.0)
             .animation(Animation.easeInOut.speed(0.7))
             

@@ -12,6 +12,7 @@ struct SettingsView: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var generatedScriptures: GeneratedScriptures
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Environment(\.colorScheme) var colorScheme
     @State var presentSheet = false
     
     var body: some View {
@@ -129,6 +130,7 @@ struct SettingsView: View {
                     DatePicker(selection: $settings.notificationsTime, displayedComponents: .hourAndMinute) {
                         Text("Time")
                     }
+                    .accentColor(colorScheme == .dark ? Color.white : Color.black)
                     
                     // Badge toggle
                     Toggle("", isOn: $settings.badgeNumOn)
@@ -152,7 +154,7 @@ struct SettingsView: View {
         .sheet(isPresented: self.$presentSheet) {
             GoToSettingsSheet(presentSheet: self.$presentSheet)
         }
-        .navigationBarTitle("Settings")
+        .navigationBarTitle("Settings", displayMode: .large)
         .navigationBarItems(
             leading:
                 Button(action: {
@@ -175,6 +177,7 @@ struct SettingsView: View {
                     .foregroundColor(settings.themeColor.dark)
                 }
         )
+        .navigationBarBackButtonHidden(true)
         .onAppear { self.settings.updateTomorrowVerse() }
     }
     
