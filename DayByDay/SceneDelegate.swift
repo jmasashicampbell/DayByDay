@@ -53,28 +53,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Reset badge number
         UIApplication.shared.applicationIconBadgeNumber = 0
         
-        // Reschedule notifications with correct badge numbers
-        let notificationCenter = UNUserNotificationCenter.current()
-        var oldRequests: [UNNotificationRequest] = []
-        notificationCenter.getPendingNotificationRequests { notificationRequests in
-             for notificationRequest : UNNotificationRequest in notificationRequests {
-                oldRequests.append(notificationRequest)
+        if settings.badgeNumOn {
+            // Reschedule notifications with correct badge numbers
+            let notificationCenter = UNUserNotificationCenter.current()
+            var oldRequests: [UNNotificationRequest] = []
+            notificationCenter.getPendingNotificationRequests { notificationRequests in
+                 for notificationRequest : UNNotificationRequest in notificationRequests {
+                    oldRequests.append(notificationRequest)
+                }
             }
-        }
-        notificationCenter.removeAllPendingNotificationRequests()
-        
-        for (badge, oldRequest) in oldRequests.enumerated() {
-            let content = UNMutableNotificationContent()
-            content.title = oldRequest.content.title
-            content.body = oldRequest.content.body
-            content.sound = oldRequest.content.sound
-            content.userInfo = oldRequest.content.userInfo
-            content.badge = NSNumber(value: badge)
+            notificationCenter.removeAllPendingNotificationRequests()
             
-            let request = UNNotificationRequest(identifier: oldRequest.identifier,
-                                                content: content,
-                                                trigger: oldRequest.trigger)
-            notificationCenter.add(request)
+            for (badge, oldRequest) in oldRequests.enumerated() {
+                let content = UNMutableNotificationContent()
+                content.title = oldRequest.content.title
+                content.body = oldRequest.content.body
+                content.sound = oldRequest.content.sound
+                content.userInfo = oldRequest.content.userInfo
+                content.badge = NSNumber(value: badge)
+                
+                let request = UNNotificationRequest(identifier: oldRequest.identifier,
+                                                    content: content,
+                                                    trigger: oldRequest.trigger)
+                notificationCenter.add(request)
+            }
         }
     }
 
