@@ -61,6 +61,7 @@
 		CFEC797724899AA40011C236 /* IntroNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEC797624899AA40011C236 /* IntroNavigator.swift */; };
 		CFEC79792489E4A10011C236 /* NotificationsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEC79782489E4A10011C236 /* NotificationsPicker.swift */; };
 		CFF462D824B909BF0032B738 /* TopicalGuidePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF462D724B909BF0032B738 /* TopicalGuidePickerView.swift */; };
+		CFFC9D622505A3B900EFE8B8 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC9D612505A3B900EFE8B8 /* BaseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +121,7 @@
 		CFEC797624899AA40011C236 /* IntroNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroNavigator.swift; sourceTree = "<group>"; };
 		CFEC79782489E4A10011C236 /* NotificationsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPicker.swift; sourceTree = "<group>"; };
 		CFF462D724B909BF0032B738 /* TopicalGuidePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicalGuidePickerView.swift; sourceTree = "<group>"; };
+		CFFC9D612505A3B900EFE8B8 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +222,7 @@
 			children = (
 				CF80F903245B79EF001424C4 /* AppDelegate.swift */,
 				CF80F905245B79EF001424C4 /* SceneDelegate.swift */,
+				CFFC9D612505A3B900EFE8B8 /* BaseView.swift */,
 				CF53A2DD24668E5C0066F7A3 /* General.swift */,
 				CF80F925245DE26E001424C4 /* Constants.swift */,
 				CF492CAB2474C4DC00B7949C /* Colors.swift */,
@@ -362,6 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFFC9D622505A3B900EFE8B8 /* BaseView.swift in Sources */,
 				CF80F924245DD343001424C4 /* ScriptureList.swift in Sources */,
 				CFA5139E24898D5E00F770C6 /* SectionPicker.swift in Sources */,
 				CF80F904245B79EF001424C4 /* AppDelegate.swift in Sources */,
