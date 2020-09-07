@@ -22,7 +22,6 @@ struct ScriptureCard: View {
         Button(action: {
             self.openInEdit = false
             self.selectionCoordinator.scripture = self.scripture
-            print(selectionCoordinator.selected)
         } ) {
             VStack(alignment: .leading, spacing: 0.0) {
                 // Header
