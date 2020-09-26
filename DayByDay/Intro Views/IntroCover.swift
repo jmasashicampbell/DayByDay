@@ -14,7 +14,7 @@ struct IntroCover: View {
             Text("Welcome to Day By Day")
                 .font(.system(size: 50, weight: .semibold))
             Spacer()
-            Image("icon_launch")
+            Image("icon_blue")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             Spacer()
