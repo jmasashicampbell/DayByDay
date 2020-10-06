@@ -134,9 +134,9 @@ struct SettingsView: View {
                         }
                         .labelsHidden()
                         .frame(width: 100)
+                        .accentColor(colorScheme == .dark ? Color.white : Color.black)
                     }
                 }
-                .accentColor(colorScheme == .dark ? Color.white : Color.black)
 
                 // Badge toggle
                 Toggle("", isOn: $settings.badgeNumOn)
