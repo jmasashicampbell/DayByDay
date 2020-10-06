@@ -25,6 +25,7 @@ class Settings: ObservableObject {
     
     @Published var notificationsOn = UserDefaults.standard.bool(forKey: "notificationsOn")
     @Published var notificationsTime = UserDefaults.standard.object(forKey: "notificationsTime") as? Date ?? Date()
+    @Published var badgeNumOn = UserDefaults.standard.bool(forKey: "badgeNumOn")
     @Published var themeColor = ThemeColor(color: ThemeColorOptions(rawValue: UserDefaults.standard.string(forKey: "themeColor") ?? "blue") ?? .blue)
     
     
@@ -175,6 +176,7 @@ class Settings: ObservableObject {
         
         UserDefaults.standard.set(notificationsOn, forKey: "notificationsOn")
         UserDefaults.standard.set(notificationsTime, forKey: "notificationsTime")
+        UserDefaults.standard.set(badgeNumOn, forKey: "badgeNumOn")
         UserDefaults.standard.set(themeColor.color.rawValue, forKey: "themeColor")
         
         shouldUpdateTomorrowVerse = true
@@ -196,6 +198,7 @@ class Settings: ObservableObject {
         
         notificationsOn = UserDefaults.standard.bool(forKey: "notificationsOn")
         notificationsTime = UserDefaults.standard.object(forKey: "notificationsTime") as? Date ?? Date()
+        badgeNumOn = UserDefaults.standard.bool(forKey: "badgeNumOn")
         themeColor = ThemeColor(color: ThemeColorOptions(rawValue: UserDefaults.standard.string(forKey: "themeColor") ?? "blue") ?? .blue)
         
         shouldUpdateTomorrowVerse = true

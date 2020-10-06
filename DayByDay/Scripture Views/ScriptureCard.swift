@@ -14,16 +14,14 @@ let SCRIPTURE_CARD_SPACING: CGFloat = 10.0
 struct ScriptureCard: View {
     var scripture: Scripture
     @EnvironmentObject var settings: Settings
-    @Binding var scriptureSelected: Bool
-    @Binding var selectedScripture: Scripture?
+    @EnvironmentObject var selectionCoordinator: SelectionCoordinator
     @Binding var openInEdit: Bool
     var height: CGFloat
     
     var body: some View {
         Button(action: {
             self.openInEdit = false
-            self.selectedScripture = self.scripture
-            self.scriptureSelected.toggle()
+            self.selectionCoordinator.scripture = self.scripture
         } ) {
             VStack(alignment: .leading, spacing: 0.0) {
                 // Header
@@ -46,8 +44,7 @@ struct ScriptureCard: View {
                 // Notes box
                 Button(action: {
                     self.openInEdit = true
-                    self.selectedScripture = self.scripture
-                    self.scriptureSelected.toggle()
+                    self.selectionCoordinator.scripture = self.scripture
                 }) {
                     HStack {
                         if scripture.notes.isEmpty {
@@ -69,15 +66,15 @@ struct ScriptureCard: View {
                     }
                     .padding(10)
                     .frame(height: 210)
-                    .background(settings.themeColor.light())
+                    .background(settings.themeColor.light)
                     .cornerRadius(10)
                 }
                 .buttonStyle(ScaleButtonStyle(scaleFactor: 0.9))
             }
             .padding(20)
             .font(FONT_MED)
-            .foregroundColor(settings.themeColor.text())
-            .background(settings.themeColor.main())
+            .foregroundColor(settings.themeColor.text)
+            .background(settings.themeColor.main)
             .cornerRadius(25)
         }
         .padding(0)

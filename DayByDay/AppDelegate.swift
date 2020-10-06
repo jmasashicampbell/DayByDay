@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .sound])
+        completionHandler([.banner, .sound])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse,
@@ -52,7 +52,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if let userInfo = response.notification.request.content.userInfo as? [String: Int] {
             let date = DateComponents(year: userInfo["year"], month: userInfo["month"], day: userInfo["day"])
             selectionCoordinator.scripture = Scripture(index: userInfo["index"]!, id: userInfo["id"]!, date: date)
-            selectionCoordinator.selected = true
         }
         completionHandler()
     }
@@ -60,6 +59,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 
 class SelectionCoordinator: ObservableObject {
-    @Published var selected: Bool = false
     @Published var scripture: Scripture? = nil
+}
+
+
+class ViewRouter: ObservableObject {
+    @Published var showIntro: Bool
+    
+    init() {
+        showIntro = !UserDefaults.standard.bool(forKey: "didLaunchBefore")
+    }
 }

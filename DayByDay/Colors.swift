@@ -58,14 +58,14 @@ struct ThemeColor {
                              b: 0.3,
                              light: 0.08,
                              dark: 0.0,
-                             textShade: 0.85),
+                             textShade: 0.95),
         
         .brown: ThemeColorSet(r: 0.38,
                               g: 0.24,
                               b: 0.18,
                               light: 0.08,
                               dark: 0.0,
-                              textShade: 0.9),
+                              textShade: 0.95),
         
         /*.white: ThemeColorSet(r: 1.0,
                               g: 1.0,
@@ -75,21 +75,10 @@ struct ThemeColor {
                               textShade: 0.7)*/
     ]
     
-    func main() -> Color {
-        return colorSets[color]!.main
-    }
-    
-    func light() -> Color {
-        return colorSets[color]!.light
-    }
-    
-    func dark() -> Color {
-        return colorSets[color]!.dark
-    }
-
-    func text() -> Color {
-        return colorSets[color]!.text
-    }
+    var main: Color { colorSets[color]!.main }
+    var light: Color { colorSets[color]!.light }
+    var dark: Color { colorSets[color]!.dark }
+    var text: Color { colorSets[color]!.text }
 }
 
 
@@ -124,7 +113,7 @@ struct ThemeColorSet {
         self.main = Color(red: r, green: g, blue: b)
         self.light = Color(red: lighten(r), green: lighten(g), blue: lighten(b))
         self.dark = Color(red: darken(r), green: darken(g), blue: darken(b))
-        self.text = Color(red: textShade, green: textShade, blue: textShade)
+        self.text = Color(white: textShade)
     }
 }
 

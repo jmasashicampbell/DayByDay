@@ -15,91 +15,103 @@ let BUTTON_SPACE_HEIGHT : CGFloat = 20.0
 struct ScriptureDetail: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var generatedScriptures: GeneratedScriptures
-    @State var scripture: Scripture
-    @Binding var scriptureSelected: Bool
+    @EnvironmentObject var selectionCoordinator: SelectionCoordinator
     @Binding var openInEdit: Bool
+    @State var notes: String
     @State private var keyboardMoveDist: CGFloat = 0
     @State private var showShareSheet = false
     
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
-                VStack(alignment: .leading, spacing: 10.0) {
-                    HStack {
-                        // Header
-                        Text(dateComponentsToString(self.scripture.date, format: "E"))
-                        .font(FONT_REG_BIG)
-                        
-                        Text(dateComponentsToString(self.scripture.date, format: "MMM dd"))
-                        .font(FONT_SEMIBOLD_BIG)
-                        Spacer()
-                        
-                        // Dismiss button
-                        Button(action: {
-                            self.generatedScriptures.setScriptureNotes(id: self.scripture.id, notes: self.scripture.notes)
-                            self.scriptureSelected.toggle()
-                        }) {
-                            Image(systemName: "chevron.down")
-                        }
-                        .font(FONT_SEMIBOLD_BIG)
-                    }
-                    
-                    // Text
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 10.0) {
-                            Text(self.scripture.text)
-                                .font(geometry.size.height > 700 ? FONT_LIGHT_PLUS : FONT_LIGHT)
+                if (selectionCoordinator.scripture != nil) {
+                    VStack(alignment: .leading, spacing: 10.0) {
+                        HStack {
+                            // Header
+                            Text(dateComponentsToString(selectionCoordinator.scripture!.date, format: "E"))
+                            .font(FONT_REG_BIG)
                             
-                            Text(self.scripture.reference)
-                                .font(FONT_MED)
+                            Text(dateComponentsToString(selectionCoordinator.scripture!.date, format: "MMM dd"))
+                            .font(FONT_SEMIBOLD_BIG)
+                            Spacer()
+                            
+                            // Dismiss button
+                            Button(action: {
+                                self.generatedScriptures.setScriptureNotes(id: selectionCoordinator.scripture!.id, notes: notes)
+                                selectionCoordinator.scripture = nil
+                            }) {
+                                Image(systemName: "chevron.down")
+                            }
+                            .font(FONT_SEMIBOLD_BIG)
+                        }
+                        
+                        // Text
+                        ScrollView {
+                            VStack(alignment: .leading, spacing: 10.0) {
+                                Text(selectionCoordinator.scripture!.text)
+                                    .font(geometry.size.height > 700 ? FONT_LIGHT_PLUS : FONT_LIGHT)
+                                
+                                Text(selectionCoordinator.scripture!.reference)
+                                    .font(FONT_MED)
+                            }
                         }
                     }
-                    .animation(nil)
-                }
-                Spacer()
-                    
-                VStack(spacing: 20) {
-                    // Notes
-                    MultilineTextField(text: self.$scripture.notes, isFirstResponder: self.openInEdit, onCommit: {
-                        self.generatedScriptures.setScriptureNotes(id: self.scripture.id, notes: self.scripture.notes)
-                    })
-                    .padding(5)
-                    .frame(height: 210)
-                    .background(self.settings.themeColor.light())
-                    .cornerRadius(10)
-                    
-                    Spacer().frame(height: self.keyboardMoveDist)
-                    
-                    // Share/Gospel Library buttons
-                    Button(action: { self.showShareSheet = true } ) {
-                        Image(systemName: "square.and.arrow.up")
-                        Text("Share")
+                    Spacer()
+     
+                        
+                    VStack(spacing: 20) {
+                        // Notes
+                        MultilineTextField(text: self.$notes, isFirstResponder: self.openInEdit, onCommit: {
+                            self.generatedScriptures.setScriptureNotes(id: selectionCoordinator.scripture!.id, notes: self.notes)
+                        })
+                        .padding(5)
+                        .frame(height: 210)
+                        .background(self.settings.themeColor.light)
+                        .cornerRadius(10)
+                        
+                        Spacer().frame(height: self.keyboardMoveDist)
+                        
+                        // Share/Gospel Library buttons
+                        Button(action: { self.showShareSheet = true } ) {
+                            Image(systemName: "square.and.arrow.up")
+                            Text("Share")
+                        }
+                        
+                        Button(action: { UIApplication.shared.open(gospelLibraryLink(selectionCoordinator.scripture!)) }) {
+                            Image(systemName: "book")
+                            Text("View in Gospel Library")
+                        }
+                        .padding(.bottom, 20)
                     }
-                    
-                    Button(action: { UIApplication.shared.open(gospelLibraryLink(self.scripture)) }) {
-                        Image(systemName: "book")
-                        Text("View in Gospel Library")
+                } else {
+                    // Spacer to keep card at full size during transitions
+                    HStack {
+                        Spacer()
                     }
+                    Spacer()
                 }
             }
-            .padding(20)
+            .padding()
             .font(FONT_SMALL)
-            .foregroundColor(self.settings.themeColor.text())
-            .background(self.settings.themeColor.main())
+            .foregroundColor(self.settings.themeColor.text)
+            .background(self.settings.themeColor.main)
             .cornerRadius(20)
             .onReceive(Publishers.keyboardHeight) { keyboardHeight in
                 let keyboardTop = geometry.frame(in: .global).height - keyboardHeight
                 let focusedTextInputTop = (UIResponder.currentFirstResponder?.globalFrame?.minY ?? 0)
-                    - (self.openInEdit ? geometry.frame(in: .global).height : 0)
-                print("Open keyboard", self.openInEdit)
-                self.keyboardMoveDist = max(0, focusedTextInputTop - keyboardTop - geometry.safeAreaInsets.bottom + 100)
+                self.keyboardMoveDist = max(0, focusedTextInputTop - keyboardTop - geometry.safeAreaInsets.bottom + 130)
                 self.openInEdit = false
             }
             .sheet(isPresented: self.$showShareSheet) {
-                ShareSheet(activityItems: [self.scripture.text, self.scripture.reference])
+                if (selectionCoordinator.scripture != nil) {
+                    ShareSheet(activityItems: [selectionCoordinator.scripture!.text,
+                                               selectionCoordinator.scripture!.reference])
+                }
             }
         }
         .padding()
+        .padding(.vertical, 10)
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 

@@ -29,7 +29,7 @@ struct DashboardView: View {
                 }) {
                     Image(systemName: "chevron.left")
                     .font(.system(size: 22, weight: .semibold))
-                    .foregroundColor(settings.themeColor.dark())
+                    .foregroundColor(settings.themeColor.dark)
                 }
                 Spacer()
             }

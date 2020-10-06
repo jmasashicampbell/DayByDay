@@ -51,7 +51,7 @@ struct TGEntryPickerView: View {
         
         var body: some View {
             let textColor = colorScheme == .dark ? Color.white : Color.black
-            let accentColor = self.settings.themeColor.dark()
+            let accentColor = self.settings.themeColor.dark
             let selected = self.settings.getTomorrowVerse() == self.verse
             
             return HStack {

@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ScriptureList()
+        let contentView = BaseView()
                           .environmentObject(settings)
                           .environmentObject(generatedScriptures)
                           .environmentObject(viewRouter)
@@ -50,8 +50,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        // Reset badge number
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
+        if settings.badgeNumOn {
+            // Reschedule notifications with correct badge numbers
+            let notificationCenter = UNUserNotificationCenter.current()
+            var oldRequests: [UNNotificationRequest] = []
+            notificationCenter.getPendingNotificationRequests { notificationRequests in
+                 for notificationRequest : UNNotificationRequest in notificationRequests {
+                    oldRequests.append(notificationRequest)
+                }
+            }
+            notificationCenter.removeAllPendingNotificationRequests()
+            
+            for (badge, oldRequest) in oldRequests.enumerated() {
+                let content = UNMutableNotificationContent()
+                content.title = oldRequest.content.title
+                content.body = oldRequest.content.body
+                content.sound = oldRequest.content.sound
+                content.userInfo = oldRequest.content.userInfo
+                content.badge = NSNumber(value: badge)
+                
+                let request = UNNotificationRequest(identifier: oldRequest.identifier,
+                                                    content: content,
+                                                    trigger: oldRequest.trigger)
+                notificationCenter.add(request)
+            }
+        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

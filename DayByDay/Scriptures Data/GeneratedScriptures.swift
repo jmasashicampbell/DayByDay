@@ -67,24 +67,31 @@ class GeneratedScriptures: ObservableObject {
         }
         
         // Schedule notification for today
+        var scheduledToday = false
         if (settings.notificationsOn) {
             if let todayScripture = getPast().last {
-                scheduleNotification(scripture: todayScripture, time: settings.notificationsTime)
+                let badge = settings.badgeNumOn ? 1 : 0
+                scheduleNotification(scripture: todayScripture, time: settings.notificationsTime, badge: badge)
+                scheduledToday = true
             }
         }
         
         let today = makeComponents(date: Date())
         let generatedDates = array.map { $0.date }
-        for date in dateRange(startDate: today, size: NUM_FUTURE_SCRIPTURES) {
+        for (i, date) in dateRange(startDate: today, size: NUM_FUTURE_SCRIPTURES).enumerated() {
             if (!generatedDates.contains(date)) {
-                generateScripture(date: date, settings: settings)
+                var badge = 0
+                if settings.badgeNumOn {
+                    badge = scheduledToday ? i + 1 : i
+                }
+                generateScripture(date: date, settings: settings, badge: badge)
             }
         }
         save()
     }
     
     
-    func generateScripture(date: DateComponents, settings: Settings) {
+    func generateScripture(date: DateComponents, settings: Settings, badge: Int) {
         let currentSections = settings.getCurrentSections()
         let newIndex: Int
         var versesPool: [Int] = []
@@ -118,7 +125,7 @@ class GeneratedScriptures: ObservableObject {
         let newScripture = Scripture(index: newIndex, id: id, date: date)
         array.append(newScripture)
         if (settings.notificationsOn) {
-            scheduleNotification(scripture: newScripture, time: settings.notificationsTime)
+            scheduleNotification(scripture: newScripture, time: settings.notificationsTime, badge: badge)
         }
     }
     
@@ -176,11 +183,12 @@ class GeneratedScriptures: ObservableObject {
     }
     
     
-    private func scheduleNotification(scripture: Scripture, time: Date) {
+    private func scheduleNotification(scripture: Scripture, time: Date, badge: Int) {
         let content = UNMutableNotificationContent()
         content.title = "Today's scripture: " + scripture.reference
         content.body = scripture.text
         content.sound = UNNotificationSound.default
+        content.badge = NSNumber(value: badge)
         content.userInfo = ["index": scripture.index, "id": scripture.id, "year": scripture.date.year!, "month": scripture.date.month!, "day": scripture.date.day!]
         
         let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: time)

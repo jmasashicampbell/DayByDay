@@ -147,9 +147,9 @@ extension UIResponder {
 
 // MARK: Structs
 
-struct NotificationsToggleStyle: ToggleStyle {
+struct ThemeToggleStyle: ToggleStyle {
     var label = ""
-    var onColor = Color.green
+    var themeColor: Color
     var offColor = Color(UIColor.systemGray5)
     var thumbColor = Color.white
 
@@ -159,7 +159,7 @@ struct NotificationsToggleStyle: ToggleStyle {
             Spacer()
             Button(action: { withAnimation { configuration.isOn.toggle() } } ) {
                 RoundedRectangle(cornerRadius: 16, style: .circular)
-                    .fill(configuration.isOn ? onColor : offColor)
+                    .fill(configuration.isOn ? themeColor : offColor)
                     .frame(width: 50, height: 29)
                     .overlay(
                         Circle()
