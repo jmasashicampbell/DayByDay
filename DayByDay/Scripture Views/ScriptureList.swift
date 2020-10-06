@@ -34,7 +34,7 @@ struct ScriptureList: View {
                                               height: geometry.size.height)
                                 .flip()
                                 .frame(width: geometry.size.width - 74,
-                                       height: geometry.size.height * 0.9)
+                                       height: geometry.size.height * 0.93)
                                 .animation(nil)
                                 //.shadow(color: self.settings.themeColor.color == ThemeColorOptions.white ? Color(red: 0.92, green: 0.92, blue: 0.92) : Color.white, radius: 10)
                                 Spacer()
@@ -87,12 +87,12 @@ struct ScriptureList_Previews: PreviewProvider {
                 .environmentObject(SelectionCoordinator())
                 .environmentObject(ViewRouter())
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd Generation)"))
-            ScriptureList()
+            /*ScriptureList()
                 .environmentObject(GeneratedScriptures())
                 .environmentObject(Settings())
                 .environmentObject(SelectionCoordinator())
                 .environmentObject(ViewRouter())
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))*/
         }
     }
 }

@@ -124,19 +124,24 @@ struct SettingsView: View {
                 Toggle("", isOn: notificationsOnBinding)
                     .toggleStyle(ThemeToggleStyle(label: "Notifications",
                                                   themeColor: settings.themeColor.main))
-                
-                if (settings.notificationsOn) {
-                    // Notification time picker
-                    DatePicker(selection: $settings.notificationsTime, displayedComponents: .hourAndMinute) {
-                        Text("Time")
-                    }
-                    .accentColor(colorScheme == .dark ? Color.white : Color.black)
                     
-                    // Badge toggle
-                    Toggle("", isOn: $settings.badgeNumOn)
-                        .toggleStyle(ThemeToggleStyle(label: "Badge Number",
-                                                      themeColor: settings.themeColor.main))
+                if (settings.notificationsOn) {
+                    HStack {
+                        Text("Time")
+                        Spacer()
+                        DatePicker(selection: $settings.notificationsTime, displayedComponents: .hourAndMinute) {
+                            Text("Time")
+                        }
+                        .labelsHidden()
+                        .frame(width: 100)
+                    }
                 }
+                .accentColor(colorScheme == .dark ? Color.white : Color.black)
+
+                // Badge toggle
+                Toggle("", isOn: $settings.badgeNumOn)
+                    .toggleStyle(ThemeToggleStyle(label: "Badge Number",
+                                                  themeColor: settings.themeColor.main))
             }
             
             // Theme
@@ -155,6 +160,7 @@ struct SettingsView: View {
             GoToSettingsSheet(presentSheet: self.$presentSheet)
         }
         .navigationBarTitle("Settings", displayMode: .large)
+        .navigationBarBackButtonHidden(true)
         .navigationBarItems(
             leading:
                 Button(action: {

@@ -55,6 +55,7 @@ struct CircleScale: View {
                 if !self.title.isEmpty {
                     Text(self.title)
                         .font(.system(size: min(g.size.height, g.size.width) * 0.08 + 6, weight: .medium))
+                        .offset(y: -10)
                 }
                 
                 //Spacer()

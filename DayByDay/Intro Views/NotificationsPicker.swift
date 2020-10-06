@@ -21,30 +21,19 @@ struct NotificationsPicker: View {
                     .font(FONT_TITLE)
                 Spacer()
             }
-            Spacer()            
+            Spacer()
+                
+            YesNoButton(value: true,
+                        notificationsOn: self.$notificationsOn,
+                        nextDisabled: self.$nextDisabled,
+                        presentSheet: self.$presentSheet,
+                        notificationsTime: $notificationsTime)
             
-            VStack {
-                Spacer().frame(height: 30)
-                HStack {
-                    Spacer()
-                    if (notificationsOn == true) {
-                        DatePicker("Time", selection: self.$notificationsTime, displayedComponents: .hourAndMinute)
-                            .colorInvert()
-                            .colorMultiply(Color.white)
-                            .labelsHidden()
-                            .transition(.opacity)
-                    }
-                    Spacer()
-                }
-            }
-            .frame(height: notificationsOn == true ? 250 : 74)
-            .background(notificationsOn == true ? STARTING_THEME_SELECTED : STARTING_THEME_UNSELECTED)
-            .cornerRadius(20)
-            .scaleEffect(notificationsOn == true ? 1.0 : 0.95)
-            .overlay(YesNoButton(value: true, notificationsOn: self.$notificationsOn, nextDisabled: self.$nextDisabled, presentSheet: self.$presentSheet), alignment: .top)
-            .animation(.spring())
-            
-            YesNoButton(value: false, notificationsOn: self.$notificationsOn, nextDisabled: self.$nextDisabled, presentSheet: self.$presentSheet)
+            YesNoButton(value: false,
+                        notificationsOn: self.$notificationsOn,
+                        nextDisabled: self.$nextDisabled,
+                        presentSheet: self.$presentSheet,
+                        notificationsTime: .constant(Date()))
             Spacer()
         }
         .padding(20)
@@ -58,6 +47,7 @@ struct NotificationsPicker: View {
         @Binding var notificationsOn: Bool?
         @Binding var nextDisabled: Bool
         @Binding var presentSheet: Bool
+        @Binding var notificationsTime: Date
         
         var body: some View {
             var text = value ? "Yes" : "No"
@@ -65,30 +55,15 @@ struct NotificationsPicker: View {
                 text += ", at"
             }
             
-            return Button(action: {
-                if self.value {
-                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                        if success {
-                            DispatchQueue.main.async {
-                                withAnimation { self.notificationsOn = true }
-                                self.nextDisabled = false
-                            }
-                        } else {
-                            self.presentSheet = true
-                        }
+            return Button(action: switchChoice) {
+                HStack {
+                    Spacer()
+                    Text(text)
+                        .font(FONT_TITLE)
+                    if (value && notificationsOn == true) {
+                        Spacer().frame(width: 130)
                     }
-                } else {
-                    withAnimation { self.notificationsOn = false }
-                    self.nextDisabled = false
-                }
-            }) {
-                VStack {
-                    HStack {
-                        Spacer()
-                        Text(text)
-                            .font(FONT_TITLE)
-                        Spacer()
-                    }
+                    Spacer()
                 }
                 .padding(20)
                 .foregroundColor(Color.white)
@@ -98,6 +73,41 @@ struct NotificationsPicker: View {
                 .animation(.linear(duration: 0.2))
             }
             .buttonStyle(ScaleButtonStyle(scaleFactor: 0.95, animated: false))
+            .overlay(
+                Group {
+                    if (value && notificationsOn == true) {
+                        Spacer().frame(width: 40)
+                        DatePicker("Time", selection: self.$notificationsTime, displayedComponents: .hourAndMinute)
+                            .datePickerStyle(DefaultDatePickerStyle())
+                            .colorMultiply(Color(hue: 0.00, saturation: 1.0, brightness: 1.0))
+                            .contrast(1.5)
+                            .colorInvert()
+                            .labelsHidden()
+                            .transition(.opacity)
+                            .frame(width: 100, height: 20)
+                            .scaleEffect(1.5)
+                            .offset(x: 60, y: -27)
+                    }
+                }
+            )
+        }
+        
+        func switchChoice() {
+            if self.value {
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                    if success {
+                        DispatchQueue.main.async {
+                            withAnimation { self.notificationsOn = true }
+                            self.nextDisabled = false
+                        }
+                    } else {
+                        self.presentSheet = true
+                    }
+                }
+            } else {
+                withAnimation { self.notificationsOn = false }
+                self.nextDisabled = false
+            }
         }
     }
 }
