@@ -37,7 +37,7 @@ struct ScriptureDetail: View {
                             
                             // Dismiss button
                             Button(action: {
-                                self.generatedScriptures.setScriptureNotes(id: selectionCoordinator.scripture!.id, notes: selectionCoordinator.scripture!.notes)
+                                self.generatedScriptures.setScriptureNotes(id: selectionCoordinator.scripture!.id, notes: notes)
                                 selectionCoordinator.scripture = nil
                             }) {
                                 Image(systemName: "chevron.down")
