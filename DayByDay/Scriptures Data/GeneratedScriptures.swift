@@ -14,7 +14,7 @@ import UserNotifications
 
 class GeneratedScriptures: ObservableObject {
     @Published var array: [Scripture]
-    let NUM_FUTURE_SCRIPTURES = 30
+    let NUM_FUTURE_SCRIPTURES = 60
     
     
     init() {
