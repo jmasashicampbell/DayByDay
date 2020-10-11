@@ -34,7 +34,7 @@ struct ScriptureList: View {
                                               height: geometry.size.height)
                                 .flip()
                                 .frame(width: geometry.size.width - 74,
-                                       height: geometry.size.height * 0.93)
+                                       height: geometry.size.height * 0.9)
                                 .animation(nil)
                                 //.shadow(color: self.settings.themeColor.color == ThemeColorOptions.white ? Color(red: 0.92, green: 0.92, blue: 0.92) : Color.white, radius: 10)
                                 Spacer()

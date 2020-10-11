@@ -110,8 +110,8 @@ struct ScriptureDetail: View {
             }
         }
         .padding()
-        .padding(.vertical, 10)
-        .edgesIgnoringSafeArea(.bottom)
+        .padding(.bottom, 10)
+        .ignoresSafeArea()
     }
 }
 
