@@ -14,7 +14,6 @@ struct MultilineTextField: View {
     @Binding var text: String
     @State var isFirstResponder: Bool
     var onCommit: (() -> Void)?
-    @State private var viewHeight: CGFloat = 40
     
     private var internalText: Binding<String> {
         Binding<String>(get: { self.text } ) {
@@ -25,115 +24,117 @@ struct MultilineTextField: View {
     var body: some View {
         let showPlaceholder = self.text.isEmpty && !self.isFirstResponder
         
-        return Button(action: {
-            self.isFirstResponder = true
-        }) {
-            if showPlaceholder {
-                VStack {
-                    Spacer()
-                    HStack {
+        return GeometryReader { geometry in
+            Button(action: {
+                self.isFirstResponder = true
+            }) {
+                if showPlaceholder {
+                    VStack {
                         Spacer()
-                        Image(systemName: "plus")
-                            .font(.system(size: 50, weight: .thin))
+                        HStack {
+                            Spacer()
+                            Image(systemName: "plus")
+                                .font(.system(size: 50, weight: .thin))
+                            Spacer()
+                        }
                         Spacer()
                     }
-                    Spacer()
-                }
-            } else {
-                ScrollView {
-                    UITextViewWrapper(text: self.internalText,
-                                      calculatedHeight: $viewHeight,
-                                      isFirstResponder: self.$isFirstResponder,
-                                      onDone: onCommit)
-                    .frame(minHeight: viewHeight, maxHeight: viewHeight)
+                } else {
+                    ScrollView {
+                        UITextViewWrapper(text: self.internalText,
+                                               height: geometry.size.height,
+                                               isFirstResponder: self.$isFirstResponder,
+                                               onDone: onCommit)
+                        .frame(minHeight: geometry.size.height, maxHeight: geometry.size.height)
+                    }
                 }
             }
+            .buttonStyle(ScaleButtonStyle(scaleFactor: showPlaceholder ? 0.8 : 1.0))
         }
-        .buttonStyle(ScaleButtonStyle(scaleFactor: showPlaceholder ? 0.8 : 1.0))
     }
 }
 
-
-private struct UITextViewWrapper: UIViewRepresentable {
-    typealias UIViewType = UITextView
+struct UITextViewWrapper: UIViewRepresentable {
     @Binding var text: String
-    @Binding var calculatedHeight: CGFloat
+    var height: CGFloat
     @Binding var isFirstResponder: Bool
     var onDone: (() -> Void)?
-
-    func makeUIView(context: UIViewRepresentableContext<UITextViewWrapper>) -> UITextView {
-        let textField = UITextView()
-        textField.delegate = context.coordinator
-
-        textField.isEditable = true
-        textField.font = UIFont.preferredFont(forTextStyle: .body)
-        textField.textColor = UIColor.white
-        textField.isSelectable = true
-        textField.isUserInteractionEnabled = true
-        textField.isScrollEnabled = false
-        textField.backgroundColor = UIColor.clear
-        if nil != onDone {
-            textField.returnKeyType = .done
+    
+    func makeUIView(context: Context) -> UITextView {
+        let textView = UITextView()
+        textView.isEditable = true
+        textView.isUserInteractionEnabled = true
+        textView.isScrollEnabled = true
+        textView.alwaysBounceVertical = false
+        textView.text = text
+        textView.font = UIFont.preferredFont(forTextStyle: .body)
+        textView.backgroundColor = UIColor.clear
+        if onDone != nil {
+            textView.returnKeyType = .done
         }
-
-        textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         if isFirstResponder {
-            textField.becomeFirstResponder()
+            textView.becomeFirstResponder()
         }
-        return textField
-    }
+        
+        context.coordinator.textView = textView
+        textView.delegate = context.coordinator
+        textView.layoutManager.delegate = context.coordinator
 
-    func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<UITextViewWrapper>) {
+        return textView
+    }
+    
+    func updateUIView(_ uiView: UITextView, context: Context) {
         if isFirstResponder {
             uiView.becomeFirstResponder()
         } else {
             uiView.resignFirstResponder()
         }
-        if uiView.text != self.text {
-            uiView.text = self.text
-        }
-        UITextViewWrapper.recalculateHeight(view: uiView, result: $calculatedHeight)
+        uiView.text = text
     }
-
-    private static func recalculateHeight(view: UIView, result: Binding<CGFloat>) {
-        let newSize = view.sizeThatFits(CGSize(width: view.frame.size.width, height: CGFloat.greatestFiniteMagnitude))
-        if result.wrappedValue != newSize.height {
-            DispatchQueue.main.async {
-                result.wrappedValue = newSize.height // call in next render cycle.
-            }
-        }
-    }
-
+    
     func makeCoordinator() -> Coordinator {
-        return Coordinator(text: $text, height: $calculatedHeight, isFirstResponder: $isFirstResponder, onDone: onDone)
+        return Coordinator(dynamicHeightTextField: self, isFirstResponder: $isFirstResponder, onDone: onDone)
+    }
+}
+
+class Coordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegate  {
+    var dynamicHeightTextField: UITextViewWrapper
+    var isFirstResponder: Binding<Bool>
+    var onDone: (() -> Void)?
+    weak var textView: UITextView?
+
+    init(dynamicHeightTextField: UITextViewWrapper, isFirstResponder: Binding<Bool>, onDone: (() -> Void)? = nil) {
+        self.dynamicHeightTextField = dynamicHeightTextField
+        self.isFirstResponder = isFirstResponder
+        self.onDone = onDone
     }
 
-    final class Coordinator: NSObject, UITextViewDelegate {
-        var text: Binding<String>
-        var calculatedHeight: Binding<CGFloat>
-        var isFirstResponder: Binding<Bool>
-        var onDone: (() -> Void)?
+    func textViewDidChange(_ textView: UITextView) {
+        self.dynamicHeightTextField.text = textView.text
+    }
 
-        init(text: Binding<String>, height: Binding<CGFloat>, isFirstResponder: Binding<Bool>, onDone: (() -> Void)? = nil) {
-            self.text = text
-            self.calculatedHeight = height
-            self.isFirstResponder = isFirstResponder
-            self.onDone = onDone
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if let onDone = self.onDone, text == "\n" {
+            self.isFirstResponder.wrappedValue = false
+            textView.resignFirstResponder()
+            onDone()
+            return false
         }
-
-        func textViewDidChange(_ uiView: UITextView) {
-            text.wrappedValue = uiView.text
-            UITextViewWrapper.recalculateHeight(view: uiView, result: calculatedHeight)
-        }
-
-        func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-            if let onDone = self.onDone, text == "\n" {
-                self.isFirstResponder.wrappedValue = false
-                textView.resignFirstResponder()
-                onDone()
-                return false
+        return true
+    }
+    
+    func layoutManager(_ layoutManager: NSLayoutManager,
+                       didCompleteLayoutFor textContainer: NSTextContainer?,
+                       atEnd layoutFinishedFlag: Bool) {
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let view = self?.textView else {
+                return
             }
-            return true
+            let size = view.sizeThatFits(view.bounds.size)
+            if self?.dynamicHeightTextField.height != size.height {
+                self?.dynamicHeightTextField.height = size.height
+            }
         }
     }
 }
