@@ -69,6 +69,7 @@ struct UITextViewWrapper: UIViewRepresentable {
         textView.text = text
         textView.font = UIFont.preferredFont(forTextStyle: .body)
         textView.backgroundColor = UIColor.clear
+        textView.textColor = UIColor.white
         if onDone != nil {
             textView.returnKeyType = .done
         }

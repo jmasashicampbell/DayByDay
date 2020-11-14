@@ -67,12 +67,10 @@ class GeneratedScriptures: ObservableObject {
         }
         
         // Schedule notification for today
-        var scheduledToday = false
         if (settings.notificationsOn) {
             if let todayScripture = getPast().last {
                 let badge = settings.badgeNumOn ? 1 : 0
                 scheduleNotification(scripture: todayScripture, time: settings.notificationsTime, badge: badge)
-                scheduledToday = true
             }
         }
         
@@ -80,10 +78,7 @@ class GeneratedScriptures: ObservableObject {
         let generatedDates = array.map { $0.date }
         for (i, date) in dateRange(startDate: today, size: NUM_FUTURE_SCRIPTURES).enumerated() {
             if (!generatedDates.contains(date)) {
-                var badge = 0
-                if settings.badgeNumOn {
-                    badge = scheduledToday ? i + 1 : i
-                }
+                let badge = settings.badgeNumOn ? i : 0
                 generateScripture(date: date, settings: settings, badge: badge)
             }
         }
