@@ -19,8 +19,8 @@ struct ScriptureDetail: View {
     @Binding var openInEdit: Bool
     @State var notes: String
     @State private var keyboardMoveDist: CGFloat = 0
+    @State var lastKeyboardHeight: CGFloat = 0
     @State private var showShareSheet = false
-    
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
@@ -97,10 +97,13 @@ struct ScriptureDetail: View {
             .background(self.settings.themeColor.main)
             .cornerRadius(20)
             .onReceive(Publishers.keyboardHeight) { keyboardHeight in
-                let keyboardTop = geometry.frame(in: .global).height - keyboardHeight
-                let focusedTextInputTop = (UIResponder.currentFirstResponder?.globalFrame?.minY ?? 0)
-                self.keyboardMoveDist = max(0, focusedTextInputTop - keyboardTop - geometry.safeAreaInsets.bottom + 130)
-                self.openInEdit = false
+                if keyboardHeight != self.lastKeyboardHeight {
+                    let keyboardTop = geometry.frame(in: .global).height - keyboardHeight
+                    let focusedTextInputTop = (UIResponder.currentFirstResponder?.globalFrame?.minY ?? 0)
+                    self.keyboardMoveDist = max(0, focusedTextInputTop - keyboardTop - geometry.safeAreaInsets.bottom + 130)
+                    self.openInEdit = false
+                    self.lastKeyboardHeight = keyboardHeight
+                }
             }
             .sheet(isPresented: self.$showShareSheet) {
                 if (selectionCoordinator.scripture != nil) {

@@ -33,6 +33,7 @@
 		CF6767F02486DAC40098DECF /* icon_yellow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767E42486DAC40098DECF /* icon_yellow@3x.png */; };
 		CF6767F12486DAC40098DECF /* icon_brown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767E52486DAC40098DECF /* icon_brown@3x.png */; };
 		CF686DE824B8E374005F7287 /* sorted_indices.json in Resources */ = {isa = PBXBuildFile; fileRef = CF686DE724B8E374005F7287 /* sorted_indices.json */; };
+		CF7AA5942533DC1600D122F0 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AA5932533DC1600D122F0 /* AboutView.swift */; };
 		CF80F904245B79EF001424C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F903245B79EF001424C4 /* AppDelegate.swift */; };
 		CF80F906245B79EF001424C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F905245B79EF001424C4 /* SceneDelegate.swift */; };
 		CF80F908245B79EF001424C4 /* ScriptureDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF80F907245B79EF001424C4 /* ScriptureDetail.swift */; };
@@ -91,6 +92,7 @@
 		CF6767E42486DAC40098DECF /* icon_yellow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_yellow@3x.png"; path = "DayByDay/icon_yellow@3x.png"; sourceTree = SOURCE_ROOT; };
 		CF6767E52486DAC40098DECF /* icon_brown@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_brown@3x.png"; path = "DayByDay/icon_brown@3x.png"; sourceTree = SOURCE_ROOT; };
 		CF686DE724B8E374005F7287 /* sorted_indices.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sorted_indices.json; sourceTree = "<group>"; };
+		CF7AA5932533DC1600D122F0 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		CF80F900245B79EF001424C4 /* Day by Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Day by Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF80F903245B79EF001424C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF80F905245B79EF001424C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				CFF462D724B909BF0032B738 /* TopicalGuidePickerView.swift */,
 				CF9FA04C2469ED4D00772D2B /* StartingPickerView.swift */,
 				CF9297EE24B920590032AF78 /* TGStartingPickerView.swift */,
+				CF7AA5932533DC1600D122F0 /* AboutView.swift */,
 			);
 			path = "Settings Views";
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				CF80F924245DD343001424C4 /* ScriptureList.swift in Sources */,
 				CFA5139E24898D5E00F770C6 /* SectionPicker.swift in Sources */,
 				CF80F904245B79EF001424C4 /* AppDelegate.swift in Sources */,
+				CF7AA5942533DC1600D122F0 /* AboutView.swift in Sources */,
 				CF0F3754246BACF80096554B /* PreviewContent.swift in Sources */,
 				CF492CAC2474C4DC00B7949C /* Colors.swift in Sources */,
 				CF811ECE247792B40012116C /* TypePickerView.swift in Sources */,
