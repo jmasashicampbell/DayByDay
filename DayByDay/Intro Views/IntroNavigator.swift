@@ -130,6 +130,7 @@ struct IntroNavigator: View {
         self.settings.pickSections[self.pickType.rawValue] = self.sectionsList
         self.settings.notificationsOn = self.notificationsOn!
         self.settings.notificationsTime = self.notificationsTime
+        self.settings.badgeNumOn = true
         self.settings.tomorrowVerses[self.pickType.rawValue] = startingVerse
         self.settings.save(firstTime: true)
         

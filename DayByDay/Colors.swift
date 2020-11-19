@@ -25,9 +25,9 @@ struct ThemeColor {
                                dark: 0.2,
                                textShade: 1.0),
         
-        .sage: ThemeColorSet(r: 0.69,
-                             g: 0.78,
-                             b: 0.64,
+        .sage: ThemeColorSet(r: 0.62,
+                             g: 0.73,
+                             b: 0.6,
                              light: 0.2,
                              dark: 0.25,
                              textShade: 1.0),

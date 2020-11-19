@@ -154,6 +154,12 @@ struct SettingsView: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .frame(height: 42)
             }
+            
+            Section {
+                NavigationLink(destination: AboutView()) {
+                    Text("Send Feedback")
+                }
+            }
         }
         .padding(.top, 10)
         .sheet(isPresented: self.$presentSheet) {
