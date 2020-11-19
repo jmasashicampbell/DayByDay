@@ -156,7 +156,11 @@ struct SettingsView: View {
             }
             
             Section {
-                NavigationLink(destination: AboutView()) {
+                Button(action: {
+                    if let url = URL(string: "https://jmcampbellapp.wordpress.com/contact/") {
+                        UIApplication.shared.open(url)
+                    }
+                }) {
                     Text("Send Feedback")
                 }
             }
