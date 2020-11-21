@@ -154,6 +154,16 @@ struct SettingsView: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .frame(height: 42)
             }
+            
+            Section {
+                Button(action: {
+                    if let url = URL(string: "https://jmcampbellapp.wordpress.com/contact/") {
+                        UIApplication.shared.open(url)
+                    }
+                }) {
+                    Text("Send Feedback")
+                }
+            }
         }
         .padding(.top, 10)
         .sheet(isPresented: self.$presentSheet) {

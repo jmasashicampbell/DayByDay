@@ -93,6 +93,14 @@ class ScriptureCompletion {
         for scripture in generatedScriptures.getPast() {
             array[scripture.index] = true
         }
+        /*for i in 0 ..< array.count {
+            var x = 4
+            if i < 24000 { x = 18 }
+            else if i < 31000 { x = 7 }
+            else if i < 37000 { x = 2 }
+            else if i < 41300 { x = 9 }
+            array[i] = Int.random(in: 0..<x) == 0
+        }*/
     }
     
     func getCompletedNum(_ range: Node) -> Int {

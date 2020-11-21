@@ -21,7 +21,9 @@ struct CircleScale: View {
     
     var body: some View {
         let fraction = Double(verses) / Double(maxVerses)
-        let percentage = round(fraction * 10000) / 100.0
+        let percentage = fraction > 0.1
+                         ? round(fraction * 1000) / 10.0
+                         : round(fraction * 10000) / 100.0
         let darkMode = colorScheme == .dark
         let backgroundGray = darkMode ? 0.2 : 0.9
         let textGray = darkMode ? 0.8 : 0.4

@@ -213,15 +213,17 @@ struct SectionPickerSheet: View {
     var body: some View {
         VStack {
             HStack {
-                if (node.parent != nil) {
-                    Button(action: {
-                        self.node = self.node.parent!
-                        self.depth = (self.node.name == "Doctrine and Covenants" ? 2 : 1)
-                    }) {
-                        Image(systemName: "chevron.left")
-                    }
+                Button(action: {
+                    self.node = self.node.parent!
+                    self.depth = (self.node.name == "Doctrine and Covenants" ? 2 : 1)
+                }) {
+                    Image(systemName: "chevron.left")
                 }
+                .foregroundColor(node.parent == nil ? Color.white : STARTING_THEME_COLOR)
+                .disabled(node.parent == nil)
+                
                 Spacer()
+                
                 Button(action: {
                     self.showSheet = false
                 }) {
@@ -229,9 +231,10 @@ struct SectionPickerSheet: View {
                 }
             }
             .font(FONT_SEMIBOLD_BIG)
-            //.padding(.top, 20)
+            .foregroundColor(STARTING_THEME_COLOR)
             .padding(20)
             .padding(.bottom, -10)
+            
             Form {
                 if (self.depth < self.maxDepth) {
                     NavigationRows(node: $node, depth: $depth)
@@ -240,6 +243,7 @@ struct SectionPickerSheet: View {
                 }
             }
         }
+        .font(FONT_MED)
     }
     
     struct NavigationRows: View {
@@ -255,7 +259,6 @@ struct SectionPickerSheet: View {
                     } ) {
                         Text(child.name)
                         .foregroundColor(STARTING_THEME_COLOR)
-                        .font(FONT_MED)
                     }
                 }
             }
@@ -283,12 +286,10 @@ struct SectionPickerSheet: View {
                                     Spacer()
                                 }
                                 .foregroundColor(STARTING_THEME_COLOR)
-                                .font(FONT_MED)
                             }
                         } else {
                             Text(child.name)
                             .foregroundColor(Color.gray)
-                            .font(FONT_MED)
                         }
                     }
                 }
@@ -339,6 +340,8 @@ struct EntryPickerSheet: View {
             .navigationBarTitle("")
             .navigationBarHidden(true)
         }
+        .foregroundColor(STARTING_THEME_COLOR)
+        .font(FONT_MED)
     }
 }
 
@@ -385,6 +388,7 @@ struct EntryLetterSheet: View {
                 }
             }
         }
+        .foregroundColor(STARTING_THEME_COLOR)
         .navigationBarTitle("")
         .navigationBarHidden(true)
     }
