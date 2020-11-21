@@ -93,7 +93,10 @@ class ScriptureCompletion {
         for scripture in generatedScriptures.getPast() {
             array[scripture.index] = true
         }
-        /*for i in 0 ..< array.count {
+        
+        /*
+        // Sample data
+        for i in 0 ..< array.count {
             var x = 4
             if i < 24000 { x = 18 }
             else if i < 31000 { x = 7 }

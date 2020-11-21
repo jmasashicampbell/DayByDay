@@ -77,7 +77,7 @@ struct ScriptureDetail: View {
                             Text("Share")
                         }
                         
-                        Button(action: { UIApplication.shared.open(gospelLibraryLink(selectionCoordinator.scripture!)) }) {
+                        Button(action: { openGospelLibraryLink(selectionCoordinator.scripture!) }) {
                             Image(systemName: "book")
                             Text("View in Gospel Library")
                         }
@@ -125,7 +125,7 @@ struct ScriptureDetail: View {
 }*/
 
 
-func gospelLibraryLink(_ scripture: Scripture) -> URL {
+func openGospelLibraryLink(_ scripture: Scripture) {
     let path = scriptureTree.getPath(index: scripture.index)
     let dAndC = path[1] == "Doctrine and Covenants"
     
@@ -134,7 +134,16 @@ func gospelLibraryLink(_ scripture: Scripture) -> URL {
     let chapter = dAndC ? path[2].components(separatedBy: " ").last! : path[3].components(separatedBy: " ").last!
     let verse = dAndC ? path[3] : path[4]
     
-    return URL(string: "gospellibrary://content/scriptures/\(volume)/\(book)/\(chapter).\(verse)?lang=eng")!
+    let pathStr = "scriptures/\(volume)/\(book)/\(chapter).\(verse)?lang=eng"
+    let gospelLibraryURL = URL(string: "gospellibrary://content/\(pathStr)")!
+    print(UIApplication.shared.canOpenURL(gospelLibraryURL))
+    
+    if UIApplication.shared.canOpenURL(gospelLibraryURL) { // if Gospel Library is installed
+        UIApplication.shared.open(gospelLibraryURL)
+    } else {
+        let safariURL = URL(string: "https://churchofjesuschrist.org/study/\(pathStr)")!
+        UIApplication.shared.open(safariURL)
+    }
 }
 
 
@@ -229,3 +238,4 @@ let ABBR = ["Old Testament": "ot",
             "Joseph Smith\u{2014}Matthew": "js-m",
             "Joseph Smith\u{2014}History": "js-h",
             "Articles of Faith": "a-of-f"]
+
