@@ -35,8 +35,7 @@ struct ScriptureList: View {
                                 .flip()
                                 .frame(width: geometry.size.width - 74,
                                        height: geometry.size.height * 0.9)
-                                .animation(nil)
-                                //.shadow(color: self.settings.themeColor.color == ThemeColorOptions.white ? Color(red: 0.92, green: 0.92, blue: 0.92) : Color.white, radius: 10)
+                                //.shadow(color: self.settings.themeColor.color == ThemeColorOptions.white ? Color(white: 0.92) : Color.white, radius: 10)
                                 Spacer()
                             }
                         }
@@ -49,15 +48,13 @@ struct ScriptureList: View {
                     leading:
                         NavigationLink(destination: DashboardView()) {
                             Image(systemName: "gauge")
-                                .resizable()
-                                .frame(width: 28, height: 28)
+                                .font(.system(size: 20, weight: .semibold))
                                 .foregroundColor(self.settings.themeColor.dark)
                         },
                     trailing:
                         NavigationLink(destination: SettingsView()) {
                             Image(systemName: "gear")
-                                .resizable()
-                                .frame(width: 28, height: 28)
+                                .font(.system(size: 20, weight: .semibold))
                                 .foregroundColor(self.settings.themeColor.dark)
                         }
                 )
@@ -68,7 +65,7 @@ struct ScriptureList: View {
                     .environmentObject(settings)
                     .environmentObject(generatedScriptures)
                     .environmentObject(selectionCoordinator)
-                    //.shadow(Color(red: 0.9, green: 0.9, blue: 0.9), radius: 10)
+                    //.shadow(Color(white: 0.9), radius: 10)
             }
         }
         .onAppear { self.generatedScriptures.update() }

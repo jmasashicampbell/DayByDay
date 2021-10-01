@@ -42,7 +42,7 @@ struct IntroNavigator: View {
                                sectionsList: self.$sectionsList, 
                                transitionType: self.forward ? forwardTransition : backwardTransition)
                 } else if (page == 2) {
-                    SectionPicker(pickType: self.pickType,
+                    IntroSectionPicker(pickType: self.pickType,
                                   sectionsList: self.$sectionsList,
                                   nextDisabled: self.$nextDisabled)
                 } else if (page == 3) {
@@ -54,7 +54,7 @@ struct IntroNavigator: View {
                 }
             }
             .transition(self.forward ? forwardTransition : backwardTransition)
-            .animation(.spring())
+            .animation(.spring(), value: page)
             
             HStack {
                 if (self.page != 0) {

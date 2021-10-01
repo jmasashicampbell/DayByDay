@@ -70,7 +70,7 @@ struct NotificationsPicker: View {
                 .background(value == notificationsOn ? STARTING_THEME_SELECTED : STARTING_THEME_UNSELECTED)
                 .cornerRadius(20)
                 .scaleEffect(value == notificationsOn ? 1.0 : 0.95)
-                .animation(.linear(duration: 0.2))
+                .animation(.linear(duration: 0.2), value: notificationsOn)
             }
             .buttonStyle(ScaleButtonStyle(scaleFactor: 0.95, animated: false))
             .overlay(
@@ -86,7 +86,7 @@ struct NotificationsPicker: View {
                             .transition(.opacity)
                             .frame(width: 100, height: 20)
                             .scaleEffect(1.5)
-                            .offset(x: 60, y: -27)
+                            .offset(x: 60, y: 0)
                     }
                 }
             )

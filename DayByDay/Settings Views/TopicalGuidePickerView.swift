@@ -10,28 +10,44 @@ import SwiftUI
 
 struct TopicalGuidePickerView: View {
     @EnvironmentObject var settings: Settings
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @State var titles: [[String]]
     
     var body: some View {
         Form {
             List {
                 ForEach(ALPHABET, id: \.self) { letter in
-                    NavigationLink(destination: TopicalGuideLetterView(letter: letter)) {
+                    NavigationLink(destination: TopicalGuideLetterView(letter: letter, chosenTitles: $titles)) {
                         HStack {
                             Text(letter)
                             Spacer()
-                            if self.countSelectedTitlesFor(letter: letter, settings: self.settings) > 0 {
-                                Text(String(self.countSelectedTitlesFor(letter: letter, settings: self.settings)))
+                            if self.countSelectedTitlesFor(letter: letter) > 0 {
+                                Text(String(self.countSelectedTitlesFor(letter: letter)))
                             }
                         }
                     }
                 }
             }
         }
+        .navigationBarItems(
+            leading:
+                Button(action: {
+                    settings.updatePickSections(sections: titles)
+                    self.mode.wrappedValue.dismiss()
+                }) {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 17, weight: .semibold))
+                        Text("Settings")
+                    }
+                    .foregroundColor(settings.themeColor.dark)
+                }
+        )
+        .navigationBarBackButtonHidden(true)
         .navigationBarTitle("Topical Guide")
     }
     
-    private func countSelectedTitlesFor(letter: String, settings: Settings) -> Int {
-        let titles = settings.pickSections[settings.pickType.rawValue]!
+    private func countSelectedTitlesFor(letter: String) -> Int {
         return titles.filter { $0.first!.first!.uppercased() == letter }.count
     }
 
@@ -40,7 +56,9 @@ struct TopicalGuidePickerView: View {
 struct TopicalGuideLetterView: View {
     @EnvironmentObject var settings: Settings
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var letter: String
+    @Binding var chosenTitles: [[String]]
     
     var body: some View {
         let textColor = colorScheme == .dark ? Color.white : Color.black
@@ -52,26 +70,40 @@ struct TopicalGuideLetterView: View {
             List {
                 ForEach(titles, id: \.self) { title in
                     Button(action: {
-                        if (self.settings.pickSectionsContains(path: [title])) {
-                            self.settings.removePickSection(path: [title])
+                        if chosenTitles.contains([title]) {
+                            chosenTitles = chosenTitles.filter{ $0 != [title] }
                         } else {
-                            self.settings.addPickSection(path: [title])
+                            chosenTitles.append([title])
                         }
                     }) {
                         HStack {
                             Text(title)
                             Spacer()
-                            if (self.settings.pickSectionsContains(path: [title])) {
+                            if (chosenTitles.contains([title])) {
                                 Image(systemName: "checkmark")
                                     .font(.system(size: 18, weight: .semibold))
                                     .imageScale(.medium)
                             }
                         }
-                        .foregroundColor(self.settings.pickSectionsContains(path: [title]) ? accentColor : textColor)
+                        .foregroundColor(chosenTitles.contains([title]) ? accentColor : textColor)
                     }
                 }
             }
         }
+        .navigationBarItems(
+            leading:
+                Button(action: {
+                    self.mode.wrappedValue.dismiss()
+                }) {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 17, weight: .semibold))
+                        Text("Topical Guide")
+                    }
+                    .foregroundColor(settings.themeColor.dark)
+                }
+        )
+        .navigationBarBackButtonHidden(true)
         .navigationBarTitle(letter)
     }
 }
@@ -79,7 +111,7 @@ struct TopicalGuideLetterView: View {
 
 struct TopicalGuidePickerView_Previews: PreviewProvider {
     static var previews: some View {
-        TopicalGuidePickerView()
+        TopicalGuidePickerView(titles: [])
         .environmentObject(Settings())
     }
 }

@@ -13,7 +13,7 @@
 		CF52509924B8E59B0009979F /* GoToSettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52509824B8E59B0009979F /* GoToSettingsSheet.swift */; };
 		CF53A2D624650BB20066F7A3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D524650BB20066F7A3 /* SettingsView.swift */; };
 		CF53A2D82465197A0066F7A3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D72465197A0066F7A3 /* Settings.swift */; };
-		CF53A2DA24667E0F0066F7A3 /* PickPickerVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D924667E0F0066F7A3 /* PickPickerVIew.swift */; };
+		CF53A2DA24667E0F0066F7A3 /* SectionPickerVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2D924667E0F0066F7A3 /* SectionPickerVIew.swift */; };
 		CF53A2DC246680AE0066F7A3 /* ScriptureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2DB246680AE0066F7A3 /* ScriptureData.swift */; };
 		CF53A2DE24668E5C0066F7A3 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53A2DD24668E5C0066F7A3 /* General.swift */; };
 		CF6767D62486D8530098DECF /* icon_sage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6767D22486D8530098DECF /* icon_sage@2x.png */; };
@@ -54,7 +54,7 @@
 		CF9FA04B24679A8500772D2B /* old_testament_map.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9FA04624679A8500772D2B /* old_testament_map.json */; };
 		CF9FA04D2469ED4D00772D2B /* StartingPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9FA04C2469ED4D00772D2B /* StartingPickerView.swift */; };
 		CFA5139C248974BF00F770C6 /* RandomPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA5139B248974BF00F770C6 /* RandomPicker.swift */; };
-		CFA5139E24898D5E00F770C6 /* SectionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA5139D24898D5E00F770C6 /* SectionPicker.swift */; };
+		CFA5139E24898D5E00F770C6 /* IntroSectionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA5139D24898D5E00F770C6 /* IntroSectionPicker.swift */; };
 		CFCADD92248B63B40094FF1C /* IntroCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCADD91248B63B40094FF1C /* IntroCover.swift */; };
 		CFD69CCD24B52F3900EC6B9A /* CircleScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD69CCC24B52F3900EC6B9A /* CircleScale.swift */; };
 		CFD69CD324B57D1700EC6B9A /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD69CD224B57D1700EC6B9A /* DashboardView.swift */; };
@@ -72,7 +72,7 @@
 		CF52509824B8E59B0009979F /* GoToSettingsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoToSettingsSheet.swift; sourceTree = "<group>"; };
 		CF53A2D524650BB20066F7A3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		CF53A2D72465197A0066F7A3 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		CF53A2D924667E0F0066F7A3 /* PickPickerVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPickerVIew.swift; sourceTree = "<group>"; };
+		CF53A2D924667E0F0066F7A3 /* SectionPickerVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPickerVIew.swift; sourceTree = "<group>"; };
 		CF53A2DB246680AE0066F7A3 /* ScriptureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureData.swift; sourceTree = "<group>"; };
 		CF53A2DD24668E5C0066F7A3 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		CF6767D22486D8530098DECF /* icon_sage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_sage@2x.png"; path = "DayByDay/icon_sage@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -115,7 +115,7 @@
 		CF9FA04624679A8500772D2B /* old_testament_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = old_testament_map.json; sourceTree = "<group>"; };
 		CF9FA04C2469ED4D00772D2B /* StartingPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingPickerView.swift; sourceTree = "<group>"; };
 		CFA5139B248974BF00F770C6 /* RandomPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPicker.swift; sourceTree = "<group>"; };
-		CFA5139D24898D5E00F770C6 /* SectionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPicker.swift; sourceTree = "<group>"; };
+		CFA5139D24898D5E00F770C6 /* IntroSectionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroSectionPicker.swift; sourceTree = "<group>"; };
 		CFCADD91248B63B40094FF1C /* IntroCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroCover.swift; sourceTree = "<group>"; };
 		CFD69CCC24B52F3900EC6B9A /* CircleScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleScale.swift; sourceTree = "<group>"; };
 		CFD69CD224B57D1700EC6B9A /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 				CF53A2D524650BB20066F7A3 /* SettingsView.swift */,
 				CF52509824B8E59B0009979F /* GoToSettingsSheet.swift */,
 				CF811ECD247792B40012116C /* TypePickerView.swift */,
-				CF53A2D924667E0F0066F7A3 /* PickPickerVIew.swift */,
+				CF53A2D924667E0F0066F7A3 /* SectionPickerVIew.swift */,
 				CFF462D724B909BF0032B738 /* TopicalGuidePickerView.swift */,
 				CF9FA04C2469ED4D00772D2B /* StartingPickerView.swift */,
 				CF9297EE24B920590032AF78 /* TGStartingPickerView.swift */,
@@ -267,7 +267,7 @@
 				CFEC797624899AA40011C236 /* IntroNavigator.swift */,
 				CFCADD91248B63B40094FF1C /* IntroCover.swift */,
 				CFE16A652488D0AA005636C9 /* TypePicker.swift */,
-				CFA5139D24898D5E00F770C6 /* SectionPicker.swift */,
+				CFA5139D24898D5E00F770C6 /* IntroSectionPicker.swift */,
 				CFA5139B248974BF00F770C6 /* RandomPicker.swift */,
 				CFEC79782489E4A10011C236 /* NotificationsPicker.swift */,
 			);
@@ -370,7 +370,7 @@
 			files = (
 				CFFC9D622505A3B900EFE8B8 /* BaseView.swift in Sources */,
 				CF80F924245DD343001424C4 /* ScriptureList.swift in Sources */,
-				CFA5139E24898D5E00F770C6 /* SectionPicker.swift in Sources */,
+				CFA5139E24898D5E00F770C6 /* IntroSectionPicker.swift in Sources */,
 				CF80F904245B79EF001424C4 /* AppDelegate.swift in Sources */,
 				CF7AA5942533DC1600D122F0 /* AboutView.swift in Sources */,
 				CF0F3754246BACF80096554B /* PreviewContent.swift in Sources */,
@@ -381,7 +381,7 @@
 				CF52509924B8E59B0009979F /* GoToSettingsSheet.swift in Sources */,
 				CF80F906245B79EF001424C4 /* SceneDelegate.swift in Sources */,
 				CFE16A662488D0AA005636C9 /* TypePicker.swift in Sources */,
-				CF53A2DA24667E0F0066F7A3 /* PickPickerVIew.swift in Sources */,
+				CF53A2DA24667E0F0066F7A3 /* SectionPickerVIew.swift in Sources */,
 				CF96202C24859E5D00594440 /* MultilineTextField.swift in Sources */,
 				CFCADD92248B63B40094FF1C /* IntroCover.swift in Sources */,
 				CF53A2D82465197A0066F7A3 /* Settings.swift in Sources */,

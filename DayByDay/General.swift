@@ -167,27 +167,12 @@ struct ThemeToggleStyle: ToggleStyle {
                             .shadow(radius: 1, x: 0, y: 1)
                             .padding(1.5)
                             .offset(x: configuration.isOn ? 10 : -10))
-                    .animation(Animation.easeInOut(duration: 0.1))
+                    .animation(Animation.easeInOut(duration: 0.1), value: configuration.isOn)
             }
         }
     }
 }
 
-
-/**
-  Makes a view
- */
-struct KeyboardAdaptive: ViewModifier {
-    func body(content: Content) -> some View {
-        GeometryReader { geometry in
-            content
-                .onReceive(Publishers.keyboardHeight) { keyboardHeight in
-            }
-            // 6.
-            .animation(.easeOut(duration: 0.16))
-        }
-    }
-}
 
 
 struct ShareSheet: UIViewControllerRepresentable {
@@ -227,7 +212,7 @@ struct ScaleButtonStyle: ButtonStyle {
             if animated {
                 configuration.label
                     .scaleEffect(configuration.isPressed ? scaleFactor : 1)
-                    .animation(.easeIn(duration: 0.08))
+                    .animation(.easeIn(duration: 0.08), value: configuration.isPressed)
             } else {
                 configuration.label
                     .scaleEffect(configuration.isPressed ? scaleFactor : 1)

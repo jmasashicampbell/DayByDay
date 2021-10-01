@@ -60,7 +60,7 @@ struct RandomPicker: View {
                 .background(setRandom == selectedRandom ? STARTING_THEME_SELECTED : STARTING_THEME_UNSELECTED)
                 .cornerRadius(20)
                 .scaleEffect(setRandom == selectedRandom ? 1.0 : 0.95)
-                .animation(.linear(duration: 0.2))
+                .animation(.linear(duration: 0.2), value: setRandom == selectedRandom)
             }
             .buttonStyle(ScaleButtonStyle(scaleFactor: 0.93, animated: false))
         }

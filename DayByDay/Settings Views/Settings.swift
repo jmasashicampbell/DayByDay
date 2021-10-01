@@ -96,6 +96,11 @@ class Settings: ObservableObject {
         }
     }
     
+    func updatePickSections(sections: [[String]]) {
+        pickSections[pickType.rawValue] = sections
+        checkTomorrowVerseValid()
+    }
+    
     
     func removePickSection(path: [String]) {
         if let currentSections = pickSections[pickType.rawValue] {

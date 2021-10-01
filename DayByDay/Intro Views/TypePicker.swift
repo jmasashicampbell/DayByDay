@@ -50,7 +50,7 @@ struct TypePicker: View {
         case .volumes:
             return "Choose volumes (such as the Book of Mormon) from which to receive verses."
         case .books:
-            return "Choose books (such as 1 Nephi, Isaiah) from which to receive verses."
+            return "Choose books (such as 1 Nephi, Isaiah, etc.) from which to receive verses."
         case .chapters:
             return "Choose chapters (such as Luke 2, Jacob 5) from which to receive verses."
         case .topicalGuide:
@@ -83,7 +83,6 @@ struct TypePicker: View {
                 .background(type == selectedType ? STARTING_THEME_SELECTED : STARTING_THEME_UNSELECTED)
                 .cornerRadius(20)
                 .scaleEffect(type == selectedType ? 1.0 : 0.9)
-                .animation(.linear(duration: 0.2))
             }
             .buttonStyle(ScaleButtonStyle(scaleFactor: 0.93, animated: false))
         }

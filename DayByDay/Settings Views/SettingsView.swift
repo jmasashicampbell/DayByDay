@@ -54,7 +54,7 @@ struct SettingsView: View {
                 
                 // Type picker
                 NavigationLink(destination:
-                    TypePickerView()
+                                TypePickerView(selectedPickType: settings.pickType)
                 ) {
                     HStack {
                         Text("Select from")
@@ -66,9 +66,12 @@ struct SettingsView: View {
                 // Section picker
                 if (settings.pickType != PickType.topicalGuide) {
                     NavigationLink(destination:
-                        PickPickerView(node: scriptureTree.root,
-                                       depth: 1,
-                                       maxDepth: maxDepthMap[settings.pickType] ?? 3)
+                        SectionPickerView(
+                            node: scriptureTree.root,
+                            depth: 1,
+                            maxDepth: maxDepthMap[settings.pickType] ?? 3,
+                            pickSections: settings.getCurrentSections()
+                        )
                     ) {
                         HStack {
                             Text(settings.pickType.rawValue)
@@ -80,7 +83,7 @@ struct SettingsView: View {
                     }
                 } else {
                     NavigationLink(destination:
-                        TopicalGuidePickerView()
+                                    TopicalGuidePickerView(titles: settings.getCurrentSections())
                     ) {
                         HStack {
                             Text("Topical Guide Entries")
@@ -96,20 +99,20 @@ struct SettingsView: View {
                 if !settings.pickRandom && !settings.getCurrentSections().isEmpty {
                     if settings.pickType == .topicalGuide {
                         NavigationLink(destination:
-                            TGStartingPickerView(entries: settings.getCurrentSections())
+                                        TGStartingPickerView(entries: settings.getCurrentSections(), selectedVerse: settings.getTomorrowVerse())
                         ) {
                             HStack {
-                                Text("Start tomorrow at")
+                                Text("Next verse")
                                 Spacer()
                                 Text(self.makeReference(path: self.settings.getTomorrowVerse()))
                             }
                         }
                     } else {
                         NavigationLink(destination:
-                            StartingPickerView(node: scriptureTree.root)
+                                        StartingPickerView(node: scriptureTree.root, selectedPath: settings.getTomorrowVerse())
                         ) {
                             HStack {
-                                Text("Start tomorrow at")
+                                Text("Next verse")
                                 Spacer()
                                 Text(self.makeReference(path: self.settings.getTomorrowVerse()))
                             }
@@ -178,7 +181,7 @@ struct SettingsView: View {
                     self.mode.wrappedValue.dismiss()
                 }) {
                     Image(systemName: "xmark")
-                    .font(.system(size: 22, weight: .semibold))
+                    .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(settings.themeColor.dark)
                 },
             
@@ -189,7 +192,7 @@ struct SettingsView: View {
                     self.mode.wrappedValue.dismiss()
                 }) {
                     Image(systemName: "checkmark")
-                    .font(.system(size: 22, weight: .semibold))
+                    .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(settings.themeColor.dark)
                 }
         )

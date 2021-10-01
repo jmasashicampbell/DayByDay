@@ -1,5 +1,5 @@
 //
-//  SectionPicker.swift
+//  IntroSectionPicker.swift
 //  DayByDay
 //
 //  Created by Jerome Campbell on 6/4/20.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SectionPicker: View {
+struct IntroSectionPicker: View {
     var pickType = PickType.books
     @Binding var sectionsList: [[String]]
     @Binding var nextDisabled: Bool
@@ -425,7 +425,7 @@ struct EntryLetterSheet: View {
 struct SectionPicker_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SectionPicker(sectionsList: .constant([[]]), nextDisabled: .constant(true))
+            IntroSectionPicker(sectionsList: .constant([[]]), nextDisabled: .constant(true))
                 .padding(20)
                 .foregroundColor(STARTING_THEME_COLOR)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 11"))

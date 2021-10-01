@@ -11,6 +11,9 @@ import SwiftUI
 struct TypePickerView: View {
     @EnvironmentObject var settings: Settings
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    
+    @State var selectedPickType: PickType
     
     var body: some View {
         let textColor = colorScheme == .dark ? Color.white : Color.black
@@ -20,13 +23,13 @@ struct TypePickerView: View {
             List {
                 ForEach(PickType.allCases, id: \.self) { pickType in
                     Button(action: {
-                        self.settings.pickType = pickType
+                        selectedPickType = pickType
                     }) {
                         HStack {
                             Text(pickType.rawValue)
-                                .foregroundColor(pickType == self.settings.pickType ? accentColor : textColor)
+                                .foregroundColor(pickType == selectedPickType ? accentColor : textColor)
                             Spacer()
-                            if (pickType == self.settings.pickType) {
+                            if (pickType == selectedPickType) {
                                 Image(systemName: "checkmark")
                                     .font(.system(size: 18, weight: .semibold))
                                     .imageScale(.medium)
@@ -36,12 +39,27 @@ struct TypePickerView: View {
                     }
                 }
             }
-        }
+        }.navigationBarItems(
+            leading:
+                Button(action: {
+                    settings.pickType = selectedPickType
+                    self.mode.wrappedValue.dismiss()
+                }) {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 17, weight: .semibold))
+                        Text("Settings")
+                    }
+                    .foregroundColor(settings.themeColor.dark)
+                }
+        )
+        .navigationBarBackButtonHidden(true)
     }
 }
 
 struct TypePickerView_Previews: PreviewProvider {
     static var previews: some View {
-        TypePickerView()
+        TypePickerView(selectedPickType: PickType.books)
+            .environmentObject(Settings())
     }
 }
