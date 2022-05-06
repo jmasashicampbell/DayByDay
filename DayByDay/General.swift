@@ -13,15 +13,19 @@ import Combine
 
 // MARK: Functions
 
+enum FileError: Error {
+    case FileNotFound
+}
+
 /**
   Converts a filename to a URL
   - Parameter filename: The filename to convert
   - Returns: The URL of the file in the main bundle
  */
-func bundleUrlFromFilename(_ filename: String) -> URL {
+func bundleUrlFromFilename(_ filename: String) throws -> URL {
     guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
         else {
-            fatalError("Couldn't find file in main bundle.")
+            throw FileError.FileNotFound
     }
     return file
 }
@@ -118,29 +122,6 @@ extension Publishers {
 extension Notification {
     var keyboardHeight: CGFloat {
         return (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.height ?? 0
-    }
-}
-
-
-/**
- Used to find first responder text field
- */
-extension UIResponder {
-    static var currentFirstResponder: UIResponder? {
-        _currentFirstResponder = nil
-        UIApplication.shared.sendAction(#selector(UIResponder.findFirstResponder(_:)), to: nil, from: nil, for: nil)
-        return _currentFirstResponder
-    }
-
-    private static weak var _currentFirstResponder: UIResponder?
-
-    @objc private func findFirstResponder(_ sender: Any) {
-        UIResponder._currentFirstResponder = self
-    }
-
-    var globalFrame: CGRect? {
-        guard let view = self as? UIView else { return nil }
-        return view.superview?.convert(view.frame, to: nil)
     }
 }
 

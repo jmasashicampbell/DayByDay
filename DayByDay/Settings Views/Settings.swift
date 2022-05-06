@@ -213,9 +213,7 @@ class Settings: ObservableObject {
     private func askNotifications() {
         if (notificationsOn) {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                if success {
-                    print("Notifications enabled")
-                } else {
+                if !success {
                     self.notificationsOn = false
                 }
             }

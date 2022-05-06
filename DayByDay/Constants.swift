@@ -10,15 +10,29 @@ import Foundation
 import SwiftUI
 
 
+
 let FONT_TITLE: Font = .system(size: 28, weight: .semibold)
+
 let FONT_REG_BIG : Font = .system(size: 24, weight: .regular)
 let FONT_SEMIBOLD_BIG : Font = .system(size: 24, weight: .semibold)
+
 let FONT_LABEL: Font = .system(size: 22, weight: .semibold)
+
 let FONT_LIGHT_PLUS: Font = .system(size: 21, weight: .light)
 let FONT_MED_PLUS: Font = .system(size: 21, weight: .medium)
-let FONT_MED : Font = .system(size: 20, weight: .medium)
-let FONT_LIGHT : Font = .system(size: 18, weight: .light)
-let FONT_SMALL : Font = .system(size: 18, weight: .regular)
+
+let FONT_SEMIBOLD: Font = .system(size: 20, weight: .semibold)
+let FONT_MED: Font = .system(size: 20, weight: .medium)
+let FONT_REG: Font = .system(size: 20, weight: .regular)
+
+let FONT_SEMIBOLD_SMALL: Font = .system(size: 18, weight: .semibold)
+let FONT_SMALL: Font = .system(size: 18, weight: .regular)
+let FONT_LIGHT_SMALL: Font = .system(size: 18, weight: .light)
+
+let FONT_SEMIBOLD_SMALLER: Font = .system(size: 14, weight: .semibold)
+let FONT_MED_SMALLER: Font = .system(size: 14, weight: .medium)
+let FONT_SMALLER: Font = .system(size: 14, weight: .regular)
+let FONT_LIGHT_SMALLER: Font = .system(size: 14, weight: .light)
 
 let SECONDS_IN_DAY = 86400
 let BOM_FIRST_VERSE = ["Scriptures", "Book of Mormon", "1 Nephi", "1 Nephi 1", "1"]

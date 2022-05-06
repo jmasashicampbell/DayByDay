@@ -49,7 +49,7 @@ struct ScriptureDetail: View {
                         ScrollView {
                             VStack(alignment: .leading, spacing: 10.0) {
                                 Text(selectionCoordinator.scripture!.text)
-                                    .font(geometry.size.height > 700 ? FONT_LIGHT_PLUS : FONT_LIGHT)
+                                    .font(geometry.size.height > 700 ? FONT_LIGHT_PLUS : FONT_LIGHT_SMALL)
                                 
                                 Text(selectionCoordinator.scripture!.reference)
                                     .font(FONT_MED)

@@ -68,7 +68,7 @@ struct ScriptureList: View {
                     //.shadow(Color(white: 0.9), radius: 10)
             }
         }
-        .onAppear { self.generatedScriptures.update() }
+        .onAppear { self.generatedScriptures.generate() }
     }
 }
 

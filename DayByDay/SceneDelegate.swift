@@ -52,7 +52,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Reset badge number
         UIApplication.shared.applicationIconBadgeNumber = 0
-        generatedScriptures.update(force: true)
+        generatedScriptures.generate(force: true)
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

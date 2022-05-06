@@ -135,7 +135,7 @@ struct IntroNavigator: View {
         self.settings.save(firstTime: true)
         
         self.generatedScriptures.array = []
-        self.generatedScriptures.update(force: true)
+        self.generatedScriptures.generate(force: true)
         UserDefaults.standard.set(true, forKey: "didLaunchBefore")
         self.viewRouter.showIntro = false
     }

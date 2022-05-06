@@ -151,23 +151,3 @@ struct TabColorView: View {
         .frame(width: 20, height: 20)
     }
 }
-
-
-struct Color_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            /*Text("")
-            .sheet(isPresented: .constant(true)) {
-                IntroCover()
-                .background(STARTING_THEME_COLOR)
-            }*/
-            
-            Text("")
-                .sheet(isPresented: .constant(true)) {
-                    TypePicker(selectedType: .constant(.volumes), sectionsList: .constant([]), transitionType: .slide)
-                    .background(STARTING_THEME_COLOR)
-                        .foregroundColor(Color.white)
-            }
-        }
-    }
-}

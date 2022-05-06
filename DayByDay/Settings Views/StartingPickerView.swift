@@ -105,10 +105,7 @@ struct StartingBodyView: View {
             List {
                 ForEach(1...node.end - node.start, id: \.self) { verseNum in
                     Button(action: {
-                        print(self.selectedPath)
-                        print(self.node.path)
                         self.selectedPath = self.node.path + [String(verseNum)]
-                        print(self.selectedPath)
                         
                     }) {
                         SelectionRow(node: self.node, verseNum: verseNum, selectedPath: $selectedPath)

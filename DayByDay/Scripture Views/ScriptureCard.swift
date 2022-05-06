@@ -36,7 +36,7 @@ struct ScriptureCard: View {
                 
                 // Text
                 Text(scripture.text)
-                    .font(height > 600 ? FONT_LIGHT_PLUS : FONT_LIGHT)
+                    .font(height > 600 ? FONT_LIGHT_PLUS : FONT_LIGHT_SMALL)
                 Spacer().frame(height: SCRIPTURE_CARD_SPACING)
                 Text(scripture.reference)
                 Spacer()

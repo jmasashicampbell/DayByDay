@@ -188,7 +188,7 @@ struct SettingsView: View {
             trailing:
                 Button(action: {
                     self.settings.save()
-                    self.generatedScriptures.update(force: true)
+                    self.generatedScriptures.generate(force: true)
                     self.mode.wrappedValue.dismiss()
                 }) {
                     Image(systemName: "checkmark")
